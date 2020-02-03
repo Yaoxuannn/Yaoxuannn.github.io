@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="渣翻..">
+<meta name="keywords" content="Python,翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Py2ORPy3">
+<meta property="og:url" content="http://yaoxuannn.com/2017/03/14/Py2ORPy3/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="渣翻..">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.395Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Py2ORPy3">
+<meta name="twitter:description" content="渣翻..">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Py2ORPy3</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/03/17/Python学习笔记-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/03/01/UserAgent_History/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/03/14/Py2ORPy3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&text=Py2ORPy3"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&is_video=false&description=Py2ORPy3"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Py2ORPy3&body=Check out this article: http://yaoxuannn.com/2017/03/14/Py2ORPy3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&name=Py2ORPy3&description=&lt;hr&gt;
+&lt;p&gt;渣翻..&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python2-OR-Python3"><span class="toc-number">1.</span> <span class="toc-text">Python2 OR Python3?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-总体概要"><span class="toc-number">2.</span> <span class="toc-text">1.总体概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-关于打印语句"><span class="toc-number">3.</span> <span class="toc-text">2.关于打印语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-最重要的一点：Python-2-拥有库"><span class="toc-number">4.</span> <span class="toc-text">3.最重要的一点：Python 2 拥有库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-为什么一些人认为-Python-3-X-更好"><span class="toc-number">5.</span> <span class="toc-text">4.为什么一些人认为 Python 3.X 更好</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-作为初学者，应该选择哪一个"><span class="toc-number">6.</span> <span class="toc-text">5.作为初学者，应该选择哪一个</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-总结：Python-2-是赢家…目前如此"><span class="toc-number">7.</span> <span class="toc-text">6.总结：Python 2 是赢家…目前如此</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在2015年1月29日的更新："><span class="toc-number">7.1.</span> <span class="toc-text">在2015年1月29日的更新：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#题外话"><span class="toc-number">8.</span> <span class="toc-text">题外话</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Py2ORPy3
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-03-14T13:32:05.000Z" itemprop="datePublished">2017-03-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/翻译/">翻译</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <hr>
+<p>渣翻..</p>
+<a id="more"></a>
+
+<h1 id="Python2-OR-Python3"><a href="#Python2-OR-Python3" class="headerlink" title="Python2 OR Python3?"></a>Python2 OR Python3?</h1><blockquote>
+<p><em>ATTENTION:</em> this latest update time of this original article is Jan. 29, 2015.<br>All translate by : <a href="https://justin13wyx.github.io" target="_blank" rel="noopener">Justin13</a><br>Translate from:   <a href="http://learntocodewith.me/programming/python/python-2-vs-python-3/" target="_blank" rel="noopener">http://learntocodewith.me/programming/python/python-2-vs-python-3/</a><br><strong>Please contact to the author if you want to use it.</strong></p>
+</blockquote>
+<h1 id="1-总体概要"><a href="#1-总体概要" class="headerlink" title="1.总体概要"></a>1.总体概要</h1><hr>
+<p>在<code>python</code>的<code>wiki</code>上已有很详尽的关于<code>Py 2.7</code>和<code>Py 3.3</code>(目前最新为3.7 for dev)的区别，各有优劣。使用哪一个完全取决于你用来干什么，总结wiki的一句话：“<code>Python 2.X</code>是遗留产物。现在和将来应使用<code>Python 3.X</code> – wiki”</p>
+<h1 id="2-关于打印语句"><a href="#2-关于打印语句" class="headerlink" title="2.关于打印语句"></a>2.关于打印语句</h1><hr>
+<p>在全世界最大的同性交友平台神社区<strong>Stack Overflow</strong>上，有很多关于此的讨论。</p>
+<blockquote>
+<p>最显著的区别可能就是<code>print</code>语句的书写方式。同样的脚本在不同的版本上是不能运行的，你只能两者选一。</p>
+</blockquote>
+<p>即：<code>print</code> 不再是一个语言结构.<br><strong>Print Is A Function</strong><br>在<code>3.X</code>中,你需要使用<code>print(&quot;...&quot;)</code>，而不是<del><code>print &quot;...&quot;</code></del><br>(然而本人在2.7的解释器上两种都可以跑-_-#)</p>
+<h1 id="3-最重要的一点：Python-2-拥有库"><a href="#3-最重要的一点：Python-2-拥有库" class="headerlink" title="3.最重要的一点：Python 2 拥有库"></a>3.最重要的一点：Python 2 拥有库</h1><hr>
+<p>在<code>print</code>语句的区别之上，网上很多人都提及了<code>Python 2.7</code>的库支持。</p>
+<p>一篇在<code>Medium</code>上的文章，标题为 “<code>Python 3</code> 正在毁灭 <code>Python</code>这门语言”，很显然，作者 <code>Stephen A. Goss</code>, 强烈反对迁移至 <code>Python 3</code> 并且保持使用 <code>Python 2</code>，他同样指出第三方库是<code>Python 2</code>最强大的力量之一。</p>
+<h1 id="4-为什么一些人认为-Python-3-X-更好"><a href="#4-为什么一些人认为-Python-3-X-更好" class="headerlink" title="4.为什么一些人认为 Python 3.X 更好"></a>4.为什么一些人认为 Python 3.X 更好</h1><hr>
+<p>在这个 <a href="https://www.youtube.com/watch?v=f_6vDi7ywuA" target="_blank" rel="noopener">talk</a> 中，<code>Brett Cannon</code>，供职于<code>Python</code>，认为<code>Python 3.3</code>是<code>Python</code>语言的全部.<br>他承认自己是有明显的偏见，但仍然在这个一小时四十分钟的演说中阐述了观点。</p>
+<p>除去这位供职于<code>Python</code>的哥们的观点，在网上亦有许许多多的相类似的观点。其中有这么一个我在 Quora 上看到的</p>
+<blockquote>
+<p><code>3.X</code>版本的最大优点就是它最先进，走在技术的前端。<br>所以所有的新特性都将会在此版本中实现，而不是在添加到<code>2.X</code>中。所以，几年下来，这将会成为开发者使用的最成熟的分支。</p>
+</blockquote>
+<p>基本上，<code>Python 3</code>将是大势所趋，但<code>Python 2</code>仍然拥有远比<code>3.X</code>多的文档。</p>
+<h1 id="5-作为初学者，应该选择哪一个"><a href="#5-作为初学者，应该选择哪一个" class="headerlink" title="5.作为初学者，应该选择哪一个"></a>5.作为初学者，应该选择哪一个</h1><hr>
+<p>如果你是像我一样的初学者，像我，你会在想:”嗯。可以。但我应该选择哪一个呢？”因为当你还是编程萌新的时候，你还在试图理清脑中关于函数的东西，而不要去对同一种语言不同版本之间的微妙之处进行深入分析。</p>
+<p>在Stack OverFlow的一个早期讨论上提及到：</p>
+<blockquote>
+<p><code>Python 3</code>是一个优美，更加如一的语言，<strong>但是</strong>，仅仅有非常有限的第三方库支持，似乎在几年后仍会如此。所以，所有的主流框架仍然会在<code>Python 2</code>上运行，并且将会持续一段很长的时间。因此，如果你现在开始学习<code>Python</code>，你应当学习<code>Python 2</code>，因为这将会是你最终使用的。</p>
+</blockquote>
+<p>同时，你也应该开始学习<code>Python 3</code>。因为不管怎么说，这是这门语言的未来发展。</p>
+<p>但是，我仍然坚持以<code>2.7</code>开始是更加明智的，因为大量的文档是你尽快开上车。</p>
+<p>另外，目前的系统(最新的<code>Cent OS 7</code>中绑定的<code>Python</code>版本为<code>2.7</code>)有很多内置2.X版本。</p>
+<h1 id="6-总结：Python-2-是赢家…目前如此"><a href="#6-总结：Python-2-是赢家…目前如此" class="headerlink" title="6.总结：Python 2 是赢家…目前如此"></a>6.总结：Python 2 是赢家…目前如此</h1><p><strong>!!在作者的最新更新中，已经建议学习并使用<code>Python 3</code>!!</strong></p>
+<p>现在我将继续学习<code>2.7</code>。 尽管看来<code>2.x</code>和<code>3.x</code>之间的差异不大.我的主要目标是只学一种编程语言,而不想陷入在两个版本中做选择的麻烦中。</p>
+<p>不管怎么说，他们看起来都可以接受。</p>
+<h2 id="在2015年1月29日的更新："><a href="#在2015年1月29日的更新：" class="headerlink" title="在2015年1月29日的更新："></a>在2015年1月29日的更新：</h2><p>StackOverflow上的讨论已经将观点移向了开发者<strong>应开始使用Python 3</strong></p>
+<p>如果我现在开始学<code>Python</code>，我将会从<code>Python 3</code>开始。</p>
+<hr>
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><p>选择哪一种版本的最终决定，并不是很重要，重要的是<strong>Research in yourself</strong>.</p>
+<p>这篇翻译仅仅是为了提供一个参考方向，这之中我认为最重要就是第三方库的依赖了，当然到了现在，Python3的支持已经非常好了，并且3.X版本在数据科学，大数据，机器学习等科技前沿，增加了很多支持和独有的特性。</p>
+<p>再多说一句：推荐使用<code>Python 3</code>😂😂</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python2-OR-Python3"><span class="toc-number">1.</span> <span class="toc-text">Python2 OR Python3?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-总体概要"><span class="toc-number">2.</span> <span class="toc-text">1.总体概要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-关于打印语句"><span class="toc-number">3.</span> <span class="toc-text">2.关于打印语句</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-最重要的一点：Python-2-拥有库"><span class="toc-number">4.</span> <span class="toc-text">3.最重要的一点：Python 2 拥有库</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-为什么一些人认为-Python-3-X-更好"><span class="toc-number">5.</span> <span class="toc-text">4.为什么一些人认为 Python 3.X 更好</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-作为初学者，应该选择哪一个"><span class="toc-number">6.</span> <span class="toc-text">5.作为初学者，应该选择哪一个</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-总结：Python-2-是赢家…目前如此"><span class="toc-number">7.</span> <span class="toc-text">6.总结：Python 2 是赢家…目前如此</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在2015年1月29日的更新："><span class="toc-number">7.1.</span> <span class="toc-text">在2015年1月29日的更新：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#题外话"><span class="toc-number">8.</span> <span class="toc-text">题外话</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/03/14/Py2ORPy3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&text=Py2ORPy3"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&is_video=false&description=Py2ORPy3"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Py2ORPy3&body=Check out this article: http://yaoxuannn.com/2017/03/14/Py2ORPy3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&title=Py2ORPy3"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/03/14/Py2ORPy3/&name=Py2ORPy3&description=&lt;hr&gt;
+&lt;p&gt;渣翻..&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

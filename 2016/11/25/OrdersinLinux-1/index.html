@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Learn some orders in Linux :)">
+<meta name="keywords" content="Linux,系统,Linux命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Basic Orders in Linux">
+<meta property="og:url" content="http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="Learn some orders in Linux :)">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.394Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Basic Orders in Linux">
+<meta name="twitter:description" content="Learn some orders in Linux :)">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Basic Orders in Linux</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/11/26/HTTP协议-part-four/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/11/24/First2Linux/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&text=Basic Orders in Linux"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&is_video=false&description=Basic Orders in Linux"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Basic Orders in Linux&body=Check out this article: http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&name=Basic Orders in Linux&description=&lt;hr&gt;
+&lt;p&gt;Learn some orders in Linux :)&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">Linux目录处理命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">Linux文件搜索命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">3.</span> <span class="toc-text">Linux帮助命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">4.</span> <span class="toc-text">Linux压缩命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">5.</span> <span class="toc-text">Linux关机与重启命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">6.</span> <span class="toc-text">其他常用命令</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Basic Orders in Linux
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-11-25T11:47:08.000Z" itemprop="datePublished">2016-11-25</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/Linux命令/">Linux命令</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <hr>
+<p>Learn some orders in Linux :)</p>
+<a id="more"></a>
+
+<h1>Linux目录处理命令</h1>
+
+<hr>
+<pre><code>ls X : 查询目录中的内容
+    -a 显示所有文件
+    -l 显示详细信息 (快捷方式: ll)
+    -d 显示目录属性
+    -h 人性化显示文件大小
+    -i 显示inode
+-----------------------------------------
+mkdir  XXX：建立目录 (make directory)
+    mkdir -p XXX 递归建立目录
+-----------------------------------------
+cd XXX : 切换所在目录 (change directory)
+    cd      进入根(/root) 目录
+    cd ~ 进入家(/home)目录
+    cd - 进入上次目录
+    cd .. 进入上一级目录
+    cd . 进入当前目录    
+----------------------------------------------
+pwd :  查询所在目录位置 (print working directory)
+---------------------------------------------
+!rmdir : 删除空目录 (remove empty directories)
+!BAD ORDER!
+-----------------------------------------------
+!ATTENTION! !&lt;rm -rf /&gt;! 会使Linux自杀的命令
+rm -rf X: 删除文件或目录 (remove)
+    -r 删除目录
+    -f 强制 (force)
+-------------------------------------------
+cp X X X:  复制 (copy)
+    -r 复制目录
+    -p 连带文件属性复制
+    -d 若源文件是链接文件，则复制链接属性
+    -a 相当于 -p + -d + -r
+-------------------------------------------
+mv X X : 剪切/重命名 (move)
+-------------------------------------------
+ln -s X X : 链接 (link)(硬链接)
+    -s 创建软链接 (soft)</code></pre><hr>
+<h1>Linux文件搜索命令</h1>
+
+<hr>
+<p><strong>Linux 中的通配符</strong><br><strong>* 匹配任意内容</strong><br><strong>？ 匹配任意一个字符</strong><br><strong>[&nbsp;&nbsp;] 匹配任意一个中括号内的字符</strong></p>
+<hr>
+<p><strong>Linux 中的逻辑关键字<br>-a = and  逻辑与<br>-o = or   逻辑或</strong></p>
+<pre><code>--------------------------------------------
+locate XXX : 按文件名搜索文件
+    配置文件:/etc/updatedb.conf
+    数据库:/var/lib/mlocate
+    更新数据库: updatedb
+---------------------------------------------
+whereis XXX : 搜索命令（路径及帮助文档所在位置）
+    -b : 只查找可执行文件
+    -m : 只查找帮助文件
+---------------------------------------------
+which XXX : 搜索命令的别名(如果有)及所在路径
+---------------------------------------------
+find [范围] [搜索条件]
+#搜索文件
+
+find / -name
+find / -iname 
+不区分大小写
+find / -user 
+按照所有者搜索
+find / -nouser 
+查找没有所有者的文件(to find junk files)
+##例外：内核产生或U盘插入
+
+find / -mtime +10 查找十天前修改的文件
+-10    10天内
+10    10天当天
++10    10天前
+atime 文件访问时间
+ctime 文件属性改变时间
+mtime 文件内容修改时间
+
+find .(当前目录) -size 25k 查找文件大小为25KB的文件
+k 千字节必须小写    M 兆字节必须大写
+-25k    小于25KB的文件
+25k    等于25KB的文件
++25k    大于25KB的文件
+find . -inum 262422 查找i节点为262422的文件
+
+find / -size +20k -a -size -50k
+查找目录下，大于20KB并且小于50KB的文件
+-a = and  逻辑与
+-o = or   逻辑或
+
+find / -size +20k -a -size -50k -exec ls -lh {} \;
+查找后执行ls -lh命令
+-exec * {} \;
+---------------------------------------------
+grep [选项] &quot;字符串&quot; 文件名
+#在文件中匹配符合条件的字符串,可以使用Regex
+-i 忽略大小写
+-v 排除指定的字符串</code></pre><hr>
+<h1>Linux帮助命令</h1>
+
+<hr>
+<p><strong>Linux命令分级：<br>1：User Command<br>2：System Calls<br>3：C Library Functions<br>4：Devices and Special Files<br>5：File Formats and Conventions<br>6：Games et. Al.<br>7：Miscellanea<br>8：System Administration Tools and Deamons</strong></p>
+<hr>
+<pre><code>man 命令 (manual)
+    -f = whatis 命令
+    #查看命令拥有那个等级
+    -k = apropos 命令
+    #查看和命令相关的所有帮助
+----------------------------------------------
+命令 --help
+
+help shell内部命令
+    e.g：whereis cd
+    #确定是否为shell内部命令
+    help cd
+    #获取内部命令帮助
+---------------------------------------------
+info 命令
+#详细命令帮助
+    - 回车： 进入子帮助页面(带有*标记)
+    - u： 进入上层界面
+    - n： 进入下一个帮助小节
+    - p： 进入上一个帮助小节
+    - q： 退出</code></pre><h1>Linux压缩命令</h1>
+
+<hr>
+<p><strong>Linux中的压缩格式：<br><code>.zip</code>、<code>.gz</code>、<code>.bz2</code><br><code>.tar.gz</code>、<code>.tar.bz2</code></strong></p>
+<hr>
+<pre><code>.zip 格式压缩
+
+zip  压缩文件名 源文件
+#压缩文件
+zip -r 压缩文件名 源目录
+#压缩目录
+
+unzip 压缩文件
+#解压缩
+
+！zip可以保存源文件，能压缩目录！
+--------------------------------------------
+.gz 格式压缩
+
+gzip 源文件
+#压缩文件
+gzip -r 源目录
+#压缩目录下的所有子文件，不能压缩目录
+
+gzip -d 压缩文件
+#解压缩文件
+gunzip 压缩文件
+#解压缩文件
+
+！gz不能保存源文件，不能压缩目录！
+-------------------------------------------
+.bz2 格式压缩
+
+bzip2 源文件
+#压缩文件，不保留源文件
+bzip2 -k 源文件
+#压缩文件，保留源文件
+
+bzip2 不支持目录操作
+
+bzip2 -d 压缩文件
+#解压缩
+bunzip2 压缩文件
+#解压缩
+加-k保留压缩文件
+--------------------------------------------</code></pre><p>不能压缩目录的<code>.gz</code>和<code>.bz2</code>很鸡肋啊。所以Linux为我们准备了<code>.tar.gz</code>和<code>.tar.bz2</code>这两种格式，他们都先把目录打包成.tar的单一文件包，这样就可以进行压缩啦。</p>
+<pre><code>-------------------------------------
+打包命令tar
+
+tar -cvf 打包文件名 源文件
+    -c 打包
+    -v 显示过程
+    -f 指定打包后的文件名
+    -cvf 
+
+解包命令tar
+
+tar -xvf 打包文件名
+    -x 解打包
+----------------------------------------
+统一起来的.tar.gz压缩与解压缩命令
+
+tar -zcvf (可以指定路径)压缩包名.tar.gz 源文件(空格分隔多文件)
+    -z 压缩为.tar.gz格式
+
+tar -zxvf 压缩包名.tar.gz
+    -x 解压缩.tar.gz格式
+-----------------------------------------
+统一起来的.tar.bz2压缩与解压缩命令
+
+tar -jcvf 压缩包名.tar.bz2 源文件
+    -j 压缩为.tar.bz2格式
+
+tar -jxvf 压缩包名.tar.bz2
+    -j 解压缩.tar.bz2格式
+    -z 查看压缩文件(不解压)
+
+通过命令末尾添加 -C 路径 来指定压缩路径(???)
+------------------------------------</code></pre><h1>Linux关机与重启命令</h1>
+
+<hr>
+<p><strong>Linux中的系统运行级别<br>0    关机<br>1    单用户<br>2    不完全多用户，(不含NFS服务)<br>3    完全多用户<br>4    未分配<br>5    图形界面<br>6    重启</strong></p>
+<p>使用<strong><code>runlevel</code></strong>查看系统当前运行级别</p>
+<p>使用<strong><code>vim /etc/inittab</code></strong>来修改系统默认运行级别</p>
+<p>使用<strong><code>date</code></strong>命令来显示当前时间</p>
+<pre><code>--------------------------------------
+shutdown 命令
+
+shutdown [选项] 时间
+    -c：取消前一个关机命令
+    -h：关机
+    -r：重启
+    now 立即执行
+
+其他shutdown命令(Unrecommend)
+#  halt
+#  poweroff
+#  init 0
+
+其他restart命令
+#  reboot
+#  init 6
+---------------------------------------</code></pre><h1>其他常用命令</h1>
+
+<hr>
+<pre><code>---------------------------------------
+1.查询与自动挂载命令
+
+mount
+#查询系统中已经挂载的设备
+
+mount -a 
+#依据配置文件，自动挂载
+#配置文件位置：/etc/fstab
+------------------------------------------------------------------
+2.挂载命令格式
+mount [-t 文件系统] [-o 特殊选项] 设备文件名 挂载点
+选项：
+    -t 文件系统：加入文件系统类型来指定挂载的类型。如：ext3,ext4,iso9660
+    -o 特殊选项：可以指定挂载的额外选项
+------------------------------------------------------------------
+3.挂载光盘
+mkdir /mnt/cdrom/
+#建立挂载点
+
+mount (-t iso9660)可省
+/dev/sr0 /mnt/cdrom
+#挂载光盘
+-----------------------------------------------
+4.卸载光盘
+umount 设备文件名或挂载点
+！先退出当前路径！
+-----------------------------------------------
+5.挂载U盘(U盘被看做硬盘)
+fdisk -l
+#查看U盘设备文件名
+
+mount -t vfat /dev/sdb1 /mnt/usb/
+##Linux默认是不支持NTFS文件系统的
+-----------------------------------------------
+6.w
+看到系统当前时间、运行时间、过去15，30，45的平均负载
+以及当前用户信息.
+----------------------------------------------
+7.who
+仅仅看到当前用户的信息.
+-----------------------------------------
+8.last
+#查询当前登录和过去登录的用户信息
+#默认读取/var/log/wtmp文件数据
+--------------------------------------------
+9.lastlog
+#查看所有用户最后一次的登陆时间
+#默认读取/var/log/lastlog文件数据
+--------------------------------------------</code></pre><p>Copyright © Justin13</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">Linux目录处理命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">Linux文件搜索命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">3.</span> <span class="toc-text">Linux帮助命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">4.</span> <span class="toc-text">Linux压缩命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">5.</span> <span class="toc-text">Linux关机与重启命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">6.</span> <span class="toc-text">其他常用命令</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&text=Basic Orders in Linux"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&is_video=false&description=Basic Orders in Linux"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Basic Orders in Linux&body=Check out this article: http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&title=Basic Orders in Linux"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2016/11/25/OrdersinLinux-1/&name=Basic Orders in Linux&description=&lt;hr&gt;
+&lt;p&gt;Learn some orders in Linux :)&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

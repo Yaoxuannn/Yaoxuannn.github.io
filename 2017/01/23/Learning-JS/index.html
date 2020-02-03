@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="对最近写的代码进行review的总结">
+<meta name="keywords" content="JavaScript,总结,review">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最近使用JS开发的一些总结">
+<meta property="og:url" content="http://yaoxuannn.com/2017/01/23/Learning-JS/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="对最近写的代码进行review的总结">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="最近使用JS开发的一些总结">
+<meta name="twitter:description" content="对最近写的代码进行review的总结">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>最近使用JS开发的一些总结</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/02/13/使用WebAudio构建音乐可视化播放器/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/01/17/对JavaScript闭包的理解/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/01/23/Learning-JS/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&text=最近使用JS开发的一些总结"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&is_video=false&description=最近使用JS开发的一些总结"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=最近使用JS开发的一些总结&body=Check out this article: http://yaoxuannn.com/2017/01/23/Learning-JS/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&name=最近使用JS开发的一些总结&description=&lt;hr&gt;
+&lt;p&gt;对最近写的代码进行review的总结&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-this漂移"><span class="toc-number">1.</span> <span class="toc-text">1.this漂移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-setTimeout的一种妙用"><span class="toc-number">2.</span> <span class="toc-text">2.setTimeout的一种妙用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-事件冒泡"><span class="toc-number">3.</span> <span class="toc-text">3.事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-清空数组"><span class="toc-number">4.</span> <span class="toc-text">4.清空数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-调整图片"><span class="toc-number">5.</span> <span class="toc-text">5.调整图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-jQuery中的break"><span class="toc-number">6.</span> <span class="toc-text">6.jQuery中的break</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-移动动画"><span class="toc-number">7.</span> <span class="toc-text">7.移动动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Range的坑"><span class="toc-number">8.</span> <span class="toc-text">8.Range的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-快速数组降维"><span class="toc-number">9.</span> <span class="toc-text">9.快速数组降维</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-DOMRect"><span class="toc-number">10.</span> <span class="toc-text">10.DOMRect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-JS的动画最终解决方案"><span class="toc-number">11.</span> <span class="toc-text">11.JS的动画最终解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-CSS3中的Filter属性"><span class="toc-number">12.</span> <span class="toc-text">12.CSS3中的Filter属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-Canvas对图片的像素级处理"><span class="toc-number">13.</span> <span class="toc-text">13.Canvas对图片的像素级处理</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        最近使用JS开发的一些总结
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-01-24T04:41:48.000Z" itemprop="datePublished">2017-01-24</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-link" href="/tags/review/">review</a>, <a class="tag-link" href="/tags/总结/">总结</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <hr>
+<p>对最近写的代码进行review的总结</p>
+<a id="more"></a>
+
+<p>LightBox图片画廊插件<br>项目地址：<a href="https://github.com/Justin13wyx/LightBox" target="_blank" rel="noopener">https://github.com/Justin13wyx/LightBox</a></p>
+<p>使用插件需要指定：</p>
+<blockquote>
+<p>类名：js-lightbox<br>data-group：组别<br>data-source    ：大图的url<br>data-id：图片ID<br>data-caption：描述<br>src：缩略图的url</p>
+</blockquote>
+<h2 id="1-this漂移"><a href="#1-this漂移" class="headerlink" title="1.this漂移"></a>1.this漂移</h2><p>在使用JS进行OOP设计的时候，一定要注意<strong>this</strong>的漂移问题，解决方法之一就是在声明函数的函数体开头加上</p>
+<blockquote>
+<p>var self = <strong>this</strong>;</p>
+</blockquote>
+<p>这样的语句。</p>
+<h2 id="2-setTimeout的一种妙用"><a href="#2-setTimeout的一种妙用" class="headerlink" title="2.setTimeout的一种妙用"></a>2.setTimeout的一种妙用</h2><p>使用定时器（Timeout）来解决事件多次触发的问题，通俗的说就是使得事件在满足触发条件且<strong>状况稳定</strong>的情况下才发生。</p>
+<p>举个例子吧：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var timer = null;</span><br><span class="line">$(window).resize(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">            <span class="keyword">if</span>(condition) &#123;</span><br><span class="line">                window.clearTimeout(timer);</span><br><span class="line">                timer = window.setTimeout(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">                    //code goes here            </span><br><span class="line">                &#125;,200);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br></pre></td></tr></table></figure>
+
+<p>这样便可以规避窗口大小不断改变时代码炸掉的情况(●’◡’●).</p>
+<h2 id="3-事件冒泡"><a href="#3-事件冒泡" class="headerlink" title="3.事件冒泡"></a>3.事件冒泡</h2><p>个人认为，在任何时候都应该优先设置阻止事件冒泡</p>
+<pre><code>e.stoppPropagation();//阻止事件冒泡</code></pre><p>另外顺便，提一下<code>e.preventDefault();</code>也是一个比较优先考虑的设置。</p>
+<h2 id="4-清空数组"><a href="#4-清空数组" class="headerlink" title="4.清空数组"></a>4.清空数组</h2><p>当需要清空数组的时候，便利的方法有：</p>
+<blockquote>
+<p>array.length = 1.<br>array = [];</p>
+</blockquote>
+<h2 id="5-调整图片"><a href="#5-调整图片" class="headerlink" title="5.调整图片"></a>5.调整图片</h2><p>图片大小大于可视区域的时候，设置缩放比来控制大小正常显示。（一个觉得挺好的算法：）</p>
+<pre><code>var scale = Math.min(winWidth/picWidth, winHeight/picHeight, 1);</code></pre><h2 id="6-jQuery中的break"><a href="#6-jQuery中的break" class="headerlink" title="6.jQuery中的break"></a>6.jQuery中的break</h2><p>在jQuery中嵌套循环中使用<code>return false;</code>来跳出循环，相当于<code>break;</code> </p>
+<h2 id="7-移动动画"><a href="#7-移动动画" class="headerlink" title="7.移动动画"></a>7.移动动画</h2><p>控制随机方向可以使用：</p>
+<pre><code>(Math.floor(Math.random() * 5 + 5)) * Math.pow(-1, Math.floor(Math.random() * 100))
+ 前半部分控制速度                    | 后半部分控制方向：数值越大，随机性越大</code></pre><h2 id="8-Range的坑"><a href="#8-Range的坑" class="headerlink" title="8.Range的坑"></a>8.Range的坑</h2><p>HTML5中新增的表单控件range在为其添加事件时，要注意change事件只有在改变确定下来的时候才会触发，所以为了获得即时效果要添加mousemove事件。</p>
+<h2 id="9-快速数组降维"><a href="#9-快速数组降维" class="headerlink" title="9.快速数组降维"></a>9.快速数组降维</h2><p>通过<code>[].concat.apply([], 2DArray to be flatten)</code>来对二位数组降维。</p>
+<p>如果是多维数组，可以使用这样的方法：</p>
+<pre><code>function flatten(arr) {
+  var res = [];
+  arr.forEach(function (val,idx) {
+    if(Array.isArray(val)) {
+      val.forEach(argument.callee)
+    }
+    else {
+      res.push(val);
+    }
+  })
+  return res;
+}</code></pre><h2 id="10-DOMRect"><a href="#10-DOMRect" class="headerlink" title="10.DOMRect"></a>10.DOMRect</h2><p>element.getBoundingClientRect()方法，可以返回一个DOMRect对象，这个对象中包含了调用元素的大小和它相对于当前视口(viewport)的位置。</p>
+<p>需要注意的是，由于参考物是当前的视口，所以当窗口滚动时，部分属性会变动。</p>
+<p>所以，在使用时使用<code>Element.getBoundingClientRect().top + window.scrollY</code>来获取绝对top值。</p>
+<p>DOMRect中的属性有(所有的属性都是float型且只读)：</p>
+<blockquote>
+<p><strong>bottom</strong>     Y-coordinate, relative to the viewport origin, of the bottom of the rectangle box.<br><br><strong>height</strong>     Height of the rectangle box (This is identical to bottom minus top).<br><br><strong>left</strong> X-coordinate, relative to the viewport origin, of the left of the rectangle box.<br><br><strong>right</strong>     X-coordinate, relative to the viewport origin, of the right of the rectangle box.<br><br><strong>top</strong>     Y-coordinate, relative to the viewport origin, of the top of the rectangle box.<br><br><strong>width</strong>     Width of the rectangle box (This is identical to right minus left).<br><br><strong>x</strong>     X-coordinate, relative to the viewport origin, of the left of the rectangle box.<br><br><strong>y</strong>     Y-coordinate, relative to the viewport origin, of the top of the rectangle box.</p>
+</blockquote>
+<p>属性之间的关系有： </p>
+<p>height = bottom - top;<br>width = right - left;</p>
+<h2 id="11-JS的动画最终解决方案"><a href="#11-JS的动画最终解决方案" class="headerlink" title="11.JS的动画最终解决方案"></a>11.JS的动画最终解决方案</h2><p>JS动画的最终解决方案是requestAnimationFrame()。</p>
+<p>这个方法接受一个参数callback,返回一个的ID值，通过传入这个ID值可以来实现动画的停止等等.</p>
+<p>requestAnimationFrame()的原理和setInterval()差不多，都是递归的调用，不同的地方是，这个方法会告诉浏览器，执行一系列动画，<br>并且执行的时间间隔是动态的，不同于setInterval()，这一解决方案会将函数体的执行时间也动态的考虑进去，最快的频率是60</p>
+<p>Example:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var start = null;</span><br><span class="line">var element = document.getElementById(<span class="string">"SomeElementYouWantToAnimate"</span>);</span><br><span class="line">element.style.position = <span class="string">'absolute'</span>;</span><br><span class="line"><span class="keyword">function</span> step(timestamp) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!start) start = timestamp;</span><br><span class="line">  var progress = timestamp - start;</span><br><span class="line">  element.style.left = Math.min(progress/10, 200) + <span class="string">"px"</span>;</span><br><span class="line">  <span class="keyword">if</span> (progress &lt; 2000) &#123;</span><br><span class="line">    window.requestAnimationFrame(step);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">window.requestAnimationFrame(step);</span><br></pre></td></tr></table></figure>
+
+<h2 id="12-CSS3中的Filter属性"><a href="#12-CSS3中的Filter属性" class="headerlink" title="12.CSS3中的Filter属性"></a>12.CSS3中的Filter属性</h2><p>Filter：</p>
+<blockquote>
+<p>grayscale 灰度 (/0-100/%)<br>sepia 深褐色 (/0-100/%)<br>saturate 饱和度 (/0-?/%)<br>opacity 透明度 (/0-100/%)<br>invert 色彩反转 (/0-100/%)<br>hue-rotate 色相 (/0-?%360/deg)<br>drop-shadow 阴影 (?px ?px ?px color)<br>contrast 对比度 (/0-?/%)<br>brightness 亮度 (/0-?/)<br>blur 模糊 (/0-?/px)</p>
+</blockquote>
+<h2 id="13-Canvas对图片的像素级处理"><a href="#13-Canvas对图片的像素级处理" class="headerlink" title="13.Canvas对图片的像素级处理"></a>13.Canvas对图片的像素级处理</h2><p>context.getImageData()可以拿到一个ImageData对象，这个对象有一个data属性包含Canvas上每一个像素点的RGBA值.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var pixelData = context.getImageData(0,0,canvas.width, canvas.height).data;</span><br></pre></td></tr></table></figure>
+
+<p>可以这样遍历数组</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">R = pixelData[i * 4 + 0];</span><br><span class="line">G = pixelData[i * 4 + 1];</span><br><span class="line">B = pixelData[i * 4 + 2];</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-this漂移"><span class="toc-number">1.</span> <span class="toc-text">1.this漂移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-setTimeout的一种妙用"><span class="toc-number">2.</span> <span class="toc-text">2.setTimeout的一种妙用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-事件冒泡"><span class="toc-number">3.</span> <span class="toc-text">3.事件冒泡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-清空数组"><span class="toc-number">4.</span> <span class="toc-text">4.清空数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-调整图片"><span class="toc-number">5.</span> <span class="toc-text">5.调整图片</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-jQuery中的break"><span class="toc-number">6.</span> <span class="toc-text">6.jQuery中的break</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-移动动画"><span class="toc-number">7.</span> <span class="toc-text">7.移动动画</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Range的坑"><span class="toc-number">8.</span> <span class="toc-text">8.Range的坑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-快速数组降维"><span class="toc-number">9.</span> <span class="toc-text">9.快速数组降维</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-DOMRect"><span class="toc-number">10.</span> <span class="toc-text">10.DOMRect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-JS的动画最终解决方案"><span class="toc-number">11.</span> <span class="toc-text">11.JS的动画最终解决方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-CSS3中的Filter属性"><span class="toc-number">12.</span> <span class="toc-text">12.CSS3中的Filter属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-Canvas对图片的像素级处理"><span class="toc-number">13.</span> <span class="toc-text">13.Canvas对图片的像素级处理</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/01/23/Learning-JS/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&text=最近使用JS开发的一些总结"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&is_video=false&description=最近使用JS开发的一些总结"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=最近使用JS开发的一些总结&body=Check out this article: http://yaoxuannn.com/2017/01/23/Learning-JS/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&title=最近使用JS开发的一些总结"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/01/23/Learning-JS/&name=最近使用JS开发的一些总结&description=&lt;hr&gt;
+&lt;p&gt;对最近写的代码进行review的总结&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

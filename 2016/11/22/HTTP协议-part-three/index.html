@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="HTTP–互联网的基盘.">
+<meta name="keywords" content="HTTP,协议,学习笔记,Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP:&#x2F;&#x2F;#three(Message)">
+<meta property="og:url" content="http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="HTTP–互联网的基盘.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.370Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP:&#x2F;&#x2F;#three(Message)">
+<meta name="twitter:description" content="HTTP–互联网的基盘.">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>HTTP://#three(Message)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/11/24/First2Linux/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/11/22/JavaScript学习笔记-Part-5/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&text=HTTP://#three(Message)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&is_video=false&description=HTTP://#three(Message)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTTP://#three(Message)&body=Check out this article: http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&name=HTTP://#three(Message)&description=&lt;hr&gt;
+&lt;p&gt; HTTP–互联网的基盘.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">3.请求和响应--了解更多</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.1.</span> <span class="toc-text">什么是报文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.2.</span> <span class="toc-text">编码&amp;&amp;分割传输与多部分对象集合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">编码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.2.</span> <span class="toc-text">分割传输</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.3.</span> <span class="toc-text">发送多种数据</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.3.</span> <span class="toc-text">内容协商</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        HTTP://#three(Message)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-11-22T18:04:19.000Z" itemprop="datePublished">2016-11-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/HTTP/">HTTP</a>, <a class="tag-link" href="/tags/Web/">Web</a>, <a class="tag-link" href="/tags/协议/">协议</a>, <a class="tag-link" href="/tags/学习笔记/">学习笔记</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <hr>
+<p> HTTP–互联网的基盘.</p>
+<a id="more"></a>
+
+<p>Created By Justin13 </p>
+<h1>3.请求和响应--了解更多</h1>
+
+<h2>什么是报文</h2>
+
+<p>前面一直在使用’报文’，’实体’，’首部’等等一些词，那么他们到底是什么呢？现在我们来看一看：</p>
+<blockquote>
+<p>用于HTTP协议交互的信息叫做报文(message)，是HTTP通信中的基本单位</p>
+</blockquote>
+<p>从客户端(请求端)发送的叫做请求报文，服务器端(响应端)发送的叫做响应报文。</p>
+<p>一个HTTP报文的结构像这样：</p>
+<pre><code>_________________________
+|        报文首部        |    通信双方需处理的请求
+|———————————————————————|     或响应的内容及属性    
+|       空行(CR+LF)      |
+|———————————————————————|
+|        报文主体        |     应被发送的数据
+|_______________________|</code></pre><p><strong>一个报文首部有以下数据组成：</strong></p>
+<p><strong>请求行-请求报文</strong></p>
+<p>包含请求方法，请求URI以及HTTP版本。</p>
+<p><strong>状态行-响应报文</strong></p>
+<p>包含表明结果的状态码，原因短语和HTTP版本。</p>
+<p><strong>首部字段</strong></p>
+<p>包含请求和响应的各种条件和属性，一般有：通用首部，请求首部，响应首部和实体首部。</p>
+<p><strong>其他</strong></p>
+<p>比如Cookie。</p>
+<h2>编码&&分割传输与多部分对象集合</h2>
+
+<h5>编码</h5>
+
+<p>HTTP可以按照原样传输数据，也可以通过编码来加快传输速率，使得处理大量请求的时候更有效。</p>
+<p>如果传输时不进行编码操作，我们认为<strong>报文主体</strong>和<strong>实体主体</strong>是相同的，通常也是这样。如果传输时编码，<strong>实体主体</strong>的内容就会发生变化。</p>
+<p>所以我们可以这么理解：</p>
+<blockquote>
+<p>在一般情况下，<strong>报文主体</strong>和<strong>实体主体</strong>的<strong>内容</strong>是一样的，实际在通信中传输的是<strong>实体主体</strong>，而<strong>报文主体</strong>就只是在报文中show出来的应被发送的数据。</p>
+</blockquote>
+<p>内容编码的过程为：</p>
+<p><code>Server</code>–compressing data–<code>Client</code>–uncompress!</p>
+<p>常见的编码方式有以下几种：</p>
+<pre><code>gzip (GNU zip)
+compress (UNIX系统的标准压缩)
+deflate (zlib)
+identity (不进行编码)</code></pre><h5>分割传输</h5>
+
+<p>我们在浏览网页时，如果网络不佳，会出现一张图片逐步显示的情况。</p>
+<p>从上面这个例子，我们说说<strong>分割发送</strong>.</p>
+<p>分块的过程和编码压缩的过程相似，Server端将实体主体分成多个块(chunk),每个块都用十六进制来标记块的大小，实体主体最后的一块以’0(CR+LF)’来标记.Client端接收块并解码，最后恢复到编码前的实体主体。</p>
+<p>这种分块的思想也使得用户能够获取部分信息，最广泛的应用是:断点续传。</p>
+<p>只要客户端发送的请求报文中明确指定下载的实体范围(这种请求叫做<strong>范围请求(Range Request)</strong>),响应会返回状态码206 Partial Content，对于多重范围的范围请求，响应会在首部字段Content-Type表明multipart/byteranges后返回响应报文。</p>
+<pre><code>GET /tip.jpg HTTP/1.1
+Host: www.usagidesign.jp
+Range: bytes = 5001-10000
+
+-----------------------------
+
+HTTP/1.1 206 Partial Content
+Date: Fri, 13 Jul 2016 04:39:17 GMT
+Content-Range: bytes 5001-10000/10000
+Content-Length: 5000
+Content-Type: image/jpeg </code></pre><p>如果是多重范围，可以这样写：</p>
+<pre><code>Range: bytes = 3000, 5001-10000</code></pre><p>如果服务器端无法响应范围请求，则会返回状态码200 OK和完整的实体内容。</p>
+<p>多线程下载也是这样的原理(下载部分再拼接).</p>
+<h5>发送多种数据</h5>
+
+<p>感觉这个还是分块的思想啊，最典型的是邮件中上传各种不同类型的附件(图片，文档，视频…)，这里采用了MIME(Multipurpose Internet Mail Extension,多用途因特网邮件拓展)机制，在这个拓展中，我们使用一种称为多对象集合(Multipart)的方法，分为两种：<code>multipart/form-data</code>和<code>multipart/byteranges</code>.</p>
+<p>其中，<code>multipart/form-data</code>是Web表单上传时用的。<code>multipart/byteranges</code>是状态码206 (Partial Content)响应报文包含多个范围内容时使用。</p>
+<p>在报文的首部加上Content-Type，表明使用，在后面加上boundary=XXXXXXXXX；(就像是旗标一样的东西)</p>
+<p><code>——XXXXXXXXXXX</code><br>···Data···<br><code>——XXXXXXXXXXX</code><br>···Data···<br><code>——XXXXXXXXXXX——</code>表示结束</p>
+<h2>内容协商</h2>
+
+<p>同一个Web网站可能会有不同的页面，譬如说中文和英文，当浏览器默认语言为中文，则会显示中文页面，反之显示英文页面。这样的机制称为内容协商(Content Negotiation),内容协商主要有以下3种类型。</p>
+<pre><code>服务器驱动协商(Server-driven Negotiaion)
+
+服务器端进行内容协商，以请求的首部字段为参考，服务器端自动处理
+
+客户端驱动协商(Client-driven Negotiation)
+
+用户手动选择，或JS脚本自动选择
+
+透明协商(Transparent Negotiation)
+
+服务器驱动和客户端驱动的结合体，由服务器端和客户端各自进行内容协商。</code></pre><p>Copyright © Justin13</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">3.请求和响应--了解更多</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.1.</span> <span class="toc-text">什么是报文</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.2.</span> <span class="toc-text">编码&amp;&amp;分割传输与多部分对象集合</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">编码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.2.</span> <span class="toc-text">分割传输</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.3.</span> <span class="toc-text">发送多种数据</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.3.</span> <span class="toc-text">内容协商</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&text=HTTP://#three(Message)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&is_video=false&description=HTTP://#three(Message)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=HTTP://#three(Message)&body=Check out this article: http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&title=HTTP://#three(Message)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2016/11/22/HTTP协议-part-three/&name=HTTP://#three(Message)&description=&lt;hr&gt;
+&lt;p&gt; HTTP–互联网的基盘.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

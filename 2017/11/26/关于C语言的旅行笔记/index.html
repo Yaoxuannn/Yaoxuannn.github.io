@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="走马观花的C语言旅行日记, 如果你学过C, 或者有编程经验的话. 我认为这篇文章能够快速的带你过一遍C语言以及帮助你看懂一些项目的C语言源码.">
+<meta name="keywords" content="C语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于C语言的旅行笔记">
+<meta property="og:url" content="http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="走马观花的C语言旅行日记, 如果你学过C, 或者有编程经验的话. 我认为这篇文章能够快速的带你过一遍C语言以及帮助你看懂一些项目的C语言源码.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2014/09/32-64.jpg">
+<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2014/08/usual_arithmetic_conversion.png">
+<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/C.png">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于C语言的旅行笔记">
+<meta name="twitter:description" content="走马观花的C语言旅行日记, 如果你学过C, 或者有编程经验的话. 我认为这篇文章能够快速的带你过一遍C语言以及帮助你看懂一些项目的C语言源码.">
+<meta name="twitter:image" content="http://www.runoob.com/wp-content/uploads/2014/09/32-64.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>关于C语言的旅行笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/12/字符编码笔记/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/11/11/自动化运维之Puppet/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&text=关于C语言的旅行笔记"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&is_video=false&description=关于C语言的旅行笔记"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=关于C语言的旅行笔记&body=Check out this article: http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&name=关于C语言的旅行笔记&description=&lt;p&gt;走马观花的C语言旅行日记, 如果你学过C, 或者有编程经验的话. 我认为这篇文章能够快速的带你过一遍C语言以及帮助你看懂一些项目的C语言源码.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一天-—-C的程序结构和数据类型"><span class="toc-number">1.</span> <span class="toc-text">第一天 — C的程序结构和数据类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二天-—C的量-存储类和运算符"><span class="toc-number">2.</span> <span class="toc-text">第二天 —C的量, 存储类和运算符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三天-—-函数-作用域-数组和指针"><span class="toc-number">3.</span> <span class="toc-text">第三天 — 函数,作用域,数组和指针</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第四天-—-结构体-共用体-位域"><span class="toc-number">4.</span> <span class="toc-text">第四天 — 结构体, 共用体, 位域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五天-—-输入输出-文件读写和强制类型转换"><span class="toc-number">5.</span> <span class="toc-text">第五天 — 输入输出, 文件读写和强制类型转换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第六天-—-C的预处理器-amp-宏-错误处理以及内存管理"><span class="toc-number">6.</span> <span class="toc-text">第六天 — C的预处理器&amp;宏,错误处理以及内存管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第七天-—-Mind-Map-最后一天"><span class="toc-number">7.</span> <span class="toc-text">第七天 — Mind Map 最后一天</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        关于C语言的旅行笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-11-26T14:01:52.000Z" itemprop="datePublished">2017-11-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/C语言/">C语言</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>走马观花的C语言旅行日记, 如果你学过C, 或者有编程经验的话. 我认为这篇文章能够快速的带你过一遍C语言以及帮助你看懂一些项目的C语言源码.</p>
+<a id="more"></a>
+
+<h1 id="第一天-—-C的程序结构和数据类型"><a href="#第一天-—-C的程序结构和数据类型" class="headerlink" title="第一天 — C的程序结构和数据类型"></a>第一天 — C的程序结构和数据类型</h1><p>一个C程序示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">/* My first C Program! */</span></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"My first C Program! \n"</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里包含了注释, C语言的注释可以有以下的几种方式:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 单行注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 多行注释的单行状态 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 多</span></span><br><span class="line"><span class="comment"> * 行</span></span><br><span class="line"><span class="comment"> * 注释</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>另外, 要记得在句尾加 分号 哦</strong>.</p>
+<p>接下来我们就要开始正式的介绍C语言的数据类型啦. </p>
+<p>基本的类型有这些:  基本的整数和浮点数类型, void类型, 派生类型(指针, 数组, 结构体, 函数等)</p>
+<p>其中我们先来着重的说一下基本的整数和浮点数类型, 根据不同的存储空间大小, 我们整数和浮点数的范围也是不一样的, </p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>存储大小</th>
+<th>值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>1 字节</td>
+<td>-128 到 127 或 0 到 255</td>
+</tr>
+<tr>
+<td>unsigned char</td>
+<td>1 字节</td>
+<td>0 到 255</td>
+</tr>
+<tr>
+<td>signed char</td>
+<td>1 字节</td>
+<td>-128 到 127</td>
+</tr>
+<tr>
+<td>int</td>
+<td>2 或 4 字节</td>
+<td>-32,768 到 32,767 或 -2,147,483,648 到 2,147,483,647</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td>2 或 4 字节</td>
+<td>0 到 65,535 或 0 到 4,294,967,295</td>
+</tr>
+<tr>
+<td>short</td>
+<td>2 字节</td>
+<td>-32,768 到 32,767</td>
+</tr>
+<tr>
+<td>unsigned short</td>
+<td>2 字节</td>
+<td>0 到 65,535</td>
+</tr>
+<tr>
+<td>long</td>
+<td>4 字节</td>
+<td>-2,147,483,648 到 2,147,483,647</td>
+</tr>
+<tr>
+<td>unsigned long</td>
+<td>4 字节</td>
+<td>0 到 4,294,967,295</td>
+</tr>
+</tbody></table>
+<p>在不同的系统上, 其实还是有微微的区别的:</p>
+<p><img src="http://www.runoob.com/wp-content/uploads/2014/09/32-64.jpg" alt="c"></p>
+<p>如果说为了获得具体的某个类型的大小, 我们可以使用<code>sizeof()</code>:</p>
+<blockquote>
+<p><strong>sizeof 不是函数</strong> 虽然看起来像是, 但并不是. 其实他是一个运算符.</p>
+</blockquote>
+<p>一个C程序示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The size of int is %lu\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行结果是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The size of int is 4</span><br></pre></td></tr></table></figure>
+
+<p>浮点数就要比整数少一点了:</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>存储大小</th>
+<th>值范围</th>
+<th>精度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>float</td>
+<td>4 字节</td>
+<td>1.2E-38 到 3.4E+38</td>
+<td>6 位小数</td>
+</tr>
+<tr>
+<td>double</td>
+<td>8 字节</td>
+<td>2.3E-308 到 1.7E+308</td>
+<td>15 位小数</td>
+</tr>
+<tr>
+<td>long double</td>
+<td>16 字节</td>
+<td>3.4E-4932 到 1.1E+4932</td>
+<td>19 位小数</td>
+</tr>
+</tbody></table>
+<p>C的标准库中有一个叫做float的, 其中定义了一些常量(宏). 使用它们我可以方便的获得这些边界值</p>
+<p>一个C程序示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;float.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The size of a float is %lu\n"</span>, <span class="keyword">sizeof</span>(<span class="keyword">float</span>));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The max float is %E\n"</span>, FLT_MAX);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The min float is %E\n"</span>, FLT_MIN);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The digit of it is %d\n"</span>, FLT_DIG);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">The size of a float is 4</span><br><span class="line">The max float is 3.402823E+38</span><br><span class="line">The min float is 1.175494E-38</span><br><span class="line">The digit of it is 6</span><br></pre></td></tr></table></figure>
+
+<p>最后我们稍微说一下void这个奇怪的类型,  我们的函数如果没有输入参数, 那么就可以说这个函数是可以接受void的, 同样, 如果没有返回值的话, 我们就可以说是返回一个void的值, 或者空. 最后就是类型为void *的指针不表示类型, 而只是地址, 这就是说 我们可以把这个指针转换成为任意一种类型. 关于void以及其他的类型我们到后面再来重复和扩展.</p>
+<h1 id="第二天-—C的量-存储类和运算符"><a href="#第二天-—C的量-存储类和运算符" class="headerlink" title="第二天 —C的量, 存储类和运算符"></a>第二天 —C的量, 存储类和运算符</h1><p>C中的变量定义:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> num;</span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="keyword">float</span> f = <span class="number">2.33</span>;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以直接定义变量而不初始化它. 其实 在我们定义变量的时候 他同时被<strong>声明</strong>了.</p>
+<blockquote>
+<p> 声明是一个想编译器保证变量会使用指定的类型和名称存在. 因此显然只有在编译阶段声明才有意义. 向我们上面这一种形式的声明同时也为变量建立了存储空间. 如果说仅仅只是声明(而不定义)的话, 我们可以使用下面的语句</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;  <span class="keyword">extern</span> <span class="keyword">int</span> i; <span class="comment">//声明，不是定义</span></span><br><span class="line">&gt;  <span class="keyword">int</span> i; <span class="comment">//声明，也是定义</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>说完变量 我们再来看一下常量:</p>
+<p>我们可以直接定义十进制 八进制或者十六进制的常量, 并且可以在我们的整数后面加上U或者L组合来分别表示无符号(Unsigned)和长整数(Long).</p>
+<p>来看几个合法的实例吧:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">85</span>         <span class="comment">/* 十进制 */</span></span><br><span class="line"><span class="number">0213</span>       <span class="comment">/* 八进制 */</span></span><br><span class="line"><span class="number">0x4b</span>       <span class="comment">/* 十六进制 */</span></span><br><span class="line"><span class="number">30</span>         <span class="comment">/* 整数 */</span></span><br><span class="line"><span class="number">30u</span>        <span class="comment">/* 无符号整数 */</span></span><br><span class="line"><span class="number">30l</span>        <span class="comment">/* 长整数 */</span></span><br><span class="line"><span class="number">30u</span>l       <span class="comment">/* 无符号长整数 */</span></span><br></pre></td></tr></table></figure>
+
+<p>而对于浮点数, 我们可以使用e或者E来表示指数:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.14159</span></span><br><span class="line"><span class="number">314159E-5</span>L</span><br></pre></td></tr></table></figure>
+
+<p> 另外 还有字符常量 其实说白了就是ASCII规定的控制字符了, 这个就不列出了.</p>
+<p>当我们定义字符串的时候 我们还可以使用转义符形成多行序列, like this</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello \</span></span><br><span class="line"><span class="string">    World!"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为了得到一个常量 我们可以这样做:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14</span></span><br></pre></td></tr></table></figure>
+
+<p>这样我们就可以在程序中使用这个<code>PI</code>. 但是要注意的是, 这并不是”定义”了一个常量, 我们连类型都没有声明哪来的定义之说? 使用<code>#define</code>得到的这个东西 称之为<strong>宏</strong> 而我们的编译器在编译时候 会先把宏定义替换到程序中 所以这更像是一种文本替换. 而且 基于这个特点 这不是特别的安全(没有类型) 同理 <code>PI</code>这个常量, 是没有内存空间的, 他不会被分配内存.</p>
+<p>一个C语言示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TEST &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello, world!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">TEST</span><br></pre></td></tr></table></figure>
+
+<p>你仍然可以正常的编译它, 然后执行.</p>
+<p>另外一种方法, 你可以使用<code>const</code>关键字来声明一个常量:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> c = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<p>看起来像是在定义变量吧! 事实上 这就是个变量 只不过加上了<code>const</code>修饰 所以这个Run-time时期被分配内存的变量的内存标记成了只读, 所以才形成了常量.</p>
+<p>除了<code>const</code>修饰符 我们还有其他的一些 称之为<strong>存储类</strong>的玩意.</p>
+<p>有这些:</p>
+<ul>
+<li>auto : 局部变量默认的存储类, 没啥好说的</li>
+<li>register : 尽量将变量定义在寄存器中(这样就没有内存地址了哦)</li>
+<li>static : 静态的变量 仅会初始化一次</li>
+<li>extern: 全局变量的定义, 对 就是刚刚的那个extern.</li>
+</ul>
+<p>接下来我们来看下C丰富的运算符吧:</p>
+<ul>
+<li>算术运算符</li>
+<li>关系运算符</li>
+<li>逻辑运算符</li>
+<li>位运算符</li>
+<li>赋值运算符</li>
+<li>杂项运算符</li>
+</ul>
+<p>就在此省略了. 另外 判断和循环基本上没有什么特殊的, 就也不说了.</p>
+<h1 id="第三天-—-函数-作用域-数组和指针"><a href="#第三天-—-函数-作用域-数组和指针" class="headerlink" title="第三天 — 函数,作用域,数组和指针"></a>第三天 — 函数,作用域,数组和指针</h1><p>基本上一个函数的构成是:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">static</span>|<span class="keyword">extern</span>|<span class="keyword">inline</span>) <span class="function">return_type <span class="title">function_name</span><span class="params">( parameter <span class="built_in">list</span> )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   body of the function</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先不管前面的那些修饰符 其他的都是很好理解的.</p>
+<p>这里的static和extern基本上和上面的概念一样, static标记成仅仅在本文件中存在, 这样即使在别的文件中存在同名函数也无所谓, 而extern就标记成是全局的函数, 可以跨文件进行访问.</p>
+<p>这里稍微有点意思的是我们的<code>inline</code>修饰, 被inline修饰之后的代码块看起来是个函数, 不过这只是在源代码层次的像函数         , 在编译之后就会变成失去函数的性质. 而是直接展开到代码中, 成为执行语句 而减少函数调用的时间消耗.</p>
+<p>另外, 虽然现在说有点早, 不过还是提及一下, 关于<strong>值传递和引用传递</strong>. 其实这个问题的核心是指针和引用以及数值的, 到和函数没有什么关系.</p>
+<p>我们可以在函数的外面定义<strong>全局变量</strong>, 也可以在函数的内部定义<strong>局部变量</strong>, 另外在函数的形式参数中定义局部变量. 还有哪里可以定义变量吗? 答案是: 没有了. 上面的三个地方就是定义变量的全部地方了.</p>
+<p>在函数的局部作用域中, 变量的值是不会被自动初始化的, 我们是需要手动的给他们赋初值的. 另外贴一下全局变量的默认值:</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>初始化默认值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int</td>
+<td>0</td>
+</tr>
+<tr>
+<td>char</td>
+<td>‘\0’</td>
+</tr>
+<tr>
+<td>float</td>
+<td>0</td>
+</tr>
+<tr>
+<td>double</td>
+<td>0</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>NULL</td>
+</tr>
+</tbody></table>
+<p>当我们传递参数的时候, 有的时候可能需要传递多个参数, 如果遇到数量不定的时候怎么办呢? 这个时候就需要我们的可变参数登场了. 使用这个功能, 需要引入C标准库中的<code>stdarg.h</code>头文件. </p>
+<p>在这个头文件中定义了一些宏, 可以提供实现可变参数的函数和宏. 具体说来有这些:</p>
+<ul>
+<li>va_list 类型变量</li>
+<li>va_start 宏</li>
+<li>va_arg 宏</li>
+<li>va_end 宏</li>
+</ul>
+<p>使用方法是这样的:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">arg</span><span class="params">(<span class="keyword">int</span> num, ...)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">float</span> res = arg(<span class="number">4</span>, <span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Result: %.2f"</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">arg</span><span class="params">(<span class="keyword">int</span> num, ...)</span> </span>&#123;</span><br><span class="line">    va_list <span class="built_in">list</span>;</span><br><span class="line">    <span class="keyword">float</span> sum = <span class="number">0.0</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    va_start(<span class="built_in">list</span>, num);</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; num; i++ ) &#123;</span><br><span class="line">        sum += va_arg(<span class="built_in">list</span>, <span class="keyword">int</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    va_end(<span class="built_in">list</span>);</span><br><span class="line">    <span class="keyword">return</span> sum / num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们先通过声明一个<code>va_list</code>类型的变量用来放我们的其他参数, 接着开始通过<code>va_start</code>开始为它初始化, 接着就可以通过<code>va_arg</code>来从里面弹出需要的类型的值, 最后通过<code>va_end</code>释放内存, 销毁变量就可以了.</p>
+<p>事实上, 我们的main函数是有携带参数的, 这个其实就是<strong>命令行参数</strong>. 通过这个方法来使用:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(argc == <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">strcmp</span>(argv[<span class="number">1</span>], <span class="string">"-h"</span>)) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"Help msg.\n"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(argc &gt; <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Too many argv.\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"One argument required.\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用的时候:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">➜  C ./a.out</span><br><span class="line">One argument required.</span><br><span class="line">➜  C ./a.out -h</span><br><span class="line">Help msg.</span><br><span class="line">➜  C ./a.out -a -f -h</span><br><span class="line">Too many argv.</span><br></pre></td></tr></table></figure>
+
+<p>而<code>argv[0]</code>就是这个<code>a.out</code>本身. </p>
+<p>接着我们就来到了一个有点意思的东西. <strong>C中的数组!</strong></p>
+<p>声明一个数组的方式很简单, 这样做:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[<span class="number">10</span>]; <span class="comment">// 定义一个长度为10的数组, 并不初始化它.</span></span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++) &#123;</span><br><span class="line">        arr[i] = i; <span class="comment">// 循环赋值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j ++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"arr[%d] = %d\n"</span>, j, arr[j]); <span class="comment">// 取值的方式</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果说想在定义的时候就赋值, 也是可以的, 这样做:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> balance[<span class="number">5</span>] = &#123;<span class="number">1000.0</span>, <span class="number">2.0</span>, <span class="number">3.4</span>, <span class="number">7.0</span>, <span class="number">50.0</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>当使用这种方式的时候, 我们可以省略数组的长度声明的.</p>
+<p>说到了数组, 我们就可以来提一提指针这个概念了.</p>
+<p>在真正说指针之前, 我们先来看一哈内存地址这个概念:</p>
+<p>一个C程序示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[] = &#123;<span class="number">100</span>, <span class="number">200</span>&#125;;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"address for arr[0]: %p\n"</span>, &amp;arr[<span class="number">0</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"address for arr[1]: %p\n"</span>, &amp;arr[<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行的结果像这样: ( 一个int的大小是4, 还记得吗 )</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">address <span class="keyword">for</span> arr[<span class="number">0</span>]: <span class="number">0x7fff54f58a20</span></span><br><span class="line">address <span class="keyword">for</span> arr[<span class="number">1</span>]: <span class="number">0x7fff54f58a24</span></span><br></pre></td></tr></table></figure>
+
+<p>我们使用<code>&amp;</code>运算符就可以获得对应变量的内存地址. 接着 了解到内存地址的获得, 我们就可以来讲讲指针啦</p>
+<p>事实上, 我们的<code>&amp;arr[0]</code>和<code>&amp;arr[1]</code>得到的值就是<strong>指针</strong>. 通过赋值语句就可以得到一个指针变量 像这样:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[] = &#123;<span class="number">100</span>, <span class="number">200</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> *pointer = &amp;arr[<span class="number">0</span>]; <span class="comment">// 得到一个指针变量</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The value of arr[0] is %d\n"</span>, *pointer);</span><br><span class="line">    pointer ++; <span class="comment">// 移动指针到下一个位置 也就是第二个int值, 内存地址相当于是移动了4字节大小.</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The value of arr[0] is %d\n"</span>, *pointer);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到的结果就是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The value of arr[0] is 100</span><br><span class="line">The value of arr[0] is 200</span><br></pre></td></tr></table></figure>
+
+<p>指针之间也是可以进行运算的, 除了上面的累加, 还可以递减以及做大小比较, 一个例子:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">int</span> *start = &amp;arr[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">int</span> *end = &amp;arr[length<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">while</span> ( start &lt;= end ) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"val is %d\n"</span>, *start);</span><br><span class="line">        start ++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以使用指针来遍历数组.</p>
+<p>现在拿到了指针, 我们就可以实现一个交换的函数, 来看:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *i, <span class="keyword">int</span> *j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = *j;</span><br><span class="line">    *j = *i;</span><br><span class="line">    *i = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之所以这样做是因为函数的作用域, 如果不是改变的指针指向的那个内存空间的值的话, 是没有用的. </p>
+<blockquote>
+<p>这里我稍微停留了一下, 再来做个测试:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line">&gt;</span><br><span class="line">&gt; <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">&gt;     <span class="built_in">printf</span>(<span class="string">"Address for i is %p\n"</span>, &amp;i);</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br><span class="line">&gt; <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&gt;     <span class="keyword">int</span> i = <span class="number">10</span>;</span><br><span class="line">&gt;     <span class="built_in">printf</span>(<span class="string">"Address for i is %p\n"</span>, &amp;i);</span><br><span class="line">&gt;     test(i);</span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>执行的结果看一下就瞬间明白 函数作用域 形式参数等等这些概念了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; Address for i is 0x7fff5f82ba28</span><br><span class="line">&gt; Address for i is 0x7fff5f82ba0c</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>懂了吧, 函数中的变量和你main里的那个完全不是一个回事, 他们只不过值相同罢了.</p>
+<p>另外, 再来说一个小技巧, 可以快速的进行转换并且不需要中间变量:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line">&gt;</span><br><span class="line">&gt; <span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">&gt;     <span class="keyword">int</span> i = <span class="number">10</span>;</span><br><span class="line">&gt;     <span class="keyword">int</span> j = <span class="number">20</span>;</span><br><span class="line">&gt;     <span class="built_in">printf</span>(<span class="string">"i and j is %d, %d\n"</span>, i, j);</span><br><span class="line">&gt;     i = i ^ j;</span><br><span class="line">&gt;     j = i ^ j;</span><br><span class="line">&gt;     i = i ^ j;</span><br><span class="line">&gt;     <span class="built_in">printf</span>(<span class="string">"i and j is %d, %d\n"</span>, i, j);</span><br><span class="line">&gt;     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; i and j is 10, 20</span><br><span class="line">&gt; i and j is 20, 10</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>除了可以使用指针指向这些变量, 我们还可以使用它指向函数. 像这样</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> (*fun_ptr)(<span class="keyword">int</span>,<span class="keyword">int</span>) = &amp;func;</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以直接使用函数指针来进行回调函数的编写( 也就是可以把函数当做参数送进去了 )</p>
+<p>例如:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> i &gt; j ? i : j;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> (*p)(<span class="keyword">int</span>, <span class="keyword">int</span>) = &amp;max;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">100</span>;</span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> res = p(i, j);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"result is: %d"</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后, 我们来说一下字符串, 其实从名字就能知道什么是字符串了, 不就是char的数组么. 所以我们就可以直接定义了:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> greeting[] = <span class="string">"Hello"</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"msg: %s\n"</span>, greeting);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"len: %lu\n"</span>, <span class="keyword">sizeof</span>(greeting));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出的结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">msg: Hello</span><br><span class="line">len: 6</span><br></pre></td></tr></table></figure>
+
+<p>咦 是不是很奇怪? 明明是5个字符, 可是却是6个字节. 这是因为每一个字符串的末尾都会有一个<code>\0</code>来表示他的结束. 而编译器会自动的为我们加上这个, 所以其实也可以不需要手动的加入.</p>
+<p>另外 C标准库(string.h)中定义了很多方便的字符串函数: </p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>函数 &amp; 目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>strcpy(s1, s2);</strong>复制字符串 s2 到字符串 s1。</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>strcat(s1, s2);</strong>连接字符串 s2 到字符串 s1 的末尾。</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>strlen(s1);</strong>返回字符串 s1 的长度。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>strcmp(s1, s2);</strong>如果 s1 和 s2 是相同的，则返回 0；如果 s1 &lt; s2 则返回小于 0；如果 s1 &gt; s2 则返回大于 0。</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>strchr(s1, ch);</strong>返回一个指针，指向字符串 s1 中字符 ch 的第一次出现的位置。</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>strstr(s1, s2);</strong>返回一个指针，指向字符串 s1 中字符串 s2 的第一次出现的位置。</td>
+</tr>
+</tbody></table>
+<h1 id="第四天-—-结构体-共用体-位域"><a href="#第四天-—-结构体-共用体-位域" class="headerlink" title="第四天 — 结构体, 共用体, 位域"></a>第四天 — 结构体, 共用体, 位域</h1><p>终于到了我们赫赫有名的结构体啦! 那么, 到底什么是结构体呢 ?</p>
+<p>其实简单的说,我认为 结构体就是为了解决描述困难的问题, 由于基本的变量类型就只有那些, 如果说想表达一本书, 那么他会有字符型的名字, 整数型的价格等等, 甚至 通过定义多个结构体我们就可以来描述更复杂的结构.</p>
+<p>定义一个结构体使用<code>struct</code>关键字:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span> title[<span class="number">50</span>];</span><br><span class="line">  <span class="keyword">char</span> author[<span class="number">50</span>];</span><br><span class="line">  <span class="keyword">int</span> book_id;</span><br><span class="line">  <span class="keyword">int</span> price;</span><br><span class="line">&#125; book;</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>Books</code>和<code>book</code>都是可选的, 其中, <code>Books</code>就是定义的这个结构体的名字, 而book有点像是初始化的一个变量, 也就是说, 我们已经在定义结构体<code>Books</code>的同时, 初始化了一个book变量.</p>
+<p>如果说想要再次声明一个<code>Books</code>类型的变量, 我们需要这样做:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span> <span class="title">book1</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span> <span class="title">book2</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p>有一点麻烦对吗? 所以我们可以通过<code>typedef</code>关键字来简化过程. 像这样:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Books</span> &#123;</span></span><br><span class="line">  ...c code...</span><br><span class="line">&#125; Book;</span><br></pre></td></tr></table></figure>
+
+<p>这样在定义变量的时候就可以直接:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Book book1;</span><br><span class="line">Book book2;</span><br></pre></td></tr></table></figure>
+
+<p>其实展开的话还是<code>struct Books</code>这个玩意, 有没有觉得有一点像是之前说的<code>#define</code>. 他们之间虽然相似 但是还是有区别的:</p>
+<ul>
+<li><code>typedef</code> 主要是为了定制类型的别名的, <code>#define</code> 除了对类型定制别名, 还可以对数值定义别名</li>
+<li><code>typedef</code>是编译器做的处理, 而<code>#define</code>是预编译器做的处理</li>
+</ul>
+<p>那么我现在拿到一个结构体对象了, 怎么用呢?</p>
+<p>一个C示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Books</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> book_id;</span><br><span class="line">    <span class="keyword">char</span> title[<span class="number">50</span>];</span><br><span class="line">    <span class="keyword">char</span> author[<span class="number">50</span>];</span><br><span class="line">    <span class="keyword">int</span> price;</span><br><span class="line">&#125; Book;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Book book1;</span><br><span class="line">    book1.book_id = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(book1.title, <span class="string">"Harry Porter"</span>);</span><br><span class="line">    <span class="built_in">strcpy</span>(book1.author, <span class="string">"J.K Rowling"</span>);</span><br><span class="line">    book1.price = <span class="number">108</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Book1 is %s by %s\n"</span>, book1.title, book1.author);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Book1 costs %d\n"</span>, book1.price);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Book1 is Harry Porter by J.K Rowling</span><br><span class="line">Book1 costs 108</span><br></pre></td></tr></table></figure>
+
+<p>我们当然也可以把结构体作为参数传递给函数, 并且同样, 对于结构体的指针也是可以的, 只不过我们使用<code>-&gt;</code>来代替上面的<code>.</code>.</p>
+<p>我们来直接看一下一个综合的例子:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Students</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">20</span>];</span><br><span class="line">    <span class="keyword">int</span> isAlive;</span><br><span class="line">&#125; Student;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printStu</span><span class="params">(Student *stu)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Student student1;</span><br><span class="line">    <span class="built_in">strcpy</span>(student1.name, <span class="string">"Xiaoming"</span>);</span><br><span class="line">    student1.number = <span class="number">1</span>;</span><br><span class="line">    Student *stu = &amp;student1;</span><br><span class="line">    stu-&gt;isAlive = <span class="number">0</span>;</span><br><span class="line">    printStu(stu);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printStu</span><span class="params">(Student *stu)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"no.%d %s\n"</span>, stu-&gt;number, stu-&gt;name);</span><br><span class="line">    <span class="built_in">printf</span>(stu-&gt;isAlive == <span class="number">0</span> ? <span class="string">"Not at School\n"</span> : <span class="string">"Still in School\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出的结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">no.1 Xiaoming</span><br><span class="line">Not at School</span><br></pre></td></tr></table></figure>
+
+<p>这里我们使用了一个int型的数值通过标记<code>0</code>/<code>1</code>来判断学生是否还在学校, 这样是有点浪费内存资源的, 因为我们仅仅会使用一个字节.这个时候我们可以使用<strong>位域</strong>的概念, 这可以是的我们的内存分布更加紧凑( 不过说真的, 现在服务器都是几十甚至几百G级别的内存, 根本没有必要为了节省几个字节的内存分配而这样麻烦, 甚至引入很多坑和隐患 )</p>
+<p>位域的使用方法像这样:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Value</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> start : <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">int</span> end : <span class="number">4</span>;</span><br><span class="line">&#125; Val;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Val val;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Size of Val is %lu\n"</span>, <span class="keyword">sizeof</span>(val));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>猜一猜输出结果是什么? </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Size of Val is 4</span><br></pre></td></tr></table></figure>
+
+<p>原本, 在不使用位域的情况下, 我们的Value会占用<code>4字节 * 2 = 8字节</code>的内存, 而在定义了位域, 我们声明变量start和end只使用4位长度的资源, 这样就会连着分配下去(只要不超过一整个字节).</p>
+<p>现在, 我们来说一下共用体.</p>
+<p>共用体也是为了节省内存出现的数据结构, 不同于结构体会为每一个变量分配内存, 共用体一次只能使用定义的其中一个变量, 我们来验证一下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Students</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> grade;</span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> Student &#123;</span><br><span class="line">    <span class="keyword">int</span> grade;</span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Students</span> <span class="title">stu</span>;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The size of stu is: %lu\n"</span>, <span class="keyword">sizeof</span>(stu));</span><br><span class="line">    <span class="keyword">union</span> Student stu2;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"The size of stu2 is: %lu\n"</span>, <span class="keyword">sizeof</span>(stu2));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">The size of stu is: 8</span><br><span class="line">The size of stu2 is: 4</span><br></pre></td></tr></table></figure>
+
+<p>使用的时候, 我们一次只能使用一个值, 如果同时分配的话, 就会出毛病:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> Test &#123;</span><br><span class="line">    <span class="keyword">int</span> val1;</span><br><span class="line">    <span class="keyword">char</span> val2[<span class="number">10</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">union</span> Test test;</span><br><span class="line">    test.val1 = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(test.val2, <span class="string">"Hello"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Val1 Test: %d\n"</span>, test.val1);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Val2 Test: %s\n"</span>, test.val2);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出的结果是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Val1 Test: 1819043144</span><br><span class="line">Val2 Test: Hello</span><br></pre></td></tr></table></figure>
+
+<p>第一个值是个随机值, 但是值2是正常的, 如果使用的话, 正确的方式其实应该改一下顺序, 把上面第13行挪到第11行的下面.</p>
+<h1 id="第五天-—-输入输出-文件读写和强制类型转换"><a href="#第五天-—-输入输出-文件读写和强制类型转换" class="headerlink" title="第五天 — 输入输出, 文件读写和强制类型转换"></a>第五天 — 输入输出, 文件读写和强制类型转换</h1><p>关于输入输出, 我们其实已经试过很多次了, 那就是那个<code>printf</code>函数, 将文本输出到标准输出上. 而与之对应的一个函数是<code>scanf</code>, 同样也是在<code>stdio.h</code>中定义的.程序在执行到这个函数的时候会暂停, 等待输入和回车:</p>
+<p>一个C语言示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Enter a val:\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"You enter: %d\n"</span>, i);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出的结果是这样的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">➜  C ./a.out</span><br><span class="line">Enter a val: (暂停等待)</span><br><span class="line">0</span><br><span class="line">You enter: 0</span><br><span class="line">➜  C ./a.out</span><br><span class="line">Enter a val:</span><br><span class="line">10.25</span><br><span class="line">You enter: 10</span><br></pre></td></tr></table></figure>
+
+<p>你会看到, 由于我们的格式化字符串是<code>%d</code>期待一个整形, 所以只会接受整型.</p>
+<p>另外, 对于scanf来说 一个空格就算是一个字符串了, 所以如果遇到这样的情况:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Now enter a <span class="built_in">string</span>:</span><br><span class="line">Hello World</span><br><span class="line">You enter Hello%</span><br></pre></td></tr></table></figure>
+
+<p>C程序如下:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Now enter a string:\n"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, str);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"You enter %s"</span>, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以, 读到空格就会返回了.</p>
+<p>那么, 如果说我是想要读取一个句子怎么办呢? 没关系, 我们有<code>gets</code>和<code>puts</code>这两个函数. 听名字也能看出来他的功能: <code>getString</code>和<code>putString</code>.</p>
+<p>而且直接调用传递参数就可以了, Like this:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">5</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Enter anything you like:\n"</span>);</span><br><span class="line">    gets(str);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"You entered: %s"</span>, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是在执行的时候, 我的Mac出现了警告:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">warning: this program uses gets(), which is unsafe.</span><br></pre></td></tr></table></figure>
+
+<p>这是怎么回事呢? 我们的gets会接受一整行, 这个时候如果我们的输入串的大小大于这个接受变量的长度的话, 尽管输出是没有问题的 但是程序会崩溃, 或者数据丢失等等这种十分致命的不安全现象会出现.</p>
+<p>所以为了程序的健壮性, 我们更应该使用<code>fgets</code>这个函数, 他接收三个参数, 接收变量, 长度, 文件描述符.</p>
+<p>这样我们把程序修改成:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> str[<span class="number">5</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Enter anything you like:"</span>);</span><br><span class="line">    fgets(str, <span class="keyword">sizeof</span>(str)+<span class="number">1</span>, <span class="built_in">stdin</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"You entered: %s"</span>, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样就好了, 另外, 如果是直接输出, 我们也可以使用<code>gets</code>的配套函数<code>puts</code>和<code>sputs</code>.</p>
+<p>最后, 如果只是读取一个字符或者输出一个字符的话, 直接使用<code>getchar</code>和<code>putchar</code>就行了. 很简单就不演示了.</p>
+<p>从本质上, 输入和输出还是读写文件, 只不过文件是标准输入输出罢了. 所以现在, 我们更加本质一点, 直接来看看怎么操作文件吧.</p>
+<p>对于文件的操作主要就是这些:</p>
+<ul>
+<li>打开文件</li>
+<li>关闭文件</li>
+<li>写入文件</li>
+<li>读取文件</li>
+</ul>
+<p>另外, 我们再加上一个文件指针的偏移(虽然我觉得这个不算) 通过打开文件的函数得到文件(<strong><code>FILE</code></strong>)类型的文件指针, 通过这个指针来对文件进行各种操作. </p>
+<p>打开文件:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">FILE *<span class="title">fopen</span><span class="params">( <span class="keyword">const</span> <span class="keyword">char</span> * filename, <span class="keyword">const</span> <span class="keyword">char</span> * mode )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>返回的是一个FILE类型的文件指针, 通过这个指针来进行其他的操作:</p>
+<p>关闭文件:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fclose</span><span class="params">( FILE *fp )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果成功关闭文件，<strong>fclose( )</strong> 函数返回零，如果关闭文件时发生错误，函数返回 <strong>EOF</strong>。这个函数实际上，会清空缓冲区中的数据，关闭文件，并释放用于该文件的所有内存.</p>
+<p>打开文件之后我们就可以读取和写入了, 写入的函数是:<code>fputs</code>和<code>fprintf</code> 非格式化和格式化. 如果只是单个的写入字符, 也可以使用:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fputc</span><span class="params">( <span class="keyword">int</span> c, FILE *fp )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>一个C示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">   fp = fopen(<span class="string">"/tmp/file_test"</span>, <span class="string">"w"</span>);</span><br><span class="line">   <span class="built_in">fputs</span>(<span class="string">"This is a test message for fputs.\n"</span>, fp);</span><br><span class="line">   <span class="built_in">fprintf</span>(fp, <span class="string">"This is a test message for fprintf."</span>);</span><br><span class="line">   fputc(<span class="string">'\n'</span>, fp);</span><br><span class="line">   fclose(fp);</span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着就会创建文件(如果没有)并写入到其中. </p>
+<p>那么读取文件都能猜出来了吧, 直接上一个示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    FILE *fp = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">char</span> buf[<span class="number">255</span>];</span><br><span class="line">    fp = fopen(<span class="string">"/tmp/file_test"</span>, <span class="string">"r"</span>);</span><br><span class="line">    <span class="built_in">fputs</span>(fgets(buf, <span class="number">255</span>, fp), <span class="built_in">stdout</span>);</span><br><span class="line">    <span class="built_in">fputs</span>(fgets(buf, <span class="number">255</span>, fp), <span class="built_in">stdout</span>);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果想要向文件中输入二进制数据, 那么就要用<code>fwrite</code>和<code>fread</code>这两个函数来解决:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Student</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    <span class="keyword">int</span> gender : <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">12</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    FILE *fp = fopen(<span class="string">"/tmp/bin_test"</span>, <span class="string">"wb+"</span>);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">stu</span>;</span></span><br><span class="line">    stu.id = <span class="number">2017</span>;</span><br><span class="line">    stu.gender = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">strcpy</span>(stu.name, <span class="string">"Justin"</span>);</span><br><span class="line">    fwrite(&amp;stu, <span class="keyword">sizeof</span>(struct Student), <span class="number">1</span>, fp);</span><br><span class="line">    fseek(fp, <span class="number">0</span>, SEEK_SET);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Student</span> <span class="title">s</span>;</span></span><br><span class="line">    fread(&amp;s, <span class="keyword">sizeof</span>(struct Student), <span class="number">1</span>, fp);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Student %d(%s) is %s"</span>, s.id, s.gender ? <span class="string">"Boy"</span> : <span class="string">"Girl"</span>, s.name);</span><br><span class="line">    fclose(fp);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我使用的模式就是二进制读写模式了, 加上了<code>b</code>表示是<code>binary</code>二进制数据.</p>
+<p>基本上这就是C对文件的种种操作了. 接下里再来补充一个强制类型转换的点.</p>
+<p>我们说编译器会对一些情况的运算优先进行隐式的变量类型转换, 现在我们说的是显式的变量类型转换怎么做:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">double</span> c = a / b; <span class="comment">// double c = (double) a / b;</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出的是<code>2.000000</code>. 这就是没有进行变量类型转换导致小数点后面的内容就没有了, 这个时候就要想办法让他进行浮点数的运算. 所以我们在第6行的a前面加上一个<code>(double)</code> 这样就会进行一次整数提升, 进行浮点数运算.</p>
+<p><img src="http://www.runoob.com/wp-content/uploads/2014/08/usual_arithmetic_conversion.png" alt="usual_arithmetic_conversion"></p>
+<p>上图就是对整数提升的规则描述, 如果操作数的类型不一样, 就会用出现的最高级的做提升, 使每一个操作数都变成这个类型的.</p>
+<p>来做个实验吧:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c = <span class="string">'a'</span>; <span class="comment">// ASCII of 'a' is 97</span></span><br><span class="line">    <span class="keyword">int</span> res = c + <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出是97, 因为提升到了整型.</p>
+<p>顺带一提, 如果是一个指针型的变量, 只能先转成其他类型的指针, 再做指向, 其实就是这个意思:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c = <span class="string">'a'</span>;</span><br><span class="line">    <span class="keyword">char</span> *cp = &amp;c;</span><br><span class="line">    <span class="keyword">int</span> res = *(<span class="keyword">int</span> *) cp + <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, res);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出是一样的, 97.</p>
+<h1 id="第六天-—-C的预处理器-amp-宏-错误处理以及内存管理"><a href="#第六天-—-C的预处理器-amp-宏-错误处理以及内存管理" class="headerlink" title="第六天 — C的预处理器&amp;宏,错误处理以及内存管理"></a>第六天 — C的预处理器&amp;宏,错误处理以及内存管理</h1><p>终于快到尾声了嘿嘿. 从预理器开始吧, 其实我们之前所有的C语言Demo都用了, 是什么玩意? 对了, 就是那个开头的<code>#include</code>这个就是预处理器中的一个典型. 另外, 我们之前使用的<code>#define</code>也是一个预处理器.</p>
+<p>还有哪些预处理器呢</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>#define</td>
+<td>定义宏</td>
+</tr>
+<tr>
+<td>#include</td>
+<td>包含一个源代码文件</td>
+</tr>
+<tr>
+<td>#undef</td>
+<td>取消已定义的宏</td>
+</tr>
+<tr>
+<td>#ifdef</td>
+<td>如果宏已经定义，则返回真</td>
+</tr>
+<tr>
+<td>#ifndef</td>
+<td>如果宏没有定义，则返回真</td>
+</tr>
+<tr>
+<td>#if</td>
+<td>如果给定条件为真，则编译下面代码</td>
+</tr>
+<tr>
+<td>#else</td>
+<td>#if 的替代方案</td>
+</tr>
+<tr>
+<td>#elif</td>
+<td>如果前面的 #if 给定条件不为真，当前条件为真，则编译下面代码</td>
+</tr>
+<tr>
+<td>#endif</td>
+<td>结束一个 #if……#else 条件编译块</td>
+</tr>
+<tr>
+<td>#error</td>
+<td>当遇到标准错误时，输出错误消息</td>
+</tr>
+<tr>
+<td>#pragma</td>
+<td>使用标准化方法，向编译器发布特殊的命令到编译器中</td>
+</tr>
+</tbody></table>
+<p>大体上看描述就能知道是干什么的了, 来看一些示例:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">undef</span>  FILE_SIZE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_SIZE 42</span></span><br></pre></td></tr></table></figure>
+
+<p>这个指令告诉 C预处理器 取消已定义的 FILE_SIZE，并定义它为 42。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MESSAGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> MESSAGE <span class="meta-string">"You wish!"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>这个指令告诉 C预处理器 只有当 MESSAGE 未定义时，才定义 MESSAGE。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></span><br><span class="line">   <span class="comment">/* Your debugging statements here */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>这个指令告诉 C预处理器 如果定义了 DEBUG，则执行处理语句。在编译时，如果编译时向 gcc 编译器传递了 <em>-DDEBUG</em> 开关量, 就会编译内部的代码.</p>
+<p>接下来来看一下经常和他们一起出现的<strong>宏</strong>. 虽然宏的概念我们之前也说过, 但是这一次我们说的更多:</p>
+<p>先来介绍下一些内置的, 预定义的宏, 有这些:</p>
+<table>
+<thead>
+<tr>
+<th>宏</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>\</em>DATE __</td>
+<td>当前日期，一个以 “MMM DD YYYY” 格式表示的字符常量。</td>
+</tr>
+<tr>
+<td>_<em>TIME_</em></td>
+<td>当前时间，一个以 “HH:MM:SS” 格式表示的字符常量。</td>
+</tr>
+<tr>
+<td>_<em>FILE_</em></td>
+<td>这会包含当前文件名，一个字符串常量。</td>
+</tr>
+<tr>
+<td>_<em>LINE_</em></td>
+<td>这会包含当前行号，一个十进制常量。</td>
+</tr>
+</tbody></table>
+<p>另外, 我们的宏也是可以传递参数的, 想这样:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> square(x) ((x) * (x))</span></span><br></pre></td></tr></table></figure>
+
+<p>这就俨然是一个计算平方的宏.</p>
+<p>和这种带参数的宏类似, 我们还有其他的运算符来增强对宏的定义:</p>
+<ul>
+<li>首先, 宏定义支持使用<code>\</code>来进行换行延续.</li>
+<li>字符串常量化, 使用<code>#</code></li>
+<li>标记粘贴运算符, 使用<code>##</code></li>
+</ul>
+<p>最后再说一个<code>defined()</code>, 传入宏的名字来检测是否已经定义过了 个人感觉和<code>#ifdef</code>一个意思.</p>
+<p>来看一个例子吧:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> MESSAGE</span></span><br><span class="line">    <span class="meta">#<span class="meta-keyword">define</span> MESSGAE <span class="meta-string">"Hello!"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> message(a) \</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello "</span> #a <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> paster(n) printf(<span class="meta-string">"token"</span> #n <span class="meta-string">" = %d"</span>, token##n)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> token1 = <span class="number">1</span>;</span><br><span class="line">    message(non-exist-var);</span><br><span class="line">    paster(<span class="number">1</span>); <span class="comment">// printf("token1 = %d", token1);</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出的结果是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello non-exist-var</span><br><span class="line">token1 = 1%</span><br></pre></td></tr></table></figure>
+
+<p>通过对宏的使用, 我们可以引入<strong>头文件</strong>, 如果是系统库中的文件, 我们使用<code>&lt;&gt;</code>来引入, 如果是自己的文件, 就通过<code>&quot;&quot;</code>来引入. 通过对条件判断的使用, 我们也可以实现对头文件的确保一次引用.</p>
+<p>有的时候在程序执行的过程中, 很有可能会发生很多很多错误: 比较典型的是文件不存在导致打开失败得到空指针. 这个时候我们就要想办法终止程序并且给出提示, 主要是标准库和string库中定义的这两个函数, 还有其他的一些宏变量.</p>
+<ul>
+<li>perror(const char *s)</li>
+<li>strerror(int errnum)</li>
+</ul>
+<p>来上个例子吧:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> errno; <span class="comment">// 在errno.h中定义的</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    FILE *fp = fopen(<span class="string">"no-exist"</span>, <span class="string">"r"</span>);</span><br><span class="line">    <span class="keyword">int</span> errnum;</span><br><span class="line">    <span class="keyword">if</span> (fp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        errnum = errno;</span><br><span class="line">        perror(<span class="string">"Error(from perror)"</span>);</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Errno: %d, msg: %s"</span>, errnum, strerror(errnum));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        fclose(fp);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error(from perror): No such file or directory</span><br><span class="line">Errno: 2, msg: No such file or directory%</span><br></pre></td></tr></table></figure>
+
+<p>另外, 在<code>stdlib.h</code>中定义了两个宏:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_SUCCESS <span class="comment">/*implementation defined*/</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EXIT_FAILURE <span class="comment">/*implementation defined*/</span></span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用<code>exit</code>函数直接终止程序, 后面会有演示.</p>
+<p>现在我们已经把技能点点的差不多了, 来看最后一座大山 — <strong>内存管理</strong>吧.</p>
+<p>内存管理来概述一下的话就是: <strong>分配</strong>, <strong>调整</strong>, <strong>释放</strong>. 这些函数都在<code>stdlib.h</code>标准库中.</p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>函数和描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><strong>void *calloc(int num, int size);</strong>在内存中动态地分配 num 个长度为 size 的连续空间，并将每一个字节都初始化为 0。所以它的结果是分配了 num*size 个字节长度的内存空间，并且每个字节的值都是0。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>*<em>void free(void \</em>address); **该函数释放 address 所指向的内存块,释放的是动态分配的内存空间。</td>
+</tr>
+<tr>
+<td>3</td>
+<td>*<em>void \</em>malloc(int num); **在堆区分配一块指定大小的内存空间，用来存放数据。这块内存空间在函数执行完成后不会被初始化，它们的值是未知的。</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>void *realloc(void <em>address, int newsize); *</em>该函数重新分配内存，把内存扩展到 **newsize</strong>。</td>
+</tr>
+</tbody></table>
+<p>来看一下使用吧:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> *space;</span><br><span class="line">    space = <span class="built_in">malloc</span>(<span class="number">10</span> * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">    <span class="keyword">if</span> (space == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        perror(<span class="string">"allocate space failed:"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">strcpy</span>(space, <span class="string">"Hello"</span>);</span><br><span class="line">    <span class="built_in">free</span>(space);</span><br><span class="line">  	space = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果说在分配完了之后发现不够用了, 我们还可以继续分配 这个过程其实就是调整的过程.</p>
+<p>我们可以做个试验来看看:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* space = <span class="literal">NULL</span>;</span><br><span class="line">    space = <span class="built_in">malloc</span>(<span class="number">10</span> * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">  	space = <span class="built_in">realloc</span>(space, <span class="number">16</span> * <span class="keyword">sizeof</span>(<span class="keyword">char</span>)); <span class="comment">// 重新分配</span></span><br><span class="line">    <span class="built_in">strcpy</span>(space, <span class="string">"aaabbbcccdddeee"</span>);</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">21</span>; i ++ ) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%p\t"</span>, space);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *space);</span><br><span class="line">        space ++;</span><br><span class="line">    &#125;</span><br><span class="line">    space -= <span class="number">21</span>;</span><br><span class="line">    <span class="built_in">free</span>(space);</span><br><span class="line">    space = <span class="built_in">calloc</span>(<span class="number">10</span> , <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">21</span>; i ++ ) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%p\t"</span>, space);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, *space);</span><br><span class="line">        space ++;</span><br><span class="line">    &#125;</span><br><span class="line">    space = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以明确的看到, 第一次分配的空间在free之后成为了空闲空间所以才会被<code>calloc</code>重新分配走, 并且初始化成0.</p>
+<h1 id="第七天-—-Mind-Map-最后一天"><a href="#第七天-—-Mind-Map-最后一天" class="headerlink" title="第七天 — Mind Map 最后一天"></a>第七天 — Mind Map 最后一天</h1><p>最后一天, 画个图来总结一下吧. ( 吐槽一下Xmind导出的图片质量真是太差了. )</p>
+<p><img src="http://q4fo85yz7.bkt.gdipper.com/C.png" alt="C.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#第一天-—-C的程序结构和数据类型"><span class="toc-number">1.</span> <span class="toc-text">第一天 — C的程序结构和数据类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第二天-—C的量-存储类和运算符"><span class="toc-number">2.</span> <span class="toc-text">第二天 —C的量, 存储类和运算符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第三天-—-函数-作用域-数组和指针"><span class="toc-number">3.</span> <span class="toc-text">第三天 — 函数,作用域,数组和指针</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第四天-—-结构体-共用体-位域"><span class="toc-number">4.</span> <span class="toc-text">第四天 — 结构体, 共用体, 位域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第五天-—-输入输出-文件读写和强制类型转换"><span class="toc-number">5.</span> <span class="toc-text">第五天 — 输入输出, 文件读写和强制类型转换</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第六天-—-C的预处理器-amp-宏-错误处理以及内存管理"><span class="toc-number">6.</span> <span class="toc-text">第六天 — C的预处理器&amp;宏,错误处理以及内存管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#第七天-—-Mind-Map-最后一天"><span class="toc-number">7.</span> <span class="toc-text">第七天 — Mind Map 最后一天</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&text=关于C语言的旅行笔记"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&is_video=false&description=关于C语言的旅行笔记"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=关于C语言的旅行笔记&body=Check out this article: http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&title=关于C语言的旅行笔记"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/11/26/关于C语言的旅行笔记/&name=关于C语言的旅行笔记&description=&lt;p&gt;走马观花的C语言旅行日记, 如果你学过C, 或者有编程经验的话. 我认为这篇文章能够快速的带你过一遍C语言以及帮助你看懂一些项目的C语言源码.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

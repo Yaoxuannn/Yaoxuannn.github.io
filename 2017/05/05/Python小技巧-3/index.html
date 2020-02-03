@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Python编程技(mo)巧(fa).[环境:Python3.6.0]">
+<meta name="keywords" content="Python,小技巧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python小技巧-3">
+<meta property="og:url" content="http://yaoxuannn.com/2017/05/05/Python小技巧-3/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="Python编程技(mo)巧(fa).[环境:Python3.6.0]">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python小技巧-3">
+<meta name="twitter:description" content="Python编程技(mo)巧(fa).[环境:Python3.6.0]">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Python小技巧-3</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/05/06/Linux三剑客-grep-awk-sed/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/04/30/Shell基础/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/05/05/Python小技巧-3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&text=Python小技巧-3"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&is_video=false&description=Python小技巧-3"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python小技巧-3&body=Check out this article: http://yaoxuannn.com/2017/05/05/Python小技巧-3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&name=Python小技巧-3&description=&lt;hr&gt;
+&lt;p&gt;Python编程技(mo)巧(fa).[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Py的魔法"><span class="toc-number">1.</span> <span class="toc-text">Py的魔法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#派生内置不可变类并修改实例化行为的魔法"><span class="toc-number">1.1.</span> <span class="toc-text">派生内置不可变类并修改实例化行为的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节省内存的魔法"><span class="toc-number">1.2.</span> <span class="toc-text">节省内存的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上下文管理的魔法"><span class="toc-number">1.3.</span> <span class="toc-text">上下文管理的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setter和getter的魔法"><span class="toc-number">1.4.</span> <span class="toc-text">setter和getter的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使类实现比较操作的魔法"><span class="toc-number">1.5.</span> <span class="toc-text">使类实现比较操作的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python进行类型检查的魔法"><span class="toc-number">1.6.</span> <span class="toc-text">Python进行类型检查的魔法</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python小技巧-3
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-05-05T09:17:27.000Z" itemprop="datePublished">2017-05-05</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/小技巧/">小技巧</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <hr>
+<p>Python编程技(mo)巧(fa).[环境:Python3.6.0]</p>
+<a id="more"></a>
+
+<h2 id="Py的魔法"><a href="#Py的魔法" class="headerlink" title="Py的魔法"></a>Py的魔法</h2><h3 id="派生内置不可变类并修改实例化行为的魔法"><a href="#派生内置不可变类并修改实例化行为的魔法" class="headerlink" title="派生内置不可变类并修改实例化行为的魔法"></a>派生内置不可变类并修改实例化行为的魔法</h3><hr>
+<p>一个类的实例化方法是<code>__init__</code> ?</p>
+<p>不是呢, 是<code>__new__</code>, <code>__init__</code>只是初始化方法.</p>
+<p>魔法原料:</p>
+<blockquote>
+<p><strong><em>\</em>new__</strong>:创建对象时调用，会返回当前对象的一个实例</p>
+</blockquote>
+<blockquote>
+<p><strong><em>\</em>init__</strong>:创建完对象后调用，对当前对象的一些实例初始化，无返回值</p>
+</blockquote>
+<p>魔法咒语:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>如果__new__和__init__同时存在，会优先调用__new__.</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>__new__方法会返回所构造的对象，__init__则不会 (__init__无返回值).</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>如果__new__返回一个对象的实例，会隐式调用__init__.</span><br><span class="line"></span><br><span class="line"><span class="number">4.</span>如果__new__不返回一个对象的实例，__init__不会被调用.</span><br><span class="line"></span><br><span class="line"><span class="number">5.</span>在对象的实例创建完成后调用。参数被传给类的构造函数.</span><br><span class="line"></span><br><span class="line"><span class="number">6.</span>如果基类有__init__方法，子类必须显示调用基类的__init__.</span><br></pre></td></tr></table></figure>
+
+<p>如果说现在我想写个继承于tuple的子类.这个类能够自动过滤掉非数字的元素,(就叫它NumTuple类吧).</p>
+<p>这个部分<code>Pyhton3</code>和<code>Python2</code>差别还是很大的, <code>Py2</code>中叫做类型<code>(type)</code>, <code>Py3</code>中叫做类<code>(class)</code></p>
+<p>这里使用的环境是Python3,所以函数签名已经改变了, Python2的函数签名就像是公交车.</p>
+<p>从上面的魔法咒语中就能明白, 实现这个功能的关键就在<code>__new__</code>方法了.通过重载<code>__new__</code>方法,可以操作要返回的对象.那么,为了调用其父类的<code>__init__</code>方法, 我们使用<code>super</code>.</p>
+<p><code>super</code>是Python中的类, 用来做基类和子类的对象代理, 什么是对象代理呢?</p>
+<p>可以简单的理解成Java中的多态? 简单的说就是调用同辈或者父类的函数, 比如这样的小栗子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Handler</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(self, token)</span>:</span></span><br><span class="line">  	write2DB(token)</span><br><span class="line">  	render()</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Auth</span><span class="params">(Handler)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(self, token)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> validate(token):</span><br><span class="line">      super().login(token) <span class="comment"># 等同于super(Auth, self)</span></span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">	  exit()</span><br></pre></td></tr></table></figure>
+
+<p>这样子类就可以非常便利的调用父类的方法了.</p>
+<p>现在尝试实现一下<code>NumTuple</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NumTuple</span><span class="params">(tuple)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__new__</span><span class="params">(self, iterable)</span>:</span></span><br><span class="line">    g = ( x <span class="keyword">for</span> x <span class="keyword">in</span> iterable <span class="keyword">if</span> isinstance(x, int) <span class="keyword">or</span> isinstance(x, float))</span><br><span class="line">    <span class="keyword">return</span> super().__new__(self, g)</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, iterable)</span>:</span></span><br><span class="line">    self.proto = iterable</span><br><span class="line">    super().__init__()</span><br></pre></td></tr></table></figure>
+
+<h3 id="节省内存的魔法"><a href="#节省内存的魔法" class="headerlink" title="节省内存的魔法"></a>节省内存的魔法</h3><hr>
+<p>实例化对象是一件消耗内存的操作. 想想这么一种场景, 一个网络游戏服务要给每一个玩家实例化一个角色类, 这数百万的实例会消耗掉许多内存,在Python中节省内存是很简单的.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person1</span><span class="params">(object)</span>:</span></span><br><span class="line">  def __init__(self, uid, name, status=0, level=1);</span><br><span class="line">    self.uid = uid</span><br><span class="line">    self.name = name</span><br><span class="line">    self.status = status</span><br><span class="line">    self.level = level</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person2</span><span class="params">(object)</span>:</span></span><br><span class="line">  __slots__ = [<span class="string">'uid'</span>, <span class="string">'name'</span>, <span class="string">'status'</span>, <span class="string">'level'</span>]</span><br><span class="line">  def __init__(self, uid, name, status=0, level=1);</span><br><span class="line">    self.uid = uid</span><br><span class="line">    self.name = name</span><br><span class="line">    self.status = status</span><br><span class="line">    self.level = level</span><br></pre></td></tr></table></figure>
+
+<p>这两个类基本一样, 唯一的不同就在第二个类多了一个<code>__slots__</code>, 这个属性表示该类的实例有且仅有这几个属性, 且不能再添加.</p>
+<p>实例化看一下效果:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> XX <span class="keyword">import</span> Person1, Person2</span><br><span class="line"></span><br><span class="line">p1 = Person1(<span class="string">"0001"</span>, <span class="string">"P1"</span>)</span><br><span class="line">p2 = Person2(<span class="string">"0002"</span>, <span class="string">"P2"</span>)</span><br><span class="line"></span><br><span class="line">print(set(dir(p1)) - set(dir(p2))) <span class="comment"># 看看两者之间究竟有什么差别!</span></span><br></pre></td></tr></table></figure>
+
+<p>最后打印出来的结果是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&apos;__weakref__&apos;, &apos;__dict__&apos;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中,最占用内存的就是<code>__dict__</code>了, 这个属性允许对象动态的进行属性的增加.</p>
+<p>你可以试试为<code>p1</code>增加一个属性, 接着查看一下<code>p1.__dict__</code>, 你会发现这个对象消耗了很多资源.</p>
+<p>查看大小的方法可以使用<code>sys</code>模块提供的<code>getsizeof</code>方法.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">sys.getsizeof(p1.__dict__)</span><br><span class="line"><span class="comment"># 132</span></span><br></pre></td></tr></table></figure>
+
+<p>在<strong>Python3</strong>中,这个已得到优化, 占用<strong>132</strong>个字节, 而在<strong>Python2</strong>中, 仅仅为一个对象增加两个属性就会消耗掉<strong>1048</strong>个字节!</p>
+<h3 id="上下文管理的魔法"><a href="#上下文管理的魔法" class="headerlink" title="上下文管理的魔法"></a>上下文管理的魔法</h3><hr>
+<p>Python提供了with关键字提供了便捷的上下文管理, 比如最经典的用于IO流的使用:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">"sample.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:</span><br><span class="line">  cont = f.read()</span><br><span class="line"><span class="comment"># f.close() 不再需要了</span></span><br></pre></td></tr></table></figure>
+
+<p>如果说我想让我自己的类也实现这样的魔法呢?</p>
+<p>事实上, 只要实现两个方法就可以实现上下文的管理: <code>__enter__</code>和<code>__exit__</code>.</p>
+<p>现在我们实现一个支持上下文管理的类.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Query</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">	self.name = name</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__enter__</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(<span class="string">"Enter!"</span>)</span><br><span class="line">    <span class="keyword">return</span> self</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__exit__</span><span class="params">(self, exc_type, exc_value, traceback)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> exc_type:</span><br><span class="line">      print(<span class="string">'Error!'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      print(<span class="string">"Exit!"</span>)</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">query</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(<span class="string">'Query info about %s...'</span> % self.name)</span><br></pre></td></tr></table></figure>
+
+<p>现在我们就可以使用<code>with</code>关键字来进行自动的上下文管理了.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> QUery(<span class="string">'name'</span>) <span class="keyword">as</span> q:</span><br><span class="line">  q.query()</span><br><span class="line"><span class="comment"># print(q)</span></span><br></pre></td></tr></table></figure>
+
+<p>这样写仍然有一点麻烦, 好在Python提供了装饰器使得代码得到了简化.</p>
+<p>可以这样写: ( 从标准库contextlib中导入contextmanager )</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> contextmanager</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Query</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">    self.name = name</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">query</span><span class="params">(self)</span>:</span></span><br><span class="line">    print(<span class="string">"Query info about %s"</span> % self.name)</span><br><span class="line"></span><br><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_query</span><span class="params">(name)</span>:</span></span><br><span class="line">  print(<span class="string">"Begin"</span>)</span><br><span class="line">  q = Query(name)</span><br><span class="line">  <span class="keyword">yield</span> q</span><br><span class="line">  print(<span class="string">"End"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这样再调用, <code>create_query</code>函数就会返回一个<code>_GeneratorContextManager</code>对象, 而这个对象就是我们使用<code>with</code>后面<code>as</code>出来的东西, 该对象就绑上了之前说的<code>__enter__</code>, <code>__exit__</code>.</p>
+<p>再调用时就像是这样:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> create_query(<span class="string">'Justin'</span>) <span class="keyword">as</span> q:</span><br><span class="line">  q.query()</span><br></pre></td></tr></table></figure>
+
+<p>简单的说, <code>@contextmanager</code>使得我们通过编写生成器来进行代码的简化.</p>
+<p>另外, 只要你返回的对象具有<code>close</code>方法, 就可以通过另一个装饰器写出更简的代码.</p>
+<p>这个装饰器也就是<code>contextlib</code>下的<code>closing</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from contextlib import closing</span><br><span class="line">from urllib.request import urlopen</span><br><span class="line">with closing(urlopen(&quot;https://justin13wyx.me&quot;)) as res:</span><br><span class="line">  print(res)</span><br></pre></td></tr></table></figure>
+
+<p>其实这个装饰器实现起来也是特别容易的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@contextmanager</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">closing</span><span class="params">(self)</span>:</span></span><br><span class="line">  <span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">yield</span> self.thing</span><br><span class="line">  <span class="keyword">finally</span>:</span><br><span class="line">    self.thing.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="setter和getter的魔法"><a href="#setter和getter的魔法" class="headerlink" title="setter和getter的魔法"></a>setter和getter的魔法</h3><hr>
+<p>在Java中, 我们编写getter和setter函数来对对象实例的属性进行更改和读取.</p>
+<p>而在Python中, 相信你也发现了我们可以直接进行读取和更改, 这往往是不安全的, 比如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">number = <span class="string">'I'</span>m <span class="keyword">not</span> a number!!<span class="string">'</span></span><br><span class="line"><span class="string">result = number * 2</span></span><br><span class="line"><span class="string">print(result)</span></span><br><span class="line"><span class="string"># I'</span>m <span class="keyword">not</span> a number!!I<span class="string">'m not a number!!</span></span><br></pre></td></tr></table></figure>
+
+<p>所以,更推荐调用函数, 因为我们可以进行处理.</p>
+<p>Python作为动态语言拥有将属性访问”重定向”到函数的能力的.重点就在于一个装饰器<code>property</code></p>
+<p><strong>使用property的其中一个注意点是:一定不要把public的属性用property装.否则,会无限递归.(因为函数名和变量名相同)</strong></p>
+<blockquote>
+<p>补充: Python中的私有变量.<br>Python中是不存在私有变量的, 只要你想,所谓的私有变量可以随意访问.<br>有两种所谓的私有变量, 一种是一条下划线的<code>_variable</code>, 这个你你几乎可以认定为是public的变量, 但, 作为一种规范, 他可以告诉别人我的这个变量是一个私有变量, 没事就别碰它.<br>另外一种, 是加了两条下划线的变量<code>__variable</code>.<br>这种变量可以认定为是Python的私有变量.因为解释器会自动把<code>_variable</code>变成<code>_ClassName__variable</code>.(这不就是自己骗自己吗!!??).</p>
+</blockquote>
+<p>请看示例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">	    self._score = <span class="number">0</span></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self._score</span><br><span class="line"><span class="meta">    @score.setter</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">score</span><span class="params">(self, value)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, int):</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must be an integer!'</span>)</span><br><span class="line">        <span class="keyword">if</span> value &lt; <span class="number">0</span> <span class="keyword">or</span> value &gt; <span class="number">100</span>:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'score must between 0 ~ 100!'</span>)</span><br><span class="line">        self._score = value</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">s = Student()</span><br><span class="line">s.score = <span class="number">90</span></span><br><span class="line">s.score <span class="comment"># 90</span></span><br><span class="line">s.score = <span class="number">9999</span></span><br><span class="line">ValueError: ....</span><br></pre></td></tr></table></figure>
+
+<p>其实,<code>property</code>还有另一种巧妙的用法:( 还有这种操作.jpg )</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 继续上面的Student类的定义:</span></span><br><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">age</span><span class="params">(self)</span>:</span></span><br><span class="line">  <span class="keyword">return</span> self._age</span><br></pre></td></tr></table></figure>
+
+<p>好了,我不去定义<code>@age.setter</code>,这样我们的<code>age</code>属性就会变成一个只读属性!</p>
+<h3 id="使类实现比较操作的魔法"><a href="#使类实现比较操作的魔法" class="headerlink" title="使类实现比较操作的魔法"></a>使类实现比较操作的魔法</h3><hr>
+<p>观察下一些常用来比较的对象, 比如说数字和字符串,不难发现他们都会有一些神奇的魔术方法:</p>
+<p>比如:<code>__eq__</code>.<code>__gt__</code>.<code>__lt__</code>.<code>__le__</code>.<code>__ne__</code>.<code>__ge__</code>.</p>
+<p>所以, 如果实现运算符的重载, 实现这些方法就可以了.</p>
+<p>这都没什么, 但有些复杂并且实现的函数略多.</p>
+<p>所以, 可以使用标准库<code>functools</code>中的<code>total_ordering</code>来进行操作的简化.</p>
+<p>只要装饰整个类, 就可以通过只实现两个方法(必须包括<code>等于</code>方法)来完成全部的运算符的重载.</p>
+<p>使用的例子就像是这样:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> total_ordering</span><br><span class="line"><span class="meta">@total_ordering</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, age)</span>:</span></span><br><span class="line">    self.age = age</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__eq__</span><span class="params">(self, that)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.age == that.age</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__lt__</span><span class="params">(self, that)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.age &lt; that.age</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python进行类型检查的魔法"><a href="#Python进行类型检查的魔法" class="headerlink" title="Python进行类型检查的魔法"></a>Python进行类型检查的魔法</h3><hr>
+<p>Python是一个弱类型语言, 尽管可以在方法中进行类型检查<code>(isinstance)</code>, 但这样远没有Java的类型检查安全 Java.C.C++的类型检查都是在编译的时候进行 的.而动态语言Python, 他的解释器是不可能实现这种检查的.</p>
+<p>所以为了能够在对变量声明时对变量进行类型声明以及对变量赋值的时候进行类型检查, Python同样提供了一些魔法:(描述符)</p>
+<ul>
+<li><code>__set__</code></li>
+<li><code>__get__</code></li>
+<li><code>__delete__</code></li>
+</ul>
+<p>你也许有这样的疑问, 既然之前都说了可以通过<code>@property</code>装饰器来使得属性的改变和获取都变成我们定义的函数,为什么需要这个东西呢?</p>
+<p><strong>注意:<strong>get</strong>和<strong>set</strong>和property的用法完全不同!</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Attr</span><span class="params">(object)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, type)</span>:</span></span><br><span class="line">    self._name = name</span><br><span class="line">    self._type = type</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__get__</span><span class="params">(self, instance, cls)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> instance.__dict__[self._name]</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__set__</span><span class="params">(self, instance, value)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> isinstance(value, self._type):</span><br><span class="line">      <span class="keyword">raise</span> TypeError(<span class="string">'expected an %s '</span> % self._type)</span><br><span class="line">    instance.__dict__[self._name] = value</span><br></pre></td></tr></table></figure>
+
+<p>这样得到一个用来进行类型规范的辅助类.</p>
+<p>通过创建这个辅助类的实例来当做用作真正要用到的类的属性, 这样方法才可以得到调用.</p>
+<p>就像是这样:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(object)</span>:</span></span><br><span class="line">  name = Attr(<span class="string">"name"</span>, str)</span><br><span class="line">  age = Attr(<span class="string">'age'</span>, int)</span><br><span class="line">s1 = Student()</span><br><span class="line">s1.name = <span class="string">"J"</span></span><br><span class="line">s1.age = <span class="number">5</span></span><br><span class="line"><span class="comment"># 没有问题</span></span><br><span class="line">s1.name = <span class="number">7</span></span><br><span class="line"><span class="comment"># TypeError: expected an &lt;class 'str'&gt;</span></span><br><span class="line">s1.age = <span class="string">"5"</span></span><br><span class="line"><span class="comment"># TypeError: expected an &lt;class 'int'&gt;</span></span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Py的魔法"><span class="toc-number">1.</span> <span class="toc-text">Py的魔法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#派生内置不可变类并修改实例化行为的魔法"><span class="toc-number">1.1.</span> <span class="toc-text">派生内置不可变类并修改实例化行为的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#节省内存的魔法"><span class="toc-number">1.2.</span> <span class="toc-text">节省内存的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上下文管理的魔法"><span class="toc-number">1.3.</span> <span class="toc-text">上下文管理的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setter和getter的魔法"><span class="toc-number">1.4.</span> <span class="toc-text">setter和getter的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使类实现比较操作的魔法"><span class="toc-number">1.5.</span> <span class="toc-text">使类实现比较操作的魔法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python进行类型检查的魔法"><span class="toc-number">1.6.</span> <span class="toc-text">Python进行类型检查的魔法</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/05/05/Python小技巧-3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&text=Python小技巧-3"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&is_video=false&description=Python小技巧-3"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python小技巧-3&body=Check out this article: http://yaoxuannn.com/2017/05/05/Python小技巧-3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&title=Python小技巧-3"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/05/05/Python小技巧-3/&name=Python小技巧-3&description=&lt;hr&gt;
+&lt;p&gt;Python编程技(mo)巧(fa).[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

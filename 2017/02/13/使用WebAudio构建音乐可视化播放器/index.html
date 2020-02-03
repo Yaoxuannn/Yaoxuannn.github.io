@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="使用HTML5的WebAudio实现对音频的解码播放和可视化。(for 内网 only)项目地址: Click me!">
+<meta name="keywords" content="JavaScript,HTML5,Express,WebAudio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用WebAudio构建音乐可视化播放器">
+<meta property="og:url" content="http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="使用HTML5的WebAudio实现对音频的解码播放和可视化。(for 内网 only)项目地址: Click me!">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/example_column.png">
+<meta property="og:image" content="http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/example_dot.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/12241/webaudioAPI_en.svg">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/7949/voice-change-o-matic-graph.png">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.422Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用WebAudio构建音乐可视化播放器">
+<meta name="twitter:description" content="使用HTML5的WebAudio实现对音频的解码播放和可视化。(for 内网 only)项目地址: Click me!">
+<meta name="twitter:image" content="http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/example_column.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>使用WebAudio构建音乐可视化播放器</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/02/15/关于let关键字在移动端导致所有脚本失效的问题/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/01/23/Learning-JS/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&text=使用WebAudio构建音乐可视化播放器"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&is_video=false&description=使用WebAudio构建音乐可视化播放器"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用WebAudio构建音乐可视化播放器&body=Check out this article: http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&name=使用WebAudio构建音乐可视化播放器&description=&lt;hr&gt;
+&lt;p&gt;使用HTML5的WebAudio实现对音频的解码播放和可视化。&lt;br&gt;(for 内网 only)项目地址: &lt;a href=&#34;http://justin13wyx.me/music&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Click me!&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">完成的效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">3.</span> <span class="toc-text">WebAudio简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">4.</span> <span class="toc-text">WebAudio的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.1.</span> <span class="toc-text">节点搭建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.2.</span> <span class="toc-text">解码音频</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.3.</span> <span class="toc-text">播放&amp;暂停&amp;继续&amp;停止 与 音量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.4.</span> <span class="toc-text">可 视 化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.5.</span> <span class="toc-text">源 码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">5.</span> <span class="toc-text">小小的总结</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        使用WebAudio构建音乐可视化播放器
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-02-13T13:28:40.000Z" itemprop="datePublished">2017-02-13</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Express/">Express</a>, <a class="tag-link" href="/tags/HTML5/">HTML5</a>, <a class="tag-link" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-link" href="/tags/WebAudio/">WebAudio</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <hr>
+<p>使用HTML5的WebAudio实现对音频的解码播放和可视化。<br>(for 内网 only)项目地址: <a href="http://justin13wyx.me/music" target="_blank" rel="noopener">Click me!</a></p>
+<a id="more"></a>
+
+<h2>完成的效果</h2>
+
+<img src="./example_column.png" alt>
+<img src="./example_dot.png" alt>
+
+<h2>环境</h2>
+
+<p>我是使用的Express搭建的应用前后端，模板引擎使用的默认的Jade(好像现在应该改叫pub了~)。</p>
+<p>前端界面由Canvas渲染，不得不说Canvas的API真是人性化(●’◡’●)。</p>
+<h2>WebAudio简述</h2>
+
+<p>WebAudio的核心是围绕一个<strong>AudioContext</strong>的对象来编写的，通过这个对象来创建其他必要的节点，节点间互相连接，最终实现从输入(input)到达扬声器等硬件(destination)。<br><img src="https://mdn.mozillademos.org/files/12241/webaudioAPI_en.svg"><br>一个完整的节点连接如下：<br><img src="https://mdn.mozillademos.org/files/7949/voice-change-o-matic-graph.png"></p>
+<p>这其中，<strong>AnalyserNode</strong>是用来解析音频数据的，它并不会对源数据做任何更改，<strong>GainNode</strong>用来控制音量，这些节点连接的顺序可以任意，链接多少个也是任意的，但一定要遵守的是，起点必须是<strong>MediaStreamAudioSourceNode</strong>(废话 =_=#)，但要确保的是最终必须要连接到<strong>AudioDestinationNode</strong>上，不这样做的话，硬件是不会有响应的。</p>
+<p>下面以这个播放器为例简单介绍WebAudio的使用。</p>
+<h2>WebAudio的使用</h2>
+
+<h4>节点搭建</h4>
+
+<p>首先，实例化一个<strong>AudioContext</strong>对象。<br>​    </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var audioContext = new window.AudioContext();</span><br></pre></td></tr></table></figure>
+
+<p>拿到了<strong>AudioContext</strong>我们就能通过它来创建其他节点了，本例中为了可视化和音量调整而创建了<strong>AnalyserNode</strong>和<strong>GainNode</strong>。</p>
+<p>通过<strong>AudioContext</strong>的<strong>create<em>NodeName</em></strong>方法创建节点：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var bufferSource = audioContext.createBufferSource();</span><br><span class="line">var analyser = audioContext.createAnalyser();</span><br><span class="line">var gainNode = audioContext.createGain();</span><br></pre></td></tr></table></figure>
+
+<p>一定不要忘了节点间的连接:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bufferSource.connect(analyser);</span><br><span class="line">analyser.connect(gainNode);</span><br><span class="line">gainNode.connect(audioContext.destination);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>Tips</strong>:audioContext不是节点，所以不会有连接操作。</p>
+</blockquote>
+<p>至此，我们的节点结构<strong>（BufferSource-&gt;Analyser-&gt;Gain-&gt;Destination）</strong>就搭好了，很简单对吗~</p>
+<h4>解码音频</h4>
+
+<p>音频的解码是由<strong>AudioContext.dudioData(source[, function(data)[, function(err)]])</strong>完成，这个方法接受一个<strong>ArrayBuffer</strong>型的音频数据源，解码完成的<strong>ArrayBuffer</strong>作为回调参数，这样拿到解码后的<strong>Buffer</strong>，将它传给之前创建的<strong>bufferSource</strong>的<strong>buffer</strong>属性，这样音频播放的准备就完成了。</p>
+<p>代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">audioContext.decodeAudioData(<span class="built_in">source</span>, <span class="keyword">function</span>(buffer)&#123;</span><br><span class="line">	bufferSource.buffer = buffer;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>下一步！开始播放~</p>
+<blockquote>
+<p>在HTML5中，已经有了&lt;audio&gt;标签来进行音频的播放，那么应该使用哪一种呢？<br>+++++++<br>通过解码音频的示例，大家也发现了，webAudio的播放是建立在完整获取资源的前提下，这也就意味着只有在，浏览器下载完整的资源后才会进行播放，这在网络不佳或者资源过大的场景是非常不利于用户体验的。不仅如此，decodeAudioData方法由于一次性解码，会将解码前后的文件放在内存中，这对于内存也是一笔不小的开销。<br>+++++++<br>而&lt;audio&gt;是一边解码一遍播放。然而，在移动设备(iOS,Android)上，浏览器存在<strong>gesture-requirement-for-media-playback</strong>属性，也就是要求用户需要有手势操作才会播放，并且&lt;audio&gt;的play函数是被禁用的。但是webAudio没有这样的限制，开发人员可以自由控制播放与停止。<br>+++++++<br>所以，最终还是需要根据实际需要来选择，如果选择webAudio，可以考虑把音频分段或者减少大小。</p>
+</blockquote>
+<h4>播放&amp;暂停&amp;继续&amp;停止 与 音量控制</h4>
+
+<p>webAudio提供了非常简单的api来操纵播放状态，先来说说它的时间控制。</p>
+<p>webAudio提供了非常精准的时间控制，所有的时间都是以秒来计数的，这里的秒在底层都是使用高精度的浮点数存储的，所以其实际精确度很高。</p>
+<p>当我们创建了<strong>AudioContext</strong>的时候，它的一个同步系统中的绝对时间就开始流动了。这个绝对时间可以通过<strong>audioContext.currentTime()【Read Only】</strong>获取。这个绝对时间从0开始。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bufferSource.start();//开始</span><br><span class="line">bufferSource.stop();//停止</span><br><span class="line">audioContext.suspend()();//暂停</span><br><span class="line">audioContext.resume();//继续</span><br></pre></td></tr></table></figure>
+
+<p>使用<strong>bufferSource.start()</strong>时，该方法接受三个参数，<strong>bufferSource.start([when[, offset[, duration]]])</strong>,三个参数均可选。分别表示何时开始播放(延时)， 从哪里开始(推移量)， 持续多长。<strong>bufferSource.stop([when])</strong>接受一个参数。</p>
+<p>通过监听<strong>bufferSource</strong>的<em>onend</em>事件，可以来实现自动播放列表，随机播放等等功能， 也可以直接设置<strong>bufferSource.loop</strong>来设置循环播放。</p>
+<p>音量控制是通过调节<strong>GainNode</strong>的<strong>GainNode.gain.value</strong>来控制,范围是0-1；</p>
+<p>例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"input[type=range]"</span>).onchange = <span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">	gainNode.gain.value = this.value/this.max;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4>可 视 化</h4>
+
+<p>我们的<strong>Analyser</strong>来啦！<strong>通过analyser.getByteFrequencyData(arr)</strong>来获得实时的音频数据，这个方法会将数据传递进arr这个Uint8Array，而这个Uint8Array又是通过，<strong>analyser.frequencyBinCount</strong>这个只读属性来获得的。在此之前，通过设置<strong>analyser.fftSize</strong>来设置获取数据的粒度(默认是2048，范围是32-32768， 必须是2的非零次幂).</p>
+<p>(-｡-;) 是不是有点乱？来看一下代码就会明白了：</p>
+<p>例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">analyser.fftSize = 1024;//1024就已经比较深了，没有必要设置太大</span><br><span class="line">var arr = new Uint8Array(analyser.frequencyBinCount);//得到数组</span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">v</span></span> () &#123;</span><br><span class="line">	analyser.getByteFrequencyData(arr);//将数据传进数组</span><br><span class="line">	visualizer(arr);//前端渲染</span><br><span class="line">	requestAnimationFrame(v);</span><br><span class="line">&#125;</span><br><span class="line">requestAnimationFrame(v);//获取实时</span><br></pre></td></tr></table></figure>
+
+<h4>源 码</h4>
+
+<p><a href="./MusicVisualizer.js">MusicVisualizer.js</a>—–构造函数接受一个用来获取播放列表和调整柱形图表现粒度的对象.</p>
+<h2>小小的总结</h2>
+
+<p>WebAudio的真正强大之处在它对音频的处理上，利用它的其他节点可以搭建一个非常不错的录音室了。</p>
+<p>© 2017 Justin13</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">完成的效果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">3.</span> <span class="toc-text">WebAudio简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">4.</span> <span class="toc-text">WebAudio的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.1.</span> <span class="toc-text">节点搭建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.2.</span> <span class="toc-text">解码音频</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.3.</span> <span class="toc-text">播放&amp;暂停&amp;继续&amp;停止 与 音量控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.4.</span> <span class="toc-text">可 视 化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.0.5.</span> <span class="toc-text">源 码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">5.</span> <span class="toc-text">小小的总结</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&text=使用WebAudio构建音乐可视化播放器"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&is_video=false&description=使用WebAudio构建音乐可视化播放器"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=使用WebAudio构建音乐可视化播放器&body=Check out this article: http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&title=使用WebAudio构建音乐可视化播放器"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/02/13/使用WebAudio构建音乐可视化播放器/&name=使用WebAudio构建音乐可视化播放器&description=&lt;hr&gt;
+&lt;p&gt;使用HTML5的WebAudio实现对音频的解码播放和可视化。&lt;br&gt;(for 内网 only)项目地址: &lt;a href=&#34;http://justin13wyx.me/music&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Click me!&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

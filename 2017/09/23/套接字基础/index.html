@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="套接字基础.">
+<meta name="keywords" content="Linux,网络,Socket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="套接字基础">
+<meta property="og:url" content="http://yaoxuannn.com/2017/09/23/套接字基础/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="套接字基础.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="套接字基础">
+<meta name="twitter:description" content="套接字基础.">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>套接字基础</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/23/http协议和httpd/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/22/CCNA学习-实验-updating/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/09/23/套接字基础/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/09/23/套接字基础/&text=套接字基础"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/09/23/套接字基础/&is_video=false&description=套接字基础"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=套接字基础&body=Check out this article: http://yaoxuannn.com/2017/09/23/套接字基础/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/09/23/套接字基础/&name=套接字基础&description=&lt;p&gt;套接字基础.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是套接字"><span class="toc-number">1.</span> <span class="toc-text">什么是套接字</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        套接字基础
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-23T08:09:58.000Z" itemprop="datePublished">2017-09-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/Socket/">Socket</a>, <a class="tag-link" href="/tags/网络/">网络</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>套接字基础.</p>
+<a id="more"></a>
+
+<h2 id="什么是套接字"><a href="#什么是套接字" class="headerlink" title="什么是套接字"></a>什么是套接字</h2><p>我们之前已经知道, 应用程序运行在用户空间, 也可以说称之为是用户进程. 而为了网络通信, 我们的应用程序需要经过TCP/IP协议栈的封装和解封装. 这个时候, 应用程序就需要向内核进行申请, 申请什么呢? 就是申请这<strong>套接字</strong>(socket).</p>
+<p>所谓套接字, 其实就是一种IPC的实现机制. IPC的实现机制很多, 什么信号啊, 共享内存啊, 等等. 而socket就是一种实现.主要是允许不同主机(甚至是同一主机)不同进程之间的通信, 从而完成数据交换. </p>
+<p> 一般我们在这里通常进行的都是System Call, 系统调用, 但是这里我们实际上调用的是Socket库的API, 这个API出现在1983年左右, 早期出现在BSD上后来就被广泛是实现在了Linux上的版本上.</p>
+<p>但是我们知道, TCP和UDP的端口是独立的.(都是0-65535)</p>
+<blockquote>
+<p><strong>0号端口是个啥?</strong></p>
+<p>这个问题有趣吧, 一般我们可是接触不到这个端口的.  但它依然是一个合法的端口号.</p>
+<p>这个端口原本是系统保留的, 但是后来在Unix/Linux网络编程中, 它成为了一个向系统请求下一个可以使用的端口号的端口号. </p>
+<p>我们来使用Python来做个实验就知道了:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> [root@WWW ~]<span class="comment"># python3</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Python 3.6.1 (default, Jul  9 2017, 05:20:23) </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> [GCC 4.8.5 20150623 (Red Hat 4.8.5-11)] on linux</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Type <span class="string">"help"</span>, <span class="string">"copyright"</span>, <span class="string">"credits"</span> or <span class="string">"license"</span> <span class="keyword">for</span> more information.</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> &gt;&gt;&gt; import socket</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> &gt;&gt;&gt; soc = socket.socket()</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> &gt;&gt;&gt; soc.bind((<span class="string">"127.0.0.1"</span>, 0))</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> &gt;&gt;&gt; soc.getsockname()</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> (<span class="string">'127.0.0.1'</span>, 51043)</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>套接字也有很多种类的, 有TCP的套接字, UDP的套接字, 也有什么TCP/UDP都不走的裸套接字. 而这些就分别叫做<code>SOCK_STREAM, SOCK_DGRAM, SOCK_RAW</code> </p>
+<p>除了这些分类, 我们还将Socket分为了很多Socket Domain: (Socket域) 这是另外一种分类方式, 主要根据其所使用的地址:</p>
+<ul>
+<li><strong>AF_INET</strong>:  Address Family: IPv4</li>
+<li><strong>AF_INET6</strong>: IPv6</li>
+<li><strong>AF_UNIX</strong>: 同一主机上的不同的进程进行通信的时候使用, 效率更佳, 而且不占用协议栈</li>
+</ul>
+<p>每一类套接字都提供两种socket, 也就是我们上面说的TCP和UDP的套接字, 即<strong>流</strong>和<strong>数据报</strong></p>
+<p>接下来我们扯扯一些套接字相关的系统调用吧:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">socket() 	创建一个套接字</span><br><span class="line"><span class="built_in">bind</span>()</span><br><span class="line">listen()</span><br><span class="line">accept()</span><br><span class="line">connect()</span><br><span class="line">write()</span><br><span class="line"><span class="built_in">read</span>()</span><br><span class="line">	send() recv() sendto()  recvform()</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是套接字"><span class="toc-number">1.</span> <span class="toc-text">什么是套接字</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/09/23/套接字基础/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/09/23/套接字基础/&text=套接字基础"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/09/23/套接字基础/&is_video=false&description=套接字基础"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=套接字基础&body=Check out this article: http://yaoxuannn.com/2017/09/23/套接字基础/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/09/23/套接字基础/&title=套接字基础"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/09/23/套接字基础/&name=套接字基础&description=&lt;p&gt;套接字基础.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

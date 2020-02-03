@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="在熟悉了Docker相关的操作之后, 我们现在就可以来对大规模集群的容器编排下手了.">
+<meta name="keywords" content="Kubernetes,云计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes架构基础">
+<meta property="og:url" content="http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="在熟悉了Docker相关的操作之后, 我们现在就可以来对大规模集群的容器编排下手了.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://d33wubrfki0l68.cloudfront.net/7016517375d10c702489167e704dcb99e570df85/7bb53/images/docs/components-of-kubernetes.png">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kubernetes架构基础">
+<meta name="twitter:description" content="在熟悉了Docker相关的操作之后, 我们现在就可以来对大规模集群的容器编排下手了.">
+<meta name="twitter:image" content="https://d33wubrfki0l68.cloudfront.net/7016517375d10c702489167e704dcb99e570df85/7bb53/images/docs/components-of-kubernetes.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Kubernetes架构基础</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/07/30/ELK栈初见-2/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&text=Kubernetes架构基础"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&is_video=false&description=Kubernetes架构基础"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Kubernetes架构基础&body=Check out this article: http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&name=Kubernetes架构基础&description=&lt;p&gt;在熟悉了Docker相关的操作之后, 我们现在就可以来对大规模集群的容器编排下手了. &lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#容器编排工具栈"><span class="toc-number">1.</span> <span class="toc-text">容器编排工具栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes的架构概述和基础概念"><span class="toc-number">3.</span> <span class="toc-text">Kubernetes的架构概述和基础概念</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Kubernetes架构基础
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-01-10T06:37:08.000Z" itemprop="datePublished">2020-01-10</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Kubernetes/">Kubernetes</a>, <a class="tag-link" href="/tags/云计算/">云计算</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>在熟悉了Docker相关的操作之后, 我们现在就可以来对大规模集群的容器编排下手了. </p>
+<a id="more"></a>
+
+<h2 id="容器编排工具栈"><a href="#容器编排工具栈" class="headerlink" title="容器编排工具栈"></a>容器编排工具栈</h2><p>我们之前在说Docker的时候就提到过了编排与自动化的概念, 当时我们还引用了维基百科的概念. 我们在使用Ansible的时候, 通过编写playbook就是在进行自动化的编排. 除此之外, 还有puppet, saltstack等等. 而Ansible这些对应的单元是一个个的虚拟机, 在我们引入了Docker之后, 就会发生些许变化, 当管理的对象发生的变化的时候, 我们也要改变我们所使用的工具栈.</p>
+<p>首先就是Docker自己的Docker Compose, 但是这个工具面向的只是一个Docker Host, 也就是说, 他只能对一台主机的多个容器进行编排. 为了能够扩展到多主机的集群环境, 另一个软件就是Docker Swarm, 他可以将多个主机的 容器资源抽象成一个大的资源池, 进行整合工作. 但是将一个Host加入到这个Swarm成员有需要另一个工具, 叫做Docker Machine. 这三个工具, 组成了早期Docker编排的三剑客.</p>
+<p>第二组工具的核心是Mesos, 一个Apache基金会下的分布式系统kernel, 能够对计算进行抽象并提供API支持, 它原生提供了容器支持. 但是说白了Mesos就是一个资源分配工具, 或者说是一个IDC的操作系统. 因此我们还需要一个容器的托管工具, 因为Mesos并不能直接运行容器, 这就是Marathon, 这是一个容器的编排框架.</p>
+<p>最后一种常见的工具, 也就是我们即将探讨的Kubernetes. 就目前来看, Kubernetes已经占据了最多的份额.</p>
+<h2 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h2><p>Kubernetes源自于Google内部的Borg项目, 据说google在内部使用容器技术已经超过了十年秘而不宣, 没想到Docker横空出世, 自己私藏的东西竟然被民间发现了, 于是使用Go语言重新实现了Borg项目. 这就是Kubernetes的来由.</p>
+<p>Kubernetes能够实现<strong>自动装箱</strong>. 啥意思嘞? 就是根据资源之间的依赖关系自动的进行部署. 另外还可以<strong>自我修复</strong>, 当应用程序崩溃后, 得益于容器技术, 我们不再像之前一样需要进行复杂的部署流程了, 直接kill掉出问题的容器然后新启动一个就行了. 另外, Kubernetes还可以实现水平扩展, 只要物理服务器的资源足够, 就可以不断的新建容器. 以及, 服务发现以及负载均衡, 自动发布和回滚, 密钥和配置管理, 存储编排, 批量处理执行.</p>
+<p>按照我们之前的理解, 其实Kubernetes也是一个集群, 在几个是主机上安装Kubernetes应用程序, 接着让他们协同工作. 值得注意的是, 这里的主机间是存在角色的, 类似我们之前所学到的MySQL的主从模型, 存在一个或多个Master Node和多个Worker Nodes. 这些Worker就是用来提供计算资源以及存储的, 说白了他们其实就是容器节点, 对于容器的启动, 调度等等操作就由Master Node来进行, 用户向Master发送请求, 有Master来分析后端当前的负载情况来进行具体的操作. 顺便说一个, Kubernetes也可以托管Kubernetes(禁止套娃).</p>
+<h2 id="Kubernetes的架构概述和基础概念"><a href="#Kubernetes的架构概述和基础概念" class="headerlink" title="Kubernetes的架构概述和基础概念"></a>Kubernetes的架构概述和基础概念</h2><p>既然我们说了是向Master发送请求, 那么必然会有一个API的组件, 在Kubernetes的Master Node上, 这个组件就叫做API Server, 除此之外, 必然还有一个叫做调度器(Scheduler)的组件, 他时刻关注后端的CPU, RAM存储等情况来对资源进行调度. </p>
+<p>上面谈论的都是Kubernetes的Master, 但是对于容器, 我们之前在说到的Docker的时候提到过容器的健康状态检测(Health Check), 这就依赖在Worker上的应用程序<strong><code>kubelet</code></strong>了. 这个程序会监控当前主机上的容器状态并作报告. 现在假设, 这个Worker Node, 也就是我们运行容器的主机宕机了而不是容器崩溃的话, 在整个主机上托管的服务就都下线了, 这个时候就要做上面提到的自我修复了. 这些控制器会监控自己创建的容器健康状态, 如果有问题就进行调整. </p>
+<p>但是这个控制器组件(kubelet)也是会出问题的, 因此我们在主节点上有Controller Manager组件, 与容器节点上的kubelet应用程序通过API Server进行通信, 在这个组件的层次上, 我们进行冗余. 值得一提的是, Kubernetes包含许多类型的控制器, </p>
+<ul>
+<li>Node Controller: Responsible for noticing and responding when nodes go down.</li>
+<li>Replication Controller: Responsible for maintaining the correct number of pods for every replication controller object in the system.</li>
+<li>Endpoints Controller: Populates the Endpoints object (that is, joins Services &amp; Pods).</li>
+<li>Service Account &amp; Token Controllers: Create default accounts and API access tokens for new namespaces.</li>
+</ul>
+<p>在Kubernetes之上, 最小的部署单元叫做<strong><code>Pod</code></strong>. 同时也是最基本的执行单元. 这个东西可以说是封装了容器, 以及配套的网络, 存储等等, 是一个对容器的抽象. 一个Pod里面可以有多个容器也可以只存在一个.</p>
+<p>最后我们再来贴个图</p>
+<p><img src="https://d33wubrfki0l68.cloudfront.net/7016517375d10c702489167e704dcb99e570df85/7bb53/images/docs/components-of-kubernetes.png" alt="Components of Kubernetes"></p>
+<p>(待更新)</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#容器编排工具栈"><span class="toc-number">1.</span> <span class="toc-text">容器编排工具栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes的架构概述和基础概念"><span class="toc-number">3.</span> <span class="toc-text">Kubernetes的架构概述和基础概念</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&text=Kubernetes架构基础"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&is_video=false&description=Kubernetes架构基础"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Kubernetes架构基础&body=Check out this article: http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&title=Kubernetes架构基础"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2020/01/10/Kubernetes架构基础/&name=Kubernetes架构基础&description=&lt;p&gt;在熟悉了Docker相关的操作之后, 我们现在就可以来对大规模集群的容器编排下手了. &lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

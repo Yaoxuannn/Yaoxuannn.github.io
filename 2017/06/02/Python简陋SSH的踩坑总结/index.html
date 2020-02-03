@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="Python简陋(伪)SSH的踩坑总结😶">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python简陋SSH的踩坑总结(伪)">
+<meta property="og:url" content="http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="Python简陋(伪)SSH的踩坑总结😶">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/getpass.png">
+<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/popen.png">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.410Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python简陋SSH的踩坑总结(伪)">
+<meta name="twitter:description" content="Python简陋(伪)SSH的踩坑总结😶">
+<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/getpass.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Python简陋SSH的踩坑总结(伪)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/06/07/Linux的文件和FHS&sudo/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/05/26/Linux网络配置/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&text=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&is_video=false&description=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python简陋SSH的踩坑总结(伪)&body=Check out this article: http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&name=Python简陋SSH的踩坑总结(伪)&description=&lt;p&gt;Python简陋(伪)SSH的踩坑总结😶&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#客户端"><span class="toc-number">2.</span> <span class="toc-text">客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-1-密码的输入问题"><span class="toc-number">2.1.</span> <span class="toc-text">Ques 1: 密码的输入问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库连接层"><span class="toc-number">3.</span> <span class="toc-text">数据库连接层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-2-数据库语句总是错误…"><span class="toc-number">3.1.</span> <span class="toc-text">Ques 2: 数据库语句总是错误…</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#服务端-客户端"><span class="toc-number">4.</span> <span class="toc-text">服务端 + 客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-3-同时解决标准输出和标准错误输出"><span class="toc-number">4.1.</span> <span class="toc-text">Ques 3: 同时解决标准输出和标准错误输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-4-缓冲区大小限制"><span class="toc-number">4.2.</span> <span class="toc-text">Ques 4: 缓冲区大小限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-5-粘包"><span class="toc-number">4.3.</span> <span class="toc-text">Ques 5: 粘包.</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码"><span class="toc-number">5.</span> <span class="toc-text">源码</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python简陋SSH的踩坑总结(伪)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-06-02T14:31:09.000Z" itemprop="datePublished">2017-06-02</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Python简陋(伪)SSH的踩坑总结😶</p>
+<a id="more"></a>
+
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><hr>
+<p>今天尝试使用<code>Python3</code>的<code>socket</code>包和第三方的<code>pymysql</code>连接器实现了一个小型的具有<code>SSH</code>简单效果的小玩意 (没有实现SSH通道,对于命令的响应也没有做好).期间出现了一些有趣的问题,也多学会了一些小技巧, 在这里记录一下😶</p>
+<h1 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h1><hr>
+<p>大家都知道的, 一般情况下网络编程都是客户端比较简单书写,所以我们就从客户端开始吧.😆</p>
+<h2 id="Ques-1-密码的输入问题"><a href="#Ques-1-密码的输入问题" class="headerlink" title="Ques 1: 密码的输入问题"></a>Ques 1: 密码的输入问题</h2><p>为了确保私密性, 自然不希望输出来的信息是明文, 最起码也要是星号这些屏蔽符, 最好的效果就是想POSIX那样的完全隐藏.</p>
+<p>最初的想法是重写<code>stdout</code>…..</p>
+<blockquote>
+<p><strong>很快就Duck到Python已经为我们做了这些了.</strong></p>
+</blockquote>
+<p>在<code>Python</code>的标准库中,由一个叫<code>getpass</code>的模块, 该模块只有两个方法,, 一个是获取当前系统的用户名, 相当于是在<code>Linux</code>上使用了<code>whoami</code>  底层实现其实就是在查看系统的环境变量.</p>
+<p>另外一个方法就是在今天这个简陋版的<code>SSH</code>中使用的,也就是<code>getpass</code>方法, 这个方法其实是在根据系统的<code>platform</code>进行的动态加载, 如果是<code>NT</code>, 调用的是<code>win_getpass</code>, 而<code>*unix</code>下调用的则是<code>unix_getpass</code>, 该方法签名:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> getpass <span class="keyword">import</span> getpass</span><br><span class="line">getpass(prompt=<span class="string">"Password: "</span>, stream=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中的stream是在控制prompt输出的地方(默认就是当前的tty, 默认读的也就是/dev/tty), prompt就是提示语的内容了.😐</p>
+<p>使用后的效果就是:</p>
+<p><img src="http://q4fo85yz7.bkt.gdipper.com/getpass.png" alt="getpass"></p>
+<p>基本上效果和Linux的密码输入是一个样子的.</p>
+<h1 id="数据库连接层"><a href="#数据库连接层" class="headerlink" title="数据库连接层"></a>数据库连接层</h1><hr>
+<h2 id="Ques-2-数据库语句总是错误…"><a href="#Ques-2-数据库语句总是错误…" class="headerlink" title="Ques 2: 数据库语句总是错误…"></a>Ques 2: 数据库语句总是错误…</h2><p>犯得很蠢的错…不过总觉得还是有必要记录一下的..</p>
+<p>连接层的代码很少,贴一下之前 👉<strong>有错误的</strong>👈:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># File: ssh_db.py</span></span><br><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接数据库</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    conn = pymysql.connect(host=<span class="string">"localhost"</span>, user=<span class="string">"root"</span>, passwd=<span class="string">""</span>, db=<span class="string">"ssh"</span>)</span><br><span class="line">    cursor = conn.cursor()</span><br><span class="line"><span class="keyword">except</span> pymysql.Error <span class="keyword">as</span> e:</span><br><span class="line">    print(<span class="string">"数据库连接错误:"</span>,e)</span><br><span class="line">    sys.exit(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validate</span><span class="params">(username, passwd)</span>:</span></span><br><span class="line">    <span class="comment"># 就是这里犯的错.</span></span><br><span class="line">    <span class="comment"># FLAG</span></span><br><span class="line">    cursor.execute(<span class="string">"select (passwd) from users where username ="</span>,username)</span><br><span class="line">    res = cursor.fetchall()</span><br><span class="line">    <span class="keyword">if</span> res <span class="keyword">and</span> res[<span class="number">0</span>][<span class="number">0</span>] == passwd:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面代码的<strong>FLAG</strong>下面那一行. 不断报错.<br>要不看看 你能不能发现它?</p>
+<hr>
+<p>原因是因为…<code>username</code>是个类似 -&gt; <code>root</code> 这样的字符串 (一般人都会这么直接赋值吧) .这样直接插入sql语句后就变成了 👇</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select (passwd) <span class="keyword">from</span> users where username = root</span><br></pre></td></tr></table></figure>
+
+<p>失去了引号..MySQL非常生气的报了错🤷.</p>
+<p>所以这里正确的代码应该是:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cursor.execute(<span class="string">"select (passwd) from users where username = '"</span> + username + <span class="string">"'"</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="服务端-客户端"><a href="#服务端-客户端" class="headerlink" title="服务端 + 客户端"></a>服务端 + 客户端</h1><hr>
+<p>这里是学到最多的地方啦.</p>
+<p>在继续下面的问题之前, 还是需要看一下我的实现思路:</p>
+<blockquote>
+<p>核心的想法就是, <code>client</code>端将输入的命令通过<code>socket</code>发送给<code>server</code>端, 接着通过<code>类shell</code>执行,将执行结果返回给客户端.</p>
+</blockquote>
+<h2 id="Ques-3-同时解决标准输出和标准错误输出"><a href="#Ques-3-同时解决标准输出和标准错误输出" class="headerlink" title="Ques 3: 同时解决标准输出和标准错误输出"></a>Ques 3: 同时解决标准输出和标准错误输出</h2><p>原先初版使用的命令执行是通过<code>os</code>模块的<code>popen</code>方法执行的.</p>
+<blockquote>
+<p><code>os.popen(cmd, mode=&#39;r&#39;, buffering=-1)</code></p>
+</blockquote>
+<p>一般使用的话, 只需要向<code>popen</code>传送一个参数<code>cmd</code>就行了. 这样就会返回指令处理的结果对象(<code>&lt;class &#39;os._wrap_close&#39;&gt;</code>), 接着直接进行读(<code>read</code>, <code>readline</code>, 什么的)操作就行了, 这会自动调用这个对象的_stream属性, 也就是和你打开文件时获得的文件对象的同样的类(<code>&lt;class &#39;_io.TextIOWrapper&#39;&gt;</code>).</p>
+<p>但是,在实际进行测试的时候发现了问题,<code>popen</code>会将结果输出到对象中, 但是如果命令发生错误, <code>popen</code>会直接将<code>stderr</code>输出, 也就是屏幕., 如果非要捕获的话, 就要在命令后面加上各种<code>&gt;&gt;</code>管道, 看起来很不舒服, 还要再进行管道流的提取, 很麻烦.</p>
+<p>所以.在这种情况下, 就要选择<code>subprocess</code>模块下的<code>Popen</code><br>方法了.然而, 在查阅文档的时候发现, <code>os.popen</code>的实现就是依靠<code>subprocess.Popen</code>, 当然底层还是<code>C</code>的函数<code>popen</code>.</p>
+<p><img src="http://q4fo85yz7.bkt.gdipper.com/popen.png" alt="popen"></p>
+<p>之所以选择<code>subprocess.Popen</code>,就是因为他能方便的进行重定向.<code>subprocess.Popen</code>的方法签名是:</p>
+<blockquote>
+<p><code>subprocess.Popen(args, bufsize=-1, executable=None, stdin=None, stdout=None, stderr=None, preexec_fn=None, close_fds=True, shell=False, cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0, restore_signals=True, start_new_session=False, pass_fds=(), *, encoding=None, errors=None)</code></p>
+</blockquote>
+<p>( 善意的微笑🙂.</p>
+<p><code>subprocess.Popen</code><strong>能用的到</strong>的方法签名是:</p>
+<blockquote>
+<p><code>subprocess.Popen(args, stdin=None, stdout=None, stderr=None, shell=False)</code></p>
+</blockquote>
+<p>这样我们的命令执行代码就可以这样写:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># data是server收到的命令</span></span><br><span class="line">cmd_res = subprocess.Popen(data.decode(<span class="string">"utf-8"</span>), shell=<span class="literal">True</span>, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>默认的<code>shell</code>是<code>/bin/sh</code></li>
+</ul>
+<p>这样不管命令的执行结果是什么,所有的信息都可以通过<code>cmd_res.stdout</code>来获得. </p>
+<h2 id="Ques-4-缓冲区大小限制"><a href="#Ques-4-缓冲区大小限制" class="headerlink" title="Ques 4: 缓冲区大小限制"></a>Ques 4: 缓冲区大小限制</h2><p>一般在进行<code>Socket</code>的收发时, 缓冲的大小设定都是<code>1024</code>, <code>Python</code>官方的建议是不要超过<code>8192</code>. 但事实上, 这个缓冲的大小最大是可以达到<code>10M</code>的.</p>
+<p>初版的SSH完成后发现这样的问题: ifconfig的显示结果不全, 接着在执行下一个命令的时候, 显示的又是上一次没有显示完的信息.</p>
+<p><strong>全乱套了!</strong>🙁</p>
+<p>最首先想到的办法就是增大缓冲区的大小, 还是听官方的话吧, 最大设为8192.好了! 这样解决问题了 until I cat a file.🙃</p>
+<p>谁说输出不会大于8192个字节?..这下好了, 解决方法需要更换了.</p>
+<p>接着, 从TCP协议中获得了灵感, 在TCP的数据传输中, 有个窗口的概念, 这个窗口值可以确保数据不会从缓存中溢出, 那么,我也可以效仿这个,让服务端每次传输前, 计算要传输的命令输出的大小啊( 因为<code>socket.send</code>是全盘发送 ).</p>
+<p>说干就干啦.于是加上了这样的语句:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Server 端</span></span><br><span class="line">conn.send(str(len(res.encode())).encode(<span class="string">"utf-8"</span>))</span><br><span class="line">conn.send(res.encode(<span class="string">"utf-8"</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Client 端</span></span><br><span class="line">cmd_res_size = client.recv(<span class="number">1024</span>).decode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="comment">#print("收到数据长度:",cmd_res_size)</span></span><br><span class="line">cmd_res_size = int(cmd_res_size)</span><br><span class="line">rec_size = <span class="number">0</span></span><br><span class="line">rec_data = <span class="string">b''</span></span><br><span class="line"><span class="keyword">while</span> rec_size != cmd_res_size:</span><br><span class="line">       cmd_res = client.recv(<span class="number">1024</span>).decode(<span class="string">"utf-8"</span>)</span><br><span class="line">       rec_size += int(len(cmd_res))</span><br><span class="line">       print(cmd_res)</span><br></pre></td></tr></table></figure>
+
+<p>这样就好了, 只要客户端没有收到正确大小的数据, 就一直保持接受的状态.😏</p>
+<h2 id="Ques-5-粘包"><a href="#Ques-5-粘包" class="headerlink" title="Ques 5: 粘包."></a>Ques 5: 粘包.</h2><p>这是我第一次听到的名词,在这里就先简单的介绍一下.</p>
+<blockquote>
+<p><strong>粘包现象</strong>发生在套接字的两次发送时, 这里说的发送不是系统根据缓冲区的大小自动决定的发送, 而是指通过调用系统接口进行的强制发送, 例如:<code>socket.send</code>.</p>
+</blockquote>
+<p>在上面的解决缓冲区大小的方案中, 我的<code>Server</code>端代码中有这么一段:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conn.send(str(len(res.encode())).encode(<span class="string">"utf-8"</span>))</span><br><span class="line">conn.send(res.encode(<span class="string">"utf-8"</span>))</span><br></pre></td></tr></table></figure>
+
+<p>假使我Client进行了<code>ls</code>的发送, 而<code>ls</code>的执行结果是<code>&#39;__pycache__\nsock_client.py\nsock_server.py\nssh_db.py\n&#39;</code>.长度是<code>52</code>.</p>
+<p>本应收到的结果是<code>52</code>和<code>&#39;__pycache__\nsock_client.py\nsock_server.py\nssh_db.py\n&#39;</code>.但是在<code>Client</code>端实际收到的结果是:</p>
+<blockquote>
+<p><code>52&#39;__pycache__\nsock_client.py\nsock_server.py\nssh_db.py\n&#39;</code></p>
+</blockquote>
+<p>可想而知的报错: </p>
+<blockquote>
+<p><code>ValueError: invalid literal for int() with base 10:</code></p>
+</blockquote>
+<p>为了解决粘包问题, 有一种比较蠢的方法.那就是使用<code>time.sleep()</code>.</p>
+<p><strong>你不是会连在一起发送吗?好啊,给我直接中断!</strong></p>
+<p>接着我就开始进行测试了, 确实,粘包问题是解决了, 但是这每次输完指令都等上<code>0.5s</code>的感觉真是吃了💩了.</p>
+<p>仍然是从TCP协议中获得的灵感!!! </p>
+<p>在进行三次握手的时候, 服务端的行动依靠于客户端的ACK标志位, 而众所周知的是socket在recv的时候时堵塞的!.</p>
+<p>太好了,我知道怎么写啦:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Server 端:</span></span><br><span class="line">conn.send(str(len(res.encode())).encode(<span class="string">"utf-8"</span>))</span><br><span class="line"><span class="comment"># time.sleep(0.1) # 只要将这一句注释掉, 客户端就会报错,原因是会收到两次send的合集(上一行的和下一行的), 可是一次send就会强迫进行一次系统调用, 将缓存区中的内容全盘发送才对啊?</span></span><br><span class="line"><span class="comment"># 问题解决了, 这种现象称为 粘包 .</span></span><br><span class="line"><span class="comment"># 其实在sleep()时间比较短的时候, 也会有一定的概率出现粘包.</span></span><br><span class="line"><span class="comment"># 除了sleep, 一种更好的解决方法是在这里: </span></span><br><span class="line"><span class="comment"># 加上一个类似TCP中的ACK的客户端响应,这样服务端就会自动堵塞在这里了.</span></span><br><span class="line">client_ack = conn.recv(<span class="number">1024</span>)</span><br><span class="line">conn.send(res.encode(<span class="string">"utf-8"</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Client 端</span></span><br><span class="line">cmd_res_size = client.recv(<span class="number">1024</span>).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">client.send(cmd_res_size.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">cmd_res_size = int(cmd_res_size)</span><br><span class="line">rec_size = <span class="number">0</span></span><br><span class="line">rec_data = <span class="string">b''</span></span><br><span class="line"><span class="keyword">while</span> rec_size != cmd_res_size:</span><br><span class="line">        cmd_res = client.recv(<span class="number">1024</span>).decode(<span class="string">"utf-8"</span>)</span><br><span class="line">        rec_size += int(len(cmd_res))</span><br><span class="line">        print(cmd_res)</span><br></pre></td></tr></table></figure>
+
+<p>这样, 整个过程就会很流畅了.</p>
+<h1 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h1><p><strong>sock_server.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python3</span></span><br><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> subprocess</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> ssh_db</span><br><span class="line"></span><br><span class="line">server = socket.socket()</span><br><span class="line">server.bind((<span class="string">'0.0.0.0'</span>, <span class="number">9999</span>))</span><br><span class="line">server.listen()</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        isCorrect = <span class="literal">False</span></span><br><span class="line">        conn, addr = server.accept()</span><br><span class="line">        print(<span class="string">"New conn:"</span>, addr)</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> isCorrect: </span><br><span class="line">            conn.send(<span class="string">b"login: "</span>)</span><br><span class="line">            user = conn.recv(<span class="number">1024</span>).decode(<span class="string">"utf-8"</span>)</span><br><span class="line">            conn.send(user.encode(<span class="string">"utf-8"</span>) + <span class="string">b" password: "</span>)</span><br><span class="line">            passwd = conn.recv(<span class="number">1024</span>).decode(<span class="string">"utf-8"</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> ssh_db.validate(user, passwd):</span><br><span class="line">                isCorrect = <span class="literal">False</span></span><br><span class="line">                print(<span class="string">"Auth fail."</span>)</span><br><span class="line">                conn.send(<span class="string">"Authentication failure.\n"</span>.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">                time.sleep(<span class="number">0.5</span>)</span><br><span class="line">                isCorrect = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                conn.send(<span class="string">b"correct"</span>)</span><br><span class="line">                isCorrect = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            data = conn.recv(<span class="number">1024</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">                print(<span class="string">"客户端已断开连接"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            print(<span class="string">"执行指令:"</span>,data.decode(<span class="string">'utf-8'</span>))</span><br><span class="line">            cmd_res = subprocess.Popen(data.decode(<span class="string">"utf-8"</span>), shell=<span class="literal">True</span>, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)</span><br><span class="line">            res = cmd_res.stdout.read().decode(<span class="string">"utf-8"</span>)</span><br><span class="line">            print(<span class="string">"发送结果集长度.."</span>,str(len(res)))</span><br><span class="line">            conn.send(str(len(res.encode())).encode(<span class="string">"utf-8"</span>))</span><br><span class="line">            <span class="comment"># time.sleep(0.1) # 只要将这一句注释掉, 客户端就会报错,原因是会收到两次send的合集(上一行的和下一行的), 可是一次send就会强迫进行一次系统调用, 将缓存区中的内容全盘发送才对啊?</span></span><br><span class="line">            <span class="comment"># 问题解决了, 这种现象称为 粘包 .</span></span><br><span class="line">            <span class="comment"># 其实在sleep()时间比较短的时候, 也会有一定的概率出现粘包.</span></span><br><span class="line">            <span class="comment"># 除了sleep, 一种更好的解决方法是在这里: </span></span><br><span class="line">            <span class="comment"># 加上一个类似TCP中的ACK的客户端响应,这样服务端就会自动堵塞在这里了.</span></span><br><span class="line">            client_ack = conn.recv(<span class="number">1024</span>)</span><br><span class="line">            conn.send(res.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">    <span class="keyword">except</span> (socket.error, KeyboardInterrupt) <span class="keyword">as</span> e:</span><br><span class="line">        print(e)</span><br><span class="line">        print(<span class="string">"已退出"</span>)</span><br><span class="line">        server.close()</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> server:    </span><br><span class="line">    server.close()</span><br></pre></td></tr></table></figure>
+
+<p><strong>sock_client.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#! /usr/bin/env python3</span></span><br><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> getpass</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">client = socket.socket()</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    isCorrect = <span class="literal">False</span></span><br><span class="line">    client.connect((<span class="string">'localhost'</span>, <span class="number">9999</span>))</span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> isCorrect:</span><br><span class="line">        md5 = hashlib.md5()</span><br><span class="line">        user = input(client.recv(<span class="number">1024</span>).decode(<span class="string">'utf-8'</span>))</span><br><span class="line">        client.send(user.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">        passwd = getpass.getpass(client.recv(<span class="number">1024</span>).decode(<span class="string">"utf-8"</span>))</span><br><span class="line">        md5.update(passwd.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">        client.send(md5.hexdigest().upper().encode(<span class="string">"utf-8"</span>))</span><br><span class="line">        res = client.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> res == <span class="string">b'correct'</span>:</span><br><span class="line">            print(res.decode(<span class="string">"utf-8"</span>))</span><br><span class="line">            isCorrect = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"Login Successful!"</span>)</span><br><span class="line">            isCorrect = <span class="literal">True</span></span><br><span class="line"><span class="keyword">except</span> socket.error <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br><span class="line">    sys.exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cmd = input(<span class="string">"root@www &gt;&gt;:"</span>).strip()</span><br><span class="line">        <span class="keyword">if</span> len(cmd) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> cmd == <span class="string">"exit"</span> <span class="keyword">or</span> cmd == <span class="string">"logout"</span>:</span><br><span class="line">            client.close()</span><br><span class="line">            sys.exit(<span class="number">0</span>)</span><br><span class="line">        client.send(cmd.encode(<span class="string">'utf-8'</span>))</span><br><span class="line">        cmd_res_size = client.recv(<span class="number">1024</span>).decode(<span class="string">'utf-8'</span>)</span><br><span class="line">        client.send(cmd_res_size.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">        cmd_res_size = int(cmd_res_size)</span><br><span class="line">        rec_size = <span class="number">0</span></span><br><span class="line">        rec_data = <span class="string">b''</span></span><br><span class="line">        <span class="keyword">while</span> rec_size != cmd_res_size:</span><br><span class="line">            cmd_res = client.recv(<span class="number">1024</span>).decode(<span class="string">"utf-8"</span>)</span><br><span class="line">            rec_size += int(len(cmd_res))</span><br><span class="line">            print(cmd_res)</span><br><span class="line">    <span class="keyword">except</span> (KeyboardInterrupt,ValueError,socket.error) <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(e, KeyboardInterrupt):</span><br><span class="line">            print(<span class="string">"内部错误:"</span>,e)</span><br><span class="line">        client.close()</span><br><span class="line">        print(<span class="string">"已断开连接"</span>)</span><br><span class="line">        sys.exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> client:</span><br><span class="line">    client.close()</span><br></pre></td></tr></table></figure>
+
+<p><strong>ssh_db.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    conn = pymysql.connect(host=<span class="string">"localhost"</span>, user=<span class="string">"root"</span>, passwd=<span class="string">""</span>, db=<span class="string">"ssh"</span>)</span><br><span class="line">    cursor = conn.cursor()</span><br><span class="line"><span class="keyword">except</span> pymysql.Error <span class="keyword">as</span> e:</span><br><span class="line">    print(<span class="string">"数据库错误:"</span>,e)</span><br><span class="line">    sys.exit(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">validate</span><span class="params">(username, passwd)</span>:</span></span><br><span class="line">    cursor.execute(<span class="string">"select (passwd) from users where username = '"</span> + username + <span class="string">"'"</span>)</span><br><span class="line">    res = cursor.fetchall()</span><br><span class="line">    <span class="keyword">if</span> res <span class="keyword">and</span> res[<span class="number">0</span>][<span class="number">0</span>] == passwd:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#客户端"><span class="toc-number">2.</span> <span class="toc-text">客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-1-密码的输入问题"><span class="toc-number">2.1.</span> <span class="toc-text">Ques 1: 密码的输入问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据库连接层"><span class="toc-number">3.</span> <span class="toc-text">数据库连接层</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-2-数据库语句总是错误…"><span class="toc-number">3.1.</span> <span class="toc-text">Ques 2: 数据库语句总是错误…</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#服务端-客户端"><span class="toc-number">4.</span> <span class="toc-text">服务端 + 客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-3-同时解决标准输出和标准错误输出"><span class="toc-number">4.1.</span> <span class="toc-text">Ques 3: 同时解决标准输出和标准错误输出</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-4-缓冲区大小限制"><span class="toc-number">4.2.</span> <span class="toc-text">Ques 4: 缓冲区大小限制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ques-5-粘包"><span class="toc-number">4.3.</span> <span class="toc-text">Ques 5: 粘包.</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#源码"><span class="toc-number">5.</span> <span class="toc-text">源码</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&text=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&is_video=false&description=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python简陋SSH的踩坑总结(伪)&body=Check out this article: http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&title=Python简陋SSH的踩坑总结(伪)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/06/02/Python简陋SSH的踩坑总结/&name=Python简陋SSH的踩坑总结(伪)&description=&lt;p&gt;Python简陋(伪)SSH的踩坑总结😶&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

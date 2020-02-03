@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="基础数据结构篇">
+<meta name="keywords" content="学习笔记,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python&#39;s Memo(1)">
+<meta property="og:url" content="http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="基础数据结构篇">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python&#39;s Memo(1)">
+<meta name="twitter:description" content="基础数据结构篇">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Python&#39;s Memo(1)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/04/12/SS-SSR/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/04/09/Win批处理/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&text=Python&#39;s Memo(1)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&is_video=false&description=Python&#39;s Memo(1)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python&#39;s Memo(1)&body=Check out this article: http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&name=Python&#39;s Memo(1)&description=&lt;hr&gt;
+&lt;p&gt;基础数据结构篇&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-的备忘录–基础数据结构篇"><span class="toc-number">1.</span> <span class="toc-text">Python 的备忘录–基础数据结构篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#list"><span class="toc-number">1.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tuple"><span class="toc-number">1.2.</span> <span class="toc-text">tuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dict"><span class="toc-number">1.3.</span> <span class="toc-text">dict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">1.4.</span> <span class="toc-text">set</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Python&#39;s Memo(1)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-04-12T17:49:33.000Z" itemprop="datePublished">2017-04-13</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/学习笔记/">学习笔记</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <hr>
+<p>基础数据结构篇</p>
+<a id="more"></a>
+
+<h1 id="Python-的备忘录–基础数据结构篇"><a href="#Python-的备忘录–基础数据结构篇" class="headerlink" title="Python 的备忘录–基础数据结构篇"></a>Python 的备忘录–基础数据结构篇</h1><hr>
+<p>Python基础数据结构主要有列表(list),元组(tuple),词典(dict)以及集合(set)</p>
+<blockquote>
+<p>快速记忆的方法:</p>
+<ul>
+<li>列表 [ ]</li>
+<li>元组 ( )</li>
+<li>词典 { : }</li>
+<li>集合 [( )]</li>
+</ul>
+</blockquote>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>list中的元素可以是不同类型的.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用len()来获取列表长度</span><br><span class="line">使用[]下标来获取元素</span><br><span class="line">允许传入负值来倒序遍历</span><br></pre></td></tr></table></figure>
+
+<p>操作list:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">append(ele) <span class="comment"># push一个元素</span></span><br><span class="line">pop([index]) <span class="comment"># 删除一个元素</span></span><br><span class="line">insert(index, ele) <span class="comment"># 插入一个元素</span></span><br><span class="line">extend() <span class="comment"># 拓展list</span></span><br><span class="line">sort()</span><br><span class="line">reverse() <span class="comment"># 排序</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><p>tuple类似列表,但初始化后便不可再更改.</p>
+<p><strong>MEMO</strong> 定义一个tuple时,会遇到这样的歧义:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tp = () // 声明了一个空的tuple</span><br><span class="line">tp = (1) //是声明了一个包含1的tuple,还是一个长度为1的tuple ??</span><br></pre></td></tr></table></figure>
+
+<p>因此,在遇到这样的情况时,使用长度加上逗号的方式来声明.</p>
+<p><strong>MEMO</strong> 只有tuple本身的元素不会发生变化.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果在tuple中插入了一个list,list中的元素是可以变化的.</span><br></pre></td></tr></table></figure>
+
+<h2 id="dict"><a href="#dict" class="headerlink" title="dict"></a>dict</h2><p>dict就类似于其他语言的<code>Map</code>,即键(Key)值(Value)对,<br>字典的查找速度很快,原因是dict的Key是经过了Hash计算的.<br>因此,Key是不可变的对象.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用 <span class="string">'Key'</span> <span class="keyword">in</span> dict 来判断是否存在Key.</span><br></pre></td></tr></table></figure>
+
+<p>操作dict</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;<span class="string">"name"</span>:<span class="string">"J"</span>, <span class="string">"age"</span>:<span class="string">"19"</span>&#125;</span><br><span class="line">dd = d.copy() <span class="comment"># 深拷贝,内存地址变化</span></span><br><span class="line">d.clear() <span class="comment"># 清空</span></span><br><span class="line">dd.items() <span class="comment"># 返回键值对对象,可迭代使用</span></span><br><span class="line">dd.get(<span class="string">"name"</span>[, default]) <span class="comment"># 获取值, 不存在返回default的值.</span></span><br><span class="line">dd.keys()</span><br><span class="line">dd.values() <span class="comment"># 兄弟方法,分别得到键和值</span></span><br><span class="line">dd.update() <span class="comment"># 更新字典,传入可迭代的对象(字典),用来拓展或覆盖旧值.</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><p>set是一组不包含重复元素的集合们需要提供一个list作为输入.<br>list中存储的元素是无序的.</p>
+<p>操作set</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s = set([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line">s.add(<span class="number">4</span>)</span><br><span class="line">s <span class="comment"># &#123; 1,2,3,4,5 &#125;</span></span><br><span class="line">s.add(<span class="number">6</span>)</span><br><span class="line">s <span class="comment"># &#123; 1,2,3,4,5,6 &#125;</span></span><br><span class="line">s.remove(ele) <span class="comment"># 删除元素</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>MEMO</strong> Set相当于是数学中的集合,可进行求交集\并集…</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s1 = set([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">s2 = set([<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">s1 &amp; s2 <span class="comment">#  &#123; 2,3 &#125;</span></span><br><span class="line">s1 | s2 <span class="comment">#  &#123; 1,2,3,4 &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-的备忘录–基础数据结构篇"><span class="toc-number">1.</span> <span class="toc-text">Python 的备忘录–基础数据结构篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#list"><span class="toc-number">1.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tuple"><span class="toc-number">1.2.</span> <span class="toc-text">tuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dict"><span class="toc-number">1.3.</span> <span class="toc-text">dict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">1.4.</span> <span class="toc-text">set</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&text=Python&#39;s Memo(1)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&is_video=false&description=Python&#39;s Memo(1)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python&#39;s Memo(1)&body=Check out this article: http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&name=Python&#39;s Memo(1)&description=&lt;hr&gt;
+&lt;p&gt;基础数据结构篇&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

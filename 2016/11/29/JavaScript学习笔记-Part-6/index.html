@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="JavaScript中的事件与计时器-jQuery(1).">
+<meta name="keywords" content="学习笔记,JavaScript,jQuery">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript学习笔记(Part 6)">
+<meta property="og:url" content="http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="JavaScript中的事件与计时器-jQuery(1).">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript学习笔记(Part 6)">
+<meta name="twitter:description" content="JavaScript中的事件与计时器-jQuery(1).">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>JavaScript学习笔记(Part 6)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/12/03/JavaScript学习笔记-Part-7/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/11/26/HTTP协议-part-four/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&text=JavaScript学习笔记(Part 6)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&is_video=false&description=JavaScript学习笔记(Part 6)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JavaScript学习笔记(Part 6)&body=Check out this article: http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&name=JavaScript学习笔记(Part 6)&description=&lt;p&gt;JavaScript中的事件与计时器-jQuery(1).&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">jQuery选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.1.</span> <span class="toc-text">1.$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.2.</span> <span class="toc-text">2.基本选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">按ID查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.2.</span> <span class="toc-text">按class查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.3.</span> <span class="toc-text">按tag查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.4.</span> <span class="toc-text">按attribute查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.5.</span> <span class="toc-text">组合查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.6.</span> <span class="toc-text">多项选择</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.3.</span> <span class="toc-text">3.层级选择器（Descendant Selector）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.3.0.0.1.</span> <span class="toc-text">过滤器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.3.0.0.2.</span> <span class="toc-text">特殊选择器</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">11.JS事件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.1.</span> <span class="toc-text">JS原生绑定事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.2.</span> <span class="toc-text">使用jQuery绑定事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.3.</span> <span class="toc-text">**鼠标事件**</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.4.</span> <span class="toc-text">**键盘事件**</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.5.</span> <span class="toc-text">**其他事件**</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.6.</span> <span class="toc-text">事件参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.7.</span> <span class="toc-text">取消绑定</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.8.</span> <span class="toc-text">两个补充</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">3.</span> <span class="toc-text">12.定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">计时器方法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        JavaScript学习笔记(Part 6)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-11-30T04:55:48.000Z" itemprop="datePublished">2016-11-30</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-link" href="/tags/jQuery/">jQuery</a>, <a class="tag-link" href="/tags/学习笔记/">学习笔记</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>JavaScript中的事件与计时器-jQuery(1).</p>
+<a id="more"></a>
+
+<p>———————–于12-03的补充——————————-</p>
+<h1>jQuery选择器</h1>
+
+<h2>1.$</h2>
+
+<p>jQuery所有的功能都被封装在<code>$</code>符号( <code>=== jQuery// true</code>)中。</p>
+<p>要使用jQuery，必须在页面的<code>head</code>处先进行jQuery引用。</p>
+<h2>2.基本选择器</h2>
+
+<p>jQuery写起来就要比<code>document.getElementByXXX();</code>这样的写法看起来简洁许多了。</p>
+<h5>按ID查找</h5>
+
+<p><code>var div = $(&quot;#ID&quot;);</code></p>
+<h5>按class查找</h5>
+
+<p>`var div = $(“.class.class”);//不要加空格啊亲</p>
+<h5>按tag查找</h5>
+
+<p><code>var div = $(&quot;div&quot;);</code></p>
+<h5>按attribute查找</h5>
+
+<p><code>var div = $(&quot;[name=div]&quot;);</code></p>
+<p><code>var div = $(&quot;[name^=div-]&quot;);//前缀</code></p>
+<p><code>var div = $(&quot;[name$=-with&quot;);//后缀</code></p>
+<p><code>var div = $(&quot;[name=&quot;A B&quot;]&quot;);//属性值带有特殊字符的时候要加引号</code></p>
+<h5>组合查找</h5>
+
+<p><code>var emailInput = $(&quot;input[name=email]&quot;)</code></p>
+<p><code>var text = $(&quot;p.text&quot;)</code></p>
+<h5>多项选择</h5>
+
+<p>使用<code>,</code>来分隔不同的选择器</p>
+<p><code>$(&quot;p,div&quot;)</code></p>
+<h2>3.层级选择器（Descendant Selector）</h2>
+
+<p><code>$(&quot;ul.class li.class&quot;);</code></p>
+<p><code>$(&quot;ul.class li&quot;);</code></p>
+<p><code>$(&quot;form[name=input] input&quot;);</code></p>
+<p><code>$(&quot;div[name=test] ul.class li p&quot;);</code></p>
+<p>多层选择也是OK的。</p>
+<h5>过滤器</h5>
+
+<p>过滤器与选择器一起使用，用于更精确的选出元素。</p>
+<p><code>$(&#39;ul.lang li:first-child&#39;);</code></p>
+<p><code>$(&#39;ul.lang li:last-child&#39;);</code></p>
+<p><code>$(&#39;ul.lang li:nth-child(2)&#39;); // 选出第N个元素，N从1开始</code></p>
+<p><code>$(&#39;ul.lang li:nth-child(even)&#39;); // 选出序号为偶数的元素</code></p>
+<p><code>$(&#39;ul.lang li:nth-child(odd)&#39;); // 选出序号为奇数的元素</code></p>
+<h5>特殊选择器</h5>
+
+<p>针对表单元素，jQuery还有一组特殊的选择器：</p>
+<p><code>:input：</code>可以选择<code>input</code>，<code>textarea</code>，<code>select</code>和<code>button</code>；</p>
+<p><code>:file：</code>可以选择<code>input type=&quot;file&quot;</code>，和<code>input[type=file]</code>一样；</p>
+<p><code>:checkbox：</code>可以选择复选框，和<code>input[type=checkbox]</code>一样；</p>
+<p><code>:radio：</code>可以选择单选框，和<code>input[type=radio]</code>一样；</p>
+<p><code>:focus：</code>可以选择当前输入焦点的元素，例如把光标放到一个<code>input</code>上，用<code>$(&#39;input:focus&#39;)</code>就可以选出；</p>
+<p><code>:checked：</code>选择当前勾上的单选框和复选框，用这个选择器可以立刻获得用户选择的项目，如<code>$(&#39;input[type=radio]:checked&#39;)</code>；</p>
+<p><code>:enabled：</code>可以选择可以正常输入的<code>input</code>、<code>select</code>等，也就是没有灰掉的输入；</p>
+<p><code>:disabled</code>和<code>:enabled</code>正好相反，选择那些不能输入的。</p>
+<p>此外，jQuery还有：</p>
+<p><code>$(&#39;div:visible&#39;);</code>选出所有可见的div</p>
+<p><code>$(&#39;div:hidden&#39;);</code>选出所有隐藏的div</p>
+<p>————————-分割线——————————</p>
+<h1>11.JS事件</h1>
+
+<h5>JS原生绑定事件</h5>
+
+<p>主要的事件有：</p>
+<p><strong>onclick：鼠标单击事件；<br>onmouseover：鼠标经过事件；<br>onchange：文本框内容改变事件；<br>onselect：文本框内容被选中事件；<br>onfocus：光标聚集；<br>onblur：光标离开；<br>onload：网页导入；<br>onunload：关闭网页</strong></p>
+<h5>使用jQuery绑定事件</h5>
+
+<pre><code>var a = $(&quot;#test-link&quot;);
+a.click(function() {
+    /*Code Here*/
+});</code></pre><p>jQuery能够绑定的事件主要包括：</p>
+<h5>**鼠标事件**</h5>
+
+<p><strong>click: 鼠标单击时触发；<br>dblclick：鼠标双击时触发；<br>mouseenter：鼠标进入时触发；<br>mouseleave：鼠标移出时触发；<br>mousemove：鼠标在DOM内部移动时触发；<br>hover：鼠标进入和退出时触发两个函数，相当于mouseenter加上mouseleave。</strong></p>
+<h5>**键盘事件**</h5>
+
+<p><strong>键盘事件仅作用在当前焦点的DOM上，通常是<code>input</code>和<code>textarea</code>。<br>keydown：键盘按下时触发；<br>keyup：键盘松开时触发；<br>keypress：按一次键后触发。</strong></p>
+<h5>**其他事件**</h5>
+
+<p><strong>focus：当DOM获得焦点时触发；<br>blur：当DOM失去焦点时触发；<br>change：当<code>input</code>、<code>select</code>或<code>textarea</code>的内容改变时触发；<br>submit：当form提交时触发；<br>ready：当页面被载入并且DOM树完成初始化后触发。</strong></p>
+<p>其中，ready仅作用于document对象。由于ready事件在DOM完成初始化后触发，且只触发一次.<br>我们要将自己的初始化代码放在ready里面以保证其能正常执行。</p>
+<pre><code>$(document).on(&apos;ready&apos;, function () {
+        $(&apos;#testForm).on(&apos;submit&apos;, function () {
+            alert(&apos;submit!&apos;);
+        });
+    });</code></pre><p>由于这种方式特别普遍，所以可直接简化成</p>
+<pre><code>$(function () {
+    // init...
+});</code></pre><p>这个就是document对象的ready事件处理函数。</p>
+<h5>事件参数</h5>
+
+<p>某些事件，如<code>mousemove</code>、<code>keypressed</code>，通过事件函数传入的Event参数，可以获得一些特定的值。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#mouseMoveTestDiv"</span>).mousemove(<span class="keyword">function</span> (e)&#123;</span><br><span class="line">	$(<span class="string">"#displayMouseDiv"</span>).text(<span class="string">"pageX = "</span> + e.pageX + <span class="string">" pageY = "</span> + e.pageY);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>测试一下效果：</p>
+<div id="mouseMoveTestDiv" style="display: block; border: 1px solid red;width: 400px 100%;height: 200px;"><p>&nbsp;在这里移动鼠标</p></div>
+<p id="testText">Mousemove:&nbsp;<span id="testMouseMoveSpan"></span></p>
+<script type="text/javascript">
+var node = document.getElementById('mouseMoveTestDiv');
+node.onmousemove = function (e) {
+    document.getElementById('testMouseMoveSpan').innerText = "pageX = " + e.pageX + "  pageY = " + e.pageY;
+}
+</script>
+
+<h5>取消绑定</h5>
+
+<p>一个绑定的时间可以通过<code>off(&quot; &quot;, function)</code>来取消绑定。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">hello</span></span>() &#123;</span><br><span class="line">    alert(<span class="string">'hello!'</span>);</span><br><span class="line">&#125;</span><br><span class="line">a.click(hello); // 绑定事件</span><br><span class="line">// 10秒钟后解除绑定:</span><br><span class="line">setTimeout(<span class="function"><span class="title">function</span></span> () &#123;</span><br><span class="line">    a.off(<span class="string">'click'</span>, hello);</span><br><span class="line">&#125;, 10000);</span><br></pre></td></tr></table></figure>
+
+<h5>两个补充</h5>
+
+<p>1.以<code>change</code>事件为例，如果用代码改变文本框内的值，是不会触发<code>change(function (){})</code>函数的，因此，在使用JavaScript代码修改文本内容的时候，要在后面无参的调用一下<code>change()</code>才行。</p>
+<p>2.浏览器有自己的安全限制，如<code>window.open()</code>是不会在<code>$(function (){})</code>中运行的，这些操作，只有用户主动触发，才会起到作用。</p>
+<h1>12.定时器</h1>
+
+<p>JS中有两种计时器：<br>1.一次性计时器<br>2.间歇性隔发计时器</p>
+<h5>计时器方法</h5>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">setTimeOut()  指定延迟时间后来执行代码</span><br><span class="line">clearTimeOut()  取消setTimeOut()设置</span><br><span class="line">setInterval()  每隔指定时间执行代码</span><br><span class="line">clearInterval()  取消setInterval()的设置</span><br></pre></td></tr></table></figure>
+
+<p>可以看出,TimeOut()方法所执行的代码是一次性的。</p>
+<p>Copyright © Justin13</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text">jQuery选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.1.</span> <span class="toc-text">1.$</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.2.</span> <span class="toc-text">2.基本选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">按ID查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.2.</span> <span class="toc-text">按class查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.3.</span> <span class="toc-text">按tag查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.4.</span> <span class="toc-text">按attribute查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.5.</span> <span class="toc-text">组合查找</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.2.0.0.6.</span> <span class="toc-text">多项选择</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null"><span class="toc-number">1.3.</span> <span class="toc-text">3.层级选择器（Descendant Selector）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.3.0.0.1.</span> <span class="toc-text">过滤器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">1.3.0.0.2.</span> <span class="toc-text">特殊选择器</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text">11.JS事件</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.1.</span> <span class="toc-text">JS原生绑定事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.2.</span> <span class="toc-text">使用jQuery绑定事件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.3.</span> <span class="toc-text">**鼠标事件**</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.4.</span> <span class="toc-text">**键盘事件**</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.5.</span> <span class="toc-text">**其他事件**</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.6.</span> <span class="toc-text">事件参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.7.</span> <span class="toc-text">取消绑定</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.0.8.</span> <span class="toc-text">两个补充</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#null"><span class="toc-number">3.</span> <span class="toc-text">12.定时器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">3.0.0.0.1.</span> <span class="toc-text">计时器方法</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&text=JavaScript学习笔记(Part 6)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&is_video=false&description=JavaScript学习笔记(Part 6)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JavaScript学习笔记(Part 6)&body=Check out this article: http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&title=JavaScript学习笔记(Part 6)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2016/11/29/JavaScript学习笔记-Part-6/&name=JavaScript学习笔记(Part 6)&description=&lt;p&gt;JavaScript中的事件与计时器-jQuery(1).&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

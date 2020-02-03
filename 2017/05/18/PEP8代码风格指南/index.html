@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="原文在此">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PEP8代码风格指南">
+<meta property="og:url" content="http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="原文在此">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.395Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PEP8代码风格指南">
+<meta name="twitter:description" content="原文在此">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>PEP8代码风格指南</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/05/18/数据库设计/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/05/06/Linux三剑客-grep-awk-sed/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&text=PEP8代码风格指南"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&is_video=false&description=PEP8代码风格指南"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PEP8代码风格指南&body=Check out this article: http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&name=PEP8代码风格指南&description=&lt;p&gt;原文在&lt;a href=&#34;https://www.python.org/dev/peps/pep-0008/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;此&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码排版"><span class="toc-number">1.</span> <span class="toc-text">代码排版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#每层缩进使用4个空格"><span class="toc-number">1.1.</span> <span class="toc-text">每层缩进使用4个空格.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空格是首选的缩进方法"><span class="toc-number">1.2.</span> <span class="toc-text">空格是首选的缩进方法.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制每行的最大长度为79个字符"><span class="toc-number">1.3.</span> <span class="toc-text">限制每行的最大长度为79个字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空行"><span class="toc-number">1.4.</span> <span class="toc-text">空行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编码"><span class="toc-number">1.5.</span> <span class="toc-text">编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入包"><span class="toc-number">1.6.</span> <span class="toc-text">导入包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串引号"><span class="toc-number">2.</span> <span class="toc-text">字符串引号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表达式和语句中的空格"><span class="toc-number">3.</span> <span class="toc-text">表达式和语句中的空格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">4.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命名约定"><span class="toc-number">5.</span> <span class="toc-text">命名约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共和内部接口"><span class="toc-number">6.</span> <span class="toc-text">公共和内部接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序编写建议"><span class="toc-number">7.</span> <span class="toc-text">程序编写建议</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        PEP8代码风格指南
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-05-18T07:53:59.000Z" itemprop="datePublished">2017-05-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Python/">Python</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>原文在<a href="https://www.python.org/dev/peps/pep-0008/" target="_blank" rel="noopener">此</a></p>
+<a id="more"></a>
+
+
+<p>为了写出规范的代码, 就需要遵循某些风格指南. 但是如果项目本身就有自己的编码风格, 在发生冲突的时候要优先遵循它.</p>
+<p>PEP8代码风格指南主要包括以下:</p>
+<ul>
+<li>代码排版</li>
+<li>字符串引号</li>
+<li>表达式和语句中的空格</li>
+<li>注释</li>
+<li>版本注记</li>
+<li>命名约定</li>
+<li>公共和内部接口</li>
+<li>程序编写建议</li>
+</ul>
+<p>然而要说在前面的是:</p>
+<p><strong>要知道什么时候应该破例–有时候这份风格指南就是不适用</strong></p>
+<p>也就是说:不要为了刻意遵循代码风格而破坏了代码的向后兼容性.</p>
+<p>下面进入正题, 介绍以下这些规范:</p>
+<h2 id="代码排版"><a href="#代码排版" class="headerlink" title="代码排版"></a>代码排版</h2><h3 id="每层缩进使用4个空格"><a href="#每层缩进使用4个空格" class="headerlink" title="每层缩进使用4个空格."></a>每层缩进使用4个空格.</h3><p>续行要么与圆括号、中括号、花括号这样的被包裹元素保持垂直对齐，要么放在 Python 的隐线（注：应该是相对于def的内部块）内部，或者使用悬挂缩进。使用悬挂缩进的注意事项：第一行不能有参数，用进一步的缩进来把其他行区分开</p>
+<p>所谓续行就是指:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(p1, p2, p3</span></span></span><br><span class="line"><span class="function"><span class="params">		p4, p5, p6)</span></span></span><br><span class="line"><span class="function">	<span class="title">print</span><span class="params">(<span class="string">"in foo"</span>)</span></span></span><br><span class="line"><span class="function"># 或者</span></span><br><span class="line">foo = long_func_name(</span><br><span class="line">	var1, var2,</span><br><span class="line">	var3, var4)</span><br></pre></td></tr></table></figure>
+
+<p>另外, 对于<code>if</code>等条件判断, 这样的规范的也是同样适用的.  就比如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (this_is_a_condition <span class="keyword">and</span> </span><br><span class="line">	this_is_another_thing):</span><br><span class="line">	do_sth()</span><br></pre></td></tr></table></figure>
+
+<p>类似的多行结构都可以遵循这个风格指南:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">my_list = [</span><br><span class="line">	<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">	<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="空格是首选的缩进方法"><a href="#空格是首选的缩进方法" class="headerlink" title="空格是首选的缩进方法."></a>空格是首选的缩进方法.</h3><p>不允许混合使用制表符和空格.</p>
+<p>Python3中甚至为混合使用的行为抛出异常:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TabError: inconsistent use of tabs <span class="keyword">and</span> spaces <span class="keyword">in</span> indentation</span><br></pre></td></tr></table></figure>
+
+<h3 id="限制每行的最大长度为79个字符"><a href="#限制每行的最大长度为79个字符" class="headerlink" title="限制每行的最大长度为79个字符"></a>限制每行的最大长度为79个字符</h3><p>限制编辑窗口的宽度使并排打开两个窗口成为可能, 在Python的标准库中, 代码长度最大限制为79个字符.</p>
+<p>首选的换行方式为在括号中进行隐式换行.就像是上面所说的那样, 并且, 首选的断行位置应该是操作符的后面.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if width == 0 and height == 0 and (color == &apos;red&apos; or</span><br><span class="line">                             		emphasis is None):</span><br><span class="line">    raise ValueError(&quot;I don&apos;t think so -- values are %s, %s&quot; %</span><br><span class="line">                    (width, height))</span><br></pre></td></tr></table></figure>
+
+<p>在非括号表达式的包裹下, 使用续行符<code>(反斜杠)</code>.</p>
+<p>一个例子:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(<span class="string">'/path/to/some/file'</span>) <span class="keyword">as</span> file_1, \</span><br><span class="line">	open(<span class="string">'/path/to/some/file'</span>) <span class="keyword">as</span> file_2:</span><br><span class="line">	file_1.write(file_2.read())</span><br></pre></td></tr></table></figure>
+
+<h3 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h3><p>顶级函数和类定义上下使用两个空行分隔</p>
+<p>类内的方法定义使用一个空行分隔</p>
+<p>在函数中使用空白行（有节制的）来表明逻辑部分.</p>
+<h3 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h3><p>在核心 Python 发布版中的代码应该总是使用UTF-8编码.</p>
+<p>在Python的标准库中, 默认使用<code>UTF-8</code>编码, (Python2中的编码默认为<code>ASCII</code>)</p>
+<h3 id="导入包"><a href="#导入包" class="headerlink" title="导入包"></a>导入包</h3><p><code>import</code>不同的模块应该独立一行.</p>
+<p>如:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br></pre></td></tr></table></figure>
+
+<p>不好的( <code>我一直都是这么写的..hhha</code> ):</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys, os</span><br></pre></td></tr></table></figure>
+
+<p>这样也是可行的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> Popen, PIPE</span><br></pre></td></tr></table></figure>
+
+<p><code>import</code>语句应始终放在文件的顶部, 标准的分组顺序如下:</p>
+<ul>
+<li>i:   标准库</li>
+<li>ii:  第三方库</li>
+<li>iii: 当前应用的库/模块</li>
+</ul>
+<p><strong>应该避免通配符导入（from import *），这会使名称空间里存在的名称变得不清晰，迷惑读者和自动化工具</strong></p>
+<h2 id="字符串引号"><a href="#字符串引号" class="headerlink" title="字符串引号"></a>字符串引号</h2><p>在<code>Python</code>里面，单引号字符串和双引号字符串是相同的</p>
+<p>选择一种方式并坚持使用。一个字符串同时包含单引号和双引号字符时，用另外一种来包裹字符串，而不是使用反斜杠来转义，以提高可读性.</p>
+<h2 id="表达式和语句中的空格"><a href="#表达式和语句中的空格" class="headerlink" title="表达式和语句中的空格"></a>表达式和语句中的空格</h2><p>避免在以下的情况下使用多余的空格:</p>
+<ul>
+<li>与括号保持紧凑</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spam(ham[<span class="number">1</span>], &#123;eggs: <span class="number">2</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>错误</strong>的例子是:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spam( ham[ <span class="number">1</span> ], &#123; eggs: <span class="number">2</span> &#125; )</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>切片内的冒号就像二元操作符一样，任意一侧应该被等同对待（把它当做一个极低优先级的操作）。在一个可扩展的切片中，冒号两侧必须有相同的空格数量。例外：切片参数省略时，空格也省略。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ham[<span class="number">1</span>:<span class="number">9</span>], ham[<span class="number">1</span>:<span class="number">9</span>:<span class="number">3</span>], ham[:<span class="number">9</span>:<span class="number">3</span>], ham[<span class="number">1</span>::<span class="number">3</span>], ham[<span class="number">1</span>:<span class="number">9</span>:]</span><br><span class="line">ham[lower:upper], ham[lower:upper:], ham[lower::step]</span><br><span class="line">ham[lower+offset : upper+offset]</span><br><span class="line">ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]</span><br><span class="line">ham[lower + offset : upper + offset]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>函数名和其参数列表应该保持紧凑:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spam(<span class="number">1</span>) <span class="comment"># 好的</span></span><br><span class="line">spam (<span class="number">1</span>) <span class="comment"># 不好的</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>赋值操作符的两侧保持多余的<strong>一个</strong>空格</li>
+</ul>
+<p>好的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">2</span></span><br><span class="line">long_variable = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>不好的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x 		 	  = <span class="number">1</span></span><br><span class="line">y		      = <span class="number">2</span></span><br><span class="line">long_variable = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不要在关键值参数或默认值参数的等号两边加入空格。</li>
+</ul>
+<p>好的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self, img=<span class="string">'0_0'</span>)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> magic(r=self.real, i=self.img)</span><br></pre></td></tr></table></figure>
+
+<p>不好的:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">(self, img = <span class="string">'0_0'</span>)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> magic(r = self.real, i = self.img)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有时候把 if/for/while 和一个<strong>小的</strong>主体放在同一行也是可行的</li>
+</ul>
+<p>绝对不要写成这样:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> foo == <span class="string">'blah'</span>: do_blah_thing()</span><br><span class="line"><span class="keyword">else</span>: do_non_blah_thing()</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>: something()</span><br><span class="line"><span class="keyword">finally</span>: cleanup()</span><br><span class="line"><span class="keyword">if</span> foo == <span class="string">'blah'</span>: one(); two(); three()</span><br></pre></td></tr></table></figure>
+
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>注释应该是完整的句子。如果注释是一个短语或语句，第一个单词应该大写，除非是一个开头是小写的标识符(从不改变标识符的大小写)</p>
+<p>如果注释很短，末尾的句点可以省略。块注释通常由一个或多个有完整句子的段落组成，并且每个句子应该由句点结束</p>
+<p>来自非英语国家的程序员：请用英语写注释，除非你120%确定你的代码永远不会被那些不说你的语言的人阅读</p>
+<p><strong>行内注释请节制使用</strong></p>
+<p>另外, 在PEP257标准中, 编写良好的文档字符串常驻在此.</p>
+<h2 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h2><p>有以下的规定:</p>
+<p>永远不要使用单个字符, 大写字母作为变量名.</p>
+<p>另外, 在一些字体中, 一些字符是无法和数字<code>1</code>和<code>0</code>分别开的.</p>
+<p>下面的命名风格通常是有区别的：</p>
+<ul>
+<li>b (一个小写字母)</li>
+<li>B (一个大写字母)</li>
+<li>lowercase</li>
+<li>lower_case_with_underscores</li>
+<li>UPPERCASE</li>
+<li>UPPER_CASE_WITH_UNDERSCORES</li>
+<li>CapitalizedWords (又叫 CapWords，或者 CamelCase(骆驼命名法) – 如此命名因为字母看起来崎岖不平.有时候也叫 StudlyCaps。<ul>
+<li>注意：在 CapWords 使用缩略语时，所有缩略语的首字母都要大写。因此HTTPServerError比HttpServerError要好。</li>
+</ul>
+</li>
+<li>mixedCase (和上面不同的是首字母小写)</li>
+<li>Capitalized_Words_With_Underscores (丑陋无比！)</li>
+<li>也有种风格用独一无二的短前缀来将相似的命名分组。在 Python 里用的不是很多，但是为了完整性被提及。例如，os.stat()函数返回一个元组，通常有像st_mode，st_size，st_mtime等名字。（强调与 POSIX 系统调用的字段结构一致，有助于程序员对此更熟悉）</li>
+</ul>
+<p><strong>包和模块名</strong></p>
+<p>模块名应该短，且全小写。如果能改善可读性，可以使用下划线。Python 的包名也应该短，全部小写，但是不推荐使用下划线</p>
+<p><strong>类名</strong></p>
+<p>类名通常使用 CapWords 约定</p>
+<p><strong>异常名</strong></p>
+<p>因为异常应该是类，所以类名约定在这里适用。但是，你应该用Error作为你的异常名的后缀（异常实际上是一个错误）</p>
+<p><strong>全局变量名</strong></p>
+<p>(我们希望这些变量仅仅在一个模块内部使用)这个约定有关诸如此类的变量。</p>
+<p>若被设计的模块可以通过<code>from M import *</code>来使用，它应该使用<strong>all</strong>机制来表明那些可以可导出的全局变量，或者使用下划线前缀的全局变量表明其是模块私有的</p>
+<p><strong>函数名</strong></p>
+<p>函数名应该是小写的，有必要的话用下划线来分隔单词提高可读性</p>
+<p><strong>函数和方法参数</strong></p>
+<p>总是使用self作为实例方法的第一个参数。</p>
+<p>总是使用cls作为类方法的第一个参数。</p>
+<p>如果函数参数与保留关键字冲突，通常最好在参数后面添加一个尾随的下划线，而不是使用缩写或胡乱拆减。因此class_比clss要好。（或许避免冲突更好的方式是使用近义词）</p>
+<p><strong>方法名和实例变量</strong></p>
+<p>用函数名的命名规则：全部小写，用下划线分隔单词提高可读性。</p>
+<p>用一个且有一个前导的下划线来表明非公有的方法和实例变量。</p>
+<p>为了避免与子类变量或方法的命名冲突，用两个前导下划线来调用 Python 的命名改编规则。</p>
+<p>Python 命名改编通过添加一个类名：如果类Foo有一个属性叫<strong>a，它不能被这样Foo.</strong>a访问（执着的人可以通过这样Foo._Foo__a来访问）通常，双前导的下划线应该仅仅用来避免与其子类属性的命名冲突。</p>
+<p><strong>常量</strong></p>
+<p>常量通常是模块级的定义，全部大写，单词之间以下划线分隔。例如<code>MAX_OVERFLOW</code>和<code>TOTAL</code>.</p>
+<h2 id="公共和内部接口"><a href="#公共和内部接口" class="headerlink" title="公共和内部接口"></a>公共和内部接口</h2><p>保证所有公有接口的向后兼容性。用户能清晰的区分公有和内部接口是重要的。</p>
+<p>被认为是内部的接口，其包含的任何名称空间（包、模块或类）也被认为是内部的.</p>
+<h2 id="程序编写建议"><a href="#程序编写建议" class="headerlink" title="程序编写建议"></a>程序编写建议</h2><p>代码的编写方式不能对其它 Python 的实现（PyPy、Jython、IronPython、Cython、Psyco，诸如此类的）不利。</p>
+<p>例如，不要依赖于 CPython 在字符串拼接时的优化实现，<strong>像这种语句形式a += b和a = a + b。即使是 CPython（仅对某些类型起作用） 这种优化也是脆弱的，不是在所有的实现中都不使用引用计数。在库中性能敏感的部分，用’’.join形式来代替</strong> 这会确保在所有不同的实现中字符串拼接是线性时间的</p>
+<p>比较单例，像<code>None</code>应该用<code>is</code>或<code>is not</code>，从不使用<code>==</code>操作符.</p>
+<ul>
+<li>当你的真正用意是if x is not None的时候，当心if x这样的写法 – 例如，测试一个默认值为None的变量或参数是否设置成了其它值，其它值可能是那些布尔值为 false 的类型（如空容器）</li>
+</ul>
+<p>用<code>is not</code>操作符而不是<code>not ... is</code>虽然这两个表达式是功能相同的，前一个是更可读的，是首选.</p>
+<p>用富比较实现排序操作的时候，实现所有六个比较操作符（ <code>__eq__ 、 __ne__ 、 __lt__ , __le__, __gt__ , __ge__</code>）是更好的，而不是依赖其它仅仅运用一个特定比较的代码</p>
+<p>始终使用def语句来代替直接绑定了一个<code>lambda</code>表达式的赋值语句</p>
+<p>异常类应派生自<code>Exception</code>而不是<code>BaseException</code>。直接继承自<code>BaseException</code>是为<code>Exception</code>保留的，如果从<code>BaseException</code>继承，捕获到的错误总是错的.</p>
+<p>捕获异常时，尽可能使用明确的异常，而不是用一个空的<code>except:</code>语句</p>
+<p>坚持使用<code>return</code>语句。函数内的<code>return</code>语句都应该返回一个表达式，或者<code>None</code>。如果一个<code>return</code>语句返回一个表达式，另一个没有返回值的应该用<code>return None</code>清晰的说明，并且在一个函数的结尾应该明确使用一个<code>return</code>语句（如果有返回值的话）</p>
+<p>用字符串方法代替字符串模块.</p>
+<p>用<code>&#39;&#39;.startswith()</code>和<code>&#39;&#39;.endswith()</code>代替字符串切片来检查前缀和后缀.</p>
+<p>对象类型的比较应该始终使用<code>isinstance()</code>而不是直接比较</p>
+<p>对于序列（字符串、列表、元组）来说，空的序列为<code>False</code>.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#代码排版"><span class="toc-number">1.</span> <span class="toc-text">代码排版</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#每层缩进使用4个空格"><span class="toc-number">1.1.</span> <span class="toc-text">每层缩进使用4个空格.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空格是首选的缩进方法"><span class="toc-number">1.2.</span> <span class="toc-text">空格是首选的缩进方法.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制每行的最大长度为79个字符"><span class="toc-number">1.3.</span> <span class="toc-text">限制每行的最大长度为79个字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空行"><span class="toc-number">1.4.</span> <span class="toc-text">空行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编码"><span class="toc-number">1.5.</span> <span class="toc-text">编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#导入包"><span class="toc-number">1.6.</span> <span class="toc-text">导入包</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串引号"><span class="toc-number">2.</span> <span class="toc-text">字符串引号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表达式和语句中的空格"><span class="toc-number">3.</span> <span class="toc-text">表达式和语句中的空格</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">4.</span> <span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命名约定"><span class="toc-number">5.</span> <span class="toc-text">命名约定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公共和内部接口"><span class="toc-number">6.</span> <span class="toc-text">公共和内部接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序编写建议"><span class="toc-number">7.</span> <span class="toc-text">程序编写建议</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&text=PEP8代码风格指南"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&is_video=false&description=PEP8代码风格指南"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=PEP8代码风格指南&body=Check out this article: http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&title=PEP8代码风格指南"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/05/18/PEP8代码风格指南/&name=PEP8代码风格指南&description=&lt;p&gt;原文在&lt;a href=&#34;https://www.python.org/dev/peps/pep-0008/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;此&lt;/a&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

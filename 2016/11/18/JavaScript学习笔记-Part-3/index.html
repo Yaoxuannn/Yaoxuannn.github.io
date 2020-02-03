@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang=en>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="再探JS中的对象 &amp;amp;&amp;amp; JS的OOP编程">
+<meta name="keywords" content="学习笔记,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript学习笔记(Part 3)">
+<meta property="og:url" content="http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/index.html">
+<meta property="og:site_name" content="看多了会困">
+<meta property="og:description" content="再探JS中的对象 &amp;amp;&amp;amp; JS的OOP编程">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-21T03:17:26.374Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript学习笔记(Part 3)">
+<meta name="twitter:description" content="再探JS中的对象 &amp;amp;&amp;amp; JS的OOP编程">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>JavaScript学习笔记(Part 3)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/11/19/HTTP协议-part-two/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/11/18/HTTP协议-part-one/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&text=JavaScript学习笔记(Part 3)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&is_video=false&description=JavaScript学习笔记(Part 3)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JavaScript学习笔记(Part 3)&body=Check out this article: http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&name=JavaScript学习笔记(Part 3)&description=&lt;p&gt;再探JS中的对象 &amp;amp;&amp;amp; JS的OOP编程&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#6-再探JS中的对象"><span class="toc-number">1.</span> <span class="toc-text">6.再探JS中的对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-面向对象编程与继承"><span class="toc-number">2.</span> <span class="toc-text">7.面向对象编程与继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">**原型继承**</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.1.1.</span> <span class="toc-text">在ES6之后，JS又有了class继承的方式</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        JavaScript学习笔记(Part 3)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">看多了会困</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-11-18T12:30:04.000Z" itemprop="datePublished">2016-11-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-link" href="/tags/学习笔记/">学习笔记</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>再探JS中的对象 &amp;&amp; JS的OOP编程</p>
+<a id="more"></a>
+
+<h1 id="6-再探JS中的对象"><a href="#6-再探JS中的对象" class="headerlink" title="6.再探JS中的对象"></a>6.再探JS中的对象</h1><p>String转换：</p>
+<p><strong>用parseInt()或parseFloat()来转换任意类型到number；</strong></p>
+<p><strong>用String()来转换任意类型到string，或者直接调用某个对象的toString()方法</strong></p>
+<p><strong>String对象</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myStr = <span class="string">"This is a string."</span>;</span><br><span class="line">myStr.length;<span class="comment">//返回长度</span></span><br><span class="line">myStr.toUpperCase();</span><br><span class="line">myStr.toLowerCase();<span class="comment">//略 o▽o</span></span><br><span class="line">myStr.charAt(index);</span><br><span class="line">	myStr.charAt(<span class="number">0</span>)<span class="comment">//'T'</span></span><br><span class="line">myStr.indexOf(subString, startPos);<span class="comment">//返回指定字符的索引</span></span><br><span class="line">	myStr.indexOf(<span class="string">"i"</span>);<span class="comment">//2</span></span><br><span class="line">	myStr.indexOf(<span class="string">"i"</span>, <span class="number">3</span>);<span class="comment">//5</span></span><br><span class="line">	myStr.indexOf(<span class="string">"T"</span>, <span class="number">3</span>);<span class="comment">//0</span></span><br><span class="line">myStr.split(separator, limit);<span class="comment">//分割</span></span><br><span class="line">	myStr.split(<span class="string">" "</span>);<span class="comment">//Array['This','is','my','string']</span></span><br><span class="line">	myStr.split(<span class="string">" "</span>, <span class="number">2</span>);<span class="built_in">Array</span>[<span class="string">'This'</span>,<span class="string">'is'</span>]</span><br><span class="line">	myStr.split(<span class="string">""</span>);</span><br><span class="line">myStr.substring(startPos, stopPos);</span><br><span class="line">	myStr.substring(<span class="number">3</span>);<span class="comment">//"s is a string."</span></span><br><span class="line">	myStr.substring(<span class="number">3</span>,<span class="number">5</span>);<span class="comment">//"s"</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Math</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ceil()<span class="comment">//向上取整</span></span><br><span class="line">floor()<span class="comment">//向下取整</span></span><br><span class="line">round()<span class="comment">//四舍五入</span></span><br><span class="line">random()<span class="comment">//随机数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Date对象</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">now; <span class="comment">// Wed Jun 24 2015 19:49:22 GMT+0800 (CST)</span></span><br><span class="line">now.getFullYear(); <span class="comment">// 2015, 年份</span></span><br><span class="line">now.getMonth(); <span class="comment">// 5, 月份，注意月份范围是0~11，5表示六月(好迷=_=#)...</span></span><br><span class="line">now.getDate(); <span class="comment">// 24, 表示24号</span></span><br><span class="line">now.getDay(); <span class="comment">// 3, 表示星期三</span></span><br><span class="line">now.getHours(); <span class="comment">// 19, 24小时制</span></span><br><span class="line">now.getMinutes(); <span class="comment">// 49, 分钟</span></span><br><span class="line">now.getSeconds(); <span class="comment">// 22, 秒</span></span><br><span class="line">now.getMilliseconds(); <span class="comment">// 875, 毫秒数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>RegExp对象</strong><br>正则表达式相关参阅-&gt;&gt;<a href="http://deerchao.net/tutorials/regex/regex.htm" title="http://deerchao.net/tutorials/regex/regex.htm" target="_blank" rel="noopener">正则表达式30分钟教程</a></p>
+<p><strong>JSON对象(JavaScript Object Notation)</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">序列化</span><br><span class="line"><span class="keyword">var</span> kid = &#123;</span><br><span class="line">	name:<span class="string">"Justin"</span>,</span><br><span class="line">	age:<span class="number">20</span>,</span><br><span class="line">	gender:<span class="string">"male"</span>,</span><br><span class="line">	skills:[<span class="string">'Java'</span>,<span class="string">'JavaScript'</span>,<span class="string">'Python'</span>]</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">JSON</span>.stringify(kid);<span class="comment">//'&#123;"name":"Justin","age":20,"gender":male,"skills":["Java","JavaScript,"Python"]&#125;'</span></span><br><span class="line"><span class="built_in">JSON</span>.stringify(kid,[<span class="string">'name'</span>,<span class="string">'age'</span>],<span class="string">"	 "</span>);<span class="comment">//第二个参数用来筛选对象的键值，还可传入一个函数来优先处理对象的键值</span></span><br><span class="line"><span class="comment">//输出结果就像这样</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"name"</span>: <span class="string">"Justin"</span>,</span><br><span class="line">	<span class="string">"age"</span>: <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//传入函数时</span></span><br><span class="line"><span class="built_in">JSON</span>.stringify(kid,convert,<span class="string">"  "</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convert</span>(<span class="params">key,value</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">typeof</span> value === <span class="string">'string'</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> value.toUpperCase();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">反序列化</span><br><span class="line"><span class="built_in">JSON</span>.parse(<span class="string">"*JSON formated String*"</span>);</span><br><span class="line"><span class="built_in">JSON</span>.parse(<span class="string">"*JSON formated String*"</span>,*<span class="function"><span class="keyword">function</span>*)</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="7-面向对象编程与继承"><a href="#7-面向对象编程与继承" class="headerlink" title="7.面向对象编程与继承"></a>7.面向对象编程与继承</h1><blockquote>
+<p>不同于Java和C++，JavaScript中不区分Class(然而ES6有了Class继承…)和Instance，而是使用Prototype(原型)来实现面向对象。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//For instance：(创建对象方法一)</span></span><br><span class="line"><span class="comment">//创建原型对象Student</span></span><br><span class="line"><span class="keyword">var</span> Student = &#123;</span><br><span class="line">	name:<span class="literal">null</span>,</span><br><span class="line">	test:<span class="string">"A"</span>,</span><br><span class="line">	grade:<span class="string">"A"</span>,</span><br><span class="line">	major:<span class="string">"CS"</span>,</span><br><span class="line">	age:<span class="number">20</span>,</span><br><span class="line">	study:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">"正在学习"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//创建基于原型对象Student的新对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createStudent</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(Student);</span><br><span class="line">	obj.name = name;</span><br><span class="line">	<span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xiaoming = createStudent(<span class="string">"小明"</span>);</span><br><span class="line">xiaoming.study();<span class="comment">//"小明正在学习"</span></span><br><span class="line">xiaoming._proto_ === Student;<span class="comment">//应该返回true才对，实际测试中却返回了false? Why?(原因GET：这里应该是Student.prototype.)</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<pre><code>//E.g 1:
+var arr = [1,2,3];
+//原型链是:arr---&gt;Array.prototype---&gt;Object.prototype---&gt;null</code></pre><hr>
+<pre><code>//E.g 2: 函数也是一个对象，So：
+function foo(){
+    return 0;
+}
+//原型链是:foo---&gt;Function.prototype---&gt;Object.prototype---&gt;null</code></pre><hr>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//(创建对象方法二)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.hello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">		alert(<span class="string">"Hello,"</span> + <span class="keyword">this</span>.name + <span class="string">"!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//看起来就像个普通函数对吗？</span></span><br><span class="line"><span class="comment">//接下来，用new来调用这个函数</span></span><br><span class="line"><span class="keyword">var</span> xiaoming = <span class="keyword">new</span> Student(<span class="string">"小明"</span>);</span><br><span class="line">xiaoming.name;<span class="comment">//"小明"</span></span><br><span class="line">xiaoming.hello();<span class="comment">//Hello，小明！</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xiaohong = <span class="keyword">new</span> Student(<span class="string">"小红"</span>);</span><br><span class="line">xiaohong.name;</span><br><span class="line">xiaohong.hello();</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>此时我们就认为xiaohong和xiaoming继承自Student</p>
+</blockquote>
+<hr>
+<p>一个小问题：<br><code>xiaohong.hello() === xiaoming.hello(); //false</code><br>更多情况下，我们是希望他们能共享这个函数的。<br>如果想让对象共享同一个函数 只要把函数移动到这些对象的原型上就行了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//(创建对象方法二*改)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Student.prototype.hello = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	alert(<span class="string">'Hello,'</span> + <span class="keyword">this</span>.name + <span class="string">"！"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这样<br><code>xiaohong.hello() === xiaoming.hello(); //返回true</code></p>
+<h4>**原型继承**</h4>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">F.prototype = Student.prototype;</span><br><span class="line">PrimaryStudent.prototype = <span class="keyword">new</span> F();</span><br><span class="line">PrimaryStudent.prototype.constructor = PrimaryStudent;</span><br><span class="line">PrimaryStudent.uber = Student.prototype;</span><br><span class="line"><span class="comment">//可以将以上代码封装成extends方法</span></span><br></pre></td></tr></table></figure>
+
+<h5>在ES6之后，JS又有了class继承的方式</h5>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(name)&#123;</span><br><span class="line">        <span class="keyword">super</span>(name);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    say() &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">"Hello, "</span> + <span class="keyword">this</span>.name + <span class="string">"!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Copyright © Justin13</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#6-再探JS中的对象"><span class="toc-number">1.</span> <span class="toc-text">6.再探JS中的对象</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-面向对象编程与继承"><span class="toc-number">2.</span> <span class="toc-text">7.面向对象编程与继承</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">**原型继承**</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#null"><span class="toc-number">2.0.0.1.1.</span> <span class="toc-text">在ES6之后，JS又有了class继承的方式</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&text=JavaScript学习笔记(Part 3)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&is_video=false&description=JavaScript学习笔记(Part 3)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JavaScript学习笔记(Part 3)&body=Check out this article: http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&title=JavaScript学习笔记(Part 3)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2016/11/18/JavaScript学习笔记-Part-3/&name=JavaScript学习笔记(Part 3)&description=&lt;p&gt;再探JS中的对象 &amp;amp;&amp;amp; JS的OOP编程&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Yaoxuan Wei
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
