@@ -20,9 +20,9 @@
 <meta property="og:image" content="http://files.jb51.net/file_images/article/201609/2016091516460813.png">
 <meta property="og:image" content="http://files.jb51.net/file_images/article/201609/2016091516460814.png">
 <meta property="og:image" content="http://files.jb51.net/file_images/article/201609/2016091516460815.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/nginx.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/MindMap/Nginx_mind.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.392Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/nginx.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/MindMap/Nginx_mind.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.264Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx初识和Web服务配置">
 <meta name="twitter:description" content="*Engine-X  not  en-jinks. *">
@@ -221,7 +221,7 @@
 <p>支持url, rewrite, 路径别名, 基于IP和用户的访问控制</p>
 <p>支持速率限制, 支持并发限制</p>
 <p>来看看Nginx的架构特性:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/nginx.png" alt="nginx"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/nginx.png" alt="nginx"></p>
 <p>一个Master进程生成多个Worker进程. 下层可以看到缓存manger和loader.</p>
 <p>之前说过了Nginx是基于模块的, 那么核心模块是什么? </p>
 <p>核心模块被叫做<strong>Standard HTTP modules</strong>, 除了核心模块, 还有Optional HTTP modules, Mail modules以及3rd party modules.</p>
@@ -425,7 +425,7 @@
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">keepalive_timeout</span> <span class="comment">#; # 长连接的超时时长</span></span><br><span class="line">keepalive_requests <span class="comment">#; # 一个长连接上所能够允许的请求的</span></span><br><span class="line">keepalive_disable [msie6|safari|<span class="literal">none</span>]; <span class="comment"># 为指定类型的UserAgent禁用长连接</span></span><br><span class="line"><span class="attribute">tcp_nodelay</span> <span class="literal">on</span>|<span class="literal">off</span>; <span class="comment"># 是否对长连接使用TCP_NODELAY选项</span></span><br><span class="line"><span class="attribute">client_header_timeout</span> <span class="comment">#; # 读取http请求报文首部的超时时长</span></span><br><span class="line">client_body_timeout <span class="comment">#; # 读取http请求报文主体的超时时长</span></span><br><span class="line">send_timeout <span class="comment">#; 发送响应报文的超时</span></span><br></pre></td></tr></table></figure>
 
 <p>更多的选项以后再说道反向代理的时候再说.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/MindMap/Nginx_mind.png" alt="MindMap/Nginx_mind.png"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/MindMap/Nginx_mind.png" alt="MindMap/Nginx_mind.png"></p>
 
   </div>
 </article>

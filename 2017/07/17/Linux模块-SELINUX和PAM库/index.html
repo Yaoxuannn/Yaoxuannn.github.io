@@ -16,9 +16,9 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://docs.oracle.com/cd/E26926_01/html/E25912/figures/pam.overview.1.png">
 <meta property="og:image" content="http://linux.vbird.org/linux_basic/0410accountmanager//pam-2.gif">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/selinux1.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/selinux2.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.382Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/selinux1.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/selinux2.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux模块-SELinux和PAM库">
 <meta name="twitter:description" content="SELinux (Secure Enhanced Linux)PAM (Pluggable Authentication Modules)">
@@ -314,12 +314,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW html]<span class="comment"># ps auxZ | grep httpd</span></span><br><span class="line">system_u:system_r:httpd_t:s0    root      2440  0.0  0.1 228204  5104 ?        Ss   03:38   0:00 /usr/sbin/httpd -DFOREGROUND</span><br><span class="line">system_u:system_r:httpd_t:s0    apache    2441  0.0  0.0 228340  3744 ?        S    03:38   0:00 /usr/sbin/httpd -DFOREGROUND</span><br><span class="line">[root@WWW html]<span class="comment"># ll -Z</span></span><br><span class="line">drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 .</span><br><span class="line">drwxr-xr-x. root root system_u:object_r:httpd_sys_content_t:s0 ..</span><br><span class="line">-rw-r--r--. root root unconfined_u:object_r:httpd_sys_content_t:s0 index.html</span><br><span class="line"><span class="comment"># 显然这是个httpd的子类型</span></span><br><span class="line">[root@WWW html]<span class="comment"># ll -Z ~/.bashrc</span></span><br><span class="line">-rw-r--r--. root root system_u:object_r:admin_home_t:s0 /root/.bashrc</span><br><span class="line"><span class="comment"># root用户的家目录内是这样的</span></span><br></pre></td></tr></table></figure>
 
 <p>现在直接访问的样子是这样的:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/selinux1.png" alt="selinux1"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/selinux1.png" alt="selinux1"></p>
 <p>好, 一切正常, 那么现在将他改成root家目录下的类型:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW html]<span class="comment"># chcon -t admin_home_t index.html</span></span><br></pre></td></tr></table></figure>
 
 <p>刷新页面!</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/selinux2.png" alt="selinux2"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/selinux2.png" alt="selinux2"></p>
 <p>出现了403! httpd进程没有访问index.html的权限了.</p>
 <blockquote>
 <p>如果你的页面没有发生变化, 就检查一下SELinux的开启状态(getenforce), 并且注意, 你的SELinux的状态必须是1才行.</p>

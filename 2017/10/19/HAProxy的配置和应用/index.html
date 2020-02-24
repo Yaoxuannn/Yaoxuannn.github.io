@@ -14,14 +14,14 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="说完了Nginx, 接下来就来看看另外一个性能优越的load balancer – HAProxy吧.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/cookiereq.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/cookieres.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/HAProxy_mind.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.369Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cookiereq.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cookieres.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/HAProxy_mind.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HAProxy的配置和应用">
 <meta name="twitter:description" content="说完了Nginx, 接下来就来看看另外一个性能优越的load balancer – HAProxy吧.">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/cookiereq.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cookiereq.png">
     
     
         
@@ -287,12 +287,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">backend webservers</span><br><span class="line">    balance     roundrobin</span><br><span class="line">    cookie SERVERID insert</span><br><span class="line">    server      static1 192.168.206.21:80 check cookie web1</span><br><span class="line">    server      static2 192.168.206.22:80 check cookie web2</span><br></pre></td></tr></table></figure>
 
 <p>然后我们重启服务, 第一次访问:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/cookiereq.png" alt="cookiereq"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cookiereq.png" alt="cookiereq"></p>
 <p>可以看到服务器返回了一个设置Cookie的字段, 接着第二次访问:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/cookieres.png" alt="cookieres"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cookieres.png" alt="cookieres"></p>
 <p>这个时候, 我们无论访问什么URL都会被带到这个服务器上, 因为我们是带着Cookie访问的.</p>
 <p>很简单吧.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/HAProxy_mind.png" alt="HAProxy_mind.png"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/HAProxy_mind.png" alt="HAProxy_mind.png"></p>
 
   </div>
 </article>

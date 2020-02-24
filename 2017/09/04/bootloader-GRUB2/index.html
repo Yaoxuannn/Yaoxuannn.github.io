@@ -14,13 +14,13 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="之前说过了grub的0.X版本, 而新版本是相当于重构了整个bootloader. 来学习一下.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/img.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/img.png">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/733013/201706/733013-20170629150034914-1219800403.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.355Z">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bootloader-GRUB2">
 <meta name="twitter:description" content="之前说过了grub的0.X版本, 而新版本是相当于重构了整个bootloader. 来学习一下.">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/img.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/img.png">
     
     
         
@@ -186,7 +186,7 @@
 <p>现在的磁盘设备，一般都会有分区边界对齐的性能优化提醒，所以第一个分区可能会自动从第1MB处开始创建的.</p>
 <h3 id="img文件"><a href="#img文件" class="headerlink" title="img文件"></a>img文件</h3><p>img文件是GRUB2的关键了, 也是他的核心. 我们来说一下这些文件的作用和GRUB legacy中的stage的对应关系.</p>
 <p>grub2生成了好几个img文件，有些分布在/usr/lib/grub/i386-pc目录下，有些分布在/boot/grub2/i386-pc目录下, </p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/img.png" alt="img"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/img.png" alt="img"></p>
 <p>事实上, 我们的core.img是动态生成的.而其他的img则存在在/usr/lib/grub/i386-pc/下. 在安装grub2的时候 boot.img会拷贝一份到/boot/grub2/i386-pc/目录下</p>
 <p><img src="http://images2015.cnblogs.com/blog/733013/201706/733013-20170629150034914-1219800403.png" alt="imgs"></p>
 <p>上图描述了各个模块的关系和层级.</p>

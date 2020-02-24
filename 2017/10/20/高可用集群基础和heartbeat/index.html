@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="继续探索Linux高可用集群">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/ha.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.436Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ha.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高可用集群和heartbeat">
 <meta name="twitter:description" content="继续探索Linux高可用集群">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/ha.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ha.png">
     
     
         
@@ -183,7 +183,7 @@
 <p>这样再加上我们的CRM承上启下, 构成一个资源和决策的全貌图. 以上就是我们的高可用集群的一个基础概念了. </p>
 <p>这样就完了? 当然不, 其实在我们的CRM上面还有一个层面. 这个层面的存在意义是什么? 先来想这样的问题, 我们启动一个服务就是使用<code>systemctl start/stop XX.service</code>或者<code>service XX start/stop</code>. 但是对于文件系统 , 对于IP地址, 我们就不能进行start/stop了. 如果每一资源都由管理员手动告诉CRM怎么启动, 挂载, 设置. 那也太麻烦了. 所以我们抽象出一个新的层次, 也就是<strong>LRM</strong>. local resource manager. 这个层面一般都是集群服务提供的. 但是他仍然不能直接做出资源启动关闭的决策, 所以向上再加一个层次, 也就是RA, resource agent. 这个代理能够实现对资源的管理,  一般RA的实现都是通过脚本. 这些脚本其实就是RA.</p>
 <p>也就是这样的架构:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/ha.png" alt="ha"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ha.png" alt="ha"></p>
 <p>说完了整个组成, 之前关于毙掉, <em>补刀</em>机制 我们没怎么详说, 现在来补充一下, 在高可用集群中, 这种机制被称作<strong>资源隔离</strong>机制. 隔离也是存在级别的, 比如:</p>
 <ul>
 <li>节点隔离 , 最彻底的一种机制: STONITH ( Shooting The Other Node In The Head ) 典型的方案是断电, 通过电源交换机</li>

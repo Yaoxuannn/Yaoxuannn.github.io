@@ -14,13 +14,13 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Python简陋(伪)SSH的踩坑总结😶">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/getpass.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/popen.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.410Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/getpass.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/popen.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python简陋SSH的踩坑总结(伪)">
 <meta name="twitter:description" content="Python简陋(伪)SSH的踩坑总结😶">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/getpass.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/getpass.png">
     
     
         
@@ -166,7 +166,7 @@
 
 <p>其中的stream是在控制prompt输出的地方(默认就是当前的tty, 默认读的也就是/dev/tty), prompt就是提示语的内容了.😐</p>
 <p>使用后的效果就是:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/getpass.png" alt="getpass"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/getpass.png" alt="getpass"></p>
 <p>基本上效果和Linux的密码输入是一个样子的.</p>
 <h1 id="数据库连接层"><a href="#数据库连接层" class="headerlink" title="数据库连接层"></a>数据库连接层</h1><hr>
 <h2 id="Ques-2-数据库语句总是错误…"><a href="#Ques-2-数据库语句总是错误…" class="headerlink" title="Ques 2: 数据库语句总是错误…"></a>Ques 2: 数据库语句总是错误…</h2><p>犯得很蠢的错…不过总觉得还是有必要记录一下的..</p>
@@ -195,7 +195,7 @@
 <p>一般使用的话, 只需要向<code>popen</code>传送一个参数<code>cmd</code>就行了. 这样就会返回指令处理的结果对象(<code>&lt;class &#39;os._wrap_close&#39;&gt;</code>), 接着直接进行读(<code>read</code>, <code>readline</code>, 什么的)操作就行了, 这会自动调用这个对象的_stream属性, 也就是和你打开文件时获得的文件对象的同样的类(<code>&lt;class &#39;_io.TextIOWrapper&#39;&gt;</code>).</p>
 <p>但是,在实际进行测试的时候发现了问题,<code>popen</code>会将结果输出到对象中, 但是如果命令发生错误, <code>popen</code>会直接将<code>stderr</code>输出, 也就是屏幕., 如果非要捕获的话, 就要在命令后面加上各种<code>&gt;&gt;</code>管道, 看起来很不舒服, 还要再进行管道流的提取, 很麻烦.</p>
 <p>所以.在这种情况下, 就要选择<code>subprocess</code>模块下的<code>Popen</code><br>方法了.然而, 在查阅文档的时候发现, <code>os.popen</code>的实现就是依靠<code>subprocess.Popen</code>, 当然底层还是<code>C</code>的函数<code>popen</code>.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/popen.png" alt="popen"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/popen.png" alt="popen"></p>
 <p>之所以选择<code>subprocess.Popen</code>,就是因为他能方便的进行重定向.<code>subprocess.Popen</code>的方法签名是:</p>
 <blockquote>
 <p><code>subprocess.Popen(args, bufsize=-1, executable=None, stdin=None, stdout=None, stderr=None, preexec_fn=None, close_fds=True, shell=False, cwd=None, env=None, universal_newlines=False, startupinfo=None, creationflags=0, restore_signals=True, start_new_session=False, pass_fds=(), *, encoding=None, errors=None)</code></p>

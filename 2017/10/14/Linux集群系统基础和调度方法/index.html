@@ -14,21 +14,21 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="从今天开始学习Linux集群知识 !">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lamp.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lvs_ip.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lvs-dr.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lvs_dr.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lvs-tun.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lva_nat_lab.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lvs_dr_lab.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lvs_arp.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/lvs_dr_res.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/MindMap/Cluster1_mind.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.390Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lamp.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_ip.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs-dr.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_dr.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs-tun.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lva_nat_lab.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_dr_lab.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_arp.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_dr_res.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/MindMap/Cluster1_mind.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.257Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux集群系统基础和调度方法">
 <meta name="twitter:description" content="从今天开始学习Linux集群知识 !">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/lamp.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lamp.png">
     
     
         
@@ -160,7 +160,7 @@
 <a id="more"></a>
 
 <h2 id="集群-Cluster"><a href="#集群-Cluster" class="headerlink" title="集群 Cluster"></a>集群 Cluster</h2><p>什么是一个集群啊? 或者说为什么需要集群啊? 首先我们先来从一个普通的LAMP/LNMP看:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/lamp.png" alt="lamp"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lamp.png" alt="lamp"></p>
 <p>我们的httpd是一个前端服务器同时也是一个反向代理服务器, 也就是说所有的请求都要经过它. 当请求的数量就很大的时候, httpd就会有点吃不消了. 除此之外, 我们说说后面的动态资源– php. 动态资源一般只有20%的请求. 由于处理起来是需要时间的, 所以这个的最大并发量也是有一个限制的, 甚至有可能前端服务器还没有到达瓶颈, 后端服务已经承载不住了. 当超出了之后, 整体的性能也会急剧下降.</p>
 <p>于是在这样的场景下, 我们有两种扩展的方式:</p>
 <ul>
@@ -214,7 +214,7 @@
 
 <p>也看到了 这里使用的是CentOS7做的实验. 可以很清楚的看出来, LVS功能是开启的, 支持诸多协议: TCP, UDP, AH_ESP, ESP~ 而且他的负载均衡算法都是编译成了模块存在的. </p>
 <p>在使用LVS之前, 我们先来看一下整个LVS的工作架构, 有关一些名词等等:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/lvs_ip.png" alt="lvs_ip"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_ip.png" alt="lvs_ip"></p>
 <h3 id="LVS的类型"><a href="#LVS的类型" class="headerlink" title="LVS的类型"></a>LVS的类型</h3><p>然后看看LVS的类型, 有四种:</p>
 <ul>
 <li>lvs-nat: 其实就是多目标的DNAT(iptables)</li>
@@ -226,12 +226,12 @@
 <p>不管怎么说, 我们要在director中, (准确的说是LVS专用的), 维护一张nat转换表.</p>
 <p>如果基于nat的方式, 显然RS和DIP应该使用私网地址, 且RS的网关需要指向DIP. 另外请求和响应报文都要经由director转发, 这样极高的负载的场景中, director将会成为系统瓶颈. diretor还要支持端口映射才行.</p>
 <h4 id="lvs-dr"><a href="#lvs-dr" class="headerlink" title="lvs-dr"></a>lvs-dr</h4><p>接着我们看一下lvs-dr, 这种模型是LVS默认使用的, 在大规模场景中经常使用. 而且也是一种较难理解的模型.</p>
-<p>这个的原理是<strong>修改请求报文的目标MAC地址</strong>进行转发. 在说这个之前, 我们要先来看一下这个模型的架构图:<br><img src="http://q4fo85yz7.bkt.gdipper.com/lvs-dr.png" alt="lvs-dr"></p>
+<p>这个的原理是<strong>修改请求报文的目标MAC地址</strong>进行转发. 在说这个之前, 我们要先来看一下这个模型的架构图:<br><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs-dr.png" alt="lvs-dr"></p>
 <p>这里我们把director, real server都连接到一个交换机上(此时他们都只需要一个网卡), 首先先来回忆一下用户的请求是怎么到达我们的服务器的:</p>
 <p>首先, 用户那边将包的目的地址设置成为我们的服务器的公网IP地址, 接着经过变换, 重重路由和网关, 请求到达图中的最后一个路由, 我们知道, 每一次经过一个路由, 包的源MAC地址都会变成那个路由的MAC地址对吗? 所以当最后一个路由想要将包发送过来的时候, 这个时候转换成为本地网络通信. 也就是说从图中右边那个接口出来的包头前需要再次附着一个MAC头(源MAC和目的MAC). 源MAC就是路由接口的那个MAC了BUT. 路由器怎么知道目的MAC是多少呢? 先来想下他知道什么. 对哦, 目的IP. 所以这个时候就可以做ARP广播了, 接着只有director发出回应, 路由器得到MAC地址, 完成通信.</p>
 <p>那么, 接着过程是这样走的, 请求发到director之后, director从和都连接在一个交换机上的RS中挑选一台发出响应, 过程结束.</p>
 <p>也就是说:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/lvs_dr.png" alt="lvs_dr"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_dr.png" alt="lvs_dr"></p>
 <p>这样的一个过程, 明确的一点是, 响应报文不会经过director了, 由RS直接发出. 这样会存在一个致命的问题. 源IP地址不是VIP了. 怎么办? 处理方法是这样的: <strong>每一个RS和Director的地址是一样的, 都是VIP.</strong> </p>
 <p>问题就这样解决了? 当然不是, 这会引入一个新的问题. 当路由器做ARP广播的时候, 所有的主机都给了响应, 这怎么行? </p>
 <p>其实, 我们的解决方法是这样的: 其实每一个主机都有两个IP, 对于director来说, 他有一个VIP和一个DIP, 而每一个RS也有一个VIP, 还有一个RIP. 这样当请求到达director的时候, 他会进行ARP广播获得挑选出来的那个RIP的主机的MAC地址, 接着IP包头依然是CIP-&gt;VIP, 封装MAC帧的时候, 将目的MAC封装成挑选出来的主机的那个MAC, 交换机是而二层设备, 只能转发帧, 所以就将请求报文发向挑选好的RS, RS收到报文之后解开MAC帧, 查看内部的IP包头, 源IP: CIP, 目的IP: VIP, VIP是不是自己的IP? <strong>是的</strong> !所以进入用户空间进行处理~.</p>
@@ -256,7 +256,7 @@
 <p>以上就是最常见的两种集群类型啦, 接着我们再来看看剩下的:</p>
 <h4 id="lvs-tun"><a href="#lvs-tun" class="headerlink" title="lvs-tun"></a>lvs-tun</h4><p>先来想想之前的两种, 他们都有一个共同的缺点, director和RS之间的距离不可能很长, 对嘛? 甚至第二种连路由器都不能连接.</p>
 <p>而tun就可以解决这样的问题, 我们不修改请求报文的IP首部, 而是通过在原有的ip首部之外, 再封装一个ip首部. 大体的原理就是这样. 其实只要理解了之前的 理解这个tun就不难了:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/lvs-tun.png" alt="lvs-tun"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs-tun.png" alt="lvs-tun"></p>
 <p>其实就有点像是加强版的 lvs-dr 了. 只不过由于是走IP隧道, 所以要求director和RS需要支持IP隧道协议. RS主机依然是物理网卡RIP, lo接口VIP的模式, 接着响应的时候就会有RS直接一口气发向User.</p>
 <p>但是这样其实也会有一个问题, 就是<strong>MTU</strong>. 当然这是所有隧道的问题, 由于包头增大(多了一个IP包头[20字节]), 导致MTU相对来说不够就会进行<strong>IP分组分片操作</strong>.</p>
 <h4 id="lvs-fullnat"><a href="#lvs-fullnat" class="headerlink" title="lvs_fullnat"></a>lvs_fullnat</h4><p>最后一个full-nat , 就是director同时修改源地址和目标IP. 怎么搞的呢? 其实就是在进去的时候把源IP换一下, 出去的时候把目的IP和源IP都换一下.</p>
@@ -302,7 +302,7 @@
 <p>基本上大写选项都是在管理集群服务的, 而小写选项都是在管理集群服务中的RS. 而且这个玩意也有一个save和一个restore.</p>
 <h2 id="构建LVS集群"><a href="#构建LVS集群" class="headerlink" title="构建LVS集群"></a>构建LVS集群</h2><p>终于开始了, 来亲手构造一个nat和dr模型的集群吧.</p>
 <h3 id="NAT模型"><a href="#NAT模型" class="headerlink" title="NAT模型"></a>NAT模型</h3><p>首先来看一下我们的实验拓扑图:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/lva_nat_lab.png" alt="lva_nat_lab"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lva_nat_lab.png" alt="lva_nat_lab"></p>
 <p>由于使用Vmware, 所以这里使用建立不同的虚拟网络来做隔离. 信息图中已经很明白了, </p>
 <p>现在先来是构建环境, 先要把网络拓扑搭建完成. </p>
 <p>接着就开启后端两个服务器的httpd服务, 并且配置默认页面(先设置成为不同的可区分的页面).</p>
@@ -358,13 +358,13 @@
 <p>arp_announce这个选项有三个值: 0, 1, 2. 默认值是0, 表示将自己所有的IP进行通告.  显然我们不能使用这个值. 1表示尽量避免不把本机除了接口网段以外的网络进行通告, 但是这是<strong>尽量</strong>. 所以也不启用. 最后是2这个值, 意味, 始终使用最佳本地地址. 这才是我们所使用的, 不将自己的lo上的IP通告出去.</p>
 <p>arp_ignore有很多值, 我们来看看. 首先还是默认值0, 就是如果接收到自己本地的IP的查询就提供. 接着是1, 只有询问到的地址正是自己配置在这个接口上的地址的时候, 才进行回应. 这正是我们所需要的. 还有2-8,  不过既然都找到了合适的值, 就略了.</p>
 <p>最终, 我们需要: arp_ignore = 1, arp_announce = 2.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/lvs_dr_lab.png" alt="lvs_dr_lab"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_dr_lab.png" alt="lvs_dr_lab"></p>
 <p>还是惯例, 我现在先去配置环境啦~ 这里关于虚拟接口的设定在之前的网络配置中也是说过的.</p>
 <p>但是这里要插一句, 我们是应该先配置real server的lo接口的IP地址呢? 还是先进行参数配置呢? 当然是先配置参数啦. 原因很简单的.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node2 ~]<span class="comment"># echo 1 &gt; /proc/sys/net/ipv4/conf/all/arp_ignore </span></span><br><span class="line">[root@VM-node2 ~]<span class="comment"># echo 2 &gt; /proc/sys/net/ipv4/conf/all/arp_announce</span></span><br></pre></td></tr></table></figure>
 
 <p>配置完成了之后, 找一台位于同于网络的主机( 如果你桥接的话, 就使用物理机就行了. ), 分别去ping一下director的vip和dip. 不出意外的话, 查看arp表的时候, MAC应该是一样的:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/lvs_arp.png" alt="lvs_arp"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_arp.png" alt="lvs_arp"></p>
 <p>接下来就可以开启Web服务了, 并且这里要使用rip才行.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node1 ~]<span class="comment"># curl http://192.168.206.21</span></span><br><span class="line">&lt;h1&gt;It works! (From node2)&lt;/h1&gt;</span><br><span class="line">[root@VM-node1 ~]<span class="comment"># curl http://192.168.206.22</span></span><br><span class="line">&lt;h1&gt;It works! (From node3)&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
 
@@ -377,7 +377,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node2 ~]<span class="comment"># route add -host 192.168.206.10/32 dev lo:0</span></span><br><span class="line">[root@VM-node3 ~]<span class="comment"># route add -host 192.168.206.10/32 dev lo:0</span></span><br></pre></td></tr></table></figure>
 
 <p>接着就可以了: ( 注意iptables )</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/lvs_dr_res.png" alt="lvs_dr_res"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_dr_res.png" alt="lvs_dr_res"></p>
 <h2 id="LVS的防火墙标记和Session绑定"><a href="#LVS的防火墙标记和Session绑定" class="headerlink" title="LVS的防火墙标记和Session绑定"></a>LVS的防火墙标记和Session绑定</h2><p>我们之前是不是漏了一个-f参数呀? 当时说这个是叫做防火墙标记的东西. 其实在我们的数据包到达LVS之前, 他还是经过了PREROUTING的. 而且我们还说过, LVS是工作在INPUT上的, 所以也就是说, LVS发生在PREROUTING之后, 这样我们还可以通过在PREROUTING上对某个特定的数据包进行mangle, 也就是拆开之后打上标记再安装回去, 这个标记就是防火墙标记.  在iptables的扩展TARGET中, 有一个就叫做<code>MARK</code> 该扩展能用来实现对报文加上标记从而实现诸多辨识功能.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">MARK</span><br><span class="line">    This target is used to <span class="built_in">set</span> the Netfilter mark value associated with the packet.  It can, <span class="keyword">for</span> example, be used <span class="keyword">in</span>  conjunction  with  routing  based  on  fwmark</span><br><span class="line">    (needs iproute2). If you plan on doing so, note that the mark needs to be <span class="built_in">set</span> <span class="keyword">in</span> the PREROUTING chain of the mangle table to affect routing.  The mark field is</span><br><span class="line">    32 bits wide.</span><br><span class="line"></span><br><span class="line">    --<span class="built_in">set</span>-xmark value[/mask]</span><br><span class="line">           Zeroes out the bits given by mask and XORs value into the packet mark (<span class="string">"nfmark"</span>). If mask is omitted, 0xFFFFFFFF is assumed.</span><br><span class="line"></span><br><span class="line">    --<span class="built_in">set</span>-mark value[/mask]</span><br><span class="line">           Zeroes out the bits given by mask and ORs value into the packet mark. If mask is omitted, 0xFFFFFFFF is assumed.</span><br></pre></td></tr></table></figure>
 
@@ -415,7 +415,7 @@
 <p>另外, 如果我们的后端real server出现问题, 首先还是做双份, 但是这样就会变成整个的双份. 还可以再开一只主机, 同来充当冗余, 只要有主机宕掉, 就用它来顶替. 但是这样是需要考虑数据的存储问题. 还可以考虑director进行后端主机的健康状态检查, 只要发现有主机出现问题, 告警并且将该主机从调度列表中剔除, 完成自动的上下线. 那么, 如何进行健康状态检查呢?  首先我们想到了ping, 但是这样不能说明服务是OK的, 那么就考虑进行端口扫描, 比如使用nmap这样的来扫描, 但是端口响应了, 也不能说资源是OK的, 所以干脆直接对资源进行请求好了, 由此, 我们可以从IP层, 传输层, 应用层进行检查. 检查层次越高, 消耗越大, 但是精度也越高, 这个就要根据具体的业务来说了.</p>
 <p>除了检查的方式 我们还需要考虑检查的频度以及状态判断. 多少时间检查一次呢? 如何才会判定一个主机是宕机了呢? 会出现误判断呢?</p>
 <p>就先这样啦~</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/MindMap/Cluster1_mind.png" alt="MindMap/Cluster1_mind.png"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/MindMap/Cluster1_mind.png" alt="MindMap/Cluster1_mind.png"></p>
 
   </div>
 </article>

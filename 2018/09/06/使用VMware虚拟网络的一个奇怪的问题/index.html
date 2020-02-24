@@ -14,24 +14,24 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="问题已经解决清楚, 下面记录的是我试图解决的一些过程. 顺便再来分享下过程中学习到的VMware各种上网模式的一些拓扑和原理">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/vmware_conf.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/ipconfig_conf.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/centos_conf.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/centos-ifcfg_conf.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/nmcli_conf.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/netadapter_conf.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/ping1_result.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/ping2_result.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/Annotation.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/win_info.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/vmware_hostonly.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/vmware_nat.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/vmware_bridge.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.421Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_conf.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ipconfig_conf.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/centos_conf.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/centos-ifcfg_conf.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/nmcli_conf.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/netadapter_conf.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ping1_result.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ping2_result.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Annotation.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/win_info.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_hostonly.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_nat.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_bridge.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VMware的虚拟网络拓扑原理">
 <meta name="twitter:description" content="问题已经解决清楚, 下面记录的是我试图解决的一些过程. 顺便再来分享下过程中学习到的VMware各种上网模式的一些拓扑和原理">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/vmware_conf.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_conf.png">
     
     
         
@@ -166,46 +166,46 @@
 
 <h2 id="从这个奇怪的问题切入"><a href="#从这个奇怪的问题切入" class="headerlink" title="从这个奇怪的问题切入"></a>从这个奇怪的问题切入</h2><p><strong>大前提: 宿主机连入Internet. 基本上的每一次操作都重启服务和虚拟机.</strong></p>
 <p>问题是这样子的,  当前我的VMware虚拟网络配置是:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/vmware_conf.png" alt="vmware_conf"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_conf.png" alt="vmware_conf"></p>
 <p>如你所见, 配置的IP地址段是<code>192.168.16.2-192.168.16.254</code>. 并且使用nat方式.</p>
 <p>在命令行中能查看到这个虚拟网卡的相关信息, 能看到它的MAC地址是: <code>00-50-56-C0-00-08</code>.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/ipconfig_conf.png" alt="ipconfig_conf"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ipconfig_conf.png" alt="ipconfig_conf"></p>
 <p>接下来 我给我的CentOS7主机所配置的网卡就是上述的这一张, 如你所见:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/centos_conf.png" alt="centos_conf"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/centos_conf.png" alt="centos_conf"></p>
 <p>而主机的配置也是标准的配置文件 但是没有声明<code>HWADDR</code>, 在NetworkManager的管理:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/centos-ifcfg_conf.png" alt="centos-ifcfg_conf"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/centos-ifcfg_conf.png" alt="centos-ifcfg_conf"></p>
 <p>接下来一系列看起来很奇怪的事情就发生了.</p>
 <p>首先我们通过tty登录进虚拟机, 查看下当前的一些网络属性:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/nmcli_conf.png" alt="nmcli_conf"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/nmcli_conf.png" alt="nmcli_conf"></p>
 <p>可以看到 当前的网关地址<code>192.168.16.1</code>对应的网卡地址(MAC)是<code>00-50-56-f8-7b-b1</code>. 而本机的MAC地址是<code>00-0c-29-d6-b2-26</code>. </p>
 <blockquote>
 <p>这里有一点疑问:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/netadapter_conf.png" alt="netadapter_conf"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/netadapter_conf.png" alt="netadapter_conf"></p>
 <p>我明明配置的本机网卡MAC地址是上图那样子的, 可是结果却不是 不知道是为什么.</p>
 </blockquote>
 <p>接着我们自然是想要测试一下是否可以连通Internet:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/ping1_result.png" alt="ping1_result"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ping1_result.png" alt="ping1_result"></p>
 <p>这个是百度的一个公网地址, 可以看到是没啥问题的. </p>
 <p>接下来就有趣了, 我们通过宿主机上的Xshell来进行连接使用 毕竟通过远程连接操作起来更方便嘛~</p>
 <p>然后登进去之后虚拟机就不能连通道Internet了 !</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/ping2_result.png" alt="ping2_result"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ping2_result.png" alt="ping2_result"></p>
 <p>经过一系列的尝试 我初步把问题定位在了ARP上, 因为连接前后发生的最大的变化就是网关地址的硬件地址:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/Annotation.png" alt="Annotation"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Annotation.png" alt="Annotation"></p>
 <p>你应该也发现了, 经过了宿主机的连接之后 新的网关地址的硬件地址变成了我们VMnet8的硬件地址:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/win_info.png" alt="win_info"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/win_info.png" alt="win_info"></p>
 <p>到这里有点神奇, 不过能确定的一点是, 这个VMnet8能够使得我们的宿主机和虚拟机进行通信, 但是虚拟机自己的internet连接并不是通过VMnet8来实现的. </p>
 <p>不过到这里, 通过之前学到的一些网络排错知识, 已经知道问题的所在了, 那就是IP地址重复了, 换句话说, 我们的网关地址配置和宿主机的IP地址重合了, 这就导致arp的结果发生错乱以及MAC地址重写导致虚拟机无法把数据包发送出去了.</p>
 <p>经过将网关地址修改成另外一个值, 我们成功解决了这一个看起来有点奇怪的问题.</p>
 <h2 id="VMware的虚拟网络拓扑和原理"><a href="#VMware的虚拟网络拓扑和原理" class="headerlink" title="VMware的虚拟网络拓扑和原理"></a>VMware的虚拟网络拓扑和原理</h2><p>那么经过这次的问题之后, 自然我们得知道VMware是怎么控制虚拟机的网络拓扑的. 现在就VMware的三种连接方式来说下吧!</p>
 <h3 id="Host-only"><a href="#Host-only" class="headerlink" title="Host-only"></a>Host-only</h3><p>这一种看起来是最简单的一种, 从host-only模式来先说!</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/vmware_hostonly.png" alt="vmware_hostonly"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_hostonly.png" alt="vmware_hostonly"></p>
 <p>在这种模式下,  我们的虚拟机以及配置的DHCP服务器全部都连接到由VMware所维护的一个虚拟交换机上, 可以看到, 在Windows网络适配器管理里面看到的那张VMnet1网卡其实就是隔断主机网络和VMware虚拟机网络的屏障了, 各个虚拟机通过VMnet1与主机进行通信, 但是没有办法通过连接主机网卡来访问互联网.</p>
 <p>那么你可能会有疑问, 如果我们配置成Host-only模式, 但是我们通过某种手段来把主机的网卡和VMnet1网卡进行桥接, 换句话说就是将主机网卡共享给VMnet1, 那我们的主机不是就可以向我们的主机一样 连通Internet了吗!</p>
 <p>没错, 这确实可行, 而且其实这几乎就是VMware的NAT实现方式, 只不过有一点点的小不同.</p>
-<h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p><img src="http://q4fo85yz7.bkt.gdipper.com/vmware_nat.png" alt="vmware_nat"></p>
+<h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_nat.png" alt="vmware_nat"></p>
 <p>依然, 在NAT模式下, 虚拟机们还是连通道一个虚拟交换机上, 而这一次和之前不同的是, 我们多了一个虚拟的用来实现NAT功能的模块, 不仅如此, 这个模块与宿主机的网卡相连接, 从而可以让虚拟机通过这条连接访问到互联网, 值得注意的是, <strong>虚拟机和主机的通信仍然是依靠那个VMnet网卡来进行的.</strong></p>
 <p>随后我们再来看一下最易实现的一种网络连接方式 – 桥接</p>
-<h3 id="桥接"><a href="#桥接" class="headerlink" title="桥接"></a>桥接</h3><p><img src="http://q4fo85yz7.bkt.gdipper.com/vmware_bridge.png" alt="vmware_bridge"></p>
+<h3 id="桥接"><a href="#桥接" class="headerlink" title="桥接"></a>桥接</h3><p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_bridge.png" alt="vmware_bridge"></p>
 <p>看! 当我们使用桥接的时候, 其实就是简单的在我们宿主机的网卡和我们虚拟交换机之间搭建了一条虚拟网桥来共享数据连接, 在这种模式下, 虚拟机访问宿主机和访问外网都通过这个网桥来进行.</p>
 
   </div>

@@ -16,9 +16,9 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://www.openstack.org/software/images/map/openstack-map-v20180601.svg">
 <meta property="og:image" content="https://docs.openstack.org/install-guide/_images/openstack-arch-kilo-logical-v1.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/user%26role.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/keystone_concept.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.423Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/user%26role.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/keystone_concept.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.318Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识OpenStack_1">
 <meta name="twitter:description" content="由于毕业设计的选题选择了关于使用Openstack和Docker容器技术来构建一个高校云主机申请平台, 现在开始学习了解一下这个云计算框架 - openstack. 扯点闲话关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为">
@@ -183,10 +183,10 @@
 <p><strong><code>Project</code></strong> 这个就是用来分组和隔离资源或者权限对象的一个容器. 说的直白点就是命名空间一样的概念. </p>
 <p><strong><code>Domain</code></strong> 这个东西就是在Project之上的一个更大的空间, 包括了多个project和users, 定义了一个鉴权实体的管理边界(这样说不知道你们能不能明白)</p>
 <p><strong><code>User</code></strong>和<strong><code>Role</code></strong> 这两个概念我们放在一起来解释, 先来看这个图吧:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/user%26role.png" alt="user&amp;role"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/user%26role.png" alt="user&amp;role"></p>
 <p>可以看到, 用户就相当于是一个人, 系统或者服务的表示形式, 用户可以被<code>project</code>来contain, 而<code>role</code>就是一组来执行特定操作的用户权限的形态, 用户可以和role来进行关联, 当用户进行操作的时候, 服务会去寻找用户所关联上的role是啥, 然后判定可进行的操作范围. 另外, 就像上图所展示的, 不同Project的同一个用户也可以拥有不同的角色.</p>
 <p>以上就是关于Keystione的诸多概念了. 大体上的感觉就像这样子:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/keystone_concept.png" alt="keystone_concept"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/keystone_concept.png" alt="keystone_concept"></p>
 <p>随手用visio画的, 看看就好.</p>
 <p>关于Keystone的安装和基本部署, 官方文档都写的十分详细了(起码CentOS 7版本是这样子的), 所以照着做下来就不会有大问题. 我也没有踩到什么坑. 倒是下面的Glance踩到了坑.</p>
 <h1 id="Glance"><a href="#Glance" class="headerlink" title="Glance"></a>Glance</h1><p>说完了Keystone, 我们再来说下一个服务. 为了创建一个虚拟机, 我们需要一个image映像才可以, 而glance就是</p>

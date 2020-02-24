@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="拖了一个学期结果到最后还是要来学习一下的东西…现在看来Java还是绕不过去的一个技术点啊.   Write Once, Run Anywhere">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/jsp_processing.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.376Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/jsp_processing.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java技术体系和tomcat初识">
 <meta name="twitter:description" content="拖了一个学期结果到最后还是要来学习一下的东西…现在看来Java还是绕不过去的一个技术点啊.   Write Once, Run Anywhere">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/jsp_processing.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/jsp_processing.png">
     
     
         
@@ -182,7 +182,7 @@
 </ul>
 <p>不过扯了这么多, 其实最后是想说的是对于Java服务端应用的实现, 是通过将html标签硬编码到应用程序中, 也就是我们熟悉的<code>JSP</code>. 而服务端想要实现这种, 就一定需要Web Container的帮助.  </p>
 <h3 id="JSP的运行过程"><a href="#JSP的运行过程" class="headerlink" title="JSP的运行过程"></a>JSP的运行过程</h3><p>首先来看这么一个过程图吧:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/jsp_processing.png" alt="jsp_processing"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/jsp_processing.png" alt="jsp_processing"></p>
 <p>首先客户发出请求, 请求达到我们的包含JSP容器的Web服务器的时候, 会去从磁盘上取得请求的源文件, 接着通过翻译将我们的jsp代码转换成为java源文件, 最后通过编译会得到字节码文件, 继而将字节码文件回到JSP容器中执行得到结果返回给客户端.</p>
 <p>现在说来, 对于JSP容器的开源实现主要有三个, <code>Tomcat</code>, <code>Resin</code>和<code>jetty</code>. 其中就tomcat7.0,Jetty7和Resin3.1的比较, 相对来说Resin是性能最高的一个, 还支持负载均衡. 不过仅仅可用来做开源和学习目的. 而Jetty是相对来说性能最不好的那一个. </p>
 <p>接下来我们就来进入今天的主题吧, 来了解下Tomcat.</p>

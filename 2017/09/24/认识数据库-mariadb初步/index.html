@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="mariadb, mysql的基础认识和应用.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/sql.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.436Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sql.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.336Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认识数据库(mariadb初步)">
 <meta name="twitter:description" content="mariadb, mysql的基础认识和应用.">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/sql.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sql.png">
     
     
         
@@ -158,7 +158,7 @@
 <p>那么列举一些典型的RDBMS:<br>首当其冲的就是MySQL了, 其下有三个重要的分支: MySQL, MariaDB, Percona-Server(反正我是没听说过)</p>
 <p>还有很著名的开源数据库: PostgreSQL: pgSQL.  再来一个Oracle的oracle, 还有MS的MSSQL. </p>
 <p>接下来就要来看看一个关系型数据库的组成结构了.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/sql.png" alt="sql"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sql.png" alt="sql"></p>
 <p>不管怎么说, 最终都是要存储在磁盘上的, 所以也可以简单的说MySQL只是一个文件系统上的能够理解数据库源数据的一个软件管理程序罢了.  所有的数据都是现在内存中进行的缓冲 接着在PUSH到磁盘上的. 如一个文件正在被一个进程进行写操作, 那么就会上锁, 这就是为了在资源竞争保护资源. 对于一个关系型数据库来说, 事务是一个必不可少的组件. 多个写操作被认定成一个整体操作. 如何认定一个关系型数据库满足事务功能? 只要满足ACID测试就行, ACID是事务的一个标准, 也就是(原子性, 一致性, 隔离性, 持久性)</p>
 <p>回复管理器就是为了保证事务的运行, 他会把事物产生的数据连续存储两次, 一次存储在事务日志中, 一次存储在事务文件中, 这样就可以进行一致性检测.</p>
 <p>上面的那一大块东西就是SQL引擎, 或者SQL解释器.  以上就是一个标准的RDBMS的组成结构.</p>

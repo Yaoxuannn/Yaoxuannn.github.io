@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="初步了解了单机Tomcat的配置. 接下来我们就来看一下Tomcat负载均衡集群的配置吧.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/balancer-manager_example.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.417Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/balancer-manager_example.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tomcat集群部署">
 <meta name="twitter:description" content="初步了解了单机Tomcat的配置. 接下来我们就来看一下Tomcat负载均衡集群的配置吧.">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/balancer-manager_example.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/balancer-manager_example.png">
     
     
         
@@ -193,7 +193,7 @@
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">VirtualHost</span> *<span class="attr">:80</span>&gt;</span></span><br><span class="line">        ServerName www.wyx.com</span><br><span class="line">        ProxyVia On</span><br><span class="line">        ProxyRequests Off</span><br><span class="line">        ProxyPreserveHost On</span><br><span class="line">        <span class="tag">&lt;<span class="name">Proxy</span> *&gt;</span></span><br><span class="line">                Require all granted</span><br><span class="line">        <span class="tag">&lt;/<span class="name">Proxy</span>&gt;</span></span><br><span class="line">        ProxyPass / balancer://lbcluster/</span><br><span class="line">        ProxyPassReverse / balancer://lbcluster/</span><br><span class="line">        <span class="tag">&lt;<span class="name">Location</span> /&gt;</span></span><br><span class="line">                Require all granted</span><br><span class="line">        <span class="tag">&lt;/<span class="name">Location</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Location</span> /<span class="attr">balancer-manager</span>&gt;</span></span><br><span class="line">                SetHandler balancer-manager</span><br><span class="line">                ProxyPass !</span><br><span class="line">                Require ip 192.168.16.1</span><br><span class="line">                Require all denied</span><br><span class="line">        <span class="tag">&lt;/<span class="name">Location</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">VirtualHost</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>这里加上了一个Location, 访问的效果就想这样:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/balancer-manager_example.png" alt="balancer-manager_example"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/balancer-manager_example.png" alt="balancer-manager_example"></p>
 <p>可以在这个页面进行一些简单的管理和状态监视.</p>
 <h2 id="Session-Cluster"><a href="#Session-Cluster" class="headerlink" title="Session Cluster"></a>Session Cluster</h2><p>tomcat提供了一些会话管理组件, 主要有两种, 一个是标准会话管理器, 一个是持久会话管理器.</p>
 <p>对于标准会话管理器, 使用的类是<code>org.apache.catalina.session.StandardManager</code>, 常用的三个属性是:</p>

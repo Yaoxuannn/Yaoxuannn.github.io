@@ -14,15 +14,15 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Linux的网络配置: ifcfg系列和ip家族 :)">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/if.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/route.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/interfaces.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/dns.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.389Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/if.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/route.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/interfaces.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dns.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux网络配置">
 <meta name="twitter:description" content="Linux的网络配置: ifcfg系列和ip家族 :)">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/if.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/if.png">
     
     
         
@@ -186,7 +186,7 @@
 <p><strong>ifconfig</strong></p>
 <p>ifconfig 直接调用是就显示本机所有的接口, 在后面加上网卡的标识(也就是名字了)就可以对这张NIC进行单独的查看和配置.</p>
 <p>直接使用起来就像是这样:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/if.png" alt="if"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/if.png" alt="if"></p>
 <p>基本上常规的信息都是可以看到的, 比如有:</p>
 <p><strong>inet:</strong>标识IPv4地址<br><strong>mtu:</strong>最大传输单元<br><strong>netmask:</strong>子网掩码<br><strong>broadcast:</strong>广播地址<br><strong>inet6:</strong>标识IPv6地址<br><strong>ether/HWaddr:</strong>MAC地址</p>
 <p>在<code>flags</code>的后面能看到一些大写单词,这些表明当前这个设备的状态,</p>
@@ -208,7 +208,7 @@
 <p><strong>route</strong></p>
 <p>路由管理命令–route</p>
 <p>使用route查看当前主机的路由表, 常用的参数就是<code>-n</code>, 不进行反向解析, 也就是全部显示ip而不是名字.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/route.png" alt="route"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/route.png" alt="route"></p>
 <p>来看一下这个输出,前几项直接翻译就好了嘛, 来看一下<code>FLAGS</code>, 这里会看到<code>U</code>和<code>G</code>两种, 如果添加主机路由, 会有<code>H</code>标识(<code>Host</code>). 像之前的<code>ifconfig</code>看到的一样, <code>U</code>表示<code>UP</code>已启用. <code>G</code>表示这是网关(<code>Gateway</code>)</p>
 <p>如果要进行路由的添加.使用<code>add</code>子命令.</p>
 <p>添加主机路由时, 由于目标ip直接定位到主机IP, 所以不需要添加子网掩码(其实也是可以写的,但是没有必要), 如果要添加的是一个网段的IP, 那么子网掩码是必须要指定的, 两种方法来指定, 一种是直接在后面接上子网长度, 或者明确表明关键字<code>netmask</code>加上子网IP. </p>
@@ -357,12 +357,12 @@
 <p><strong>USERCTL:</strong> 普通用户是否可控制此设备</p>
 <p><strong>PEERDNS:</strong> 如果BOOTPROTO是<code>dhcp</code>, 是否允许<code>dhcp seerver</code>分配的DNS服务器指向信息覆盖原来的<code>resolve.conf</code>.</p>
 <p>现在就以新版的配置文件来进行说明.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/interfaces.png" alt="interfaces"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/interfaces.png" alt="interfaces"></p>
 <p>最简单的配置就是直接把这个文件的<code>static</code>换成<code>dhcp</code>即可, 将下面的配置全部删去就好了.</p>
 <p>如果配置静态IP,可以参照这个图来配置, 必要的属性就是下面的三项: <code>IP地址</code>, <code>网关</code>, <code>子网掩码</code>.</p>
 <p>如果要配置DNSSever, 要在/etc/resolve.conf, 这个文件配置的信息会在重启时被重写.</p>
 <p>之前说过Linux支持最多可以配置配三台DNSServer, 就这样写就可以了:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/dns.png" alt="dns"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dns.png" alt="dns"></p>
 <p>使用<code>nameserver</code>关键字来指定服务器地址.</p>
 <p>-<strong>来自不知道什么时候之后的一个更新</strong>- 对于CentOS系统, 一直使用的就是sysconfig下的配置文件, 而Ubuntu, Debian系的系统梗偏向于使用interfaces这种文件. 所以关于时间的说法是不对的. ( 我好菜啊 )</p>
 <p><strong>7.8 更新</strong>:</p>

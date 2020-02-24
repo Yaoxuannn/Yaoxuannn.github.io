@@ -14,19 +14,19 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Linux和Windows的文件共享, NFS和Samba (SMB)">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/cmd1.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/easy.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/shared.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/confshared.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/sucshared.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/sambaserver.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/smbuser1.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/deny.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.391Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cmd1.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/easy.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/shared.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/confshared.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sucshared.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sambaserver.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/smbuser1.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/deny.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NFS和Samba">
 <meta name="twitter:description" content="Linux和Windows的文件共享, NFS和Samba (SMB)">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/cmd1.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cmd1.png">
     
     
         
@@ -242,20 +242,20 @@
 <p>有两个版本的samba, 系统已经预先安装了samba客户端, 3.6版本. 那么我们就使用这个版本的吧.</p>
 <p>在Windows上, 共享文件路径是这样写的: \SEREVR\shared_name.</p>
 <p>下面说说我们当前的环境:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/cmd1.png" alt="cmd1"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cmd1.png" alt="cmd1"></p>
 <p>而另外一台CentOS6主机就是那个192.168.56.101. 现在在Windows上建立一个共享文件夹, 步骤如下:</p>
 <ul>
 <li>关闭简单文件共享</li>
 </ul>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/easy.png" alt="easy"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/easy.png" alt="easy"></p>
 <ul>
 <li>设置共享文件夹</li>
 </ul>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/shared.png" alt="shared"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/shared.png" alt="shared"></p>
 <ul>
 <li>配置权限, 创建一个新用户</li>
 </ul>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/confshared.png" alt="confshared"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/confshared.png" alt="confshared"></p>
 <p>完成之后就会看到图标发生改变.</p>
 <p>现在就来试试连接到Windows上的共享文件夹, 首先我们来看看samba-client安装了什么二进制程序吧:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># rpm -ql samba-client</span></span><br><span class="line">/usr/bin/findsmb</span><br><span class="line">/usr/bin/nmblookup</span><br><span class="line">/usr/bin/rpcclient</span><br><span class="line">/usr/bin/sharesec</span><br><span class="line">/usr/bin/smbcacls</span><br><span class="line">/usr/bin/smbclient</span><br><span class="line">/usr/bin/smbget</span><br><span class="line">/usr/bin/smbprint</span><br><span class="line">/usr/bin/smbspool</span><br><span class="line">/usr/bin/smbtar</span><br><span class="line">/usr/bin/smbtree</span><br></pre></td></tr></table></figure>
@@ -272,7 +272,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">smb: \&gt; lcd /etc/</span><br><span class="line">smb: \&gt; put fstab </span><br><span class="line">putting file fstab as \fstab (84.7 kb/s) (average 84.7 kb/s)</span><br></pre></td></tr></table></figure>
 
 <p>此时Windows中已经看到了:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/sucshared.png" alt="sucshared"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sucshared.png" alt="sucshared"></p>
 <p>就这么简单. 这是一种基于交互式访问的方式,也可以进行挂载使用:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># mount -t cifs //192.168.56.102/Shared /NTshared/ -o username=test</span></span><br><span class="line">Password:</span><br><span class="line">[root@localhost NTshared]<span class="comment"># cd /NTshared/</span></span><br><span class="line">[root@localhost NTshared]<span class="comment"># ls</span></span><br><span class="line">fstab</span><br></pre></td></tr></table></figure>
 
@@ -301,7 +301,7 @@
 <p>这个时候按理说已经可以在Windows主机中看到Linux主机了, 但是问题在于他们的工作组不一样( 上面说过使用工作组来划分 ), 因为Windows上的默认工作组是<code>WORKGROUP</code>, 而samba默认的工作组是<code>MYGROUP</code>. 这个设定可以在samba的配置文件中进行更改:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#======================= Global Settings =====================================</span></span><br><span class="line"></span><br><span class="line">[global]</span><br><span class="line"></span><br><span class="line"><span class="comment"># ----------------------- Network Related Options -------------------------</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># workgroup = NT-Domain-Name or Workgroup-Name, eg: MIDEARTH</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># server string is the equivalent of the NT Description field</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># netbios name can be used to specify a server name not tied to the hostname</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Interfaces lets you configure Samba to use multiple interfaces</span></span><br><span class="line"><span class="comment"># If you have multiple network interfaces then you can list the ones</span></span><br><span class="line"><span class="comment"># you want to listen on (never omit localhost)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Hosts Allow/Hosts Deny lets you restrict who can connect, and you can</span></span><br><span class="line"><span class="comment"># specifiy it as a per share option as well</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">        workgroup = MYGROUP</span><br><span class="line">        server string = Samba Server Version %v</span><br><span class="line">...(omitted)</span><br></pre></td></tr></table></figure>
 
-<p>把他改成WORKGROUP之后, 重新启动服务, 在windows中的网上邻居中查看工作组的计算机就可以看到:<br><img src="http://q4fo85yz7.bkt.gdipper.com/sambaserver.png" alt="sambaserver"></p>
+<p>把他改成WORKGROUP之后, 重新启动服务, 在windows中的网上邻居中查看工作组的计算机就可以看到:<br><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sambaserver.png" alt="sambaserver"></p>
 <blockquote>
 <p><strong>脱坑指南: 如果你看不到主机先尝试清空iptables.</strong></p>
 </blockquote>
@@ -313,7 +313,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># smbpasswd</span></span><br><span class="line">  -a                   add user</span><br><span class="line">  -d                   <span class="built_in">disable</span> user</span><br><span class="line">  -e                   <span class="built_in">enable</span> user</span><br><span class="line">  -x                   delete user</span><br></pre></td></tr></table></figure>
 
 <p>输入密码登陆之后就可以看到了:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/smbuser1.png" alt="smbuser1"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/smbuser1.png" alt="smbuser1"></p>
 <p>接着你就可以在里面创建文件了, 因为这就是smbuser1的家目录, 所以是有权限的.</p>
 <p>另外如果是使用另外一台Linux来访问这个smbuser1是什么样子的呢?我们启动另外一台CentOS7来看看:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]<span class="comment"># smbclient -L 192.168.56.101 -U smbuser1</span></span><br><span class="line">Enter SAMBA\smbuser1<span class="string">'s password: </span></span><br><span class="line"><span class="string">Domain=[LOCALHOST] OS=[Unix] Server=[Samba 3.6.23-45.el6_9]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	Sharename       Type      Comment</span></span><br><span class="line"><span class="string">	---------       ----      -------</span></span><br><span class="line"><span class="string">	IPC$            IPC       IPC Service (Samba Server Version 3.6.23-45.el6_9)</span></span><br><span class="line"><span class="string">	smbuser1        Disk      Home Directories</span></span><br><span class="line"><span class="string">Domain=[LOCALHOST] OS=[Unix] Server=[Samba 3.6.23-45.el6_9]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	Server               Comment</span></span><br><span class="line"><span class="string">	---------            -------</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	Workgroup            Master</span></span><br><span class="line"><span class="string">	---------            -------</span></span><br><span class="line"><span class="string">	WORKGROUP            LOCALHOST</span></span><br></pre></td></tr></table></figure>
@@ -346,7 +346,7 @@
 </blockquote>
 <blockquote>
 <p>并且在上面的Windows实验中看到的是:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/deny.png" alt="deny"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/deny.png" alt="deny"></p>
 <p>而且你确定是有权限的话, 那么很大一部分原因可能是SELINUX.</p>
 </blockquote>
 <h2 id="Extra"><a href="#Extra" class="headerlink" title="Extra"></a>Extra</h2><p>另外, samba是有一个图形化管理工具的, 叫做swat. 处于extra源中.</p>

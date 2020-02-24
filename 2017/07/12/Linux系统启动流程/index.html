@@ -15,8 +15,8 @@
 <meta property="og:description" content="Linux(CentOS5&amp;amp;6)的系统启动流程">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://linux.vbird.org/linux_basic/0510osloader//osloader-flow-initramfs.jpg">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/login.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.388Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/login.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS5和6的启动流程">
 <meta name="twitter:description" content="Linux(CentOS5&amp;amp;6)的系统启动流程">
@@ -262,7 +262,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1:2345:respawn:/sbin/mingetty tty1</span><br><span class="line">2:2345:respawn:/sbin/mingetty tty2</span><br><span class="line">...</span><br><span class="line">6:2345:respawn:/sbin/mingetty tty6</span><br><span class="line">x:5:respawn:/etc/X11/prefdm -nodaemon <span class="comment"># 图形界面</span></span><br></pre></td></tr></table></figure>
 
 <p>这个时候开始加载终端, 也就进入了我们看到的第一个画面: </p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/login.png" alt="login"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/login.png" alt="login"></p>
 <p>这个界面的出现是因为<code>mingetty</code>之后调用了一个叫<code>login</code>的程序. <strong>Warning: 在远程连接的shell里执行这个指令远程主机就会关闭连接!</strong></p>
 <p>在SysV的inittab里的第一句话写了这么一句: <code>si::sysinit:/etc/rc.d/rc.sysinit</code>.在CentOS6上这个由于使用了startup所以没有出现在inittab中, 而是写在了别的配置文件中, 这意味着在实际运行之前还要再把整个系统的环境设置好.这个脚本做的初始化有哪些呢?</p>
 <p>这个脚本还是很大的(670行)主要做的事情有:</p>

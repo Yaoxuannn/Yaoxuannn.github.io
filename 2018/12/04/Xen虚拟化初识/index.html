@@ -14,16 +14,16 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="稍微复习了一下操作系统, 从今天真正开始接触虚拟化相关.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/%E4%B8%80%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/%E4%BA%8C%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E4%B8%80%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E4%BA%8C%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png">
 <meta property="og:image" content="https://wiki.xen.org/images/thumb/c/c5/ToolStacks.png/799px-ToolStacks.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/vmware%E8%99%9A%E6%8B%9F%E5%8C%96CPU%E9%85%8D%E7%BD%AE.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/pygrub_1.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.421Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware%E8%99%9A%E6%8B%9F%E5%8C%96CPU%E9%85%8D%E7%BD%AE.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/pygrub_1.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.310Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xen虚拟化初识">
 <meta name="twitter:description" content="稍微复习了一下操作系统, 从今天真正开始接触虚拟化相关.">
-<meta name="twitter:image" content="http://q4fo85yz7.bkt.gdipper.com/%E4%B8%80%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png">
+<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E4%B8%80%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png">
     
     
         
@@ -177,9 +177,9 @@
 <li>库级别的虚拟化, 例如Wine</li>
 <li>应用程序级别的虚拟化, 例如JVM, PVM(Python)</li>
 </ul>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/%E4%B8%80%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png" alt="一型虚拟化"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E4%B8%80%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png" alt="一型虚拟化"></p>
 <p>将我们的HyperVisor直接安装在硬件上(就是说宿主机没有OS), 这种叫做1型虚拟化. </p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/%E4%BA%8C%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png" alt="二型虚拟化"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E4%BA%8C%E5%9E%8B%E8%99%9A%E6%8B%9F%E5%8C%96.png" alt="二型虚拟化"></p>
 <p>将HyperVisor作为一个进程运行在操作系统上, 这是2型虚拟化.</p>
 <p>这就很显然了. 1型虚拟化肯定是性能上更好的, 而2型的优点在于, 存在一个典型的操作系统, 比较灵活, 而且支持虚拟机的嵌套.</p>
 <h2 id="Xen"><a href="#Xen" class="headerlink" title="Xen"></a>Xen</h2><p>接着我们来看看Xen这个东西, 这玩意是由剑桥大学开发的. 原本的设计目标是为了在单机上跑128个虚拟机.</p>
@@ -217,7 +217,7 @@
 <p>上面的这张图就是我们进行Xen操作的相关接口, 其中XAPI/XE是Xen的子项目, 而XL是一个基于libxenlight的轻量级命令行管理工具, 这个工具现在是Xen默认自行携带的. 至于Libvirt是由红帽推出的一整套解决虚拟化API的工具, 通过在虚拟机上运行一个<code>libvirtd</code>进程来进行通信, 所以不仅可以管理Xen, 也可以是KVM等等, 通过virsh来进行交互.</p>
 <h2 id="在虚拟机上安装并使用Xen"><a href="#在虚拟机上安装并使用Xen" class="headerlink" title="在虚拟机上安装并使用Xen"></a>在虚拟机上安装并使用Xen</h2><p>首先说明, 因为我手头没有物理机, 所以只能使用虚拟机来做实验, 值得一提的是, 在这种情况下, 我们在默认的虚拟机配置上只能使用半虚拟化技术, 而使用的Vmware平台可以通过将虚拟CPU的VT-x打开来实现在虚拟机上的HVM模式.</p>
 <p>这个配置就是Vmware的这里: </p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/vmware%E8%99%9A%E6%8B%9F%E5%8C%96CPU%E9%85%8D%E7%BD%AE.png" alt="vmware虚拟化CPU配置"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware%E8%99%9A%E6%8B%9F%E5%8C%96CPU%E9%85%8D%E7%BD%AE.png" alt="vmware虚拟化CPU配置"></p>
 <p>另外由于我们运行的这个是个DomU, 还需要运行Dom0, 所以建议将内存稍微分配的大一点.</p>
 <p>这里使用的到的内核版本:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-master ~]<span class="comment"># lsb_release -a</span></span><br><span class="line">LSB Version:	:core-4.1-amd64:core-4.1-noarch</span><br><span class="line">Distributor ID:	CentOS</span><br><span class="line">Description:	CentOS Linux release 7.4.1708 (Core) </span><br><span class="line">Release:	7.4.1708</span><br><span class="line">Codename:	Core</span><br></pre></td></tr></table></figure>
@@ -404,7 +404,7 @@
 <p>这里我们需要一个叫做<code>pygrub</code>的引导程序, 它会随着我们的xen环境一同被安装</p>
 <p>新版本的配置文件可以把kernel, initramfs, extra_cmd, root等等参数都注释掉了, 只需要额外再写一个<code>bootloader</code>指向我们的<code>pygrub</code>就行了.</p>
 <p>启动虚拟机, 直接附加console, 我们就能看到这个grub的引导页面了.</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/pygrub_1.png" alt="pygrub_1"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/pygrub_1.png" alt="pygrub_1"></p>
 <p>但是, 这里似乎存在问题, 那就是console会报错, 看样子是应该配置一下虚拟显卡等等. 暂时还没有研究, 就先跳过了.</p>
 <h2 id="使用libvirt来管理Xen虚拟机"><a href="#使用libvirt来管理Xen虚拟机" class="headerlink" title="使用libvirt来管理Xen虚拟机"></a>使用libvirt来管理Xen虚拟机</h2><p>除了使用xl, 我们还可以使用libvirt这个工具栈, 为了使用libvirt. 我们需要在虚拟机中运行libvirtd进程就可以进行远程的管理了. </p>
 <p>通过安装<code>libvirt</code>这个包, 并且和xen搭配的daemon也可以安装上.</p>

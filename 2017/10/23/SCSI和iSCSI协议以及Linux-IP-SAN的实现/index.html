@@ -15,11 +15,11 @@
 <meta property="og:description" content="学习了好多集群的概念和理论…要好好消化一下, 所以来个小插曲转移一下注意点啦~">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://img.blog.csdn.net/20161108104700216">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/RHELstorage.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/SCSI.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/iSCSI.png">
-<meta property="og:image" content="http://q4fo85yz7.bkt.gdipper.com/SANvsNAS.png">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.413Z">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/RHELstorage.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SCSI.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/iSCSI.png">
+<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SANvsNAS.png">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SCSI和iSCSI协议以及Linux IP SAN的实现">
 <meta name="twitter:description" content="学习了好多集群的概念和理论…要好好消化一下, 所以来个小插曲转移一下注意点啦~">
@@ -159,7 +159,7 @@
 <p>不过虽然是这样画的 现代的服务器的架构肯定是和这个有一些不同的, 不过大体上是一样的. CPU通过局部总线(Local Bus)连接上缓存和北桥控制器, 而控制器通过内存总线和内存进行连接, 中间的叫做PCI总线又接上了很多控制器, 例如SCSI控制器, USB控制器, 等等. </p>
 <p>我们之前在说存储类型的时候说过, DAS, NAS, 和SAN. DAS就好比我们直接把移动硬盘接进来, 这就是DAS, 即直接附加存储(Direct Attach Storage). 而NAS设备就是使用一些文件共享协议实现的文件服务器, 好比NFS, CIFS等. 有些NAS也可以使用应用层的HTTP协议进行文件传输. (RESTful). 还有就是SAN, 存储区域网络(Storage Area Network) 这些设备通过的网络, 就是SAN. SAN能够块级别的文件服务, 其实SAN主要就是做到对特定的物理层的解码和编码, 例如<code>FC SAN</code>就是为了光信号的文件传输的. 而IP层的就是可以提供IP层的协议报文的封装和解包.</p>
 <p>为了搞清楚这些玩意, 我们就要来看看Linux(RHEL)的存储模型是个什么样的, 或者说调用接口是怎么组织的:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/RHELstorage.png" alt="RHELstorage"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/RHELstorage.png" alt="RHELstorage"></p>
 <p>首先我们从上层来看, 有存储数据或者读取数据的需求的显然是我们的应用程序, 接着我们的Linux为各种类型的文件系统抽象出统一的接口, 即上面的VFS. 接着的File System Driver就是我们的各种类型文件系统的具体实现了, 接着驱动实际的有存储能力的磁盘就是向下一层的Block Device Driver. 最后的Volume就不需要多说了.</p>
 <p>而为了要是需要操作基本的存储卷的话, 就需要将DAS接到总线上, 这些接口有这些: IDE, SCSI ( 这两个都是并行的 ), 串行的: SATA, SAS, USB, eSATA. 我们今天的主角就是SCSI了, SCSI的全称是小型计算机接口(Small Computer System Interface)</p>
 <p>刚刚也说了, SCSI是一种并行的IO技术, 并且规范了相关的协议. 对于SCSI而言, 他的数据传输是以块的方式进行的. SCSI有这些特点:</p>
@@ -172,16 +172,16 @@
 <p>接下来我们来说说SCSI控制器的工作模式:</p>
 <p>首先, 在逻辑上, 我们把SCSI控制器分为一个任务管理单元和多个逻辑管理单元. 对于每一个逻辑设备, 我们也为他们分配一个ID号码来辨识, 叫做LUN.</p>
 <p>SCSI的通信模型是一个C/S架构的模型, 也就是我们常说的客户端,服务器端架构, 我们把客户端叫做Initiator, 而另外一端, 即Target端, 他们之间通过SCSI通道连接互相的SCSI port进行通信. 更有意思的是, 理解SCSI十分容易, 如果你对网络分层的理解不错的话, 因为他们之间的分层架构和我们的网络十分相像:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/SCSI.png" alt="SCSI"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SCSI.png" alt="SCSI"></p>
 <p>相信一看就能明白, 然而我想说的一点是, 现在的技术已经可以将物理层替换成其他的传输介质, 不一定非要是SCSI线缆. 也可以是FC光缆,     iSCSI, IB什么的, 这样, 通过各种不同的组织方式, 我们就可以构建承载着存储协议SCSI的相关报文的网络, 这就是一个SAN了.</p>
 <p>每一个SCSI硬盘, 他的内部都有一个或者数个由逻辑单元,任务管理器,服务器构成的组件, 和一个任务分发器.</p>
 <p>为什么说这个呢?  我们来思考一个问题, 如果说不谈物理层面上那个具有存储能力的<em>磁盘</em>, 如果说我随便找一个磁盘, 但是我把它接到一个Linux主机上, 该主机实现了上面 我说的那些功能, 那么我说这个是一个SCSI盘也是没有什么毛病的.</p>
 <p>换言之, 我们通过软件是完全可以把一个IDE硬盘驱动成SCSI的. 这个其实就是iSCSI.</p>
-<p>来看下面的一个图:<br><img src="http://q4fo85yz7.bkt.gdipper.com/iSCSI.png" alt="iSCSI"></p>
+<p>来看下面的一个图:<br><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/iSCSI.png" alt="iSCSI"></p>
 <p>这是iSCSI和SCSI/FC的对比. SCSI/FC很简单了, 只要有FC或者SCSI驱动,光卡和专用线缆就可以了, 主要是看看我们的iSCSI.</p>
 <p>首先, 为了封装得到SCSI报文, 我们需要SCSI驱动, 接着由iSCSI驱动承上启下转换成为TCP/IP报文, 接着通过网卡传输到存储端, 而当然了, 存储端同样也是要求拥有网卡的. 也就是说我们要在原始的数据前面加上SCSI首部, iSCSI首部, TCP首部, IP首部, Ethernet首部. 这样多层封装的结果就是, 性能不会这么好.</p>
 <p>接下来我们就来看看SAN和NAS的对比吧:</p>
-<p><img src="http://q4fo85yz7.bkt.gdipper.com/SANvsNAS.png" alt="SANvsNAS"></p>
+<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SANvsNAS.png" alt="SANvsNAS"></p>
 <p>主要的区别我们之前也都说过了, 向外输出的接口就是很不一样的, 一个是块级别的, 一个是文件级别.</p>
 <p>最后 iSCSI协议监听在tcp的3260端口上.</p>
 <h2 id="Linux-IP-SAN的实现"><a href="#Linux-IP-SAN的实现" class="headerlink" title="Linux IP SAN的实现"></a>Linux IP SAN的实现</h2><p>现在我就先来实现一下Target端, 并且在上面配置LUN. 接着我们在找一台主机当做Initiator端, 看他能不能发现网络上的SCSI设备并且格式化并使用, 以及当出现了另外一个Initiator时, 同时读写同一个文件会造成什么情况.</p>
