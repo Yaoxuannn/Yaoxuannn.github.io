@@ -10,7 +10,7 @@
 <meta name="keywords" content="Linux,系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux系统基本原理(init)">
-<meta property="og:url" content="http://yaoxuannn.com/2017/06/26/Linux系统基本原理/index.html">
+<meta property="og:url" content="https://yaoxuannn.com/2017/06/26/Linux系统基本原理/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.">
 <meta property="og:locale" content="en">
@@ -95,16 +95,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&text=Linux系统基本原理(init)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&is_video=false&description=Linux系统基本原理(init)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Linux系统基本原理(init)&body=Check out this article: http://yaoxuannn.com/2017/06/26/Linux系统基本原理/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&name=Linux系统基本原理(init)&description=&lt;p&gt;简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&text=Linux系统基本原理(init)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&is_video=false&description=Linux系统基本原理(init)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux系统基本原理(init)&body=Check out this article: https://yaoxuannn.com/2017/06/26/Linux系统基本原理/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&name=Linux系统基本原理(init)&description=&lt;p&gt;简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -266,16 +266,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&text=Linux系统基本原理(init)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&is_video=false&description=Linux系统基本原理(init)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Linux系统基本原理(init)&body=Check out this article: http://yaoxuannn.com/2017/06/26/Linux系统基本原理/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/06/26/Linux系统基本原理/&name=Linux系统基本原理(init)&description=&lt;p&gt;简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&text=Linux系统基本原理(init)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&is_video=false&description=Linux系统基本原理(init)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Linux系统基本原理(init)&body=Check out this article: https://yaoxuannn.com/2017/06/26/Linux系统基本原理/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&title=Linux系统基本原理(init)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/06/26/Linux系统基本原理/&name=Linux系统基本原理(init)&description=&lt;p&gt;简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

@@ -10,7 +10,7 @@
 <meta name="keywords" content="搜索引擎,Lucene">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ELK栈初见-1">
-<meta property="og:url" content="http://yaoxuannn.com/2019/07/25/ELK栈初见-1/index.html">
+<meta property="og:url" content="https://yaoxuannn.com/2019/07/25/ELK栈初见-1/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="我们运行的各种服务在工作过程中都会产生巨大的日志, 如果是小规模的生产环境我们可以简单的通过将各种软件的日志复制到数据库或者直接文件系统上进行汇总. 当然这种不仅仅限日志量十分的少而且这样做会带来很多的弊端, 例如我们很难对其中的日志进行搜索和分析, 另外巨大的IO量对我们的硬盘也是一种巨大的考验. 今天就来学习ELK栈的第一步, 我们先来了解一下搜索引擎的简单原理.">
 <meta property="og:locale" content="en">
@@ -90,16 +90,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&text=ELK栈初见-1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&is_video=false&description=ELK栈初见-1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ELK栈初见-1&body=Check out this article: http://yaoxuannn.com/2019/07/25/ELK栈初见-1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&name=ELK栈初见-1&description=&lt;p&gt;我们运行的各种服务在工作过程中都会产生巨大的日志, 如果是小规模的生产环境我们可以简单的通过将各种软件的日志复制到数据库或者直接文件系统上进行汇总. 当然这种不仅仅限日志量十分的少而且这样做会带来很多的弊端, 例如我们很难对其中的日志进行搜索和分析, 另外巨大的IO量对我们的硬盘也是一种巨大的考验.&lt;/p&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&text=ELK栈初见-1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&is_video=false&description=ELK栈初见-1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ELK栈初见-1&body=Check out this article: https://yaoxuannn.com/2019/07/25/ELK栈初见-1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&name=ELK栈初见-1&description=&lt;p&gt;我们运行的各种服务在工作过程中都会产生巨大的日志, 如果是小规模的生产环境我们可以简单的通过将各种软件的日志复制到数据库或者直接文件系统上进行汇总. 当然这种不仅仅限日志量十分的少而且这样做会带来很多的弊端, 例如我们很难对其中的日志进行搜索和分析, 另外巨大的IO量对我们的硬盘也是一种巨大的考验.&lt;/p&gt;
 &lt;p&gt;今天就来学习ELK栈的第一步, 我们先来了解一下搜索引擎的简单原理.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
@@ -232,16 +232,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&text=ELK栈初见-1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&is_video=false&description=ELK栈初见-1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=ELK栈初见-1&body=Check out this article: http://yaoxuannn.com/2019/07/25/ELK栈初见-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2019/07/25/ELK栈初见-1/&name=ELK栈初见-1&description=&lt;p&gt;我们运行的各种服务在工作过程中都会产生巨大的日志, 如果是小规模的生产环境我们可以简单的通过将各种软件的日志复制到数据库或者直接文件系统上进行汇总. 当然这种不仅仅限日志量十分的少而且这样做会带来很多的弊端, 例如我们很难对其中的日志进行搜索和分析, 另外巨大的IO量对我们的硬盘也是一种巨大的考验.&lt;/p&gt;
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&text=ELK栈初见-1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&is_video=false&description=ELK栈初见-1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ELK栈初见-1&body=Check out this article: https://yaoxuannn.com/2019/07/25/ELK栈初见-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&title=ELK栈初见-1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2019/07/25/ELK栈初见-1/&name=ELK栈初见-1&description=&lt;p&gt;我们运行的各种服务在工作过程中都会产生巨大的日志, 如果是小规模的生产环境我们可以简单的通过将各种软件的日志复制到数据库或者直接文件系统上进行汇总. 当然这种不仅仅限日志量十分的少而且这样做会带来很多的弊端, 例如我们很难对其中的日志进行搜索和分析, 另外巨大的IO量对我们的硬盘也是一种巨大的考验.&lt;/p&gt;
 &lt;p&gt;今天就来学习ELK栈的第一步, 我们先来了解一下搜索引擎的简单原理.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 

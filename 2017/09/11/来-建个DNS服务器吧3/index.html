@@ -10,11 +10,11 @@
 <meta name="keywords" content="Linux,DNS,Bind">
 <meta property="og:type" content="article">
 <meta property="og:title" content="来,建个DNS服务器吧(Part3)">
-<meta property="og:url" content="http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/index.html">
+<meta property="og:url" content="https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="来稍微说点高级的话题: 子域授权 转发服务器的建立 Bind的安全和权限管理 Bind的编译安装 和 压力测试">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-21T03:17:26.430Z">
+<meta property="og:updated_time" content="2020-02-24T23:04:46.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="来,建个DNS服务器吧(Part3)">
 <meta name="twitter:description" content="来稍微说点高级的话题: 子域授权 转发服务器的建立 Bind的安全和权限管理 Bind的编译安装 和 压力测试">
@@ -87,16 +87,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&text=来,建个DNS服务器吧(Part3)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&is_video=false&description=来,建个DNS服务器吧(Part3)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=来,建个DNS服务器吧(Part3)&body=Check out this article: http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&name=来,建个DNS服务器吧(Part3)&description=&lt;p&gt;来稍微说点高级的话题: 子域授权 转发服务器的建立 Bind的安全和权限管理 Bind的编译安装 和 压力测试&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&text=来,建个DNS服务器吧(Part3)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&is_video=false&description=来,建个DNS服务器吧(Part3)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=来,建个DNS服务器吧(Part3)&body=Check out this article: https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&name=来,建个DNS服务器吧(Part3)&description=&lt;p&gt;来稍微说点高级的话题: 子域授权 转发服务器的建立 Bind的安全和权限管理 Bind的编译安装 和 压力测试&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -301,16 +301,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&text=来,建个DNS服务器吧(Part3)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&is_video=false&description=来,建个DNS服务器吧(Part3)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=来,建个DNS服务器吧(Part3)&body=Check out this article: http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&name=来,建个DNS服务器吧(Part3)&description=&lt;p&gt;来稍微说点高级的话题: 子域授权 转发服务器的建立 Bind的安全和权限管理 Bind的编译安装 和 压力测试&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&text=来,建个DNS服务器吧(Part3)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&is_video=false&description=来,建个DNS服务器吧(Part3)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=来,建个DNS服务器吧(Part3)&body=Check out this article: https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&title=来,建个DNS服务器吧(Part3)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/09/11/来-建个DNS服务器吧3/&name=来,建个DNS服务器吧(Part3)&description=&lt;p&gt;来稍微说点高级的话题: 子域授权 转发服务器的建立 Bind的安全和权限管理 Bind的编译安装 和 压力测试&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
