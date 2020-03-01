@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="这是《Python源码剖析 — 深度探索动态语言核心技术》的阅读记录. 概述和内建对象的基石 - PyObject">
-<meta name="keywords" content="Python,源码">
+<meta name="keywords" content="Python,Source Code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python源码阅读—内建对象(1)">
 <meta property="og:url" content="https://yaoxuannn.com/2018/03/06/Python源码阅读-内建对象-1/index.html">
@@ -15,7 +15,7 @@
 <meta property="og:description" content="这是《Python源码剖析 — 深度探索动态语言核心技术》的阅读记录. 概述和内建对象的基石 - PyObject">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/python_src_tree.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.284Z">
+<meta property="og:updated_time" content="2020-03-01T23:12:32.744Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python源码阅读—内建对象(1)">
 <meta name="twitter:description" content="这是《Python源码剖析 — 深度探索动态语言核心技术》的阅读记录. 概述和内建对象的基石 - PyObject">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python的内建对象"><span class="toc-number">1.</span> <span class="toc-text">Python的内建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyObject"><span class="toc-number">1.2.</span> <span class="toc-text">PyObject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的创建"><span class="toc-number">1.3.</span> <span class="toc-text">对象的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的行为-方法"><span class="toc-number">1.4.</span> <span class="toc-text">对象的行为/方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型-类型"><span class="toc-number">1.5.</span> <span class="toc-text">类型:类型</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyObject"><span class="toc-number">2.</span> <span class="toc-text">PyObject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的创建"><span class="toc-number">3.</span> <span class="toc-text">对象的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的行为-方法"><span class="toc-number">4.</span> <span class="toc-text">对象的行为/方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型-类型"><span class="toc-number">5.</span> <span class="toc-text">类型:类型</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -143,7 +143,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/源码/">源码</a>
+        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/Source-Code/">Source Code</a>
     </div>
 
 
@@ -180,7 +180,7 @@
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/python_src_tree.png" alt="python_src_tree.png"></p>
 <p>其中, <code>Include</code>这样的命名大家都知道了, 是用来放头文件的. <code>Lib</code>就是我们熟悉的那些Python标准库的源码了, 他们都是使用Python写的, 另外一个目录: <code>Modules</code>同样也是放一些模块的, 只不过这里的都是使用C语言写的, 目的不言自明. <code>Parser</code>就是Python解释器中的词法分析和语法分析, 其中还有些自动生成Python语言的词法和语法分析器, 类似YACC.<code>Python</code>, 都用自己的名字来命名了, 这个目录就十分重要了, 包含了Python的编译器和执行引擎. 另外<code>PCbuild</code>和<code>PCbuild8</code>这两个玩意是VS的工程了, 由于我是在Mac上操作的, 所以就忽略掉了.</p>
 <p>那就不说多了, 直接开始吧!</p>
-<h1 id="Python的内建对象"><a href="#Python的内建对象" class="headerlink" title="Python的内建对象"></a>Python的内建对象</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>先来撇清楚一个概念, 我们都知道Python是个面向对象的编程语言, 而这里内建对象的<strong>对象</strong>. 和面向<strong>对象</strong>的<strong>对象</strong>是两个截然不同的概念. 在Python中, 存在许多类型, 例如上面列举的int, string, List, Dict等等. 这些都实现了<strong>类</strong>的功能, 有意思的是, 这些类型, 他们也是类; 即是说: 类型本身也是类. 除了这些内置的, 我们还可以使用<code>class A(object)</code>这样的语句进行自定类型的声明和创建相应的实例. 我们都知道Python是使用ANSI C实现的, 那么这些对象是怎么在C中表示的呢?</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>先来撇清楚一个概念, 我们都知道Python是个面向对象的编程语言, 而这里内建对象的<strong>对象</strong>. 和面向<strong>对象</strong>的<strong>对象</strong>是两个截然不同的概念. 在Python中, 存在许多类型, 例如上面列举的int, string, List, Dict等等. 这些都实现了<strong>类</strong>的功能, 有意思的是, 这些类型, 他们也是类; 即是说: 类型本身也是类. 除了这些内置的, 我们还可以使用<code>class A(object)</code>这样的语句进行自定类型的声明和创建相应的实例. 我们都知道Python是使用ANSI C实现的, 那么这些对象是怎么在C中表示的呢?</p>
 <p>其实不仅仅是Python, 其他很多基于C实现的面向对象语言都是使用的结构体来存储一个类所包含的信息的. 也就是说, 所谓类, 也就无非是C中的结构体在堆上申请的一块内存. 在Python中, 对象的创建是按照固定的内存大小创建的. 但我们都知道我们是可以随意的给一个对象加上各种属性的, 这是怎么搞的? </p>
 <p>其实是这样, 这些对象都在自己的固定内存中维护一个指向一个可变大小的内存区域的指针. 那你可能要问了, 为啥不直接制定可变大小的对象区域? 其实这个答案很简单, 如果是这样 那么连续创建的两个对象在前一个对象需要增加大小的时候, 第二个是需要移动的, 如果第二个后面还有其他的对象, 还需要继续移动下去, 为第一个对象提供内存空间, 这就很麻烦了.</p>
 <h2 id="PyObject"><a href="#PyObject" class="headerlink" title="PyObject"></a>PyObject</h2><p>现在我们来看一下头文件中的<code>object.h</code>, 他定义了Python对象机制中的核心对象 — <strong><code>PyObject</code></strong></p>
@@ -323,7 +323,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python的内建对象"><span class="toc-number">1.</span> <span class="toc-text">Python的内建对象</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyObject"><span class="toc-number">1.2.</span> <span class="toc-text">PyObject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的创建"><span class="toc-number">1.3.</span> <span class="toc-text">对象的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的行为-方法"><span class="toc-number">1.4.</span> <span class="toc-text">对象的行为/方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型-类型"><span class="toc-number">1.5.</span> <span class="toc-text">类型:类型</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概述"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PyObject"><span class="toc-number">2.</span> <span class="toc-text">PyObject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的创建"><span class="toc-number">3.</span> <span class="toc-text">对象的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的行为-方法"><span class="toc-number">4.</span> <span class="toc-text">对象的行为/方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类型-类型"><span class="toc-number">5.</span> <span class="toc-text">类型:类型</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

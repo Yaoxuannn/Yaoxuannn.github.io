@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="这是《Python源码剖析 — 深度探索动态语言核心技术》的阅读记录. Python中的整数对象 - IntObject">
-<meta name="keywords" content="Python,源码">
+<meta name="keywords" content="Python,Source Code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python源码阅读-内建对象(2)">
 <meta property="og:url" content="https://yaoxuannn.com/2018/03/08/Python源码阅读-内建对象-2/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="这是《Python源码剖析 — 深度探索动态语言核心技术》的阅读记录. Python中的整数对象 - IntObject">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.285Z">
+<meta property="og:updated_time" content="2020-03-01T23:13:47.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python源码阅读-内建对象(2)">
 <meta name="twitter:description" content="这是《Python源码剖析 — 深度探索动态语言核心技术》的阅读记录. Python中的整数对象 - IntObject">
@@ -141,7 +141,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/源码/">源码</a>
+        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/Source-Code/">Source Code</a>
     </div>
 
 
@@ -209,7 +209,7 @@
 <h3 id="大整数"><a href="#大整数" class="headerlink" title="大整数"></a>大整数</h3><p>小整数的范围就这样了, 但是大整数不是说就不怎么使用了啊? 那怎么办? Python官方在空间和时间上做了平衡之后得到的解决方法是 - 提供一个单独的内存空间用来除了上面定义的小整数之外的整数使用. 这个内存空间就是一个新的结构, <code>_intblock</code>:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BLOCK_SIZE	1000	<span class="comment">/* 1K less typical malloc overhead */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BHEAD_SIZE	8	<span class="comment">/* Enough for a 64-bit pointer */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N_INTOBJECTS	((BLOCK_SIZE - BHEAD_SIZE) / sizeof(PyIntObject))</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">intblock</span> &#123;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> _<span class="title">intblock</span> *<span class="title">next</span>;</span></span><br><span class="line">	PyIntObject objects[N_INTOBJECTS];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">intblock</span> <span class="title">PyIntBlock</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> PyIntBlock *block_list = <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">static</span> PyIntObject *free_list = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
 
-<p><em>一个小疑问, 这里为啥不写在一起? 直接typedef不就行了?</em></p>
+<p><em>一个小疑问, 这里为啥不写在一起? 直接typedef不就行了? 可能只是代码风格问题吧</em></p>
 <p>当然, 这么一个空间也是可以动态调整的, 只要修改之后重新编译一下就好了.</p>
 <p>这就是装着整数对象的单向链表, 而<code>free_list</code>就是一开始指向这个链表表头的指针, 随着程序移动. 到了这里, 我们的这个小标题其实可以做个更改了, 它更应该叫做<strong>通用整数</strong>.</p>
 <h3 id="创建过程"><a href="#创建过程" class="headerlink" title="创建过程"></a>创建过程</h3><p>行了, 我们现在就开始看创建函数吧:</p>

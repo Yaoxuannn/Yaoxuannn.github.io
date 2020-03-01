@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="由于毕业设计的选题选择了关于使用Openstack和Docker容器技术来构建一个高校云主机申请平台, 现在开始学习了解一下这个云计算框架 - openstack. 扯点闲话关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为">
-<meta name="keywords" content="云计算,Openstack">
+<meta name="keywords" content="Openstack,Cloud Computing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识OpenStack_1">
 <meta property="og:url" content="https://yaoxuannn.com/2019/03/11/初识OpenStack_1/index.html">
@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://docs.openstack.org/install-guide/_images/openstack-arch-kilo-logical-v1.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/user%26role.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/keystone_concept.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.318Z">
+<meta property="og:updated_time" content="2020-03-01T23:39:44.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识OpenStack_1">
 <meta name="twitter:description" content="由于毕业设计的选题选择了关于使用Openstack和Docker容器技术来构建一个高校云主机申请平台, 现在开始学习了解一下这个云计算框架 - openstack. 扯点闲话关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为">
@@ -106,12 +106,12 @@
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2019/03/11/初识OpenStack_1/&title=初识OpenStack_1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2019/03/11/初识OpenStack_1/&title=初识OpenStack_1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2019/03/11/初识OpenStack_1/&name=初识OpenStack_1&description=&lt;p&gt;由于毕业设计的选题选择了关于使用Openstack和Docker容器技术来构建一个高校云主机申请平台, 现在开始学习了解一下这个云计算框架 - openstack.&lt;/p&gt;
-&lt;h3 id=&#34;扯点闲话&#34;&gt;&lt;a href=&#34;#扯点闲话&#34; class=&#34;headerlink&#34; title=&#34;扯点闲话&#34;&gt;&lt;/a&gt;扯点闲话&lt;/h3&gt;&lt;p&gt;关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为版本号, 例如2010年的第一个版本叫做Austin, 接着是Bexar, Cactus, Diablo….目前最新的版本是R版, 即Rocky. 这一次的我们选择的版本是Q版本, Queen.名字挺好听的吧. 就是他了.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+&lt;h2 id=&#34;扯点闲话&#34;&gt;&lt;a href=&#34;#扯点闲话&#34; class=&#34;headerlink&#34; title=&#34;扯点闲话&#34;&gt;&lt;/a&gt;扯点闲话&lt;/h2&gt;&lt;p&gt;关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为版本号, 例如2010年的第一个版本叫做Austin, 接着是Bexar, Cactus, Diablo….目前最新的版本是R版, 即Rocky. 这一次的我们选择的版本是Q版本, Queen.名字挺好听的吧. 就是他了.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#扯点闲话"><span class="toc-number">1.</span> <span class="toc-text">扯点闲话</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Keystone"><span class="toc-number"></span> <span class="toc-text">Keystone</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Glance"><span class="toc-number"></span> <span class="toc-text">Glance</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#扯点闲话"><span class="toc-number">1.</span> <span class="toc-text">扯点闲话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keystone"><span class="toc-number">2.</span> <span class="toc-text">Keystone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Glance"><span class="toc-number">3.</span> <span class="toc-text">Glance</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -146,7 +146,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Openstack/">Openstack</a>, <a class="tag-link" href="/tags/云计算/">云计算</a>
+        <a class="tag-link" href="/tags/Cloud-Computing/">Cloud Computing</a>, <a class="tag-link" href="/tags/Openstack/">Openstack</a>
     </div>
 
 
@@ -156,7 +156,7 @@
 
   <div class="content" itemprop="articleBody">
     <p>由于毕业设计的选题选择了关于使用Openstack和Docker容器技术来构建一个高校云主机申请平台, 现在开始学习了解一下这个云计算框架 - openstack.</p>
-<h3 id="扯点闲话"><a href="#扯点闲话" class="headerlink" title="扯点闲话"></a>扯点闲话</h3><p>关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为版本号, 例如2010年的第一个版本叫做Austin, 接着是Bexar, Cactus, Diablo….目前最新的版本是R版, 即Rocky. 这一次的我们选择的版本是Q版本, Queen.名字挺好听的吧. 就是他了.</p>
+<h2 id="扯点闲话"><a href="#扯点闲话" class="headerlink" title="扯点闲话"></a>扯点闲话</h2><p>关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为版本号, 例如2010年的第一个版本叫做Austin, 接着是Bexar, Cactus, Diablo….目前最新的版本是R版, 即Rocky. 这一次的我们选择的版本是Q版本, Queen.名字挺好听的吧. 就是他了.</p>
 <a id="more"></a>
 
 <p>Openstack是一个很复杂和庞大的云计算框架, 不过与其说他是框架, 不如说它是多个项目综合起来的一个更大项目, 最初的Openstack, 仅仅只有最基础的两个服务, 分别是NASA贡献的计算代码Nova和Rackspace贡献的对象存储代码Swift. 到了现在已经有大大小小几十个项目了:</p>
@@ -165,7 +165,7 @@
 <p><img src="https://docs.openstack.org/install-guide/_images/openstack-arch-kilo-logical-v1.png" alt="Logical architecture"></p>
 <p>还是蛮复杂的. </p>
 <p>接下来的几篇关于Openstack的文章, 我们会从单个项目进行入手, 这篇文章我们来看看Openstack的两个核心组件 – Keystone和Glance.</p>
-<h1 id="Keystone"><a href="#Keystone" class="headerlink" title="Keystone"></a>Keystone</h1><p>为什么所有人都要从这个组件说起? 因为这是一个进行统一的身份验证, token的发放和校验, 服务列表, 还有包括用户权限的定义. 几乎所有的Openstack服务都要经过Keystone, 来获取操作的权限和身份识别. 简单说来, 这是一个<code>Identity Sevice</code>.</p>
+<h2 id="Keystone"><a href="#Keystone" class="headerlink" title="Keystone"></a>Keystone</h2><p>为什么所有人都要从这个组件说起? 因为这是一个进行统一的身份验证, token的发放和校验, 服务列表, 还有包括用户权限的定义. 几乎所有的Openstack服务都要经过Keystone, 来获取操作的权限和身份识别. 简单说来, 这是一个<code>Identity Sevice</code>.</p>
 <p>官方文档对这么一个服务的表述是: </p>
 <blockquote>
 <p> The OpenStack Identity service provides a single point of integration for managing authentication, authorization, and a catalog of services.</p>
@@ -193,7 +193,7 @@
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/keystone_concept.png" alt="keystone_concept"></p>
 <p>随手用visio画的, 看看就好.</p>
 <p>关于Keystone的安装和基本部署, 官方文档都写的十分详细了(起码CentOS 7版本是这样子的), 所以照着做下来就不会有大问题. 我也没有踩到什么坑. 倒是下面的Glance踩到了坑.</p>
-<h1 id="Glance"><a href="#Glance" class="headerlink" title="Glance"></a>Glance</h1><p>说完了Keystone, 我们再来说下一个服务. 为了创建一个虚拟机, 我们需要一个image映像才可以, 而glance就是</p>
+<h2 id="Glance"><a href="#Glance" class="headerlink" title="Glance"></a>Glance</h2><p>说完了Keystone, 我们再来说下一个服务. 为了创建一个虚拟机, 我们需要一个image映像才可以, 而glance就是</p>
 <p>这么一个用于虚拟机映像的发现注册和获取的服务.glance支持使用文件后端(simple fs),或者是使用对象文件存储系统以及诸多外部存储系统.</p>
 <p>Glance包含这些组件:</p>
 <ul>
@@ -258,7 +258,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#扯点闲话"><span class="toc-number">1.</span> <span class="toc-text">扯点闲话</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Keystone"><span class="toc-number"></span> <span class="toc-text">Keystone</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Glance"><span class="toc-number"></span> <span class="toc-text">Glance</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#扯点闲话"><span class="toc-number">1.</span> <span class="toc-text">扯点闲话</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Keystone"><span class="toc-number">2.</span> <span class="toc-text">Keystone</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Glance"><span class="toc-number">3.</span> <span class="toc-text">Glance</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -273,7 +273,7 @@
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2019/03/11/初识OpenStack_1/&title=初识OpenStack_1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2019/03/11/初识OpenStack_1/&title=初识OpenStack_1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2019/03/11/初识OpenStack_1/&name=初识OpenStack_1&description=&lt;p&gt;由于毕业设计的选题选择了关于使用Openstack和Docker容器技术来构建一个高校云主机申请平台, 现在开始学习了解一下这个云计算框架 - openstack.&lt;/p&gt;
-&lt;h3 id=&#34;扯点闲话&#34;&gt;&lt;a href=&#34;#扯点闲话&#34; class=&#34;headerlink&#34; title=&#34;扯点闲话&#34;&gt;&lt;/a&gt;扯点闲话&lt;/h3&gt;&lt;p&gt;关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为版本号, 例如2010年的第一个版本叫做Austin, 接着是Bexar, Cactus, Diablo….目前最新的版本是R版, 即Rocky. 这一次的我们选择的版本是Q版本, Queen.名字挺好听的吧. 就是他了.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+&lt;h2 id=&#34;扯点闲话&#34;&gt;&lt;a href=&#34;#扯点闲话&#34; class=&#34;headerlink&#34; title=&#34;扯点闲话&#34;&gt;&lt;/a&gt;扯点闲话&lt;/h2&gt;&lt;p&gt;关于Openstack大家都听说过, 这个项目是由NASA和Rackspace发起开源的一个云平台. 最早于2010年发布第一个版本. 关于Openstack的版本号, 是按照26个英文字母的顺序, 用这些字母开头的单词来作为版本号, 例如2010年的第一个版本叫做Austin, 接着是Bexar, Cactus, Diablo….目前最新的版本是R版, 即Rocky. 这一次的我们选择的版本是Q版本, Queen.名字挺好听的吧. 就是他了.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

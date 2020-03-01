@@ -6,19 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="现在让我们一起来看看这只企鹅到底是个什么吧~~">
-<meta name="keywords" content="Linux,系统,Kernel">
+    <meta name="description" content="现在让我们一起来看看这只企鹅到底是个什么吧">
+<meta name="keywords" content="Linux,Kernel,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux内核管理和编译初步">
 <meta property="og:url" content="https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/index.html">
 <meta property="og:site_name" content="看多了会困">
-<meta property="og:description" content="现在让我们一起来看看这只企鹅到底是个什么吧~~">
+<meta property="og:description" content="现在让我们一起来看看这只企鹅到底是个什么吧">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Kernel_config.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.249Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核管理和编译初步">
-<meta name="twitter:description" content="现在让我们一起来看看这只企鹅到底是个什么吧~~">
+<meta name="twitter:description" content="现在让我们一起来看看这只企鹅到底是个什么吧">
 <meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Kernel_config.png">
     
     
@@ -102,12 +102,12 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&title=Linux内核管理和编译初步"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&title=Linux内核管理和编译初步"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&title=Linux内核管理和编译初步"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&name=Linux内核管理和编译初步&description=&lt;p&gt;现在让我们一起来看看这只企鹅到底是个什么吧~~&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&name=Linux内核管理和编译初步&description=&lt;p&gt;现在让我们一起来看看这只企鹅到底是个什么吧&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内核管理初步"><span class="toc-number">1.</span> <span class="toc-text">内核管理初步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sys"><span class="toc-number">2.</span> <span class="toc-text">/sys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译内核-Part1"><span class="toc-number">3.</span> <span class="toc-text">编译内核(Part1)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备开发环境"><span class="toc-number">3.1.</span> <span class="toc-text">准备开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取硬件信息"><span class="toc-number">3.2.</span> <span class="toc-text">获取硬件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取系统信息"><span class="toc-number">3.3.</span> <span class="toc-text">获取系统信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取内核源代码"><span class="toc-number">3.4.</span> <span class="toc-text">获取内核源代码</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内核管理初步"><span class="toc-number">1.</span> <span class="toc-text">内核管理初步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sys"><span class="toc-number">2.</span> <span class="toc-text">/sys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译内核"><span class="toc-number">3.</span> <span class="toc-text">编译内核</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备开发环境"><span class="toc-number">3.1.</span> <span class="toc-text">准备开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取硬件信息"><span class="toc-number">3.2.</span> <span class="toc-text">获取硬件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取系统信息"><span class="toc-number">3.3.</span> <span class="toc-text">获取系统信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取内核源代码"><span class="toc-number">3.4.</span> <span class="toc-text">获取内核源代码</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -142,7 +142,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Kernel/">Kernel</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Kernel/">Kernel</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>
     </div>
 
 
@@ -151,7 +151,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>现在让我们一起来看看这只企鹅到底是个什么吧~~</p>
+    <p>现在让我们一起来看看这只企鹅到底是个什么吧</p>
 <a id="more"></a>
 
 <h2 id="内核管理初步"><a href="#内核管理初步" class="headerlink" title="内核管理初步"></a>内核管理初步</h2><p>之前的Linux系统基本原理我们说过, Linux是单内核体系设计, 但它充分借鉴了微内核体系的优点, 引入了模块化的机制. </p>
@@ -162,11 +162,11 @@
 </ul>
 <p>对于内核对象我们有三种选择:</p>
 <ul>
-<li><p>[ ]: 不选择此功能</p>
+<li><p><code>[ ]</code>: 不选择此功能</p>
 </li>
-<li><p>[M]: 编译成模块</p>
+<li><p><code>[M]</code>: 编译成模块</p>
 </li>
-<li><p>[*]: 编译进内核核心</p>
+<li><p><code>[*]</code>: 编译进内核核心</p>
 </li>
 </ul>
 <p>要注意的是, 不是所有的内核代码都可以抽成模块的, 正常情况下, 内核核心自己有自己的框架结构, 压缩之后大小应该为1M左右, 而CentOS默认的内核已经有4M了, 这就说明已经将一些功能编译进了内核. 同样有些东西是不支持的模块化的, 对于这些功能来说就只有两种结果: 编译进内核和不编译进去.</p>
@@ -197,7 +197,7 @@
 <p><code>depmod</code> 这个命令不仅可以帮我们生成module.dep还可以生成我们在说grub中见到的<code>System.map-2.6.32-220.el6.x86_64</code>这样的文件. 说的标准点, depmod是内核模块依赖关系文件及系统信息映射文件的生成工具.在大多数情况下, 我们都无需手动调用.</p>
 <p>不知道你有没有注意到, 在上面进行modprobe的试验演示的时候, 分别出现了<code>insmod</code>和<code>rmmod</code>.</p>
 <p>这个其实才是真正的加载模块和卸载模块的命令, 不同的地方在于, 这两个命令仅仅在乎加载和卸载, 而不在意依赖关系, 这些命令的关系就有点类似是yum/apt和rpm/dpkg的关系. 不仅如此, 你也注意到了吧, 在执行insmod和rmmod的时候 后面跟上的参数是完整的绝对路径文件名. 其实也只有加载的时候麻烦点. 卸载时可以直接写模块名, 但是依然的, 不能解决依赖问题.</p>
-<p>/proc目录是内核的状态映射输出, 内核有很多状态信息和可设置的参数, 这些就通过这么一个伪文件系统.有关/proc的信息在<a href="https://justin13wyx.me/2017/07/02/Linux%E7%B3%BB%E7%BB%9F-%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">Linux系统-服务管理学习笔记</a>中提到了一些. </p>
+<p>/proc目录是内核的状态映射输出, 内核有很多状态信息和可设置的参数, 这些就通过这么一个伪文件系统.有关/proc的信息在<a href="https://yaoxuannn.com/2017/07/02/Linux%E7%B3%BB%E7%BB%9F-%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Linux系统-服务管理学习笔记</a>中提到了一些. </p>
 <p>内核的参数分成两种: 只读的和可写的. 只读的也就是那些输出的状态信息, 而可写的就是提供了设置参数, 来实现对内核某功能或特性的配置.</p>
 <p>一个控制的重要命令就是<code>sysctl</code>. 可用来查看和设定/proc下的诸多参数(内核参数) 我们不能通过直接修改文件的方式来进行修改, 但是还可以通过<code>echo</code>重定向来修改大部分参数的值.</p>
 <p>当我们想要进行某个属性修改的时候, 就: <code>sysctl -w path.to.parameter</code> 或者 <code>echo &quot;VALUE&quot; &gt; path/to/parameter</code> 在使用<code>sysctl -w</code> 路径的开头就直接是<code>/proc/sys/</code>了.</p>
@@ -248,7 +248,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ cpio -ivcd &lt; initramfs-2.6.32-220.el6.x86_64.img</span><br><span class="line">...(omitted)</span><br><span class="line">[root@WWW ~]$ ls -l</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 bin</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 cmdline</span><br><span class="line">drwxr-xr-x. 3 root root     4096 Jul 14 00:00 dev</span><br><span class="line">-rw-r--r--. 1 root root       19 Jul 14 00:00 dracut-004-256.el6</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 emergency</span><br><span class="line">drwxr-xr-x. 7 root root     4096 Jul 14 00:00 etc</span><br><span class="line">-rwxr-xr-x. 1 root root     8874 Jul 14 00:00 init</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 initqueue</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 initqueue-finished</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 initqueue-settled</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 initqueue-timeout</span><br><span class="line">-rw-r--r--. 1 root root 45508096 Jul 13 23:57 initramfs-2.6.32-220.el6.x86_64.img</span><br><span class="line">drwxr-xr-x. 7 root root     4096 Jul 14 00:00 lib</span><br><span class="line">drwxr-xr-x. 4 root root     4096 Jul 14 00:00 lib64</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 mount</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 pre-pivot</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 pre-trigger</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 pre-udev</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 proc</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 sbin</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 sys</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 sysroot</span><br><span class="line">drwxr-xr-x. 2 root root     4096 Jul 14 00:00 tmp</span><br><span class="line">drwxr-xr-x. 7 root root     4096 Jul 14 00:00 usr</span><br><span class="line">drwxr-xr-x. 4 root root     4096 Jul 14 00:00 var</span><br></pre></td></tr></table></figure>
 
 <p>目录文件是否很熟悉呢?这些就是熟悉的根目录fs.在sbin里也都是最基本需要的程序.像lvm和raid的支持也在这里呀~这里面还有一个叫<code>switch_root</code> 这个就是在帮助我们做根切换的!</p>
-<h2 id="编译内核-Part1"><a href="#编译内核-Part1" class="headerlink" title="编译内核(Part1)"></a>编译内核(Part1)</h2><p>编译内核的步骤分这么几步:</p>
+<h2 id="编译内核"><a href="#编译内核" class="headerlink" title="编译内核"></a>编译内核</h2><p>编译内核的步骤分这么几步:</p>
 <ul>
 <li>准备开发环境</li>
 <li>获取主机的硬件设备相关信息</li>
@@ -278,9 +278,9 @@
 <p>根据具体需求来进行配置之后就可以开始进行安装啦! 但是, 先别急着安装! 想一个问题先, 在我们安装时, 网络会断开 那么我们session断掉了, 整个安装进程也就直接结束了. 那岂不是就陷入了死循环了吗. 所以我们可以考虑使用screen这么一个工具. 他可以创建一个虚拟的屏幕, 使得任务只要虚拟机不关机, 就不会终止.</p>
 <p>好了! 开始编译吧! 编译的时候可以根据自己机器的情况加上<code>-j</code>参数来加快速度.</p>
 <blockquote>
-<p>编译了两个多小时…大家注意啊..(当然也许和我的电脑配置有关…)如果不是必要的话就不要加进去这么多功能啊…10G的硬盘, 光编译个内核就6个G了,我都没怎么选就进行make了, 所以说在进行上面的配置的时候要多花点时间来选择啊.</p>
+<p>编译了两个多小时…大家注意啊..(当然也许和我的电脑配置有关…) 如果不是必要的话就不要加进去这么多功能啊…10G的硬盘, 光编译个内核就6个G了,我都没怎么选就进行make了, 所以说在进行上面的配置的时候要多花点时间来筛选啊.</p>
 </blockquote>
-<p>(编译到大半夜开始继续码字的我)编译结束之后就可以开始安装了, 在执行常规的<code>make install</code>之前 要先将内核进行模块的安装.</p>
+<p>(编译到大半夜开始继续码字的我) 编译结束之后就可以开始安装了, 在执行常规的<code>make install</code>之前 要先将内核进行模块的安装.</p>
 <p>模块安装以及系统安装(会自动写入GRUB引导文件)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ make modules_install</span><br><span class="line">[root@WWW ~]$ make install</span><br></pre></td></tr></table></figure>
 
@@ -317,7 +317,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内核管理初步"><span class="toc-number">1.</span> <span class="toc-text">内核管理初步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sys"><span class="toc-number">2.</span> <span class="toc-text">/sys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译内核-Part1"><span class="toc-number">3.</span> <span class="toc-text">编译内核(Part1)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备开发环境"><span class="toc-number">3.1.</span> <span class="toc-text">准备开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取硬件信息"><span class="toc-number">3.2.</span> <span class="toc-text">获取硬件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取系统信息"><span class="toc-number">3.3.</span> <span class="toc-text">获取系统信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取内核源代码"><span class="toc-number">3.4.</span> <span class="toc-text">获取内核源代码</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#内核管理初步"><span class="toc-number">1.</span> <span class="toc-text">内核管理初步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sys"><span class="toc-number">2.</span> <span class="toc-text">/sys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译内核"><span class="toc-number">3.</span> <span class="toc-text">编译内核</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备开发环境"><span class="toc-number">3.1.</span> <span class="toc-text">准备开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取硬件信息"><span class="toc-number">3.2.</span> <span class="toc-text">获取硬件信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取系统信息"><span class="toc-number">3.3.</span> <span class="toc-text">获取系统信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取内核源代码"><span class="toc-number">3.4.</span> <span class="toc-text">获取内核源代码</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -331,7 +331,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&title=Linux内核管理和编译初步"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&title=Linux内核管理和编译初步"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&title=Linux内核管理和编译初步"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&name=Linux内核管理和编译初步&description=&lt;p&gt;现在让我们一起来看看这只企鹅到底是个什么吧~~&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/07/16/Linux的内核管理和编译初步/&name=Linux内核管理和编译初步&description=&lt;p&gt;现在让我们一起来看看这只企鹅到底是个什么吧&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ks_mirror.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cobbler_first_run.png">
 <meta property="og:image" content="https://www.zhangfangzhou.cn/wp-content/uploads/2017/11/centos7-bad-superblock-.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.329Z">
+<meta property="og:updated_time" content="2020-03-01T23:49:21.746Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="来,搭建一个DHCP服务器和PXE吧">
 <meta name="twitter:description" content="DHCP服务器建立起来特别简单啦, 就当放松心情来搭建一个吧! 另外 这一次顺便来看看神奇的网络引导究竟是怎么实现的~">
@@ -84,7 +84,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2017/10/08/Review/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/10/10/iptables/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2017/10/01/来做个mini-Linux吧/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -114,7 +114,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCP"><span class="toc-number">1.</span> <span class="toc-text">DHCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PXE"><span class="toc-number">2.</span> <span class="toc-text">PXE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cobbler的实现"><span class="toc-number"></span> <span class="toc-text">Cobbler的实现</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCP"><span class="toc-number">1.</span> <span class="toc-text">DHCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PXE"><span class="toc-number">2.</span> <span class="toc-text">PXE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cobbler的实现"><span class="toc-number">4.</span> <span class="toc-text">Cobbler的实现</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -271,7 +271,7 @@
 <p>如果是CentOS7, 过程和C6不太一样, 但大体相同:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">CentOS 7 PXE:</span><br><span class="line">  yum -y install syslinux tftp-server</span><br><span class="line"></span><br><span class="line">  cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/</span><br><span class="line">  cp /media/cdrom/images/pxelinux/&#123;vmlinuz,initrd.img&#125; /var/lib/tftp/boot/</span><br><span class="line">  cp /usr/share/syslinux/&#123;chain.c32,mboot.c32,menu.c32,memdisk&#125; /var/lib/tftpboot/</span><br><span class="line">  mkdir /var/lib/tftpboot/pxelinux.cfg/</span><br><span class="line"></span><br><span class="line">  创建/var/lib/tftpboot/pxelinux.cfg/default</span><br><span class="line">  内容类似如下：</span><br><span class="line">  default menu.c32</span><br><span class="line">  prompt 5</span><br><span class="line">  timeout 30</span><br><span class="line">  MENU TITLE CentOS 7 PXE Menu</span><br><span class="line"></span><br><span class="line">  LABEL linux</span><br><span class="line">  MENU LABEL Install CentOS 7 x86_64</span><br><span class="line">  KERNEL vmlinuz</span><br><span class="line">  APPEND initrd=initrd.img inst.repo=http://YUM_IP/centos7 ks=http://KS_IP/centos7.cfg</span><br></pre></td></tr></table></figure>
 
-<h1 id="Cobbler的实现"><a href="#Cobbler的实现" class="headerlink" title="Cobbler的实现"></a>Cobbler的实现</h1><p>我们在上面已经实现了一个简单的PXE网络引导环境, 那么现在说的Cobbler又是个什么东西呢? 实际上, 这是一个对PXE的更高级封装, 包括了KS, YUM等等一统之下的系统集中部署的环境.</p>
+<h2 id="Cobbler的实现"><a href="#Cobbler的实现" class="headerlink" title="Cobbler的实现"></a>Cobbler的实现</h2><p>我们在上面已经实现了一个简单的PXE网络引导环境, 那么现在说的Cobbler又是个什么东西呢? 实际上, 这是一个对PXE的更高级封装, 包括了KS, YUM等等一统之下的系统集中部署的环境.</p>
 <p>这个玩意是使用Python实现的, 十分小巧. 我们来看一下他的架构和一些名词:</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Cobbler_first.png" alt="Cobbler_first.png"></p>
 <p>这里最重要的部分就是Profile了, 我们在上面都知道较完整的一个网络引导起码需要vmlinuz + initrd.img, YUM repo, KS文件等等. 而不同的发行版是需要不同的, 或者说对应版本的vmlinuz, initrd.img的, 我们不能将非对应版本的这些扔到一块去.</p>
@@ -368,7 +368,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCP"><span class="toc-number">1.</span> <span class="toc-text">DHCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PXE"><span class="toc-number">2.</span> <span class="toc-text">PXE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cobbler的实现"><span class="toc-number"></span> <span class="toc-text">Cobbler的实现</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DHCP"><span class="toc-number">1.</span> <span class="toc-text">DHCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PXE"><span class="toc-number">2.</span> <span class="toc-text">PXE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cobbler的实现"><span class="toc-number">4.</span> <span class="toc-text">Cobbler的实现</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

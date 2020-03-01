@@ -22,12 +22,11 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/netadapter_conf.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ping1_result.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ping2_result.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Annotation.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/win_info.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_hostonly.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_nat.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmware_bridge.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.311Z">
+<meta property="og:updated_time" content="2020-03-01T23:38:40.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VMware的虚拟网络拓扑原理">
 <meta name="twitter:description" content="问题已经解决清楚, 下面记录的是我试图解决的一些过程. 顺便再来分享下过程中学习到的VMware各种上网模式的一些拓扑和原理">
@@ -191,10 +190,10 @@
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ping1_result.png" alt="ping1_result"></p>
 <p>这个是百度的一个公网地址, 可以看到是没啥问题的. </p>
 <p>接下来就有趣了, 我们通过宿主机上的Xshell来进行连接使用 毕竟通过远程连接操作起来更方便嘛~</p>
-<p>然后登进去之后虚拟机就不能连通道Internet了 !</p>
+<p>然后登进去之后虚拟机就不能连通到Internet了 !</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ping2_result.png" alt="ping2_result"></p>
 <p>经过一系列的尝试 我初步把问题定位在了ARP上, 因为连接前后发生的最大的变化就是网关地址的硬件地址:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Annotation.png" alt="Annotation"></p>
+<p><code>来自未来: 这图炸了 找不到原图了, 懒得复现这个问题了...</code></p>
 <p>你应该也发现了, 经过了宿主机的连接之后 新的网关地址的硬件地址变成了我们VMnet8的硬件地址:</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/win_info.png" alt="win_info"></p>
 <p>到这里有点神奇, 不过能确定的一点是, 这个VMnet8能够使得我们的宿主机和虚拟机进行通信, 但是虚拟机自己的internet连接并不是通过VMnet8来实现的. </p>

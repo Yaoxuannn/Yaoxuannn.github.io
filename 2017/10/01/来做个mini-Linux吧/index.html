@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="制作一只超 mini 的 Tux !!">
-<meta name="keywords" content="Linux,系统">
+<meta name="keywords" content="Linux,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="来做个mini-Linux吧!">
 <meta property="og:url" content="https://yaoxuannn.com/2017/10/01/来做个mini-Linux吧/index.html">
@@ -50,7 +50,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ins1.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ins2.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/works.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.330Z">
+<meta property="og:updated_time" content="2020-03-01T23:49:43.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="来做个mini-Linux吧!">
 <meta name="twitter:description" content="制作一只超 mini 的 Tux !!">
@@ -143,7 +143,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#制作开始"><span class="toc-number">1.</span> <span class="toc-text">制作开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移植bash-shell"><span class="toc-number">2.</span> <span class="toc-text">移植bash shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#busybox"><span class="toc-number">3.</span> <span class="toc-text">busybox</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#折腾不动了-后面有空再填坑-拜拜"><span class="toc-number"></span> <span class="toc-text">折腾不动了, 后面有空再填坑, 拜拜</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#制作开始"><span class="toc-number">1.</span> <span class="toc-text">制作开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移植bash-shell"><span class="toc-number">2.</span> <span class="toc-text">移植bash shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#busybox"><span class="toc-number">3.</span> <span class="toc-text">busybox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#折腾不动了-后面有空再填坑-拜拜"><span class="toc-number">4.</span> <span class="toc-text">折腾不动了, 后面有空再填坑, 拜拜</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -178,7 +178,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>
     </div>
 
 
@@ -410,7 +410,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"loading Intel e1000..."</span></span><br><span class="line">insmod lib/modules/e1000.ko</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Initializing NIC..."</span></span><br><span class="line">ifconfig eth1 192.168.206.133 up</span><br><span class="line">ifconfig lo 127.0.0.1 up</span><br><span class="line"></span><br><span class="line">[ -f /etc/sysconfig/network ] &amp;&amp; . /etc/sysconfig/network</span><br><span class="line">[ -z <span class="string">"<span class="variable">$HOSTNAME</span>"</span> -o <span class="variable">$HOSTNAME</span> == <span class="string">'(none)'</span> ] &amp;&amp; HOSTNAME=<span class="string">'localhost'</span></span><br><span class="line">hostname <span class="variable">$HOSTNAME</span></span><br></pre></td></tr></table></figure>
 
 <p>接着创建/etc/sysconfig/network, 向里面echo一句:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost sysroot]<span class="comment"># mkdir etc/sysconfig</span></span><br><span class="line">[root@localhost sysroot]<span class="comment"># echo "HOSTNAME=miniTux.justin13wyx.me" &gt; etc/sysconfig/network</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost sysroot]<span class="comment"># mkdir etc/sysconfig</span></span><br><span class="line">[root@localhost sysroot]<span class="comment"># echo "HOSTNAME=miniTux.yaoxuannn.com" &gt; etc/sysconfig/network</span></span><br></pre></td></tr></table></figure>
 
 <p>除了网络的初始化, 我们还想让这只小企鹅增加用户用户认证的功能, 怎么办?</p>
 <p>步骤如下:</p>
@@ -431,7 +431,7 @@
 <p>挂起, 打开小企鹅!</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/works.png" alt="works"></p>
 <p>It works! 我们的脚本工作了, 但是一敲回车就进入sh了..所以还是不行, 看样子是哪里有问题. ( 难道是busybox的Bug?</p>
-<h1 id="折腾不动了-后面有空再填坑-拜拜"><a href="#折腾不动了-后面有空再填坑-拜拜" class="headerlink" title="折腾不动了, 后面有空再填坑, 拜拜"></a>折腾不动了, 后面有空再填坑, 拜拜</h1>
+<h2 id="折腾不动了-后面有空再填坑-拜拜"><a href="#折腾不动了-后面有空再填坑-拜拜" class="headerlink" title="折腾不动了, 后面有空再填坑, 拜拜"></a>折腾不动了, 后面有空再填坑, 拜拜</h2>
   </div>
 </article>
 
@@ -464,7 +464,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#制作开始"><span class="toc-number">1.</span> <span class="toc-text">制作开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移植bash-shell"><span class="toc-number">2.</span> <span class="toc-text">移植bash shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#busybox"><span class="toc-number">3.</span> <span class="toc-text">busybox</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#折腾不动了-后面有空再填坑-拜拜"><span class="toc-number"></span> <span class="toc-text">折腾不动了, 后面有空再填坑, 拜拜</span></a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#制作开始"><span class="toc-number">1.</span> <span class="toc-text">制作开始</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#移植bash-shell"><span class="toc-number">2.</span> <span class="toc-text">移植bash shell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#busybox"><span class="toc-number">3.</span> <span class="toc-text">busybox</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#折腾不动了-后面有空再填坑-拜拜"><span class="toc-number">4.</span> <span class="toc-text">折腾不动了, 后面有空再填坑, 拜拜</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

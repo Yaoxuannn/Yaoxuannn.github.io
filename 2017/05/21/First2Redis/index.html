@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Redis – 基于内存的键值对数据库, 强大之处在于它的值可以是数据结构.">
-<meta name="keywords" content="Redis,数据库">
+<meta name="keywords" content="Redis,Database">
 <meta property="og:type" content="article">
 <meta property="og:title" content="First2Redis">
 <meta property="og:url" content="https://yaoxuannn.com/2017/05/21/First2Redis/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Redis – 基于内存的键值对数据库, 强大之处在于它的值可以是数据结构.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.214Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="First2Redis">
 <meta name="twitter:description" content="Redis – 基于内存的键值对数据库, 强大之处在于它的值可以是数据结构.">
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String"><span class="toc-number">1.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lists"><span class="toc-number">2.</span> <span class="toc-text">Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hashes"><span class="toc-number">3.</span> <span class="toc-text">Hashes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-number">4.</span> <span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sorted-Set"><span class="toc-number">5.</span> <span class="toc-text">Sorted Set</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EXISTS-and-DEL"><span class="toc-number">5.1.</span> <span class="toc-text">EXISTS and DEL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TYPE-and-KEYS"><span class="toc-number">5.2.</span> <span class="toc-text">TYPE and KEYS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RANDOMKEY-and-CLEAR"><span class="toc-number">5.3.</span> <span class="toc-text">RANDOMKEY and CLEAR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RENAME-and-RENAMENX"><span class="toc-number">5.4.</span> <span class="toc-text">RENAME and RENAMENX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis中的时间"><span class="toc-number">5.5.</span> <span class="toc-text">Redis中的时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#限定Key的存活时间"><span class="toc-number">5.5.1.</span> <span class="toc-text">限定Key的存活时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询key的存活时间"><span class="toc-number">5.5.2.</span> <span class="toc-text">查询key的存活时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#清除所有的Key"><span class="toc-number">5.5.3.</span> <span class="toc-text">清除所有的Key</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统设置相关"><span class="toc-number">5.6.</span> <span class="toc-text">系统设置相关</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String"><span class="toc-number">1.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lists"><span class="toc-number">2.</span> <span class="toc-text">Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hashes"><span class="toc-number">3.</span> <span class="toc-text">Hashes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-number">4.</span> <span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sorted-Set"><span class="toc-number">5.</span> <span class="toc-text">Sorted Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EXISTS-and-DEL"><span class="toc-number">6.</span> <span class="toc-text">EXISTS and DEL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TYPE-and-KEYS"><span class="toc-number">7.</span> <span class="toc-text">TYPE and KEYS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RANDOMKEY-and-CLEAR"><span class="toc-number">8.</span> <span class="toc-text">RANDOMKEY and CLEAR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RENAME-and-RENAMENX"><span class="toc-number">9.</span> <span class="toc-text">RENAME and RENAMENX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis中的时间"><span class="toc-number">10.</span> <span class="toc-text">Redis中的时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#限定Key的存活时间"><span class="toc-number">10.1.</span> <span class="toc-text">限定Key的存活时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询key的存活时间"><span class="toc-number">10.2.</span> <span class="toc-text">查询key的存活时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清除所有的Key"><span class="toc-number">10.3.</span> <span class="toc-text">清除所有的Key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统设置相关"><span class="toc-number">11.</span> <span class="toc-text">系统设置相关</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -140,7 +140,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Redis/">Redis</a>, <a class="tag-link" href="/tags/数据库/">数据库</a>
+        <a class="tag-link" href="/tags/Database/">Database</a>, <a class="tag-link" href="/tags/Redis/">Redis</a>
     </div>
 
 
@@ -223,28 +223,28 @@
 
 <p>使用<code>WITHSCORES</code>参数会连带返回记录值。</p>
 <p>接下来一起来看一下Redis的其他相关命令和系统管理操作.</p>
-<h3 id="EXISTS-and-DEL"><a href="#EXISTS-and-DEL" class="headerlink" title="EXISTS and DEL"></a>EXISTS and DEL</h3><p>见名知意啦~<code>EXISTS</code>用来判断一个Key是否存在, 存在就返回1, 不存在就返回0;</p>
+<h2 id="EXISTS-and-DEL"><a href="#EXISTS-and-DEL" class="headerlink" title="EXISTS and DEL"></a>EXISTS and DEL</h2><p>见名知意啦~<code>EXISTS</code>用来判断一个Key是否存在, 存在就返回1, 不存在就返回0;</p>
 <p><code>DEL</code>用来删除一个键, 或者是一系列的键.返回非零表示删除成功.</p>
 <blockquote>
 <p>非零是因为实际上<code>DEL</code>返回的是删除的条数.</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; set mykey m</span><br><span class="line">OK</span><br><span class="line">&gt; exists mykey</span><br><span class="line">(integer) 1</span><br><span class="line">&gt; del mykey</span><br><span class="line">(integer) 1</span><br><span class="line">&gt; exists mykey</span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
 
-<h3 id="TYPE-and-KEYS"><a href="#TYPE-and-KEYS" class="headerlink" title="TYPE and KEYS"></a>TYPE and KEYS</h3><p>终于可以知道值的属性了!使用<code>TYPE KEY</code>来获得属性描述.</p>
+<h2 id="TYPE-and-KEYS"><a href="#TYPE-and-KEYS" class="headerlink" title="TYPE and KEYS"></a>TYPE and KEYS</h2><p>终于可以知道值的属性了!使用<code>TYPE KEY</code>来获得属性描述.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; set mykey &quot;Foo&quot;</span><br><span class="line">OK</span><br><span class="line">&gt; type mykey</span><br><span class="line">string</span><br></pre></td></tr></table></figure>
 
 <p>所有支持的类型都可能被返回, 包括: <strong>( none, string, list, set, zset, hash )</strong>.</p>
 <p><code>KEYS</code>用来在Redis全局进行键的搜索, 使用<code>keys pattern</code>来进行检索.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; set student_name &apos;justin&apos;</span><br><span class="line">OK</span><br><span class="line">&gt; set student_grade 2</span><br><span class="line">OK</span><br><span class="line">&gt; keys student_*</span><br><span class="line">1) &quot;student_name&quot;</span><br><span class="line">2) &quot;student_grade&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="RANDOMKEY-and-CLEAR"><a href="#RANDOMKEY-and-CLEAR" class="headerlink" title="RANDOMKEY and CLEAR"></a>RANDOMKEY and CLEAR</h3><p>很迷的两个指令..我认为的.</p>
+<h2 id="RANDOMKEY-and-CLEAR"><a href="#RANDOMKEY-and-CLEAR" class="headerlink" title="RANDOMKEY and CLEAR"></a>RANDOMKEY and CLEAR</h2><p>很迷的两个指令..我认为的.</p>
 <p><code>CLEAR</code>就相当于<code>ctrl+l</code>.清屏指令</p>
 <p>至于<code>RANDOMKEY</code>, 我是没想明白用处在哪里.</p>
 <p><code>RANDOMKEY</code>随机返回一个键名, 如果数据库为空, 则返回空字符串.</p>
 <p>比如:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; randomkey</span><br><span class="line">(nil)</span><br><span class="line">&gt; set key1 100</span><br><span class="line">OK</span><br><span class="line">&gt; set key2 200</span><br><span class="line">OK</span><br><span class="line">&gt; set key3 300</span><br><span class="line">OK</span><br><span class="line">&gt; randomkey</span><br><span class="line">&quot;key2&quot;</span><br><span class="line">&gt; randomkey</span><br><span class="line">&quot;key1&quot;</span><br></pre></td></tr></table></figure>
 
-<h3 id="RENAME-and-RENAMENX"><a href="#RENAME-and-RENAMENX" class="headerlink" title="RENAME and RENAMENX"></a>RENAME and RENAMENX</h3><p>两个指令都是用来进行重命名的,区别在于:</p>
+<h2 id="RENAME-and-RENAMENX"><a href="#RENAME-and-RENAMENX" class="headerlink" title="RENAME and RENAMENX"></a>RENAME and RENAMENX</h2><p>两个指令都是用来进行重命名的,区别在于:</p>
 <ul>
 <li><p>RENAME 直接改名, 如果新的Key已经存在, 那么将会直接进行覆盖.</p>
 </li>
@@ -260,24 +260,24 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; set key value</span><br><span class="line">OK</span><br><span class="line">&gt; dbsize</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
 
-<h3 id="Redis中的时间"><a href="#Redis中的时间" class="headerlink" title="Redis中的时间"></a>Redis中的时间</h3><h4 id="限定Key的存活时间"><a href="#限定Key的存活时间" class="headerlink" title="限定Key的存活时间"></a>限定Key的存活时间</h4><p>对于任何数据都可以实现, 这主要用于临时存储, 并避免大量的<code>DEL</code>操作.</p>
+<h2 id="Redis中的时间"><a href="#Redis中的时间" class="headerlink" title="Redis中的时间"></a>Redis中的时间</h2><h3 id="限定Key的存活时间"><a href="#限定Key的存活时间" class="headerlink" title="限定Key的存活时间"></a>限定Key的存活时间</h3><p>对于任何数据都可以实现, 这主要用于临时存储, 并避免大量的<code>DEL</code>操作.</p>
 <p>指令是: <code>expire</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; set key somevalue</span><br><span class="line">OK</span><br><span class="line">&gt; expire key 10</span><br><span class="line">(integer) 1</span><br><span class="line">&gt; get key</span><br><span class="line">&quot;somevalue&quot;</span><br></pre></td></tr></table></figure>
 
 <p>10s后再次执行:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; get key </span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
 
-<h4 id="查询key的存活时间"><a href="#查询key的存活时间" class="headerlink" title="查询key的存活时间"></a>查询key的存活时间</h4><p>多亲切的指令, 查询key存活时间的指令是: <code>TTL</code> – ( time to live ) </p>
+<h3 id="查询key的存活时间"><a href="#查询key的存活时间" class="headerlink" title="查询key的存活时间"></a>查询key的存活时间</h3><p>多亲切的指令, 查询key存活时间的指令是: <code>TTL</code> – ( time to live ) </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; set key 100 ex 30</span><br><span class="line">OK</span><br><span class="line">&gt; ttl key</span><br><span class="line">(integer) 28</span><br><span class="line">&gt; ttl key</span><br><span class="line">(integer) 26</span><br></pre></td></tr></table></figure>
 
-<h4 id="清除所有的Key"><a href="#清除所有的Key" class="headerlink" title="清除所有的Key"></a>清除所有的Key</h4><p>两个指令都是用来进行清除操作的:</p>
+<h3 id="清除所有的Key"><a href="#清除所有的Key" class="headerlink" title="清除所有的Key"></a>清除所有的Key</h3><p>两个指令都是用来进行清除操作的:</p>
 <ul>
 <li><code>FLUSHDB</code> 清空当前数据库的所有键</li>
 <li><code>FLUSHALL</code> 清空所有数据库中的所有键</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; flushdb</span><br><span class="line">OK</span><br><span class="line">-----------</span><br><span class="line">&gt; flushall</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
 
-<h3 id="系统设置相关"><a href="#系统设置相关" class="headerlink" title="系统设置相关"></a>系统设置相关</h3><p>Redis可以通过使用配置文件或者<code>CLI</code>的方式进行配置.</p>
+<h2 id="系统设置相关"><a href="#系统设置相关" class="headerlink" title="系统设置相关"></a>系统设置相关</h2><p>Redis可以通过使用配置文件或者<code>CLI</code>的方式进行配置.</p>
 <p>指令的语法倒是同git很像.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; config get requirepass</span><br><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;&quot;</span><br><span class="line">&gt; config set requirepass &quot;mima&quot;</span><br><span class="line">OK</span><br><span class="line">&gt; config get requirepass</span><br><span class="line">(error) NOAUTH Authentication required</span><br><span class="line">&gt; auth mima</span><br><span class="line">OK</span><br><span class="line">&gt; config get requirepass</span><br><span class="line">1) &quot;requirepass&quot;</span><br><span class="line">2) &quot;mima&quot;</span><br></pre></td></tr></table></figure>
 
@@ -336,7 +336,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String"><span class="toc-number">1.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lists"><span class="toc-number">2.</span> <span class="toc-text">Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hashes"><span class="toc-number">3.</span> <span class="toc-text">Hashes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-number">4.</span> <span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sorted-Set"><span class="toc-number">5.</span> <span class="toc-text">Sorted Set</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EXISTS-and-DEL"><span class="toc-number">5.1.</span> <span class="toc-text">EXISTS and DEL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TYPE-and-KEYS"><span class="toc-number">5.2.</span> <span class="toc-text">TYPE and KEYS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RANDOMKEY-and-CLEAR"><span class="toc-number">5.3.</span> <span class="toc-text">RANDOMKEY and CLEAR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RENAME-and-RENAMENX"><span class="toc-number">5.4.</span> <span class="toc-text">RENAME and RENAMENX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redis中的时间"><span class="toc-number">5.5.</span> <span class="toc-text">Redis中的时间</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#限定Key的存活时间"><span class="toc-number">5.5.1.</span> <span class="toc-text">限定Key的存活时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查询key的存活时间"><span class="toc-number">5.5.2.</span> <span class="toc-text">查询key的存活时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#清除所有的Key"><span class="toc-number">5.5.3.</span> <span class="toc-text">清除所有的Key</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#系统设置相关"><span class="toc-number">5.6.</span> <span class="toc-text">系统设置相关</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String"><span class="toc-number">1.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Lists"><span class="toc-number">2.</span> <span class="toc-text">Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hashes"><span class="toc-number">3.</span> <span class="toc-text">Hashes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-number">4.</span> <span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sorted-Set"><span class="toc-number">5.</span> <span class="toc-text">Sorted Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EXISTS-and-DEL"><span class="toc-number">6.</span> <span class="toc-text">EXISTS and DEL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TYPE-and-KEYS"><span class="toc-number">7.</span> <span class="toc-text">TYPE and KEYS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RANDOMKEY-and-CLEAR"><span class="toc-number">8.</span> <span class="toc-text">RANDOMKEY and CLEAR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RENAME-and-RENAMENX"><span class="toc-number">9.</span> <span class="toc-text">RENAME and RENAMENX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis中的时间"><span class="toc-number">10.</span> <span class="toc-text">Redis中的时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#限定Key的存活时间"><span class="toc-number">10.1.</span> <span class="toc-text">限定Key的存活时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询key的存活时间"><span class="toc-number">10.2.</span> <span class="toc-text">查询key的存活时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#清除所有的Key"><span class="toc-number">10.3.</span> <span class="toc-text">清除所有的Key</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统设置相关"><span class="toc-number">11.</span> <span class="toc-text">系统设置相关</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

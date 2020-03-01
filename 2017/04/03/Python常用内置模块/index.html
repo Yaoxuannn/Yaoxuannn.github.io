@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Python内置了很多模块,这些模块往往很有用.">
-<meta name="keywords" content="学习笔记,Python">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python常用内置模块">
 <meta property="og:url" content="https://yaoxuannn.com/2017/04/03/Python常用内置模块/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Python内置了很多模块,这些模块往往很有用.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.280Z">
+<meta property="og:updated_time" content="2020-03-01T23:06:04.519Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python常用内置模块">
 <meta name="twitter:description" content="Python内置了很多模块,这些模块往往很有用.">
@@ -100,13 +100,12 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&title=Python常用内置模块"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&title=Python常用内置模块"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&title=Python常用内置模块"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&name=Python常用内置模块&description=&lt;hr&gt;
-&lt;p&gt;Python内置了很多模块,这些模块往往很有用.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&name=Python常用内置模块&description=&lt;p&gt;Python内置了很多模块,这些模块往往很有用.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理时间和日期–datetime"><span class="toc-number">1.</span> <span class="toc-text">处理时间和日期–datetime</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#时间的加减"><span class="toc-number">1.0.1.</span> <span class="toc-text">时间的加减</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#collections"><span class="toc-number">2.</span> <span class="toc-text">collections</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base64"><span class="toc-number">3.</span> <span class="toc-text">base64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hashlib"><span class="toc-number">4.</span> <span class="toc-text">hashlib</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#itertools"><span class="toc-number">5.</span> <span class="toc-text">itertools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#count-进行自增1的迭代"><span class="toc-number">5.1.</span> <span class="toc-text">count: 进行自增1的迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cycle-进行循环迭代"><span class="toc-number">5.2.</span> <span class="toc-text">cycle: 进行循环迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repeat-进行重复迭代-准确的说-这也可以不叫做无限迭代"><span class="toc-number">5.3.</span> <span class="toc-text">repeat: 进行重复迭代(准确的说,这也可以不叫做无限迭代)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle"><span class="toc-number">6.</span> <span class="toc-text">pickle</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理时间和日期–datetime"><span class="toc-number">1.</span> <span class="toc-text">处理时间和日期–datetime</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#时间的加减"><span class="toc-number">1.1.</span> <span class="toc-text">时间的加减</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#collections"><span class="toc-number">2.</span> <span class="toc-text">collections</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base64"><span class="toc-number">3.</span> <span class="toc-text">base64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hashlib"><span class="toc-number">4.</span> <span class="toc-text">hashlib</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#itertools"><span class="toc-number">5.</span> <span class="toc-text">itertools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#count-进行自增1的迭代"><span class="toc-number">5.1.</span> <span class="toc-text">count: 进行自增1的迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cycle-进行循环迭代"><span class="toc-number">5.2.</span> <span class="toc-text">cycle: 进行循环迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repeat-进行重复迭代-准确的说-这也可以不叫做无限迭代"><span class="toc-number">5.3.</span> <span class="toc-text">repeat: 进行重复迭代(准确的说,这也可以不叫做无限迭代)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle"><span class="toc-number">6.</span> <span class="toc-text">pickle</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -141,7 +140,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/学习笔记/">学习笔记</a>
+        <a class="tag-link" href="/tags/Python/">Python</a>
     </div>
 
 
@@ -150,12 +149,10 @@
   
 
   <div class="content" itemprop="articleBody">
-    <hr>
-<p>Python内置了很多模块,这些模块往往很有用.</p>
+    <p>Python内置了很多模块,这些模块往往很有用.</p>
 <a id="more"></a>
 
-<h2 id="处理时间和日期–datetime"><a href="#处理时间和日期–datetime" class="headerlink" title="处理时间和日期–datetime"></a>处理时间和日期–datetime</h2><hr>
-<p>1.获取当前的时间–以datetime对象方式返回</p>
+<h2 id="处理时间和日期–datetime"><a href="#处理时间和日期–datetime" class="headerlink" title="处理时间和日期–datetime"></a>处理时间和日期–datetime</h2><p>1.获取当前的时间–以datetime对象方式返回</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line">now = datetime.now()</span><br><span class="line">//now 是一个datetime对象</span><br><span class="line">//datetime.datetime(<span class="number">2017</span>, <span class="number">3</span>, <span class="number">30</span>, <span class="number">1</span>, <span class="number">53</span>, <span class="number">42</span>, <span class="number">679114</span>)</span><br><span class="line">print(now)</span><br><span class="line">//<span class="number">2017</span><span class="number">-03</span><span class="number">-30</span> <span class="number">01</span>:<span class="number">53</span>:<span class="number">42.679114</span></span><br></pre></td></tr></table></figure>
 
 <p>2.获取指定时间和日期,直接像构造一个datetime对象就行了.</p>
@@ -182,7 +179,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">current = now.strftime(<span class="string">"%a, %b %d %H:%M"</span>)</span><br><span class="line">print(current)</span><br><span class="line">//Thu March <span class="number">30</span> <span class="number">02</span>:<span class="number">55</span></span><br></pre></td></tr></table></figure>
 
 <p><a href="https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior" target="_blank" rel="noopener">官方文档:时间 格式化符号参考</a></p>
-<h4 id="时间的加减"><a href="#时间的加减" class="headerlink" title="时间的加减"></a>时间的加减</h4><p>由于计算机是使用的时间戳来存储的时间,那么就可用<code>+</code>或<code>-</code>来进行运算.</p>
+<h3 id="时间的加减"><a href="#时间的加减" class="headerlink" title="时间的加减"></a>时间的加减</h3><p>由于计算机是使用的时间戳来存储的时间,那么就可用<code>+</code>或<code>-</code>来进行运算.</p>
 <p>但是,如果为了更好地迁移,可以使用这样的模块<code>timedelta</code>.</p>
 <p>例如:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta, timezone</span><br><span class="line">now = datetime.now()</span><br><span class="line">now + timedelta(hours=<span class="number">14</span>)</span><br><span class="line">now + timedelta(days=<span class="number">1</span>)</span><br><span class="line">now + timedelta(days=<span class="number">2</span>,hours=<span class="number">12</span>)//这些都是可行的</span><br></pre></td></tr></table></figure>
@@ -198,8 +195,7 @@
 
 <p>如果在获取datetime对象时,没有指定时区,就会被视作本地时间.</p>
 <p>所以,不如使用timestamp来存放datetime对象.</p>
-<h2 id="collections"><a href="#collections" class="headerlink" title="collections"></a>collections</h2><hr>
-<p>见名知意,内建的集合模块,封装了很多有用的集合类</p>
+<h2 id="collections"><a href="#collections" class="headerlink" title="collections"></a>collections</h2><p>见名知意,内建的集合模块,封装了很多有用的集合类</p>
 <p>主要有:<code>namedtuple</code>,<code>deque</code>,<code>defaultdict</code>, <code>OrderedDict</code>, <code>Counter</code>….</p>
 <p><strong>namedtuple</strong>:</p>
 <p>假使我们构建一个元组:</p>
@@ -234,8 +230,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">c= Counter()</span><br><span class="line"><span class="keyword">for</span> char <span class="keyword">in</span> <span class="string">'Hello,World'</span>:</span><br><span class="line">  c[char] += <span class="number">1</span></span><br><span class="line">print(c)</span><br></pre></td></tr></table></figure>
 
 <p><code>c</code>的输出为Counter<code>({&#39;l&#39;:3, &#39;o&#39;:2, .....})</code></p>
-<h2 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h2><hr>
-<p>先来简要介绍一下Base64编码的原理,Base64使用 a-z A-Z 0-9 + / 这64个字符来表示二进制数据(不计等号,等号是用来补空位的),由于,计算机内的编码方式是2进制,2^6=64,因此,便将6个比特映射到一个Base64可打印字符上,就可以进行转换了.</p>
+<h2 id="base64"><a href="#base64" class="headerlink" title="base64"></a>base64</h2><p>先来简要介绍一下Base64编码的原理,Base64使用 a-z A-Z 0-9 + / 这64个字符来表示二进制数据(不计等号,等号是用来补空位的),由于,计算机内的编码方式是2进制,2^6=64,因此,便将6个比特映射到一个Base64可打印字符上,就可以进行转换了.</p>
 <p>比如:<code>man</code>这个字符串,转为Base64编码的过程为:</p>
 <table>
 <thead>
@@ -263,8 +258,7 @@
 <p>现在就可以来看一下Python对Base64的支持了.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">encoded = base64.b64encode(<span class="string">b'Hello,World'</span>)//注意这里是二进制格式化字符串</span><br><span class="line">print(encoded)</span><br><span class="line">//<span class="string">b'SGVsbG8sV29ybGQ='</span></span><br><span class="line">type(encoded)</span><br><span class="line">//&lt;<span class="class"><span class="keyword">class</span> '<span class="title">byte</span>'&gt;</span></span><br><span class="line"><span class="class">//返回的也是二进制数据</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="hashlib"><a href="#hashlib" class="headerlink" title="hashlib"></a>hashlib</h2><hr>
-<p>hashlib是python的摘要算法模块,提供常见的摘要算法如:SHA,MD5等等</p>
+<h2 id="hashlib"><a href="#hashlib" class="headerlink" title="hashlib"></a>hashlib</h2><p>hashlib是python的摘要算法模块,提供常见的摘要算法如:SHA,MD5等等</p>
 <p>简单的说,摘要算法就是通过一个函数，把任意长度的数据转换为一个长度固定的数据串</p>
 <p>只要源数据有一丁点的改变,摘要(digest)就会有翻天覆地的变化.所以经常用来进行软件或信息的检验.</p>
 <p>摘要函数是一个单向函数，计算f(data)很容易，但通过digest反推data却非常困难。</p>
@@ -272,8 +266,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line">md5 = hashlib.md5()</span><br><span class="line">md5.update(<span class="string">"Hello,World"</span>.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">md5.update(<span class="string">"This is Python!"</span>.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">md5.hexdigest()</span><br><span class="line">//<span class="string">'d6a6851cd4f390744645be4f5646b52a'</span></span><br></pre></td></tr></table></figure>
 
 <p>还可以使用更加安全的SHA算法,调用方法基本类似.</p>
-<h2 id="itertools"><a href="#itertools" class="headerlink" title="itertools"></a>itertools</h2><hr>
-<p><strong>注意:当使用不当时.itertools极其容易无限迭代</strong></p>
+<h2 id="itertools"><a href="#itertools" class="headerlink" title="itertools"></a>itertools</h2><p><strong>注意:当使用不当时.itertools极其容易无限迭代</strong></p>
 <p>因此做实验时建议考虑加上time.sleep()</p>
 <p>拥有无限迭代的迭代器有:</p>
 <h3 id="count-进行自增1的迭代"><a href="#count-进行自增1的迭代" class="headerlink" title="count: 进行自增1的迭代"></a>count: 进行自增1的迭代</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools, time</span><br><span class="line">naturals = itertools.count(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> naturals:</span><br><span class="line">  print(n)</span><br><span class="line">  time.sleep(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
@@ -303,8 +296,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key,val <span class="keyword">in</span> itertools.groupby(<span class="string">"AaaBbbCcc"</span>, <span class="keyword">lambda</span> x : x.upper()):</span><br><span class="line">  print(key, list(val))</span><br><span class="line">///返回</span><br><span class="line">A [<span class="string">"A"</span>,<span class="string">"a"</span>,<span class="string">"a"</span>]</span><br><span class="line">B [<span class="string">"B"</span>,<span class="string">"b"</span>,<span class="string">"b"</span>]</span><br><span class="line">C [<span class="string">"C"</span>,<span class="string">"c"</span>,<span class="string">"c"</span>]</span><br></pre></td></tr></table></figure>
 
 <p>只要后面函数的返回值相同,那么元素就被认为是同组的,这个返回的值就是元素的组名.</p>
-<h2 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h2><hr>
-<p>pickle这个模块负责进行对象的持久化,或者叫序列化.</p>
+<h2 id="pickle"><a href="#pickle" class="headerlink" title="pickle"></a>pickle</h2><p>pickle这个模块负责进行对象的持久化,或者叫序列化.</p>
 <p>一个对象的生命周期是不可能比一个Pyhton程序还长的,所以,为了使得这个对象在下次程序启动是仍能使用,pickle便提供了这样的接口.</p>
 <p>pickle的核心API就是<code>dump/dumps/load/loads</code>这四个.</p>
 <p>这是一个持久化的例子:</p>
@@ -346,7 +338,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理时间和日期–datetime"><span class="toc-number">1.</span> <span class="toc-text">处理时间和日期–datetime</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#时间的加减"><span class="toc-number">1.0.1.</span> <span class="toc-text">时间的加减</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#collections"><span class="toc-number">2.</span> <span class="toc-text">collections</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base64"><span class="toc-number">3.</span> <span class="toc-text">base64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hashlib"><span class="toc-number">4.</span> <span class="toc-text">hashlib</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#itertools"><span class="toc-number">5.</span> <span class="toc-text">itertools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#count-进行自增1的迭代"><span class="toc-number">5.1.</span> <span class="toc-text">count: 进行自增1的迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cycle-进行循环迭代"><span class="toc-number">5.2.</span> <span class="toc-text">cycle: 进行循环迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repeat-进行重复迭代-准确的说-这也可以不叫做无限迭代"><span class="toc-number">5.3.</span> <span class="toc-text">repeat: 进行重复迭代(准确的说,这也可以不叫做无限迭代)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle"><span class="toc-number">6.</span> <span class="toc-text">pickle</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#处理时间和日期–datetime"><span class="toc-number">1.</span> <span class="toc-text">处理时间和日期–datetime</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#时间的加减"><span class="toc-number">1.1.</span> <span class="toc-text">时间的加减</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#collections"><span class="toc-number">2.</span> <span class="toc-text">collections</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base64"><span class="toc-number">3.</span> <span class="toc-text">base64</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hashlib"><span class="toc-number">4.</span> <span class="toc-text">hashlib</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#itertools"><span class="toc-number">5.</span> <span class="toc-text">itertools</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#count-进行自增1的迭代"><span class="toc-number">5.1.</span> <span class="toc-text">count: 进行自增1的迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cycle-进行循环迭代"><span class="toc-number">5.2.</span> <span class="toc-text">cycle: 进行循环迭代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repeat-进行重复迭代-准确的说-这也可以不叫做无限迭代"><span class="toc-number">5.3.</span> <span class="toc-text">repeat: 进行重复迭代(准确的说,这也可以不叫做无限迭代)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pickle"><span class="toc-number">6.</span> <span class="toc-text">pickle</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -360,8 +352,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&title=Python常用内置模块"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&title=Python常用内置模块"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&title=Python常用内置模块"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&name=Python常用内置模块&description=&lt;hr&gt;
-&lt;p&gt;Python内置了很多模块,这些模块往往很有用.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/03/Python常用内置模块/&name=Python常用内置模块&description=&lt;p&gt;Python内置了很多模块,这些模块往往很有用.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="前一篇文章过了一遍权限服务和虚拟机映像服务, 而且都是在控制节点上进行的. 现在终于要开始部署计算服务了, 想想都激动.">
-<meta name="keywords" content="云计算,Openstack">
+<meta name="keywords" content="Openstack,Cloud Computing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="初识Opensatck_2">
 <meta property="og:url" content="https://yaoxuannn.com/2019/03/12/初识OpenStack_2/index.html">
@@ -16,7 +16,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Nova-arch.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dashboard1.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.319Z">
+<meta property="og:updated_time" content="2020-03-01T23:40:34.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Opensatck_2">
 <meta name="twitter:description" content="前一篇文章过了一遍权限服务和虚拟机映像服务, 而且都是在控制节点上进行的. 现在终于要开始部署计算服务了, 想想都激动.">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nova"><span class="toc-number">1.</span> <span class="toc-text">Nova</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nova的配置-控制节点和计算节点"><span class="toc-number">1.1.</span> <span class="toc-text">Nova的配置 - 控制节点和计算节点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Neutron"><span class="toc-number">2.</span> <span class="toc-text">Neutron</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Neutron的配置"><span class="toc-number">2.1.</span> <span class="toc-text">Neutron的配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Horizon"><span class="toc-number">3.</span> <span class="toc-text">Horizon</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nova"><span class="toc-number">1.</span> <span class="toc-text">Nova</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nova的配置-控制节点和计算节点"><span class="toc-number">1.1.</span> <span class="toc-text">Nova的配置 - 控制节点和计算节点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Neutron"><span class="toc-number">2.</span> <span class="toc-text">Neutron</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Neutron的配置"><span class="toc-number">2.1.</span> <span class="toc-text">Neutron的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Horizon"><span class="toc-number">3.</span> <span class="toc-text">Horizon</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -143,7 +143,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Openstack/">Openstack</a>, <a class="tag-link" href="/tags/云计算/">云计算</a>
+        <a class="tag-link" href="/tags/Cloud-Computing/">Cloud Computing</a>, <a class="tag-link" href="/tags/Openstack/">Openstack</a>
     </div>
 
 
@@ -155,7 +155,7 @@
     <p>前一篇文章过了一遍权限服务和虚拟机映像服务, 而且都是在控制节点上进行的. 现在终于要开始部署计算服务了, 想想都激动. </p>
 <a id="more"></a>
 
-<h1 id="Nova"><a href="#Nova" class="headerlink" title="Nova"></a>Nova</h1><p>为了了解Nova是如何工作的, 我们先看下这个逻辑架构图的Nova部分:</p>
+<h2 id="Nova"><a href="#Nova" class="headerlink" title="Nova"></a>Nova</h2><p>为了了解Nova是如何工作的, 我们先看下这个逻辑架构图的Nova部分:</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Nova-arch.png" alt="Nova-arch"></p>
 <p>可以看到, 其中最重要, 和大部分的组件都产生关系的组件就是这个<code>Queue</code>了. 官方文档称呼这个东西叫做<code>central hub</code>, 都已经central了能不重要吗哈哈. 这个队列主要是在各种daemon中传递消息的, 通常使用的是RabbitMQ.</p>
 <p>然后我们从最外面开始看, 这里唯一和外界打交道的就是nova-api了, 它是用来接受和响应终端用户的计算API调用的. 与之配合的, 上图中没有列出的一个组件是<code>nova-api-metadata service</code>, 听名字就知道了, 这个东西是用来接受来自实例的源数据请求的.</p>
@@ -171,7 +171,7 @@
 </ul>
 <p>根据虚拟机平台不同, 所使用到的HyperVisor API也不同. 然后再虚拟机启动之后把他在数据库中存储的状态进行update.</p>
 <p>那就奇怪了, 上面的架构图中, 计算服务似乎并没和数据库进行直接的交互. 没错, 负责协调引领计算节点和数据库交互的模块就是<code>conductor module</code>. </p>
-<h2 id="Nova的配置-控制节点和计算节点"><a href="#Nova的配置-控制节点和计算节点" class="headerlink" title="Nova的配置 - 控制节点和计算节点"></a>Nova的配置 - 控制节点和计算节点</h2><p>我们按照官方文档的说明, 对控制节点和计算节点的Nova服务进行配置, 然后进行安装验证. 下面说下我遇到的问题:</p>
+<h3 id="Nova的配置-控制节点和计算节点"><a href="#Nova的配置-控制节点和计算节点" class="headerlink" title="Nova的配置 - 控制节点和计算节点"></a>Nova的配置 - 控制节点和计算节点</h3><p>我们按照官方文档的说明, 对控制节点和计算节点的Nova服务进行配置, 然后进行安装验证. 下面说下我遇到的问题:</p>
 <p>安装和配置完成之后, 惊奇的发现不停的报503和401错误, 原因大概率可能是因为配置文件里面的密码写错了, 另外, 如果密码参数是空白的话, 也会报错. </p>
 <blockquote>
 <p>我之前在说glance的时候说这个配置项在官方文档已经找不到了, 但是如果不在里面写上的话, 一些服务注册发现会遇到授权错误导致失败, 也即是401 Unauthorized错误的原因. 所以还是要写上的.</p>
@@ -185,7 +185,7 @@
 
 <p>然后google了很久都说是把数据库改一下就好了, 但是神奇的是进去之后发现并没有重复的compute节点, 于是我就把数据库洗掉了重新生成了一次, 这一次就好了, 想要尝试复现这个情况的时候也没成功. 所以就先当做是一个奇怪的现象记录在这里.</p>
 <p>配置好了Nova之后我们就可以开始着手搭建最小化openstack的最后一步了, 来构建网络服务. 代码名为<strong><code>neutron</code></strong>.</p>
-<h1 id="Neutron"><a href="#Neutron" class="headerlink" title="Neutron"></a>Neutron</h1><p>先来了解一下Openstack的两种网络选项, 分别叫做<code>Provider Networks</code>和<code>Self-Service Networks</code>.</p>
+<h2 id="Neutron"><a href="#Neutron" class="headerlink" title="Neutron"></a>Neutron</h2><p>先来了解一下Openstack的两种网络选项, 分别叫做<code>Provider Networks</code>和<code>Self-Service Networks</code>.</p>
 <p>其中前者主要就只有2层, 他把虚拟的网络通过桥接的方式连接到物理网络上, 然后依赖物理网络上的第三层服务(路由). 至于后者, 使用到的技术就是NAT, 所以显然, 这个网络选项是含有第三层服务的.</p>
 <p>接下来就来看看Openstack的网络组件Neutron的相关, 这个服务主要包含三个组件:</p>
 <ul>
@@ -196,14 +196,14 @@
 <p>现在我们来说说关于neutron和Openstack网络一些概念, 作为一个网络服务就是需要提供对于网络, 子网, 路由器等等的对象抽象. 对于一个给定的网络, 需要设立至少一个外部网络, 这个外部网络不仅仅是一个虚拟定义网络, 而是一个在Openstack范围之外可以访问到的物理的外部网络, 只要是在这么一个外部的网络中, 任何人都可以物理的访问到. 除了外部网络 , 每一个Neutron定义的网络还需要有一至多个内部网络, 这些软件定义网络直接连接到虚拟机, 在这么一个网络中, 只有给定这些网络和子网的虚拟机之间可以通过这些网络直接访问. </p>
 <p>另外, 在Openstack的网络概念中, 还有一个叫做安全组的东西. 熟悉吧, 我们在腾讯云阿里云操作云主机的时候就遇到这个概念了, 所谓安全组其实就是防火墙规则, 一个虚拟机可以被关联到一至多个安全组.</p>
 <p>对于Neutron网络中的另一个重要组成部分 – 插件, 每一个网络插件都有他自己的概念, 因此这种就只能遇到在说了.</p>
-<h2 id="Neutron的配置"><a href="#Neutron的配置" class="headerlink" title="Neutron的配置"></a>Neutron的配置</h2><p><strong>巨大的坑: 主机名不能带下划线!</strong></p>
+<h3 id="Neutron的配置"><a href="#Neutron的配置" class="headerlink" title="Neutron的配置"></a>Neutron的配置</h3><p><strong>巨大的坑: 主机名不能带下划线!</strong></p>
 <p>这种事情给你就应该在一开始说一下嘛! 如果主机名携带下划线, 就会导致linuxbridge服务启动失败, 并且systemctl不会给你错误返回值! 需要你自己去看日志.</p>
 <p>其他的照着官方那个文档做就没问题.</p>
 <p>配置完了Nova和Neutron之后, 一个最小化的Openstack就完成了</p>
 <p>接下来为了更方便的使用, 我们可以构建horizon.</p>
-<h1 id="Horizon"><a href="#Horizon" class="headerlink" title="Horizon"></a>Horizon</h1><p>Horizon就是Openstack的前端dashboard了. 使用的Django进行的开发, 配置使用起来十分容易:</p>
+<h2 id="Horizon"><a href="#Horizon" class="headerlink" title="Horizon"></a>Horizon</h2><p>Horizon就是Openstack的前端dashboard了. 使用的Django进行的开发, 配置使用起来十分容易:</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dashboard1.png" alt="dashboard1"></p>
-<p>但是现在还不能直接通过镜像启动实例, 因为我们还有一些必要的配置项没有搞. 但是现在这么一个基础的服务框架已经建立, 接下来因为时间和进度的关系, 我们会暂时放下Openstack转而学习Docker的基础, 最后再来学习将两者统一起来的项目Zun或者Magnum.</p>
+<p>但是现在还不能直接通过镜像启动实例, 因为我们还有一些必要的配置项没有搞. 但是现在这么一个基础的服务框架已经建立, 接下来因为时间和进度的关系, 我会暂时放下Openstack转而学习Docker的基础, 最后再来学习将两者统一起来的项目Zun或者Magnum.</p>
 
   </div>
 </article>
@@ -237,7 +237,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nova"><span class="toc-number">1.</span> <span class="toc-text">Nova</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nova的配置-控制节点和计算节点"><span class="toc-number">1.1.</span> <span class="toc-text">Nova的配置 - 控制节点和计算节点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Neutron"><span class="toc-number">2.</span> <span class="toc-text">Neutron</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Neutron的配置"><span class="toc-number">2.1.</span> <span class="toc-text">Neutron的配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Horizon"><span class="toc-number">3.</span> <span class="toc-text">Horizon</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nova"><span class="toc-number">1.</span> <span class="toc-text">Nova</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nova的配置-控制节点和计算节点"><span class="toc-number">1.1.</span> <span class="toc-text">Nova的配置 - 控制节点和计算节点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Neutron"><span class="toc-number">2.</span> <span class="toc-text">Neutron</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Neutron的配置"><span class="toc-number">2.1.</span> <span class="toc-text">Neutron的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Horizon"><span class="toc-number">3.</span> <span class="toc-text">Horizon</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

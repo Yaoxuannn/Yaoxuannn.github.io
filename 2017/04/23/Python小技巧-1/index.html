@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Python编程技巧.[环境:Python3.6.0]">
-<meta name="keywords" content="Python,小技巧">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python小技巧">
 <meta property="og:url" content="https://yaoxuannn.com/2017/04/23/Python小技巧-1/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Python编程技巧.[环境:Python3.6.0]">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.277Z">
+<meta property="og:updated_time" content="2020-03-01T23:03:10.159Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python小技巧">
 <meta name="twitter:description" content="Python编程技巧.[环境:Python3.6.0]">
@@ -75,7 +75,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2017/04/25/Python与MySQL/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/04/26/Python小技巧-2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2017/04/15/Linux基本命令的常用参数/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -100,13 +100,12 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&title=Python小技巧"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&title=Python小技巧"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&title=Python小技巧"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&name=Python小技巧&description=&lt;hr&gt;
-&lt;p&gt;Python编程技巧.[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&name=Python小技巧&description=&lt;p&gt;Python编程技巧.[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1-基本数据结构与collections"><span class="toc-number">1.</span> <span class="toc-text">Part 1 基本数据结构与collections</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤"><span class="toc-number">1.1.</span> <span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名-统计-字典排序"><span class="toc-number">1.2.</span> <span class="toc-text">命名.统计.字典排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名"><span class="toc-number">1.2.1.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#统计"><span class="toc-number">1.2.2.</span> <span class="toc-text">统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字典排序"><span class="toc-number">1.2.3.</span> <span class="toc-text">字典排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典公共键"><span class="toc-number">1.3.</span> <span class="toc-text">字典公共键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Deque来实现历史记录"><span class="toc-number">1.4.</span> <span class="toc-text">使用Deque来实现历史记录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代"><span class="toc-number">2.</span> <span class="toc-text">迭代</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1-基本数据结构与collections"><span class="toc-number">1.</span> <span class="toc-text">Part 1 基本数据结构与collections</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤"><span class="toc-number">1.1.</span> <span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名-统计-字典排序"><span class="toc-number">1.2.</span> <span class="toc-text">命名.统计.字典排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名"><span class="toc-number">1.2.1.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#统计"><span class="toc-number">1.2.2.</span> <span class="toc-text">统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字典排序"><span class="toc-number">1.2.3.</span> <span class="toc-text">字典排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典公共键"><span class="toc-number">1.3.</span> <span class="toc-text">字典公共键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Deque来实现历史记录"><span class="toc-number">1.4.</span> <span class="toc-text">使用Deque来实现历史记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代"><span class="toc-number">1.5.</span> <span class="toc-text">迭代</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -141,7 +140,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/小技巧/">小技巧</a>
+        <a class="tag-link" href="/tags/Python/">Python</a>
     </div>
 
 
@@ -150,8 +149,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <hr>
-<p>Python编程技巧.[环境:Python3.6.0]</p>
+    <p>Python编程技巧.[环境:Python3.6.0]</p>
 <a id="more"></a>
 
 <h2 id="Part-1-基本数据结构与collections"><a href="#Part-1-基本数据结构与collections" class="headerlink" title="Part 1 基本数据结构与collections"></a>Part 1 基本数据结构与collections</h2><h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h3><p>过滤操作是一个很常用的操作,Python作为函数式编程语言,提供了非常好的解析支持.</p>
@@ -173,7 +171,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;randint(<span class="number">-10</span>,<span class="number">10</span>) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">10</span>)&#125;</span><br><span class="line">res = &#123;x <span class="keyword">for</span> x <span class="keyword">in</span> data <span class="keyword">if</span> x &gt;= <span class="number">0</span>&#125;</span><br></pre></td></tr></table></figure>
 
 <p>其实只要理解了解析式,过滤操作就会变得很简单了.</p>
-<h3 id="命名-统计-字典排序"><a href="#命名-统计-字典排序" class="headerlink" title="命名.统计.字典排序"></a>命名.统计.字典排序</h3><h4 id="命名"><a href="#命名" class="headerlink" title="命名"></a><strong>命名</strong></h4><p>当我们用一个列表来存储一条类似数据库记录的对象时,会遇到这样的问题.</p>
+<h3 id="命名-统计-字典排序"><a href="#命名-统计-字典排序" class="headerlink" title="命名.统计.字典排序"></a>命名.统计.字典排序</h3><h4 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h4><p>当我们用一个列表来存储一条类似数据库记录的对象时,会遇到这样的问题.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">student = (<span class="string">'Justin'</span>, <span class="number">19</span>, <span class="string">'male'</span>, <span class="string">'justin13wyx@gmail.com'</span>)</span><br><span class="line">print(<span class="string">'Name:'</span>,studnet[<span class="number">0</span>]) <span class="comment"># Is there anyone who can figure out what student[0] refer to ???</span></span><br></pre></td></tr></table></figure>
 
 <p>此时,如果我们想要取得student的姓名,就要通过数组下标的方式来查找,这样会大大降低程序的可读性.</p>
@@ -188,7 +186,7 @@
 
 <p>此时使用<code>isinstance</code>来测试一下 <code>isinstance(s, tuple)</code>, 会返回<code>True</code><br>同样使用<code>isinstance(s,Student)</code>会返回<code>True</code>.<br>使用<code>type(s)</code>来看看, 会返回 <code>&lt;class &#39;__main__.Student&#39;&gt;</code>.</p>
 <p>所以,<code>namedtuple</code>是可以<strong>动态创建类</strong>的,这个创建的类是<code>tuple</code>的子类.</p>
-<h4 id="统计"><a href="#统计" class="headerlink" title="统计"></a><strong>统计</strong></h4><p>常规的统计方法是这样的:</p>
+<h4 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h4><p>常规的统计方法是这样的:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line">data = [randint(<span class="number">0</span>,<span class="number">10</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">20</span>)]</span><br><span class="line">counter = dict.fromkeys(data, <span class="number">0</span>) <span class="comment"># 生成</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> data:</span><br><span class="line">  counter[x] += <span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 <p>这样处理后的<code>counter</code>就是一个<code>data</code>的频度字典了.</p>
@@ -201,7 +199,7 @@
 <p>如果要进行词频统计,我们需要正则模块<code>re</code>.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line">f = open(<span class="string">'./text'</span>, <span class="string">'r'</span>)</span><br><span class="line">txt = f.read()</span><br><span class="line"><span class="comment"># 现在就可以开始统计了</span></span><br><span class="line">c = Counter(re.split(<span class="string">'\W+'</span>, txt))</span><br><span class="line">c.most_common(<span class="number">10</span>) <span class="comment"># 选出最高的十个单词</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="字典排序"><a href="#字典排序" class="headerlink" title="字典排序"></a><strong>字典排序</strong></h4><p>如果曾经尝试过字典排序,你就会发现:<strong>字典中的可迭代对象是key</strong></p>
+<h4 id="字典排序"><a href="#字典排序" class="headerlink" title="字典排序"></a>字典排序</h4><p>如果曾经尝试过字典排序,你就会发现:<strong>字典中的可迭代对象是key</strong></p>
 <p>可以通过下面这段代码来验证</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line">d = &#123; k:randint(<span class="number">0</span>,<span class="number">20</span>) <span class="keyword">for</span> k <span class="keyword">in</span> range(<span class="number">10</span>) &#125;</span><br><span class="line">list(iter(d)) <span class="comment"># 返回的是0,1,2,3...8,9.</span></span><br></pre></td></tr></table></figure>
 
@@ -252,7 +250,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">q.append(<span class="number">12</span>)</span><br><span class="line">q.append(<span class="number">23</span>)</span><br><span class="line">q.append(<span class="number">34</span>)</span><br><span class="line">q.append(<span class="number">45</span>)</span><br><span class="line">q.append(<span class="number">56</span>)</span><br><span class="line">q</span><br><span class="line"><span class="comment"># Out: [12,23,34,45,56]</span></span><br><span class="line">q.append(<span class="number">67</span>)</span><br><span class="line">q</span><br><span class="line"><span class="comment"># Out: [23,34,45,56,67]</span></span><br></pre></td></tr></table></figure>
 
 <p>可以看出,第一个值已经被挤出去了.</p>
-<h2 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h2><p>这之中有两个极易混淆的东西,一个叫<strong>迭代器(iterator)</strong>,一个叫<strong>可迭代对象(iterable)</strong></p>
+<h3 id="迭代"><a href="#迭代" class="headerlink" title="迭代"></a>迭代</h3><p>这之中有两个极易混淆的东西,一个叫<strong>迭代器(iterator)</strong>,一个叫<strong>可迭代对象(iterable)</strong></p>
 <p>涉及到的核心方法和接口有<code>__iter__</code>和<code>__next__</code>.一个最最最简单的迭代实现就像是这样:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">T</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> Ter()</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ter</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__next__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"0"</span></span><br></pre></td></tr></table></figure>
 
@@ -372,7 +370,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1-基本数据结构与collections"><span class="toc-number">1.</span> <span class="toc-text">Part 1 基本数据结构与collections</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤"><span class="toc-number">1.1.</span> <span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名-统计-字典排序"><span class="toc-number">1.2.</span> <span class="toc-text">命名.统计.字典排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名"><span class="toc-number">1.2.1.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#统计"><span class="toc-number">1.2.2.</span> <span class="toc-text">统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字典排序"><span class="toc-number">1.2.3.</span> <span class="toc-text">字典排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典公共键"><span class="toc-number">1.3.</span> <span class="toc-text">字典公共键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Deque来实现历史记录"><span class="toc-number">1.4.</span> <span class="toc-text">使用Deque来实现历史记录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#迭代"><span class="toc-number">2.</span> <span class="toc-text">迭代</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1-基本数据结构与collections"><span class="toc-number">1.</span> <span class="toc-text">Part 1 基本数据结构与collections</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过滤"><span class="toc-number">1.1.</span> <span class="toc-text">过滤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命名-统计-字典排序"><span class="toc-number">1.2.</span> <span class="toc-text">命名.统计.字典排序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#命名"><span class="toc-number">1.2.1.</span> <span class="toc-text">命名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#统计"><span class="toc-number">1.2.2.</span> <span class="toc-text">统计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字典排序"><span class="toc-number">1.2.3.</span> <span class="toc-text">字典排序</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典公共键"><span class="toc-number">1.3.</span> <span class="toc-text">字典公共键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Deque来实现历史记录"><span class="toc-number">1.4.</span> <span class="toc-text">使用Deque来实现历史记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代"><span class="toc-number">1.5.</span> <span class="toc-text">迭代</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -386,8 +384,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&title=Python小技巧"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&title=Python小技巧"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&title=Python小技巧"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&name=Python小技巧&description=&lt;hr&gt;
-&lt;p&gt;Python编程技巧.[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/23/Python小技巧-1/&name=Python小技巧&description=&lt;p&gt;Python编程技巧.[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

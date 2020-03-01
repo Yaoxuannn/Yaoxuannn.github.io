@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="学习基础的Linux的服务与进程管理.">
-<meta name="keywords" content="Linux,系统">
+<meta name="keywords" content="Linux,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux系统-服务管理学习笔记">
 <meta property="og:url" content="https://yaoxuannn.com/2017/07/02/Linux系统-服务管理学习笔记/index.html">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/renice.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/jobs.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmstat.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.254Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux系统-服务管理学习笔记">
 <meta name="twitter:description" content="学习基础的Linux的服务与进程管理.">
@@ -148,7 +148,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>
     </div>
 
 
@@ -161,7 +161,7 @@
 <a id="more"></a>
 
 <h2 id="查询已安装的服务"><a href="#查询已安装的服务" class="headerlink" title="查询已安装的服务"></a>查询已安装的服务</h2><p>首先了解系统的运行级别:</p>
-<p>参考这个: <a href="https://justin13wyx.me/2016/11/25/OrdersinLinux-1/#more" target="_blank" rel="noopener">系统运行级别</a>.</p>
+<p>参考这个: <a href="https://yaoxuannn.com/2016/11/25/OrdersinLinux-1/#more">系统运行级别</a>.</p>
 <p>Linux的服务主要分类是这样:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Linux服务</span><br><span class="line"> |</span><br><span class="line"> |-RPM包默认安装的服务</span><br><span class="line"> |		|</span><br><span class="line"> |		|-独立的服务</span><br><span class="line"> |		|</span><br><span class="line"> | 		|-基于xinetd的服务</span><br><span class="line"> |</span><br><span class="line"> |-源码包安装的服务</span><br></pre></td></tr></table></figure>
 
@@ -434,7 +434,7 @@
 
 <p>有一个弱智版的<code>at</code>指令叫<code>batch</code>, 他会让系统自动进行选择执行时间(通常是在系统空闲的时候)</p>
 <p>Crontab定时任务请参考这个 : </p>
-<p><a href="http://justin13wyx.me/2017/04/27/Crontab%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/#more" target="_blank" rel="noopener">Crontab学习日志</a></p>
+<p><a href="http://yaoxuannn.com/2017/04/27/Crontab%E5%AD%A6%E4%B9%A0%E6%97%A5%E5%BF%97/#more">Crontab学习日志</a></p>
 <h2 id="7-8的补充和更新"><a href="#7-8的补充和更新" class="headerlink" title="7.8的补充和更新"></a>7.8的补充和更新</h2><h3 id="再看看-proc"><a href="#再看看-proc" class="headerlink" title="再看看/proc/*"></a>再看看/proc/*</h3><p>现在都知道<code>/proc</code>是直接存在在内存中的, 每一个进程号对应的目录内包含的文件都是内存当中映射出来的.</p>
 <p>现在就来好好了解一下:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/proc/cmdline 加载kernel的时候所执行的参数. 可以知道系统是怎么启动的.</span><br><span class="line">/proc/cpuinfo 本机的CPU参数, 包含频率 类型 和运算功能</span><br><span class="line">/proc/devices 记录了系统的主要设备的设备代号 也就是/dev/下看到的那些主设备号, 和mknod有关</span><br><span class="line">/proc/filesystems 目前系统已经加载的文件系统</span><br><span class="line">/proc/interrupts 当前IRQ的分配状态</span><br><span class="line">/proc/ioports 当前系统上面各个设备的I/O地址</span><br><span class="line">/proc/kcore 内存(RAM)的大小 在64位的系统上表现为128TB, 这个是2的47次方(用户空间的大小)</span><br><span class="line">/proc/loadavg 不需要解释了吧, top/uptime等就是从这里获得的数值</span><br><span class="line">/proc/meminfo 内存使用信息</span><br><span class="line">/proc/modules 当前加载的模块信息, 也可以认为是驱动</span><br><span class="line">/proc/mounts 系统挂载的信息, 你会发现和mount命令是一样的输出</span><br><span class="line">/proc/swaps 系统加载的交换分区的信息</span><br><span class="line">/proc/partition 当前系统的分区情况</span><br><span class="line">/proc/pci 每个PCI总线上面的设备的详细情况.(但不知道为什么,在我的机子上没有这个文件, 但是使用lspci会看到结果, 原来是整合到了/proc/bus/下面了)</span><br><span class="line">/proc/uptime 和使用uptime的输出结果是一致的</span><br><span class="line">/proc/version 内核的版本</span><br><span class="line">/proc/bus/* 一些总线的的设备, 还有USB的设备记录</span><br></pre></td></tr></table></figure>

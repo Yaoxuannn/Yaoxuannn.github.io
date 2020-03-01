@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="说说我对HTTPS的理解">
-<meta name="keywords" content="协议,Web,HTTPS">
+<meta name="keywords" content="HTTPS,SSL&#x2F;TLS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对SSL&#x2F;TLS的理解">
 <meta property="og:url" content="https://yaoxuannn.com/2017/04/03/对SSL-TLS的理解/index.html">
@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/SSL_handshake_with_two_way_authentication_with_certificates.svg/1024px-SSL_handshake_with_two_way_authentication_with_certificates.svg.png">
 <meta property="og:image" content="http://image.beekka.com/blog/2014/bg2014092009.png">
 <meta property="og:image" content="http://image.beekka.com/blog/2014/bg2014092012.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.321Z">
+<meta property="og:updated_time" content="2020-03-01T23:45:58.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对SSL&#x2F;TLS的理解">
 <meta name="twitter:description" content="说说我对HTTPS的理解">
@@ -79,7 +79,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2017/04/03/First-to-hardware/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/04/12/Python-s-Memo-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2017/04/03/Python常用内置模块/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -144,7 +144,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/HTTPS/">HTTPS</a>, <a class="tag-link" href="/tags/Web/">Web</a>, <a class="tag-link" href="/tags/协议/">协议</a>
+        <a class="tag-link" href="/tags/HTTPS/">HTTPS</a>, <a class="tag-link" href="/tags/SSL-TLS/">SSL/TLS</a>
     </div>
 
 
@@ -156,8 +156,7 @@
     <p>说说我对HTTPS的理解</p>
 <a id="more"></a>
 
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><hr>
-<p>TLS是现在广泛使用的安全协议,全名为传输层安全协议(Transport Layer Security).它的前身是SSL,即安全套接层(Secure Socket Layer).</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>TLS是现在广泛使用的安全协议,全名为传输层安全协议(Transport Layer Security).它的前身是SSL,即安全套接层(Secure Socket Layer).</p>
 <p>网景公司（Netscape）在1994年推出首版网页浏览器，网景导航者时，推出HTTPS协议，以SSL进行加密，这是SSL的起源。</p>
 <p>后来,Google在04年发布 在SSL 3.0中发现设计缺陷，建议禁用此一协议。攻击者可以向TLS发送虚假错误提示，然后将安全连接强行降级到过时且不安全的SSL 3.0，然后就可以利用其中的设计漏洞窃取敏感信息。最后各大公司都选择了强制使用TLS.</p>
 <p>目前SSL/TLS已成为互联网上保密通讯的工业标准</p>
@@ -172,12 +171,10 @@
 </ol>
 </li>
 </ol>
-<h2 id="正片开始"><a href="#正片开始" class="headerlink" title="正片开始"></a>正片开始</h2><hr>
-<p>提到了TLS,就一定要说一下HTTPS了,一般对HTTPS的定义是<code>HTTP over SSL/HTTP over TLS/HTTP over Secure</code>.</p>
+<h2 id="正片开始"><a href="#正片开始" class="headerlink" title="正片开始"></a>正片开始</h2><p>提到了TLS,就一定要说一下HTTPS了,一般对HTTPS的定义是<code>HTTP over SSL/HTTP over TLS/HTTP over Secure</code>.</p>
 <p>而提到了HTTPS,有不得不说一下浏览器了.那么我来慢慢按照顺序来说一下.</p>
 <p>首先,HTTPS借由HTTP(<code>如果对HTTP不熟悉可以考虑看一下隔壁的HTTP阅读笔记</code>)来传输信息,但为了某些需要,要加密某些信息,此时它就借助了SSL/TLS来加密传输的数据包.一般的,HTTPS的默认使用端口为<code>443</code>.</p>
-<p>最重要的部分就是协议实现的方式了.<br>下面来说下:(可以结合下面的图来看,<a href="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SSL_handshake_with_two_way_authentication_with_certificates.svg" target="_blank" rel="noopener">超清版的.SVG</a>)</p>
-<hr>
+<p>最重要的部分就是协议实现的方式了.<br>下面来说下: (可以结合下面的图来看, <a href="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SSL_handshake_with_two_way_authentication_with_certificates.svg" target="_blank" rel="noopener">超清版的.SVG</a>)</p>
 <p><strong>首先</strong>客户端向Web服务器发送一个HTTPS请求,该请求包含了客户端的条件以及一个随机数.<strong>关键字</strong>:{ <strong>本地条件</strong> }</p>
 <ul>
 <li>具体内容包括：支持的协议版本，比如TLS1.0版，一个客户端生成的随机数（稍后用于生成“会话密钥”），支持的加密算法（如RSA公钥加密）和支持的压缩算法。</li>
@@ -191,7 +188,6 @@
 <ul>
 <li><strong>{ Phase1中交换了随机数,确定了连接参数 }</strong></li>
 </ul>
-<hr>
 <p><strong>再然后</strong>当双方知道了连接参数，客户端与服务器交换证书(依靠被选择的公钥系统)(Phase2-Phase3)</p>
 <p>服务器端向客户端发送自己的证书和公钥并要求客户端提供证书. <strong>看到这里,想必会有这样的疑问:客户端哪里来的证书?</strong></p>
 <p>我认为,本机的电子证书是通过浏览器中预设的CA来获取的.</p>
@@ -207,7 +203,6 @@
 <ul>
 <li><strong>{Phase2中客户端验证了服务器的身份}</strong></li>
 </ul>
-<hr>
 <p><strong>接着</strong>根据之前的请求,客户端向服务器端发送自己的证书和自己的公钥.</p>
 <blockquote>
 <p>客户端有证书即双向身份认证，没证书时随机生成公钥。</p>
@@ -219,13 +214,11 @@
 <ul>
 <li><strong>{Phase3中双方得到了会话密钥}</strong></li>
 </ul>
-<hr>
 <p><strong>最后</strong>,双方关键数据的加密传输均使用这个“会话密钥”–主密钥</p>
 <p>结束SSL握手.</p>
 <p>至此,全部的SSL握手结束.</p>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/SSL_handshake_with_two_way_authentication_with_certificates.svg/1024px-SSL_handshake_with_two_way_authentication_with_certificates.svg.png" alt="SSL"></p>
-<h2 id="SSL-TLS的延时问题"><a href="#SSL-TLS的延时问题" class="headerlink" title="SSL/TLS的延时问题"></a>SSL/TLS的延时问题</h2><hr>
-<p>既然HTTPS的数据传递是相对安全的,那为什么不给每一个域名都配上HTTPS呢?</p>
+<h2 id="SSL-TLS的延时问题"><a href="#SSL-TLS的延时问题" class="headerlink" title="SSL/TLS的延时问题"></a>SSL/TLS的延时问题</h2><p>既然HTTPS的数据传递是相对安全的,那为什么不给每一个域名都配上HTTPS呢?</p>
 <p>原因很简单,<strong>延时</strong>,因为复杂的握手机制,会使得访问时间延长很多,那么到底有多少呢?</p>
 <p>首先,HTTPS是建立在HTTP的,HTTP又是建立在TCP/IP上的,因此必定存在三次握手.</p>
 <p>所以,我们可以得到:</p>
@@ -242,8 +235,7 @@
 </blockquote>
 <p>从结果可以看到，SSL握手的耗时大概是TCP握手的二-三倍。</p>
 <p>也就是说，在建立连接的阶段，HTTPs链接比HTTP链接要长2-3倍的时间，当然了,具体数字取决于CPU的快慢和网络状况。</p>
-<h2 id="最后-再来说说session恢复的问题"><a href="#最后-再来说说session恢复的问题" class="headerlink" title="最后,再来说说session恢复的问题"></a>最后,再来说说session恢复的问题</h2><hr>
-<p>如果出于某种原因，对话中断，就需要重新握手。</p>
+<h2 id="最后-再来说说session恢复的问题"><a href="#最后-再来说说session恢复的问题" class="headerlink" title="最后,再来说说session恢复的问题"></a>最后,再来说说session恢复的问题</h2><p>如果出于某种原因，对话中断，就需要重新握手。</p>
 <p>之前说过,SSL是很要时间的,因此,要想出一种办法来快速恢复.</p>
 <p>这时有两种方法可以恢复原来的session：一种叫做<strong>session ID</strong>，另一种叫做<strong>session ticket</strong>。</p>
 <p>session ID的思想很简单，就是每一次对话都有一个编号（session ID）。如果对话中断，下次重连的时候，只要客户端给出这个编号，且服务器有这个编号的记录，双方就可以重新使用已有的”对话密钥”，而不必重新生成一把。</p>
@@ -253,8 +245,7 @@
 <p>为了解决这个问题,session ticket应运而生.</p>
 <p><img src="http://image.beekka.com/blog/2014/bg2014092012.png" alt="sessionticket"></p>
 <p>上图中，客户端不再发送session ID，而是发送一个服务器在上一次对话中发送过来的session ticket。这个session ticket是加密的，只有服务器才能解密，其中包括本次对话的主要信息，比如对话密钥和加密方法。当服务器收到session ticket以后，解密后就不必重新生成对话密钥了。</p>
-<h2 id="补充-SSH-Secure-Shell-的原理和处理过程"><a href="#补充-SSH-Secure-Shell-的原理和处理过程" class="headerlink" title="补充:SSH(Secure Shell)的原理和处理过程"></a>补充:SSH(Secure Shell)的原理和处理过程</h2><hr>
-<p>首先,需要知道几种不同的SSH Key,</p>
+<h2 id="补充-SSH-Secure-Shell-的原理和处理过程"><a href="#补充-SSH-Secure-Shell-的原理和处理过程" class="headerlink" title="补充:SSH(Secure Shell)的原理和处理过程"></a>补充:SSH(Secure Shell)的原理和处理过程</h2><p>首先,需要知道几种不同的SSH Key,</p>
 <ul>
 <li>HOST KEY  由服务端创建, 用于对服务端进行认证</li>
 <li>User Key  由用户创建, 用于对用户进行验证</li>

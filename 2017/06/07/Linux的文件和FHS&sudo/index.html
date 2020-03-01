@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="一切皆文件. 你也是.">
-<meta name="keywords" content="Linux,系统,sudo">
+<meta name="keywords" content="Linux,sudo,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux的文件和FHS &amp; sudo的使用">
 <meta property="og:url" content="https://yaoxuannn.com/2017/06/07/Linux的文件和FHS&sudo/index.html">
@@ -16,7 +16,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/rm.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/rm2.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.250Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux的文件和FHS &amp; sudo的使用">
 <meta name="twitter:description" content="一切皆文件. 你也是.">
@@ -81,7 +81,7 @@
         <li><a class="icon" href="/2017/06/18/Linux文件系统和磁盘管理-Part1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2017/06/07/Linux的文件和FHS/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/05/26/Linux网络配置/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-文件"><span class="toc-number">1.</span> <span class="toc-text">1.文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件属性"><span class="toc-number">1.1.</span> <span class="toc-text">文件属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux中文件权限的重要意义"><span class="toc-number">1.2.</span> <span class="toc-text">Linux中文件权限的重要意义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对于文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">对于文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对于目录"><span class="toc-number">1.2.2.</span> <span class="toc-text">对于目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件类型和扩展名"><span class="toc-number">1.3.</span> <span class="toc-text">文件类型和扩展名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的权限补充"><span class="toc-number">1.4.</span> <span class="toc-text">文件的权限补充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUID"><span class="toc-number">1.5.</span> <span class="toc-text">SUID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGID"><span class="toc-number">1.6.</span> <span class="toc-text">SGID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SBIT"><span class="toc-number">1.7.</span> <span class="toc-text">SBIT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Linux目录配置标准-FHS"><span class="toc-number">2.</span> <span class="toc-text">2. Linux目录配置标准 ( FHS )</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#除了根目录-var和-usr下也有很多重要的子目录"><span class="toc-number">2.0.1.</span> <span class="toc-text">除了根目录, /var和/usr下也有很多重要的子目录.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sudo的简单使用"><span class="toc-number">3.</span> <span class="toc-text">Sudo的简单使用</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件"><span class="toc-number">1.</span> <span class="toc-text">文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件属性"><span class="toc-number">1.1.</span> <span class="toc-text">文件属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux中文件权限的重要意义"><span class="toc-number">1.2.</span> <span class="toc-text">Linux中文件权限的重要意义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对于文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">对于文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对于目录"><span class="toc-number">1.2.2.</span> <span class="toc-text">对于目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件类型和扩展名"><span class="toc-number">1.3.</span> <span class="toc-text">文件类型和扩展名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的权限补充"><span class="toc-number">1.4.</span> <span class="toc-text">文件的权限补充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUID"><span class="toc-number">1.5.</span> <span class="toc-text">SUID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGID"><span class="toc-number">1.6.</span> <span class="toc-text">SGID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SBIT"><span class="toc-number">1.7.</span> <span class="toc-text">SBIT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux目录配置标准-FHS"><span class="toc-number">2.</span> <span class="toc-text">Linux目录配置标准 ( FHS )</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sudo的简单使用"><span class="toc-number">3.</span> <span class="toc-text">sudo的简单使用</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -143,7 +143,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/sudo/">sudo</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>, <a class="tag-link" href="/tags/sudo/">sudo</a>
     </div>
 
 
@@ -163,7 +163,7 @@
 <li>Others – 其他用户</li>
 </ul>
 <p>相关的文件就是 /etc/passwd (所有用户) /etc/shadow (用户密码) /etc/groups (所有用户组)</p>
-<h2 id="1-文件"><a href="#1-文件" class="headerlink" title="1.文件"></a>1.文件</h2><h3 id="文件属性"><a href="#文件属性" class="headerlink" title="文件属性"></a>文件属性</h3><p>当时用<code>ls -l</code>查看目录的时候, 会列出文件的很多元信息. 其中就包括文件的类型和权限.</p>
+<h2 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h2><h3 id="文件属性"><a href="#文件属性" class="headerlink" title="文件属性"></a>文件属性</h3><p>当时用<code>ls -l</code>查看目录的时候, 会列出文件的很多元信息. 其中就包括文件的类型和权限.</p>
 <p>文件权限区域数一数的话, 一共有10个字符.</p>
 <blockquote>
 <p><code>-|rwx|rw-|--- 1 root root 3231 Jun 4 17:21 install.log</code></p>
@@ -266,7 +266,7 @@
 <h3 id="SBIT"><a href="#SBIT" class="headerlink" title="SBIT"></a>SBIT</h3><p>SBIT仅对目录起效果,简单的说就是, 该目录下创建的所有文件和目录文件, 都不能被创建者和root以外的人删除掉.</p>
 <p>这个三个权限的值分别为:4-&gt;GUID, 2-&gt;SGID, 1-&gt;SBIT</p>
 <hr>
-<h2 id="2-Linux目录配置标准-FHS"><a href="#2-Linux目录配置标准-FHS" class="headerlink" title="2. Linux目录配置标准 ( FHS )"></a>2. Linux目录配置标准 ( FHS )</h2><p>这就是重点了, FHS的全称是( Filesystem Hierarchy Standard ), 正是因为Linux的使用者,开发者太多了, 如果每一个Distribution都有自己的一套, 那岂不是学习成本飞涨? 正因为此, 大家都遵循这个规范设计, 这样就可以保持同样的目录架构.</p>
+<h2 id="Linux目录配置标准-FHS"><a href="#Linux目录配置标准-FHS" class="headerlink" title="Linux目录配置标准 ( FHS )"></a>Linux目录配置标准 ( FHS )</h2><p>这就是重点了, FHS的全称是( Filesystem Hierarchy Standard ), 正是因为Linux的使用者,开发者太多了, 如果每一个Distribution都有自己的一套, 那岂不是学习成本飞涨? 正因为此, 大家都遵循这个规范设计, 这样就可以保持同样的目录架构.</p>
 <p>FHS是跟着历史不断改版的, 他将目录定义成下面的四种交互作用的形态.</p>
 <table>
 <thead>
@@ -321,7 +321,8 @@
 <li>/lib [函数库和内核模块]</li>
 <li>/sbin [系统执行文件]</li>
 </ul>
-<h4 id="除了根目录-var和-usr下也有很多重要的子目录"><a href="#除了根目录-var和-usr下也有很多重要的子目录" class="headerlink" title="除了根目录, /var和/usr下也有很多重要的子目录."></a>除了根目录, <code>/var</code>和<code>/usr</code>下也有很多重要的子目录.</h4><p><code>/usr</code>下也有一个<code>bin</code>目录,和<code>/bin</code>的区别在于是否在开机时使用.</p>
+<p>除了根目录, <code>/var</code>和<code>/usr</code>下也有很多重要的子目录.</p>
+<p><code>/usr</code>下也有一个<code>bin</code>目录,和<code>/bin</code>的区别在于是否在开机时使用.</p>
 <p><code>/usr/src</code> 一般放置源码, 其中再深入一级的<code>/linux</code>放置的是Linux的系统源码.</p>
 <p><code>/usr/include</code> C/C++的头文件,当使用tarball的方式进行软件安装的时候,就会用到这其中的头文件与包含文件.</p>
 <p><code>/usr/lib</code> 是软件的函数库和目标文件;</p>
@@ -330,7 +331,7 @@
 <p><code>/var/log</code>里面保存的是登录文件和一些程序的日志.</p>
 <p><code>/var/run</code>下会放置一些服务和程序的pid文件.</p>
 <p><code>/var/lock</code>这里是为了确保程序或者软件在同一时间仅会有同一人在进行访问或操作而加的锁所放置的目录.</p>
-<h2 id="Sudo的简单使用"><a href="#Sudo的简单使用" class="headerlink" title="Sudo的简单使用"></a>Sudo的简单使用</h2><p>接触sudo之前, 我们知道有个叫su的命令. su其实就是switch-user. 使用时有点像SSH命令, 可以进行登录, 可以开一个子进程, 可以直接执行之后退出, 看下面的实例:</p>
+<h2 id="sudo的简单使用"><a href="#sudo的简单使用" class="headerlink" title="sudo的简单使用"></a>sudo的简单使用</h2><p>接触sudo之前, 我们知道有个叫su的命令. su其实就是switch-user. 使用时有点像SSH命令, 可以进行登录, 可以开一个子进程, 可以直接执行之后退出, 看下面的实例:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]<span class="comment"># useradd test</span></span><br><span class="line">[root@WWW ~]<span class="comment"># su -l test</span></span><br><span class="line">Last login: Mon Sep 25 20:04:14 EDT 2017 on pts/0</span><br><span class="line">[<span class="built_in">test</span>@WWW ~]$ <span class="built_in">logout</span></span><br><span class="line">[root@WWW ~]<span class="comment"># su test</span></span><br><span class="line">[<span class="built_in">test</span>@WWW root]$ <span class="built_in">logout</span></span><br><span class="line">bash: <span class="built_in">logout</span>: not login shell: use `<span class="built_in">exit</span><span class="string">'</span></span><br><span class="line"><span class="string">[test@WWW root]$ exit</span></span><br><span class="line"><span class="string">exit</span></span><br><span class="line"><span class="string">[root@WWW ~]# su test -c '</span>ls -a ~/<span class="string">'</span></span><br><span class="line"><span class="string">.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  .zshrc</span></span><br><span class="line"><span class="string">[root@WWW ~]# su -l test -c '</span>ls -a ~/<span class="string">'</span></span><br><span class="line"><span class="string">.  ..  .bash_history  .bash_logout  .bash_profile  .bashrc  .zshrc</span></span><br></pre></td></tr></table></figure>
 
 <p>使用-l参数就可以指定是否进行登录, 也可以使用-c参数直接执行.</p>
@@ -425,7 +426,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-文件"><span class="toc-number">1.</span> <span class="toc-text">1.文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件属性"><span class="toc-number">1.1.</span> <span class="toc-text">文件属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux中文件权限的重要意义"><span class="toc-number">1.2.</span> <span class="toc-text">Linux中文件权限的重要意义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对于文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">对于文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对于目录"><span class="toc-number">1.2.2.</span> <span class="toc-text">对于目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件类型和扩展名"><span class="toc-number">1.3.</span> <span class="toc-text">文件类型和扩展名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的权限补充"><span class="toc-number">1.4.</span> <span class="toc-text">文件的权限补充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUID"><span class="toc-number">1.5.</span> <span class="toc-text">SUID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGID"><span class="toc-number">1.6.</span> <span class="toc-text">SGID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SBIT"><span class="toc-number">1.7.</span> <span class="toc-text">SBIT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Linux目录配置标准-FHS"><span class="toc-number">2.</span> <span class="toc-text">2. Linux目录配置标准 ( FHS )</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#除了根目录-var和-usr下也有很多重要的子目录"><span class="toc-number">2.0.1.</span> <span class="toc-text">除了根目录, /var和/usr下也有很多重要的子目录.</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sudo的简单使用"><span class="toc-number">3.</span> <span class="toc-text">Sudo的简单使用</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件"><span class="toc-number">1.</span> <span class="toc-text">文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件属性"><span class="toc-number">1.1.</span> <span class="toc-text">文件属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux中文件权限的重要意义"><span class="toc-number">1.2.</span> <span class="toc-text">Linux中文件权限的重要意义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对于文件"><span class="toc-number">1.2.1.</span> <span class="toc-text">对于文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对于目录"><span class="toc-number">1.2.2.</span> <span class="toc-text">对于目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件类型和扩展名"><span class="toc-number">1.3.</span> <span class="toc-text">文件类型和扩展名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的权限补充"><span class="toc-number">1.4.</span> <span class="toc-text">文件的权限补充</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUID"><span class="toc-number">1.5.</span> <span class="toc-text">SUID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SGID"><span class="toc-number">1.6.</span> <span class="toc-text">SGID</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SBIT"><span class="toc-number">1.7.</span> <span class="toc-text">SBIT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux目录配置标准-FHS"><span class="toc-number">2.</span> <span class="toc-text">Linux目录配置标准 ( FHS )</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sudo的简单使用"><span class="toc-number">3.</span> <span class="toc-text">sudo的简单使用</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

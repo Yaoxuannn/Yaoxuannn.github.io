@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="再来看http协议 &amp;amp; Web服务器httpd的初次会面">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.219Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http协议和httpd">
 <meta name="twitter:description" content="再来看http协议 &amp;amp; Web服务器httpd的初次会面">
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP协议补充"><span class="toc-number">1.</span> <span class="toc-text">HTTP协议补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web服务器基础"><span class="toc-number">2.</span> <span class="toc-text">Web服务器基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http服务器程序"><span class="toc-number">3.</span> <span class="toc-text">http服务器程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#httpd"><span class="toc-number">4.</span> <span class="toc-text">httpd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS6上的httpd-2-2"><span class="toc-number">4.1.</span> <span class="toc-text">CentOS6上的httpd 2.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS7上的httpd-2-4"><span class="toc-number">4.2.</span> <span class="toc-text">CentOS7上的httpd 2.4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充-2018-09-07"><span class="toc-number">4.3.</span> <span class="toc-text">补充 (2018-09-07)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#随便扯一下"><span class="toc-number">4.3.1.</span> <span class="toc-text">随便扯一下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PHP的配置"><span class="toc-number">4.3.2.</span> <span class="toc-text">PHP的配置</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP协议补充"><span class="toc-number">1.</span> <span class="toc-text">HTTP协议补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web服务器基础"><span class="toc-number">2.</span> <span class="toc-text">Web服务器基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http服务器程序"><span class="toc-number">3.</span> <span class="toc-text">http服务器程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#httpd"><span class="toc-number">4.</span> <span class="toc-text">httpd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS6上的httpd-2-2"><span class="toc-number">4.1.</span> <span class="toc-text">CentOS6上的httpd 2.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS7上的httpd-2-4"><span class="toc-number">4.2.</span> <span class="toc-text">CentOS7上的httpd 2.4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充-2018-09-07"><span class="toc-number">5.</span> <span class="toc-text">补充 (2018-09-07)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#随便扯一下"><span class="toc-number">5.1.</span> <span class="toc-text">随便扯一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP的配置"><span class="toc-number">5.2.</span> <span class="toc-text">PHP的配置</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -152,7 +152,8 @@
     <p>再来看http协议 &amp; Web服务器httpd的初次会面</p>
 <a id="more"></a>
 
-<h2 id="HTTP协议补充"><a href="#HTTP协议补充" class="headerlink" title="HTTP协议补充"></a>HTTP协议补充</h2><p>虽然之前说过一大堆关于Http的东西了, 就是那一堆<a href="https://justin13wyx.me/2016/11/19/HTTP%E5%8D%8F%E8%AE%AE-part-two/" target="_blank" rel="noopener"><strong>图解http阅读笔记</strong></a> 虽然写了三个部分吧, 但是毕竟是很早的时候搞得, 那个时候的认知显然和现在不太一样, 所以这里就再来说一下, 但是不说原理, 补充一些当时没有写的.</p>
+<h2 id="HTTP协议补充"><a href="#HTTP协议补充" class="headerlink" title="HTTP协议补充"></a>HTTP协议补充</h2><p>虽然之前说过一大堆关于Http的东西了, 就是那一堆图解http阅读笔记, 虽然写了三个部分吧, 但是毕竟是很早的时候搞得, 那个时候的认知显然和现在不太一样, 所以这里就再来说一下, 但是不说原理, 补充一些当时没有写的.</p>
+<p><strong>来自未来: 之前写的http阅读笔记太垃圾了所以我删掉了 哈哈哈, 推荐直接去看书吧</strong></p>
 <p>早期我们的HTTP协议仅仅可以传输html文本, 也就是所谓超文本标记语言. 但是现在可不一样, 我们可以传输音乐, 图片, 视频等等. 这是怎么做的?</p>
 <p>其实就是引入了MIME, 这个玩意是来自于邮件的, 为了能够发送不同类型的文件附件, 叫做多用途互联网邮件扩展. 基于这个HTTP就能够发送非文本的数据了. </p>
 <p>至于HTTP的工作原理, 之前也说得差不多了. 其实也很简单, 就是HTTP请求和HTTP响应. 报文也主要就是这两种. </p>
@@ -316,10 +317,10 @@
 </ul>
 <p>httpd还可以进行别名的设置, 就是说, 当你访问对应的位置的时候, 能够进行别的目录映射 就是这个意思:</p>
 <p>DocumentRoot “/www/htdocs”</p>
-<p>那么访问: <a href="http://justin13wyx.me/index.html" target="_blank" rel="noopener">http://justin13wyx.me/index.html</a> –&gt; /www/htdocs/index.html</p>
+<p>那么访问: <a href="http://yaoxuannn.com/index.html">http://yaoxuannn.com/index.html</a> –&gt; /www/htdocs/index.html</p>
 <p>如果设置了别名(Alias), 比如:</p>
 <p>Alias /bbs/ “/forum/bbs/“</p>
-<p>那么访问: <a href="http://justin13wyx.me/bbs/index.php" target="_blank" rel="noopener">http://justin13wyx.me/bbs/index.php</a> –&gt; /forum/bbs/index.php 了</p>
+<p>那么访问: <a href="http://yaoxuannn.com/bbs/index.php">http://yaoxuannn.com/bbs/index.php</a> –&gt; /forum/bbs/index.php 了</p>
 <p>上面说过了基于来源地址的访问控制, 现在我们来补充一下基于用户的访问控制, 其实这个访问控制方式就是进行我们熟悉的401质询, 请求用户输入账号和密码 关于这个认证的过程就省略了, 因为太简单了. 关于认证类型有两种: 明文(basic)和消息摘要(digest-MD5)  一般还是会选择basic方式, 虽然这么说…现在也没有谁会使用这种认证了.所以不细说了, 直接过一遍过程就行了:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost htdocs]<span class="comment"># htpasswd -cm /etc/httpd/conf.d/.htpasswd justin</span></span><br><span class="line">New password: </span><br><span class="line">Re-type new password: </span><br><span class="line">Adding password <span class="keyword">for</span> user justin</span><br><span class="line">[root@localhost htdocs]<span class="comment"># tail /etc/httpd/conf.d/.htpasswd </span></span><br><span class="line">justin:<span class="variable">$apr1</span><span class="variable">$ce77yxIr</span><span class="variable">$GLPzKPK8BOdCpBKAwA0VY0</span></span><br><span class="line">---------</span><br><span class="line">    AuthType Basic</span><br><span class="line">    AuthName <span class="string">"Admin"</span></span><br><span class="line">    AuthUserFile <span class="string">"/etc/httpd/conf.d/.htpasswd"</span></span><br><span class="line">    Require valid-user</span><br><span class="line"></span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line">----------</span><br></pre></td></tr></table></figure>
 
@@ -374,17 +375,17 @@
 <p>但是需要注意的是, 这个访问控制需要放在一个单独的容器中执行. 例如:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;RequireAll&gt;</span><br><span class="line">  Require not ip 192.168.56.1</span><br><span class="line">  Require all granted</span><br><span class="line">&lt;/RequireAll&gt;</span><br></pre></td></tr></table></figure>
 
-<h3 id="补充-2018-09-07"><a href="#补充-2018-09-07" class="headerlink" title="补充 (2018-09-07)"></a>补充 (2018-09-07)</h3><h4 id="随便扯一下"><a href="#随便扯一下" class="headerlink" title="随便扯一下"></a>随便扯一下</h4><p>在看PHP的相关配置之前, 我们还是先来回忆一下关于LAMP中AMP的概念和一些相关的东西.</p>
+<h2 id="补充-2018-09-07"><a href="#补充-2018-09-07" class="headerlink" title="补充 (2018-09-07)"></a>补充 (2018-09-07)</h2><h3 id="随便扯一下"><a href="#随便扯一下" class="headerlink" title="随便扯一下"></a>随便扯一下</h3><p>在看PHP的相关配置之前, 我们还是先来回忆一下关于LAMP中AMP的概念和一些相关的东西.</p>
 <p>首先是我们的客户端通过HTTP协议的请求发送到我们的HTTP服务器, 然后我们的服务器通过CGI协议访问到和后台的应用服务器, 也就/是我们的PHP应用程序. 接着根据我们的应用代码, 通过应用程序的mysql协议或者说是驱动连接到我们后方的mysqld守护进程. </p>
 <p>另外我们说httpd支持多种运行模式: prefork, event, worker. 而第一个prefork, 我们所使用的PHP模块叫做<code>libphp5.so</code>. 后面的两个所使用的叫做: <code>libphp5-zts.so</code>.</p>
 <p>一般我们都可以通过使用PHP加速器来加速我们的执行过程, 常见的几种PHP加速器有: APC, eAccelerator, Xcache.</p>
 <p>就这样随便说一下吧, 接下来就来看看PHP的一些配置吧.</p>
-<h4 id="PHP的配置"><a href="#PHP的配置" class="headerlink" title="PHP的配置"></a>PHP的配置</h4><p>php的配置文件, 位置在<code>/etc/php.ini</code>和<code>/etc/php.d/*.ini</code>. </p>
+<h3 id="PHP的配置"><a href="#PHP的配置" class="headerlink" title="PHP的配置"></a>PHP的配置</h3><p>php的配置文件, 位置在<code>/etc/php.ini</code>和<code>/etc/php.d/*.ini</code>. </p>
 <p>官方关于配置文件的写法在<a href="http://www.php.net/manual/zh/configuration.file.php" target="_blank" rel="noopener">这里</a>. </p>
 <p>需要说明的一个: <strong>配置文件（php.ini）在 PHP 启动时被读取。对于服务器模块版本的 PHP，仅在 web 服务器启动时读取一次。对于 CGI 和 CLI 版本，每次调用都会读取</strong>.</p>
 <p>在配置文件中, 我们可以进行关于是否启用解释器的设定, 是否使用短标签等等很多配置, 这里我们其实没有必要去了解,  大部分的配置其实都和开发人员所写的程序相关联的, 在这个文件中, 你可以直接指定MySQL链接的相关参数, 例如主机 端口, 用户名, 密码等等, 不过这并不是一个好的idea. 因为任何一个有PHP访问权限的用户, 都可以直接通过<code>get_cfg_var()</code>来获得.</p>
 <p>更多比较长的一些配置属性都被丢在了<code>/etc/php.d</code>中, 例如<code>mysql.ini</code>. 里面其实就是配置了一个加载的模块.</p>
-<p>对于PHP的配置, 和具体的业务应用程序关联度比较高, 所以还是到需要用的时候再进行查阅吧.</p>
+<p>对于PHP的配置, 和具体的业务应用程序关联度比较高, 所以还是到需要用的时候再进行查阅吧.�.</p>
 
   </div>
 </article>
@@ -418,7 +419,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP协议补充"><span class="toc-number">1.</span> <span class="toc-text">HTTP协议补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web服务器基础"><span class="toc-number">2.</span> <span class="toc-text">Web服务器基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http服务器程序"><span class="toc-number">3.</span> <span class="toc-text">http服务器程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#httpd"><span class="toc-number">4.</span> <span class="toc-text">httpd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS6上的httpd-2-2"><span class="toc-number">4.1.</span> <span class="toc-text">CentOS6上的httpd 2.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS7上的httpd-2-4"><span class="toc-number">4.2.</span> <span class="toc-text">CentOS7上的httpd 2.4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#补充-2018-09-07"><span class="toc-number">4.3.</span> <span class="toc-text">补充 (2018-09-07)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#随便扯一下"><span class="toc-number">4.3.1.</span> <span class="toc-text">随便扯一下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PHP的配置"><span class="toc-number">4.3.2.</span> <span class="toc-text">PHP的配置</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP协议补充"><span class="toc-number">1.</span> <span class="toc-text">HTTP协议补充</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web服务器基础"><span class="toc-number">2.</span> <span class="toc-text">Web服务器基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http服务器程序"><span class="toc-number">3.</span> <span class="toc-text">http服务器程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#httpd"><span class="toc-number">4.</span> <span class="toc-text">httpd</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS6上的httpd-2-2"><span class="toc-number">4.1.</span> <span class="toc-text">CentOS6上的httpd 2.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS7上的httpd-2-4"><span class="toc-number">4.2.</span> <span class="toc-text">CentOS7上的httpd 2.4</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充-2018-09-07"><span class="toc-number">5.</span> <span class="toc-text">补充 (2018-09-07)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#随便扯一下"><span class="toc-number">5.1.</span> <span class="toc-text">随便扯一下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PHP的配置"><span class="toc-number">5.2.</span> <span class="toc-text">PHP的配置</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

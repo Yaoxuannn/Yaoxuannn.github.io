@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Crontab是Linux下一个强大的计划任务工具.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.209Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Crontab学习日志">
 <meta name="twitter:description" content="Crontab是Linux下一个强大的计划任务工具.">
@@ -106,7 +106,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#检测安装"><span class="toc-number">1.</span> <span class="toc-text">检测安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小试牛刀"><span class="toc-number">2.</span> <span class="toc-text">小试牛刀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简述"><span class="toc-number">3.</span> <span class="toc-text">简述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件"><span class="toc-number">4.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Crontab的常见异常和错误"><span class="toc-number">5.</span> <span class="toc-text">Crontab的常见异常和错误</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#检测安装"><span class="toc-number">1.</span> <span class="toc-text">检测安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小试牛刀"><span class="toc-number">2.</span> <span class="toc-text">小试牛刀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简述"><span class="toc-number">3.</span> <span class="toc-text">简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件"><span class="toc-number">4.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crontab的常见异常和错误"><span class="toc-number">5.</span> <span class="toc-text">Crontab的常见异常和错误</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -155,7 +155,7 @@
 <a id="more"></a>
 
 <p>基本上Linux发行版上都会默认安装的工具.</p>
-<h3 id="检测安装"><a href="#检测安装" class="headerlink" title="检测安装"></a>检测安装</h3><p>可以通过使用</p>
+<h2 id="检测安装"><a href="#检测安装" class="headerlink" title="检测安装"></a>检测安装</h2><p>可以通过使用</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br><span class="line"><span class="comment"># OR</span></span><br><span class="line">service crond status</span><br></pre></td></tr></table></figure>
 
 <p>来检测是否安装.</p>
@@ -173,14 +173,14 @@
 <li><code>crontabs</code>: 包含CentOS提供的系统维护的任务 </li>
 </ul>
 <p>因此要确保<code>crontab</code>正常运行, 就要先保证<code>crond</code>正常在运行.</p>
-<h3 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h3><p>先来感受一下定时任务的便利吧:</p>
+<h2 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h2><p>先来感受一下定时任务的便利吧:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
 
 <p>进入编辑界面,在最后添加一行之后, 保存退出.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/1 * * * * date &gt;&gt; /tmp/date.log</span><br></pre></td></tr></table></figure>
 
 <p>接着你可以使用<code>tail -f /tmp/date.log</code>, 这时候就会发现每分钟这个文件就会得到更新 显示当期的时间</p>
-<h3 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h3><p>crontab 的核心在于crond这个进程, 这个系统服务每分钟都会从配置文件中刷新任务.</p>
+<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>crontab 的核心在于crond这个进程, 这个系统服务每分钟都会从配置文件中刷新任务.</p>
 <p>有时间到了后crond就会启动这个任务.</p>
 <p>而crontab这个就是用户操作,用来调整定时任务的工具了, 最后, 配置文件负责以文件的形式设置定时任务.</p>
 <p>用户的<code>cron</code>: 每个用户都有一个专门的<code>cron</code>任务文件: <code>/var/spool/cron/USERNAME</code> </p>
@@ -191,7 +191,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * <span class="keyword">for</span> min <span class="keyword">in</span> 0 1 2; <span class="keyword">do</span> <span class="built_in">echo</span> <span class="string">"exec."</span>; sleep 20; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
 <p>其实这里使用到的<code>sleep</code>指令不仅仅是执行秒的睡眠, 还可以进行分钟和小时, 甚至天的. 只要加上单位就行</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p>作为我们修改的对象,只有知道怎么书写任务,才可以更好的使用, 接下来就来看一下Crontab的配置文件的组成.</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>作为我们修改的对象,只有知道怎么书写任务,才可以更好的使用, 接下来就来看一下Crontab的配置文件的组成.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">* * * * * [user-name] COMMAND</span><br><span class="line">| | | | |__星期0~7(0/7均表示周日)</span><br><span class="line">| | | |____月份1~12</span><br><span class="line">| | |______日期1~31</span><br><span class="line">| |________小时0~23</span><br><span class="line">|__________分钟0~59</span><br></pre></td></tr></table></figure>
 
 <p>为更好地理解这些参数,请看下面的一些实例</p>
@@ -205,7 +205,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Apr 27 00:47:01 localhost CROND[21437]: (root) CMD (/usr/<span class="built_in">local</span>/sa/agent/secu-tcs-agent-mon-safe.sh /usr/<span class="built_in">local</span>/sa/agent &gt; /dev/null 2&gt;&amp;1)</span><br><span class="line">Apr 27 00:48:01 localhost crond[619]: (*system*) RELOAD (/etc/cron.d/sysstat)</span><br><span class="line">Apr 27 00:48:01 localhost crond[619]: (tester) ORPHAN (no passwd entry)</span><br><span class="line">Apr 27 00:48:01 localhost CROND[21556]: (root) CMD (/usr/<span class="built_in">local</span>/sa/agent/secu-tcs-agent-mon-safe.sh /usr/<span class="built_in">local</span>/sa/agent &gt; /dev/null 2&gt;&amp;1)</span><br><span class="line">Apr 27 00:48:01 localhost CROND[21557]: (root) CMD (/usr/<span class="built_in">local</span>/qcloud/stargate/admin/start.sh &gt; /dev/null 2&gt;&amp;1 &amp;)</span><br></pre></td></tr></table></figure>
 
 <p>可以看到有tester.root的任务在执行.</p>
-<h3 id="Crontab的常见异常和错误"><a href="#Crontab的常见异常和错误" class="headerlink" title="Crontab的常见异常和错误"></a>Crontab的常见异常和错误</h3><p>Crontab的常见错误有以下几点:</p>
+<h2 id="Crontab的常见异常和错误"><a href="#Crontab的常见异常和错误" class="headerlink" title="Crontab的常见异常和错误"></a>Crontab的常见异常和错误</h2><p>Crontab的常见错误有以下几点:</p>
 <ul>
 <li>环境变量</li>
 <li>CLI双引号中使用%时, 未加反斜线 \</li>
@@ -271,7 +271,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#检测安装"><span class="toc-number">1.</span> <span class="toc-text">检测安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小试牛刀"><span class="toc-number">2.</span> <span class="toc-text">小试牛刀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#简述"><span class="toc-number">3.</span> <span class="toc-text">简述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置文件"><span class="toc-number">4.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Crontab的常见异常和错误"><span class="toc-number">5.</span> <span class="toc-text">Crontab的常见异常和错误</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#检测安装"><span class="toc-number">1.</span> <span class="toc-text">检测安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小试牛刀"><span class="toc-number">2.</span> <span class="toc-text">小试牛刀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简述"><span class="toc-number">3.</span> <span class="toc-text">简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置文件"><span class="toc-number">4.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crontab的常见异常和错误"><span class="toc-number">5.</span> <span class="toc-text">Crontab的常见异常和错误</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

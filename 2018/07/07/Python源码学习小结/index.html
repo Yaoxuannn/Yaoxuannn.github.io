@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="勤奋的我回来了, 哈哈哈. 很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.">
-<meta name="keywords" content="Python,源码">
+<meta name="keywords" content="Python,Source Code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python源码阅读小结">
 <meta property="og:url" content="https://yaoxuannn.com/2018/07/07/Python源码学习小结/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="勤奋的我回来了, 哈哈哈. 很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.284Z">
+<meta property="og:updated_time" content="2020-03-01T23:11:52.437Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python源码阅读小结">
 <meta name="twitter:description" content="勤奋的我回来了, 哈哈哈. 很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.">
@@ -106,7 +106,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原初-对象的基石"><span class="toc-number">1.</span> <span class="toc-text">原初 - 对象的基石</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.1.</span> <span class="toc-text">对象</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -141,7 +141,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/源码/">源码</a>
+        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/Source-Code/">Source Code</a>
     </div>
 
 
@@ -154,15 +154,14 @@
 <p>很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.</p>
 <a id="more"></a>
 
-<p>##原初 - 对象的基石</p>
-<p>我们最一开始了解到的, 就是Python对象的构成基石 - PyObject. 并且在之后对其他对象和基础虚拟机的简单了解过程中, 渐渐的体会到了这个设计的巧妙. 我们来回顾一下.</p>
+<h2 id="原初-对象的基石"><a href="#原初-对象的基石" class="headerlink" title="原初 - 对象的基石"></a>原初 - 对象的基石</h2><p>我们最一开始了解到的, 就是Python对象的构成基石 - PyObject. 并且在之后对其他对象和基础虚拟机的简单了解过程中, 渐渐的体会到了这个设计的巧妙. 我们来回顾一下.</p>
 <p>起初我们先拿的intObject开的刀, 这是一个不可变长对象只需要一个int类型的变量基本就可以解决问题了, 再来看一下这个对象:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef struct &#123;</span><br><span class="line">    PyObject_HEAD</span><br><span class="line">    long ob_ival;</span><br><span class="line">&#125; PyIntObject;</span><br></pre></td></tr></table></figure>
 
 <p>看到那个熟悉的头部宏了, 这个宏的设计使得所有的对象都可以使用<code>*PyObject</code>指针来进行指向. 这个神奇的头部还包括了对象的类型信息和引用计数. 而另外一种对应列表字典字符串的对象, 就是可变长对象了, 这种对象唯一的不同就在他的头部中加了一个表示变量长度的量. 接着我们向内部深入了一层, 看到了<code>Python</code>表示类型的结构体. 这个类型结构体其实就是Python类的实现.</p>
 <h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>通过在后来对一些典型对象的了解, 我们看到了两种创建对象的方式, 一种是直接使用C API, 直接传入PyObject和对应的TypeObject指针来自动选择创建函数, 另一种是使用类型相关的创建函数, 每一种函数都是单独实现的, 并且是存在在每一个对象实现中的.</p>
 <p>那么对于用户自定义的类, 创建方式就是通过base指针指向的一个基本类来作为对象创建的, 实际上呢. 创建的函数还是new. 只不过我们自定义的类new函数指针指向的是NULL, 但是通过base指向的基本类是有new函数的, 接着就根据这个类中记录的大小来进行内存申请, 接着调用init函数进行初始化就完事了.</p>
-<p>接着我们又了解到了Python</p>
+<p>(待更新)</p>
 
   </div>
 </article>
@@ -196,7 +195,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.</span> <span class="toc-text">对象</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原初-对象的基石"><span class="toc-number">1.</span> <span class="toc-text">原初 - 对象的基石</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.1.</span> <span class="toc-text">对象</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

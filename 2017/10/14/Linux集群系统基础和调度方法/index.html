@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="从今天开始学习Linux集群知识 !">
-<meta name="keywords" content="Linux,集群,LVS">
+<meta name="keywords" content="Linux,LVS,Cluster">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux集群系统基础和调度方法">
 <meta property="og:url" content="https://yaoxuannn.com/2017/10/14/Linux集群系统基础和调度方法/index.html">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_arp.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvs_dr_res.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/MindMap/Cluster1_mind.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.257Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux集群系统基础和调度方法">
 <meta name="twitter:description" content="从今天开始学习Linux集群知识 !">
@@ -151,7 +151,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/LVS/">LVS</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/集群/">集群</a>
+        <a class="tag-link" href="/tags/Cluster/">Cluster</a>, <a class="tag-link" href="/tags/LVS/">LVS</a>, <a class="tag-link" href="/tags/Linux/">Linux</a>
     </div>
 
 
@@ -418,7 +418,7 @@
 <p>首先从我们的director来看, 他是整个系统的关键. 首先我们为了做高可用, 说白了也就是做冗余. 首先就想到双份, 当然这是要花价钱的. 除了这个, 还有一种就是缩短平均修复时间, 但是这样需要一个技能过硬的运维攻城狮才行, 而且使用人来做这样的事情其实是不明智的, 我们应该选择自动化的方式进行. 这是前端主机.</p>
 <p>另外, 如果我们的后端real server出现问题, 首先还是做双份, 但是这样就会变成整个的双份. 还可以再开一只主机, 同来充当冗余, 只要有主机宕掉, 就用它来顶替. 但是这样是需要考虑数据的存储问题. 还可以考虑director进行后端主机的健康状态检查, 只要发现有主机出现问题, 告警并且将该主机从调度列表中剔除, 完成自动的上下线. 那么, 如何进行健康状态检查呢?  首先我们想到了ping, 但是这样不能说明服务是OK的, 那么就考虑进行端口扫描, 比如使用nmap这样的来扫描, 但是端口响应了, 也不能说资源是OK的, 所以干脆直接对资源进行请求好了, 由此, 我们可以从IP层, 传输层, 应用层进行检查. 检查层次越高, 消耗越大, 但是精度也越高, 这个就要根据具体的业务来说了.</p>
 <p>除了检查的方式 我们还需要考虑检查的频度以及状态判断. 多少时间检查一次呢? 如何才会判定一个主机是宕机了呢? 会出现误判断呢?</p>
-<p>就先这样啦~</p>
+<p>就先这样啦.</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/MindMap/Cluster1_mind.png" alt="MindMap/Cluster1_mind.png"></p>
 
   </div>

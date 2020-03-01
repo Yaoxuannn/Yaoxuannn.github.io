@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SCSI.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/iSCSI.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SANvsNAS.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.299Z">
+<meta property="og:updated_time" content="2020-03-01T23:21:30.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SCSI和iSCSI协议以及Linux IP SAN的实现">
 <meta name="twitter:description" content="学习了好多集群的概念和理论…要好好消化一下, 所以来个小插曲转移一下注意点啦~">
@@ -111,7 +111,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SCSI和iSCSI协议"><span class="toc-number">1.</span> <span class="toc-text">SCSI和iSCSI协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-IP-SAN的实现"><span class="toc-number">2.</span> <span class="toc-text">Linux IP SAN的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Target端的配置"><span class="toc-number">2.0.1.</span> <span class="toc-text">Target端的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Initiator端的配置"><span class="toc-number">2.0.2.</span> <span class="toc-text">Initiator端的配置</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SCSI和iSCSI协议"><span class="toc-number">1.</span> <span class="toc-text">SCSI和iSCSI协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-IP-SAN的实现"><span class="toc-number">2.</span> <span class="toc-text">Linux IP SAN的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Target端的配置"><span class="toc-number">2.1.</span> <span class="toc-text">Target端的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Initiator端的配置"><span class="toc-number">2.2.</span> <span class="toc-text">Initiator端的配置</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -208,7 +208,7 @@
 <li>授权</li>
 </ul>
 <p>OK, 现在我们准备三台主机, 两台作为Initiator端, 一台作为Target端.</p>
-<h4 id="Target端的配置"><a href="#Target端的配置" class="headerlink" title="Target端的配置"></a>Target端的配置</h4><p>在Initiator端, 我准备了两块磁盘每个大小是10G的. </p>
+<h3 id="Target端的配置"><a href="#Target端的配置" class="headerlink" title="Target端的配置"></a>Target端的配置</h3><p>在Initiator端, 我准备了两块磁盘每个大小是10G的. </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node2 ~]<span class="comment"># cat /dev/sd</span></span><br><span class="line">sda   sda1  sda2  sdb   sdc</span><br></pre></td></tr></table></figure>
 
 <p>这两块磁盘不需要进行分区, 也不需要进行格式化. 接着就安装软件吧, 我们来看看生成了哪些东西:</p>
@@ -252,7 +252,7 @@
 </ul>
 </blockquote>
 <p>这样我们的target就已经配置完了, 很easy吧. 接下来就是另外一边的initiator端了.</p>
-<h4 id="Initiator端的配置"><a href="#Initiator端的配置" class="headerlink" title="Initiator端的配置"></a>Initiator端的配置</h4><p>显然我们还是要先安装软件程序包, 配置Initiator的名字, 并且启动服务. 接着再使用iscsiadm实现对Target端的发现和注册等.</p>
+<h3 id="Initiator端的配置"><a href="#Initiator端的配置" class="headerlink" title="Initiator端的配置"></a>Initiator端的配置</h3><p>显然我们还是要先安装软件程序包, 配置Initiator的名字, 并且启动服务. 接着再使用iscsiadm实现对Target端的发现和注册等.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node1 ~]<span class="comment"># rpm -ql iscsi-initiator-utils</span></span><br><span class="line">/etc/NetworkManager/dispatcher.d/04-iscsi</span><br><span class="line">/etc/iscsi</span><br><span class="line">/etc/iscsi/iscsid.conf</span><br><span class="line">/usr/lib/systemd/system/iscsi-shutdown.service</span><br><span class="line">/usr/lib/systemd/system/iscsi.service</span><br><span class="line">/usr/lib/systemd/system/iscsid.service</span><br><span class="line">/usr/lib/systemd/system/iscsid.socket</span><br><span class="line">/usr/lib/tmpfiles.d/iscsi.conf</span><br><span class="line">/usr/lib64/libiscsi.so.0</span><br><span class="line">/usr/lib64/python2.7/site-packages/libiscsimodule.so</span><br><span class="line">/usr/libexec/iscsi-mark-root-nodes</span><br><span class="line">/usr/sbin/iscsi-iname</span><br><span class="line">/usr/sbin/iscsiadm</span><br><span class="line">/usr/sbin/iscsid</span><br><span class="line">/usr/sbin/iscsistart</span><br><span class="line">...(omitted)</span><br><span class="line">/var/lib/iscsi</span><br><span class="line">/var/lib/iscsi/ifaces</span><br><span class="line">/var/lib/iscsi/isns</span><br><span class="line">/var/lib/iscsi/nodes</span><br><span class="line">/var/lib/iscsi/send_targets</span><br><span class="line">/var/lib/iscsi/slp</span><br><span class="line">/var/lib/iscsi/static</span><br><span class="line">/var/lock/iscsi</span><br><span class="line">/var/lock/iscsi/lock</span><br></pre></td></tr></table></figure>
 
 <p>这个玩意安装的东西有点多了吧, 提供了多个程序. 真正的管理工具就是那个iscsiadm. 有意思的是, 他有两个服务, 一个是iscsi, 一个是iscsid. 前者是为了实现在开机之后自动连入上一次连接的target, 而iscsid是为了实现数据的持久传输, 所以这些服务我们都需要启动.</p>
@@ -355,7 +355,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SCSI和iSCSI协议"><span class="toc-number">1.</span> <span class="toc-text">SCSI和iSCSI协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-IP-SAN的实现"><span class="toc-number">2.</span> <span class="toc-text">Linux IP SAN的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Target端的配置"><span class="toc-number">2.0.1.</span> <span class="toc-text">Target端的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Initiator端的配置"><span class="toc-number">2.0.2.</span> <span class="toc-text">Initiator端的配置</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#SCSI和iSCSI协议"><span class="toc-number">1.</span> <span class="toc-text">SCSI和iSCSI协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-IP-SAN的实现"><span class="toc-number">2.</span> <span class="toc-text">Linux IP SAN的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Target端的配置"><span class="toc-number">2.1.</span> <span class="toc-text">Target端的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Initiator端的配置"><span class="toc-number">2.2.</span> <span class="toc-text">Initiator端的配置</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

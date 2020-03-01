@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="mariadb, mysql的基础认识和应用.">
-<meta name="keywords" content="数据库">
+<meta name="keywords" content="Database">
 <meta property="og:type" content="article">
 <meta property="og:title" content="认识数据库(mariadb初步)">
 <meta property="og:url" content="https://yaoxuannn.com/2017/09/24/认识数据库-mariadb初步/index.html">
@@ -15,7 +15,7 @@
 <meta property="og:description" content="mariadb, mysql的基础认识和应用.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sql.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.336Z">
+<meta property="og:updated_time" content="2020-03-01T23:51:34.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认识数据库(mariadb初步)">
 <meta name="twitter:description" content="mariadb, mysql的基础认识和应用.">
@@ -142,7 +142,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/数据库/">数据库</a>
+        <a class="tag-link" href="/tags/Database/">Database</a>
     </div>
 
 
@@ -157,7 +157,7 @@
 <h2 id="认识数据库"><a href="#认识数据库" class="headerlink" title="认识数据库"></a>认识数据库</h2><p>我们现在已经知道数据库有很多种类型的, 比如关系型数据库, NoSQL数据库, 分布式关系型数据库.  而mysql,mariadb只是数量众多的数据库中关系型数据库的一种开源实现. 数据存储在文本文件中在数据量很大中是很麻烦的, 所以数据库就是为了<strong>组织数据</strong>.  所以采用何种组织数据的方式, 我们就把他成为数据组织模型. 像文件系统组织文件的模型就是树状的. 对于单个文件就是一行行的流.</p>
 <p>数据结构模型一开始有: <strong>层次模型</strong>. 这种模型使用时就发现了问题, 因为他很难表示两个节点之间的关系, 多个节点就更加困难了. 于是后来就有了<strong>网状结构</strong> .</p>
 <p>而网状结构却发现, 这个模型和应用程序的耦合度过大. 一旦应用程序的发生改变, 这个结构也要发生变化.</p>
-<p>因此最后提出了<strong>关系结构模型</strong>, 每一个数据被组成行和列, 一个二维交叉的平面结构上. 那么当进行一个大的数据集的设计的时候, 为了达到降低数据冗余, 达到更改方便的时候, 提出设计数据库的几个范式, 有关数据库的设计在之前我曾经简单的在慕课网上学习了一些: <a href="https://justin13wyx.me/2017/05/19/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/" target="_blank" rel="noopener">数据库设计</a> </p>
+<p>因此最后提出了<strong>关系结构模型</strong>, 每一个数据被组成行和列, 一个二维交叉的平面结构上. 那么当进行一个大的数据集的设计的时候, 为了达到降低数据冗余, 达到更改方便的时候, 提出设计数据库的几个范式, 有关数据库的设计在之前我曾经简单的在慕课网上学习了一些: <a href="https://yaoxuannn.com/2017/05/19/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1/">数据库设计</a> </p>
 <p>之前说过, 为了满足范式我们经常要进行表的拆分, 这个时候如果要进行查询就要先进行表的连接(join), 而这个连接就是关系性数据库要解决的一个大问题, 表的连接是十分消耗资源的. 这个合并操作对于内存是一个大的消耗. 因此就精心设计算法来避免产生过多中间数据.</p>
 <p>那么列举一些典型的RDBMS:<br>首当其冲的就是MySQL了, 其下有三个重要的分支: MySQL, MariaDB, Percona-Server(反正我是没听说过)</p>
 <p>还有很著名的开源数据库: PostgreSQL: pgSQL.  再来一个Oracle的oracle, 还有MS的MSSQL. </p>
@@ -240,7 +240,7 @@
 <p>而如果想要撤销授权, 就使用revoke指令就行. 格式是:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REVOKE priv_type,... ON db_name.tb_name FROM <span class="string">'user'</span>@<span class="string">'host'</span>;</span><br></pre></td></tr></table></figure>
 
-<p>在我们启动MariaDB服务进程的时候,会读取mysql库中的所有授权表到内存中, 所以每当有用户进行登录的时候都会到内存中进行检查. 而当我们进行权限改变, 或者用户更改的时候, 这些操作机会保存在表中, MariaDB会自动进行重读授权表. 而对于不能或者不能及时重读授权表的时候, 我们就使用<code>FLUSH PRIVILEGES</code> 来强制重读.</p>
+<p>在我们启动MariaDB服务进程的时候,会读取mysql库中的所有授权表到内存中, 所以每当有用户进行登录的时候都会到内存中进行检查. 而当我们进行权限改变, 或者用户更改的时候, 这些操作机会保存在表中, MariaDB会自动进行重读授权表. 而对于不能或者不能及时重读授权表的时候, 我们就使用<code>FLUSH PRIVILEGES</code> 来强制重读..</p>
 
   </div>
 </article>

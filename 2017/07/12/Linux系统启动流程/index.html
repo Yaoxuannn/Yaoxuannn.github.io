@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Linux(CentOS5&amp;amp;6)的系统启动流程">
-<meta name="keywords" content="Linux,系统,bootloader">
+<meta name="keywords" content="Linux,bootloader,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS5和6的启动流程">
 <meta property="og:url" content="https://yaoxuannn.com/2017/07/12/Linux系统启动流程/index.html">
@@ -16,7 +16,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://linux.vbird.org/linux_basic/0510osloader//osloader-flow-initramfs.jpg">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/login.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.254Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS5和6的启动流程">
 <meta name="twitter:description" content="Linux(CentOS5&amp;amp;6)的系统启动流程">
@@ -108,7 +108,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS-5和6-的启动流程"><span class="toc-number">1.</span> <span class="toc-text">CentOS 5和6 的启动流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前菜"><span class="toc-number">1.1.</span> <span class="toc-text">前菜</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正餐"><span class="toc-number">1.2.</span> <span class="toc-text">正餐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内核的天下"><span class="toc-number">1.3.</span> <span class="toc-text">内核的天下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sbin-init"><span class="toc-number">1.4.</span> <span class="toc-text">/sbin/init</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chkconfig-amp-rc脚本"><span class="toc-number">1.5.</span> <span class="toc-text">chkconfig &amp; rc脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS6和5的区别"><span class="toc-number">1.6.</span> <span class="toc-text">CentOS6和5的区别</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS-5和6-的启动流程"><span class="toc-number">1.</span> <span class="toc-text">CentOS 5和6 的启动流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前菜"><span class="toc-number">1.1.</span> <span class="toc-text">前菜</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正餐"><span class="toc-number">1.2.</span> <span class="toc-text">正餐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内核的天下"><span class="toc-number">1.3.</span> <span class="toc-text">内核的天下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sbin-init"><span class="toc-number">1.4.</span> <span class="toc-text">/sbin/init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chkconfig-amp-rc脚本"><span class="toc-number">1.5.</span> <span class="toc-text">chkconfig &amp; rc脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS6和5的区别"><span class="toc-number">1.6.</span> <span class="toc-text">CentOS6和5的区别</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -143,7 +143,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/bootloader/">bootloader</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>, <a class="tag-link" href="/tags/bootloader/">bootloader</a>
     </div>
 
 
@@ -155,7 +155,7 @@
     <p>Linux(CentOS5&amp;6)的系统启动流程</p>
 <a id="more"></a>
 
-<h1 id="CentOS-5和6-的启动流程"><a href="#CentOS-5和6-的启动流程" class="headerlink" title="CentOS 5和6 的启动流程"></a>CentOS 5和6 的启动流程</h1><h2 id="前菜"><a href="#前菜" class="headerlink" title="前菜"></a>前菜</h2><p>抛开底层的硬件不谈, 我们知道LInux最核心的两个部分就是<strong><code>kernel</code></strong>和<strong><code>rootfs</code></strong>了</p>
+<h2 id="CentOS-5和6-的启动流程"><a href="#CentOS-5和6-的启动流程" class="headerlink" title="CentOS 5和6 的启动流程"></a>CentOS 5和6 的启动流程</h2><h3 id="前菜"><a href="#前菜" class="headerlink" title="前菜"></a>前菜</h3><p>抛开底层的硬件不谈, 我们知道LInux最核心的两个部分就是<strong><code>kernel</code></strong>和<strong><code>rootfs</code></strong>了</p>
 <p>从内核的角度上说, 内核主要进行的工作有: 进程管理, 内存管理, 网络管理, 驱动程序, 文件系统, 安全功能</p>
 <p>对程序员而说, 不会直接选择进行系统调用而是对已经对系统调用进行了一层封装的库进行调用, 在Linux下这个标准库就是<code>glibc</code>  而这些库文件都放在<code>rootfs</code>里面.</p>
 <p>那么到底什么是库呢? 说白了就是一堆函数的集合, 而函数其实又只是一堆代码片段, 一个功能的实现,</p>
@@ -186,7 +186,7 @@
 <p>这么一个文件系统中的驱动显然是只用于当前用户的, 也就是说这个的内容并不是在最初就制作好的, 而是在安装操作系统的时候就生成的. 当然这么一个文件系统也不是必须的, 如果内核可以直接识别你的设备, 那么自然就不需要这么搞了.</p>
 <p>这么个生成的工具就是<code>ramdisk</code> 这个有两种格式, 在CentOS5上是模拟成的硬盘的, 而6,7上是文件系统, 这是因为文件系统更加快速, 提高效率.在CentOS5上表现的是: <code>/boot/initrd-VERSION-release.img</code>. CentOS6,7上就是: <code>/boot/initramfs-VERSION-release.img</code>. (基于内存的文件系统) 还可以看到,叫System.map开头的文件, 这个是内核放置到物理内存上的映射表.</p>
 <p>在完成加载驱动后, 就会进行根的切换, 因为上面的这个根是个假的. 如果没有这一步, 那么内核就会认为自己已经完成了根的加载了, 而放弃加载真实的根了.</p>
-<h2 id="正餐"><a href="#正餐" class="headerlink" title="正餐"></a>正餐</h2><p><strong>CentOS系统的启动流程:</strong> (x86)</p>
+<h3 id="正餐"><a href="#正餐" class="headerlink" title="正餐"></a>正餐</h3><p><strong>CentOS系统的启动流程:</strong> (x86)</p>
 <p>POST: <strong>加电自检</strong>: 当按下电源按钮, 这个时候会开始检查各个硬件是否存在以及他们能否正常工作(CPU, 风扇, 内存, 输入输出设备等等)  这些依靠ROM中的CMOS, BIOS加载CMOS,取得系统的硬件信息. BIOS程序的执行也依靠CPU. 所以说当我开机的时候, 主机激活CPU, 并且执行第一条指令: 叫醒 . 接着CPU就会去某ROM的某一个固定地址去加载那个地方的指令, 从而完成自检等等操作. 内存包括ROM+RAM, 在内存进行编址的时候, 都是先进行的ROM编址, 完成之后才进行的RAM编址.</p>
 <p>BIOS是进行主板设定的地方, 但并不是说我们每一次都要进行设定, 设定的结果是保存在CMOS中的 所以在开始时, 只提供一个菜单供用户选择. 任何一台电脑都需要操作系统对不.而操作系统都在哪呢? 显然是在我们外部的存储设备上(硬盘, USB闪存等等) 问题是, 多个硬盘的情况下, 我怎么知道哪一块才是我要进的OS所在呢?</p>
 <p>这就说到了一个Linux中非常重要的引导次序(BOOT Sequence). BIOS根据这个设置的引导次序来进行加载.决定因素就是设备需要存在并且有引导程序在. 比如: 我的引导次序是光盘, 网卡, 硬盘. 实际的系统在硬盘上.那么当开始进行引导的时候就会开始按照次序寻找: 首先是光盘, 发现当前电脑上并没有安装硬盘, 跳过. 接着是网卡, 网卡存在但是却没有引导程序, 跳过. 最后是硬盘, 存在并且在MBR分区中找到了引导程序. (How?*)开始加载相应的引导程序. 接着 这个bootloader所指向的操作系统是损坏的, 仍启动不起来.</p>
@@ -207,7 +207,7 @@
 <p><code>1.5阶段</code>:  grub识别硬盘上的文件系统. 这个时候遇到了一个和上面一样的问题了, 首先明确grub是存在在文件系统上的, 为了访问磁盘分区, 我就要能够使用文件系统, 而使用文件系统我还要能够访问磁盘分区.</p>
 <p>所以说, 其实这个匹配的文件系统在系统安装的时候就已经装载在了MBR剩余的地方了.这样就解决了驱动的问题.</p>
 <p><code>2nd stage</code>: 由于硬盘上的容量远大于446字节, grub就可以任意施展了.</p>
-<h2 id="内核的天下"><a href="#内核的天下" class="headerlink" title="内核的天下"></a>内核的天下</h2><p>grub加载好内核之后, 就是kernel来统一天下了.</p>
+<h3 id="内核的天下"><a href="#内核的天下" class="headerlink" title="内核的天下"></a>内核的天下</h3><p>grub加载好内核之后, 就是kernel来统一天下了.</p>
 <p>首先, kernel进行自身的初始化: 探测可识别到的所有硬件设备, 加载硬件驱动程序(当然有可能借助于ramdisk加载驱动), 以只读的方式根文件系统. 接着运行用户空间的第一个应用程序: <code>/sbin/init | /usr/lib/systemd/systemd</code></p>
 <p>init程序可以是一个程序, 也有可能是一个脚本(CentOS5, 安卓)</p>
 <ul>
@@ -222,9 +222,9 @@
 <p>POST –&gt; BootSequence (BIOS) –&gt; Bootloader(MBR) –&gt; kernel(ramdisk) –&gt; rootfs(只读) –&gt; init/systemd</p>
 <p>上一张图吧:</p>
 <p><img src="http://linux.vbird.org/linux_basic/0510osloader//osloader-flow-initramfs.jpg" alt="Boot"></p>
-<p><strong>关于上面的systemd, 是CentOS7所采用的init程序, 参考这里<a href="https://justin13wyx.me/2017/09/06/CentOS7%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/" target="_blank" rel="noopener">CentOS7启动流程</a></strong></p>
-<h2 id="sbin-init"><a href="#sbin-init" class="headerlink" title="/sbin/init"></a>/sbin/init</h2><p>在Windows上我们也许见过这样的问题, 升级了某些驱动之后再次进入系统会出现蓝屏的现象, 原因有很多,可能是驱动和硬件不兼容, 也有可能是驱动程序有Bug.但不管怎么说, 现在要进行修复了, 在Windows上我们会进入安全模式, 这个模式下只加载最基本的核心组件, 从而最低维持系统.(几乎失去生产能力), 而在Linux下这个被叫做运行级别(Run-level). 这个概念在CentOS7上已经发生了改变,  但在传统的CentOS5和6上依然保持了原本的意义.</p>
-<p>运行级别: 为了系统的运行和维护等应用目的而设定. 在原先的<a href="https://justin13wyx.me/2017/07/02/Linux%E7%B3%BB%E7%BB%9F-%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" target="_blank" rel="noopener">Linux系统-服务管理学习笔记</a>也已经提过. 共划分7个等级.</p>
+<p><strong>关于上面的systemd, 是CentOS7所采用的init程序, 参考这里<a href="https://yaoxuannn.com/2017/09/06/CentOS7%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B/">CentOS7启动流程</a></strong></p>
+<h3 id="sbin-init"><a href="#sbin-init" class="headerlink" title="/sbin/init"></a>/sbin/init</h3><p>在Windows上我们也许见过这样的问题, 升级了某些驱动之后再次进入系统会出现蓝屏的现象, 原因有很多,可能是驱动和硬件不兼容, 也有可能是驱动程序有Bug.但不管怎么说, 现在要进行修复了, 在Windows上我们会进入安全模式, 这个模式下只加载最基本的核心组件, 从而最低维持系统.(几乎失去生产能力), 而在Linux下这个被叫做运行级别(Run-level). 这个概念在CentOS7上已经发生了改变,  但在传统的CentOS5和6上依然保持了原本的意义.</p>
+<p>运行级别: 为了系统的运行和维护等应用目的而设定. 在原先的<a href="https://yaoxuannn.com/2017/07/02/Linux%E7%B3%BB%E7%BB%9F-%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more">Linux系统-服务管理学习笔记</a>也已经提过. 共划分7个等级.</p>
 <p>配置文件所在, 在上文已经提过了: <code>/etc/inittab</code> 每一行对应一个action以及与之对应的process(并不意味着<strong>一个</strong>进程) 由于我这部分的实验主机使用的是CentOS6, 因此实验结果没有5版本好.</p>
 <p>现在来看看配置文件都写了什么:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[root@livecd ~]<span class="comment"># cat /etc/inittab </span></span><br><span class="line"><span class="comment"># inittab is only used by upstart for the default runlevel.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># ADDING OTHER CONFIGURATION HERE WILL HAVE NO EFFECT ON YOUR SYSTEM.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># System initialization is started by /etc/init/rcS.conf</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Individual runlevels are started by /etc/init/rc.conf</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Ctrl-Alt-Delete is handled by /etc/init/control-alt-delete.conf</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Terminal gettys are handled by /etc/init/tty.conf and /etc/init/serial.conf,</span></span><br><span class="line"><span class="comment"># with configuration in /etc/sysconfig/init.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># For information on how to write upstart event handlers, or how</span></span><br><span class="line"><span class="comment"># upstart works, see init(5), init(8), and initctl(8).</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Default runlevel. The runlevels used are:</span></span><br><span class="line"><span class="comment">#   0 - halt (Do NOT set initdefault to this)</span></span><br><span class="line"><span class="comment">#   1 - Single user mode</span></span><br><span class="line"><span class="comment">#   2 - Multiuser, without NFS (The same as 3, if you do not have networking)</span></span><br><span class="line"><span class="comment">#   3 - Full multiuser mode</span></span><br><span class="line"><span class="comment">#   4 - unused</span></span><br><span class="line"><span class="comment">#   5 - X11</span></span><br><span class="line"><span class="comment">#   6 - reboot (Do NOT set initdefault to this)</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">id:5:initdefault:</span><br></pre></td></tr></table></figure>
@@ -241,7 +241,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ chkconfig -list</span><br><span class="line">NetworkManager 	0:off	1:off	2:on	3:on	4:on	5:on	6:off</span><br><span class="line">acpid          	0:off	1:off	2:on	3:on	4:on	5:on	6:off</span><br><span class="line">atd            	0:off	1:off	2:off	3:off	4:off	5:off	6:off</span><br><span class="line">...(omitted)</span><br><span class="line"><span class="comment"># 假设现在我们将级别5时候的NetworkManager关闭, 这样操作</span></span><br><span class="line">[root@WWW rc0.d]$ chkconfig --level 5 NetworkManager off</span><br><span class="line">[root@WWW rc0.d]$ chkconfig --list</span><br><span class="line">NetworkManager 	0:off	1:off	2:on	3:on	4:on	5:off	6:off</span><br><span class="line">...(omitted)</span><br><span class="line"><span class="comment"># 看, 服务的自动启动已经被关闭了</span></span><br><span class="line">[root@WWW rc0.d]$ ll /etc/rc.d/rc5.d/</span><br><span class="line">total 0</span><br><span class="line">...(omitted)</span><br><span class="line">lrwxrwxrwx. 1 root root 24 Jul 10 16:11 K84NetworkManager -&gt; ../init.d/NetworkManager</span><br><span class="line">...(omitted)</span><br><span class="line"><span class="comment"># 此时查看就会发现, 已经变成K开头的了.那么, 为什么是84呢?</span></span><br><span class="line"><span class="comment"># 要知道这个问题我们需要看一下NetworkManager的真正脚本</span></span><br><span class="line">[root@WWW ~]$ head -10 /etc/init.d/NetworkManager </span><br><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># NetworkManager:   NetworkManager daemon</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># chkconfig: - 23 84</span></span><br><span class="line"><span class="comment"># description:  This is a daemon for automatically switching network \</span></span><br><span class="line"><span class="comment">#               connections to the best available connection.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># processname: NetworkManager</span></span><br><span class="line"><span class="comment"># pidfile: /var/run/NetworkManager/NetworkManager.pid</span></span><br></pre></td></tr></table></figure>
 
 <p>除了这些文件, 在系统启动的时候还会加载/etc/sysconfig下的种种配置.</p>
-<h2 id="chkconfig-amp-rc脚本"><a href="#chkconfig-amp-rc脚本" class="headerlink" title="chkconfig &amp; rc脚本"></a>chkconfig &amp; rc脚本</h2><p>查看服务在所有级别的启动情况:</p>
+<h3 id="chkconfig-amp-rc脚本"><a href="#chkconfig-amp-rc脚本" class="headerlink" title="chkconfig &amp; rc脚本"></a>chkconfig &amp; rc脚本</h3><p>查看服务在所有级别的启动情况:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chkconfig [--list] [name]</span><br></pre></td></tr></table></figure>
 
 <p>添加:</p>
@@ -287,9 +287,9 @@
 <blockquote>
 <p>*<em>总结:/sbin/init –&gt; (/etc/inittab) –&gt; 设置默认运行级别 –&gt; 运行系统初始脚本,完成系统的初始化 –&gt; 关闭对应下需要关闭的服务, 启动需要运行的服务 –&gt; 设置登录终端 *</em></p>
 </blockquote>
-<h2 id="CentOS6和5的区别"><a href="#CentOS6和5的区别" class="headerlink" title="CentOS6和5的区别"></a>CentOS6和5的区别</h2><p>init程序尽管更换为了startup, 但仍旧命名为init, 并且配置文件不是单一的inittab, 而是分了多个文件都放在<code>/etc/init</code>下, 每一个配置项都是一个*.conf的文件.</p>
+<h3 id="CentOS6和5的区别"><a href="#CentOS6和5的区别" class="headerlink" title="CentOS6和5的区别"></a>CentOS6和5的区别</h3><p>init程序尽管更换为了startup, 但仍旧命名为init, 并且配置文件不是单一的inittab, 而是分了多个文件都放在<code>/etc/init</code>下, 每一个配置项都是一个*.conf的文件.</p>
 <p> 在这个目录下的rc.conf其实最终还是执行的<code>/etc/rc.d/rc $RUNLEVEL</code> 而负责执行脚本的rcS.conf实际上运行的也就是刚刚说过的<code>rc.sysinit</code>类似的, 大家也可以猜出来tty.conf实际上就是执行的<code>mingetty</code>. </p>
-<p><strong>注意: /etc/init/*.conf文件语法, 遵循upstart配置文件的语法格式.</strong></p>
+<p><strong>注意: /etc/init/<em>.conf文件语法, 遵循upstart配置文件的语法格式.*</em></strong></p>
 
   </div>
 </article>
@@ -323,7 +323,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CentOS-5和6-的启动流程"><span class="toc-number">1.</span> <span class="toc-text">CentOS 5和6 的启动流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#前菜"><span class="toc-number">1.1.</span> <span class="toc-text">前菜</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正餐"><span class="toc-number">1.2.</span> <span class="toc-text">正餐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内核的天下"><span class="toc-number">1.3.</span> <span class="toc-text">内核的天下</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sbin-init"><span class="toc-number">1.4.</span> <span class="toc-text">/sbin/init</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#chkconfig-amp-rc脚本"><span class="toc-number">1.5.</span> <span class="toc-text">chkconfig &amp; rc脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS6和5的区别"><span class="toc-number">1.6.</span> <span class="toc-text">CentOS6和5的区别</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS-5和6-的启动流程"><span class="toc-number">1.</span> <span class="toc-text">CentOS 5和6 的启动流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前菜"><span class="toc-number">1.1.</span> <span class="toc-text">前菜</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#正餐"><span class="toc-number">1.2.</span> <span class="toc-text">正餐</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内核的天下"><span class="toc-number">1.3.</span> <span class="toc-text">内核的天下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sbin-init"><span class="toc-number">1.4.</span> <span class="toc-text">/sbin/init</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#chkconfig-amp-rc脚本"><span class="toc-number">1.5.</span> <span class="toc-text">chkconfig &amp; rc脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS6和5的区别"><span class="toc-number">1.6.</span> <span class="toc-text">CentOS6和5的区别</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

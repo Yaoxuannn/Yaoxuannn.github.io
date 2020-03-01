@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="一直都在使用OpenSSH这个玩意儿连接我们的Linux, 该仔细看一看他噜~">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.266Z">
+<meta property="og:updated_time" content="2020-03-01T22:58:05.859Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenSSH和其配置">
 <meta name="twitter:description" content="一直都在使用OpenSSH这个玩意儿连接我们的Linux, 该仔细看一看他噜~">
@@ -156,7 +156,7 @@
 <p>在机房几百几千台服务器, 我们不可能一个一个都去配置上显示器, 所以就想办法通过网络来进行连接. 这里我们所连接上的就是远程终端. 要把对方显示的结果显示到我们本地的显示器上, 并且通过本地键盘键入命令, 获得远程执行的结果. 包括我们在登录时输入的账号和密码, 都需要通过网络来传输. 因此默认情况下, 原本本地的终端使用<code>mingetty</code>来附加上一个<code>login</code>程序, 来让用户登录. BUT! mingetty并没有能使得远程管理的功能. 因此我们就需要在服务器(远程终端)执行一个服务端程序来将本地的基于终端的请求通过某种特定的协议映射到需要交换的对象上. 这也是C/S架构的一个应用. </p>
 <p>早期, 上述的实现是使用的telnet. 两地终端通过telnet协议进行通信. telnet同样使用tcp, 但它监听在23端口. telnet没有涉及任何加密, 所以所有的数据都是明文传输, 这是相当于不安全的. 于是telnet的后继者ssh就出现了. 并且解决了除了远程登录的诸多功能.</p>
 <p>在一台CentOS6的机器上实验, 注意, 这个telnet服务属于是<strong>超级守护进程的瞬时激活进程</strong> (不知道这样说对不对?) 也就是由xinetd统一管理的进程之一, xinetd有点像我们之前说的systemd的socket激活机制, 按需激活的机制. 所以我们只要启动xinetd服务即可.</p>
-<p>有关SSH安全机制在 <a href="https://justin13wyx.me/2017/04/04/%E5%AF%B9SSL-TLS%E7%9A%84%E7%90%86%E8%A7%A3/#补充-SSH-Secure-Shell-的原理和处理过程" target="_blank" rel="noopener">补充-SSH-Secure-Shell-的原理和处理过程</a> 说过一点.</p>
+<p>有关SSH安全机制在 <a href="https://yaoxuannn.com/2017/04/04/%E5%AF%B9SSL-TLS%E7%9A%84%E7%90%86%E8%A7%A3/#补充-SSH-Secure-Shell-的原理和处理过程">补充-SSH-Secure-Shell-的原理和处理过程</a> 说过一点.</p>
 <p>OpenSSH也是C/S架构的, 我们的服务器端就叫做: sshd, 而对于客户端则直接叫做: ssh, 并且还有scp这样的工具, 还有sftp这样的子系统.</p>
 <h2 id="SSH命令和配置"><a href="#SSH命令和配置" class="headerlink" title="SSH命令和配置"></a>SSH命令和配置</h2><h3 id="SSH命令"><a href="#SSH命令" class="headerlink" title="SSH命令"></a>SSH命令</h3><p>直接man一下ssh, 其实支持的功能还是蛮多的. 最简单的方法就直接在后面加上主机名就行了. 用户名是可以省略的, 会使用当前系统登录的用户作为默认用户来登录. 除了默认的user@hostname, 也可以使用<strong>-l</strong>来指定user, 也就是:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -l root 192.168.100.10 <span class="comment"># 就等价于ssh root@192.168.100.10</span></span><br></pre></td></tr></table></figure>
@@ -225,9 +225,8 @@
 <li><p>禁止使用protocol version 1</p>
 </li>
 <li><p>限制可登录用户</p>
-<ul>
-<li>有两个属性叫做AllowUsers和AllowGroups可以用来做白名单, 反之还有黑名单. <strong>注意, 当你两个都设置的时候, ssh会取两者的交集(就是说:当你允许root和用户test登录, 但是只允许root组登录的时候, test依旧会被拒绝.)</strong></li>
-</ul>
+</li>
+<li><p>有两个属性叫做AllowUsers和AllowGroups可以用来做白名单, 反之还有黑名单. <strong>注意, 当你两个都设置的时候, ssh会取两者的交集(就是说:当你允许root和用户test登录, 但是只允许root组登录的时候, test依旧会被拒绝.)</strong></p>
 </li>
 <li><p>设定空闲会话超时时长</p>
 </li>
@@ -255,7 +254,7 @@
 </li>
 </ul>
 <h2 id="OpenSSL和CA相关"><a href="#OpenSSL和CA相关" class="headerlink" title="OpenSSL和CA相关"></a>OpenSSL和CA相关</h2><p>我们之前已经说了好大一会openssl这个东西了, 但是当时就草草的随意提了下关于证书的种种. 今天就在这里详细说一下关于CA和证书的事情.</p>
-<p><a href="https://justin13wyx.me/2017/09/08/OpenSSL%E5%88%9D%E8%AF%86%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/" target="_blank" rel="noopener">OpenSSL初识</a></p>
+<p><a href="https://yaoxuannn.com/2017/09/08/OpenSSL%E5%88%9D%E8%AF%86%E4%B8%8E%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E5%AE%89%E5%85%A8/">OpenSSL初识</a></p>
 <p>我们之前提到过 有一个实现现代互联网安全使得最根本的保证, 叫做PKI, 全称是Public Key Infrastructure. 也就是公钥基础设施. 主要有下面几个成分组成, 也就是CA(发证机构), RA(注册机构), CRL(吊销列表), 证书存取库. 其中CA是非常重要的, 而注册机构也是需要发给CA, 然后由CA做签名的.  但是总不能一直都支付那么高的费用, 例如, 日后我需要建立VPN来连接机构组织的内网, 由于这个VPN需要验证而且他本身就是用在我们这个组织内部的, 所以我们可以使用<strong>内部证书</strong>, 或者说<strong>私有证书</strong>, 这种感觉就好像是银行所使用的某某盾, 某某通行证啥的, 这些东西只有在银行内部才能够使用 如果每一个客户的支付通行证都是购买的证书的话, 那开销也太大了.</p>
 <p>建立私有CA, 已经可以满足我们的需要了. 建立私有CA, 有很多专门的工具来做到, 其中由一个非常著名的实现叫做OpenCA, 但是过于复杂和专业, 所以我们使用openssl来实现. 其实OpenCA就是对openssl的高度抽象来实现更多强大的功能. 下面就来说怎么建立私有CA.</p>
 <p>首先就要先了解一下我们的证书申请和签署步骤:</p>
@@ -316,7 +315,7 @@
 <p>最后一步, 更新证书吊销列表:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW newcerts]<span class="comment"># openssl ca -gencrl -out /etc/pki/CA/crl/httpd.crl</span></span><br><span class="line">Using configuration from /etc/pki/tls/openssl.cnf</span><br></pre></td></tr></table></figure>
 
-<p>以上.</p>
+<p>以上.�.</p>
 
   </div>
 </article>

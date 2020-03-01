@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="初识OpenSSL与简单的密码学知识~">
-<meta name="keywords" content="OpenSSL,密码">
+<meta name="keywords" content="OpenSSL,password">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenSSL初识与简单的网络通信安全">
 <meta property="og:url" content="https://yaoxuannn.com/2017/09/07/OpenSSL初识与简单的网络通信安全/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="初识OpenSSL与简单的密码学知识~">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.267Z">
+<meta property="og:updated_time" content="2020-03-01T22:58:46.939Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenSSL初识与简单的网络通信安全">
 <meta name="twitter:description" content="初识OpenSSL与简单的密码学知识~">
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一次通信"><span class="toc-number">1.</span> <span class="toc-text">一次通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux上的通信安全工具"><span class="toc-number">2.</span> <span class="toc-text">Linux上的通信安全工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对称加密"><span class="toc-number">2.0.1.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#公钥加密"><span class="toc-number">2.0.2.</span> <span class="toc-text">公钥加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#单向加密"><span class="toc-number">2.0.3.</span> <span class="toc-text">单向加密</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#证书和CA"><span class="toc-number">3.</span> <span class="toc-text">证书和CA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSL-TLS"><span class="toc-number">4.</span> <span class="toc-text">SSL/TLS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSSL"><span class="toc-number">5.</span> <span class="toc-text">OpenSSL</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一次通信"><span class="toc-number">1.</span> <span class="toc-text">一次通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux上的通信安全工具"><span class="toc-number">2.</span> <span class="toc-text">Linux上的通信安全工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对称加密"><span class="toc-number">2.1.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公钥加密"><span class="toc-number">2.2.</span> <span class="toc-text">公钥加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向加密-签名"><span class="toc-number">2.3.</span> <span class="toc-text">单向加密(签名)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#证书和CA"><span class="toc-number">3.</span> <span class="toc-text">证书和CA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSL-TLS"><span class="toc-number">4.</span> <span class="toc-text">SSL/TLS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSSL"><span class="toc-number">5.</span> <span class="toc-text">OpenSSL</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -140,7 +140,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/OpenSSL/">OpenSSL</a>, <a class="tag-link" href="/tags/密码/">密码</a>
+        <a class="tag-link" href="/tags/OpenSSL/">OpenSSL</a>, <a class="tag-link" href="/tags/password/">password</a>
     </div>
 
 
@@ -184,7 +184,7 @@
 <p><strong>认证协议</strong>  </p>
 <p>说到密码, 这个东西其实并不是程序员所研究的东西, 通常都是一些研究机构, 数学科学家, 军方在研究. 而各国都有自己秘而不宣的加密算法, 至于我们现在在生产环境中所使用的这些, 至少他们对于信息获取没有什么阻碍.</p>
 <h2 id="Linux上的通信安全工具"><a href="#Linux上的通信安全工具" class="headerlink" title="Linux上的通信安全工具"></a>Linux上的通信安全工具</h2><p><strong>OpenSSL</strong> 和 <strong>gpg</strong> , 后者是对pgp协议的实现. 接下来我们就说说常见的加密技术吧.</p>
-<h4 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h4><p>首先是<strong>对称加密</strong>技术: 其实就是说,加密和解密使用的是同一个密钥. 这里需要说的一件事是, 其实加密算法倒不是最重要的(不是说不重要啊), 算法可以公开, 但是问题在于即使知道了算法,也很难揣测出密钥是什么. 所以加密的关键是这个密钥, 比如AES-128,AES-256大家都知道算法的思想是什么,但是就是没法逆推. 那怎么解密呢, 我们有密钥啊, 对称加密使用的是一样的密钥. 这样带来的缺陷是 如果通信有n组用户, 那么就会存在n组密钥. 这样错误率就会出增大. </p>
+<h3 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h3><p>首先是<strong>对称加密</strong>技术: 其实就是说,加密和解密使用的是同一个密钥. 这里需要说的一件事是, 其实加密算法倒不是最重要的(不是说不重要啊), 算法可以公开, 但是问题在于即使知道了算法,也很难揣测出密钥是什么. 所以加密的关键是这个密钥, 比如AES-128,AES-256大家都知道算法的思想是什么,但是就是没法逆推. 那怎么解密呢, 我们有密钥啊, 对称加密使用的是一样的密钥. 这样带来的缺陷是 如果通信有n组用户, 那么就会存在n组密钥. 这样错误率就会出增大. </p>
 <p>在早期的: DES(Data Encryption Standard), 56位的密钥. 但是在2003年前后就被攻破了, 可以非常容易的进行逆推. 所以DES就进行了改进, 变成了3DES. 后来继续征集新的安全标准, 于是出现了AES, 也就是Advance ES, 这个标准支持128.192,258,384,512bits的长度. 类似的还有BlowFish, TwoFish, IDEA, RC6, CAST5(相信你都没听说过吧..现在互联网上使用最多的也就是3DES和AES了)</p>
 <p><strong>特性</strong>:</p>
 <ul>
@@ -196,7 +196,7 @@
 <li>密钥过多</li>
 <li>密钥分发有问题</li>
 </ul>
-<h4 id="公钥加密"><a href="#公钥加密" class="headerlink" title="公钥加密"></a>公钥加密</h4><p><strong>公钥加密</strong>极大地推动了现在互联网安全. 公钥加密中, 密钥是成对出现的. 公钥(publiic key)可以公开给所有人, 私钥(private key)是自己留存的, 必须保证安全性. 但是密钥长度非常长, 通常都是1024,2048位为起点的.长则4096, 甚至还有8192位的都有. 使用公钥加密的数据, 仅仅能通过与之配对的私钥解密, 反之亦然.</p>
+<h3 id="公钥加密"><a href="#公钥加密" class="headerlink" title="公钥加密"></a>公钥加密</h3><p><strong>公钥加密</strong>极大地推动了现在互联网安全. 公钥加密中, 密钥是成对出现的. 公钥(publiic key)可以公开给所有人, 私钥(private key)是自己留存的, 必须保证安全性. 但是密钥长度非常长, 通常都是1024,2048位为起点的.长则4096, 甚至还有8192位的都有. 使用公钥加密的数据, 仅仅能通过与之配对的私钥解密, 反之亦然.</p>
 <p>常见的公钥加密有三种功能: <strong>身份认证(数字签名)</strong>, <strong>密钥交换</strong>, <strong>数据加密</strong>   </p>
 <p>常见的算法有: RSA[数字签名和加密都能实现], DSA(DSS)[仅能用于数字签名], ELGamal</p>
 <p>一般情况下, 我们很少使用公钥加密来进行数据加密, 因为太长了, 光加密就需要很长时间. 基本上慢对称加密的三个数量级. 但事实上, 我们可以用来加密密钥. 这样就解决了之前对称加密的密钥分发问题. 发送方使用接收方的公钥进行密钥加密, 接着接收方使用自己的私钥进行解密. 最后就可以通过这个对称密钥进行加密通信了.</p>
@@ -204,7 +204,7 @@
 <p>但是这样就安全了吗? 不. 这一个过程依靠于最开始的公钥上.如果在通信线路上潜伏的人截取了最一开始的公钥, 而把自己的公钥发送过去的话, 后面就可想而知了.</p>
 <p>所以引入CA, 也就是证书签署机构. 在一开始扔过去的公钥不是公钥本身, 而是自己的证书.证书中有他的公钥.首先找到有公信力的组织, 证明身份, 接着机构就会扔给他证书, 证书上会有自己的戳. 所以接收方先对证书进行完整性验证, 接着验证证书机构, 最后才会接收到公钥.</p>
 <p>如果使用公钥加密, 我们只要维护一对儿密钥就行啦.</p>
-<h4 id="单向加密"><a href="#单向加密" class="headerlink" title="单向加密"></a>单向加密</h4><p>只能加密, 不能解密. 因为主要目的是为了提取数据指纹, 用来保证数据的完整性.</p>
+<h3 id="单向加密-签名"><a href="#单向加密-签名" class="headerlink" title="单向加密(签名)"></a>单向加密(签名)</h3><p>只能加密, 不能解密. 因为主要目的是为了提取数据指纹, 用来保证数据的完整性.</p>
 <p>特性: 定长输出(无论数据是什么长度的, 加密后的都是一样长度的), 雪崩效应(源数据的微小改变都会引起结果的巨大改变)</p>
 <p>常见的加密算法有: MD5, SHA1, SHA256, SHA512</p>
 <p>OK, 现在我们来说一种糅合了所有方法的通信过程, 让第三方无计可施!</p>
@@ -245,7 +245,7 @@
 <li>2008, TLS 1.2</li>
 <li>2015, TLS 1.3</li>
 </ul>
-<p>现在nginx等已经支持TLS1.3, 而各大现代浏览器也推出TLS1.3的实验性支持. 对于SSL/TLS的简单理解, 可以参考之前的 <a href="https://justin13wyx.me/2017/04/04/%E5%AF%B9SSL-TLS%E7%9A%84%E7%90%86%E8%A7%A3/" target="_blank" rel="noopener">我对SSl/TLS的理解</a> (已更新)</p>
+<p>现在nginx等已经支持TLS1.3, 而各大现代浏览器也推出TLS1.3的实验性支持. 对于SSL/TLS的简单理解, 可以参考之前的 <a href="https://yaoxuannn.com/2017/04/04/%E5%AF%B9SSL-TLS%E7%9A%84%E7%90%86%E8%A7%A3/">我对SSl/TLS的理解</a> (已更新)</p>
 <h2 id="OpenSSL"><a href="#OpenSSL" class="headerlink" title="OpenSSL"></a>OpenSSL</h2><p>OpenSSL是什么? OpenSSL开源项目, 主要包含了三个组件:</p>
 <ul>
 <li>openssl: 多用途的命令行工具</li>
@@ -309,7 +309,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一次通信"><span class="toc-number">1.</span> <span class="toc-text">一次通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux上的通信安全工具"><span class="toc-number">2.</span> <span class="toc-text">Linux上的通信安全工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对称加密"><span class="toc-number">2.0.1.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#公钥加密"><span class="toc-number">2.0.2.</span> <span class="toc-text">公钥加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#单向加密"><span class="toc-number">2.0.3.</span> <span class="toc-text">单向加密</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#证书和CA"><span class="toc-number">3.</span> <span class="toc-text">证书和CA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSL-TLS"><span class="toc-number">4.</span> <span class="toc-text">SSL/TLS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSSL"><span class="toc-number">5.</span> <span class="toc-text">OpenSSL</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一次通信"><span class="toc-number">1.</span> <span class="toc-text">一次通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux上的通信安全工具"><span class="toc-number">2.</span> <span class="toc-text">Linux上的通信安全工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对称加密"><span class="toc-number">2.1.</span> <span class="toc-text">对称加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公钥加密"><span class="toc-number">2.2.</span> <span class="toc-text">公钥加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单向加密-签名"><span class="toc-number">2.3.</span> <span class="toc-text">单向加密(签名)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#证书和CA"><span class="toc-number">3.</span> <span class="toc-text">证书和CA</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSL-TLS"><span class="toc-number">4.</span> <span class="toc-text">SSL/TLS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenSSL"><span class="toc-number">5.</span> <span class="toc-text">OpenSSL</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

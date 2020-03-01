@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="SELinux (Secure Enhanced Linux)PAM (Pluggable Authentication Modules)">
-<meta name="keywords" content="Linux,系统,SELinux">
+<meta name="keywords" content="Linux,SELinux,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux模块-SELinux和PAM库">
 <meta property="og:url" content="https://yaoxuannn.com/2017/07/17/Linux模块-SELINUX和PAM库/index.html">
@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://linux.vbird.org/linux_basic/0410accountmanager//pam-2.gif">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/selinux1.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/selinux2.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.245Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.642Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux模块-SELinux和PAM库">
 <meta name="twitter:description" content="SELinux (Secure Enhanced Linux)PAM (Pluggable Authentication Modules)">
@@ -80,7 +80,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2017/07/19/Python操作Rabbitmq-Redis/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/07/19/Python操作Rabbitmq-Redis-MySQL/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2017/07/16/Linux的内核管理和编译初步/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -110,7 +110,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PAM"><span class="toc-number">1.</span> <span class="toc-text">PAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SELinux"><span class="toc-number">2.</span> <span class="toc-text">SELinux</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PAM"><span class="toc-number">1.</span> <span class="toc-text">PAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SELinux"><span class="toc-number">2.</span> <span class="toc-text">SELinux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nsswitch"><span class="toc-number">3.</span> <span class="toc-text">nsswitch</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -145,7 +145,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/SELinux/">SELinux</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>, <a class="tag-link" href="/tags/SELinux/">SELinux</a>
     </div>
 
 
@@ -267,7 +267,8 @@
 </ol>
 </blockquote>
 <p>最后再说一句, 如果 关于这个出现了什么难以解决的不明问题, 最好的解决方法个人认为就是去查看日志, 也即是/var/log/messages和/var/log/secure.(不同发行版不同哦,不确定的话查看rsyslog的配置吧)</p>
-<h2 id="SELinux"><a href="#SELinux" class="headerlink" title="SELinux"></a>SELinux</h2><p>在开头说过了, SELinux是指安全加强的Linux. 他的来头很大,是美国国家安全委员会负责研发的. 然而实际上在实际的生产环境中却没有<strong>1%</strong>的人选择使用. </p>
+<h2 id="SELinux"><a href="#SELinux" class="headerlink" title="SELinux"></a>SELinux</h2><p>在开头说过了, SELinux是指安全加强的Linux. 他的来头很大,是美国国家安全委员会负责研发的. </p>
+<p>然而在实际的生产环境中却没有<strong>1%</strong>的人选择使用. </p>
 <blockquote>
 <p>美国国家安全委员会对操作系统进行了安全评分, 从最安全的A到最次的D. Windows Server的安全评级为C2, 也就是仅次于最差的D, 那么Linux呢? 和WinServer一样, 都是C2. 有些人总说使用Linux是因为安全, 其实这样是不合理的.只是说由于Linux的学习曲线陡峭导致Linux的用户都花了精力研究过的. 而Windows由于用户中多自然针对的攻击脚本也多.</p>
 </blockquote>
@@ -341,7 +342,7 @@
 <p>由于现在使用SELuinx的场景越来越小了, 所以我也就不在展开了吧, 更多的东西就这里吧:</p>
 <p><a href="http://linux.vbird.org/linux_basic/0440processcontrol.php#selinux" target="_blank" rel="noopener">鸟哥!!</a></p>
 <p><strong>更新 17.10.05:</strong></p>
-<p>除了上面说过的框架级别的认证服务PAM, 现在再介绍一个框架级别的服务, 即<strong>nsswitch</strong> 即网络服务交换. 这个服务主要负责进行名称解析 ( name:id )</p>
+<h2 id="nsswitch"><a href="#nsswitch" class="headerlink" title="nsswitch"></a>nsswitch</h2><p>除了上面说过的框架级别的认证服务PAM, 现在再介绍一个框架级别的服务, 即<strong>nsswitch</strong> 即网络服务交换. 这个服务主要负责进行名称解析 ( name:id )</p>
 <p> 和PAM一样, 或者说和所有框架级别的服务一样, 当我们需要进行解析的时候, 我们知道有很多种介质, 例如文件解析, MySQL数据库解析, LDAP解析, DNS解析等等. 如果想要支持这些解析, 那么就需要程序员在自己的程序中内置这些解析介质的驱动. 这显然并不好, 所以为了提供一个大家都能够进行解析的平台, 就这样出现了这样的一个通用层, 中间层. 也就是这个通用框架 – nsswitch. 但是我不一定会使用到所有的解析介质. 因此, nsswitch提供一个配置文件来指明解析顺序, 方式. 这样就会<strong>通用且灵活</strong>. 这种概念在整个计算机科学中各个地方都有体现.</p>
 <p>关于nsswitch服务的模块在<code>/usr/lib64/</code>下可以找到, 我们来看一眼:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW lib64]<span class="comment"># ls libnss*</span></span><br><span class="line">libnss3.so             libnss_db-2.17.so  libnss_dns-2.17.so    libnss_files.so.2       libnss_mymachines.so.2  libnss_nis.so     libnss_winbind.so</span><br><span class="line">libnssckbi.so          libnssdbm3.chk     libnss_dns.so         libnss_hesiod-2.17.so   libnss_nis-2.17.so      libnss_nis.so.2   libnss_winbind.so.2</span><br><span class="line">libnss_compat-2.17.so  libnssdbm3.so      libnss_dns.so.2       libnss_hesiod.so        libnss_nisplus-2.17.so  libnsspem.so      libnss_wins.so</span><br><span class="line">libnss_compat.so       libnss_db.so       libnss_files-2.17.so  libnss_hesiod.so.2      libnss_nisplus.so       libnsssysinit.so  libnss_wins.so.2</span><br><span class="line">libnss_compat.so.2     libnss_db.so.2     libnss_files.so       libnss_myhostname.so.2  libnss_nisplus.so.2     libnssutil3.so</span><br></pre></td></tr></table></figure>
@@ -396,7 +397,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PAM"><span class="toc-number">1.</span> <span class="toc-text">PAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SELinux"><span class="toc-number">2.</span> <span class="toc-text">SELinux</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#PAM"><span class="toc-number">1.</span> <span class="toc-text">PAM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SELinux"><span class="toc-number">2.</span> <span class="toc-text">SELinux</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nsswitch"><span class="toc-number">3.</span> <span class="toc-text">nsswitch</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

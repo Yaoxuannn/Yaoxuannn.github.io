@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Linux的网络配置: ifcfg系列和ip家族 :)">
-<meta name="keywords" content="Linux,网络">
+<meta name="keywords" content="Linux,Network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux网络配置">
 <meta property="og:url" content="https://yaoxuannn.com/2017/05/26/Linux网络配置/index.html">
@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/route.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/interfaces.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dns.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.256Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux网络配置">
 <meta name="twitter:description" content="Linux的网络配置: ifcfg系列和ip家族 :)">
@@ -80,7 +80,7 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2017/06/02/Python简陋SSH的踩坑总结/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/06/07/Linux的文件和FHS&sudo/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
         <li><a class="icon" href="/2017/05/21/First2Redis/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
@@ -110,7 +110,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ifcfg系列"><span class="toc-number">1.</span> <span class="toc-text">ifcfg系列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置网络接口"><span class="toc-number">1.1.</span> <span class="toc-text">配置网络接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip家族"><span class="toc-number">2.</span> <span class="toc-text">ip家族</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#link"><span class="toc-number">2.0.1.</span> <span class="toc-text">link</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#addr"><span class="toc-number">2.0.2.</span> <span class="toc-text">addr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#route"><span class="toc-number">2.0.3.</span> <span class="toc-text">route</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ss"><span class="toc-number">2.0.4.</span> <span class="toc-text">ss</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#udev"><span class="toc-number">3.</span> <span class="toc-text">udev</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络属性配置"><span class="toc-number">4.</span> <span class="toc-text">网络属性配置</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ifcfg系列"><span class="toc-number">1.</span> <span class="toc-text">ifcfg系列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置网络接口"><span class="toc-number">1.1.</span> <span class="toc-text">配置网络接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip家族"><span class="toc-number">2.</span> <span class="toc-text">ip家族</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#link"><span class="toc-number">2.1.</span> <span class="toc-text">link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#addr"><span class="toc-number">2.2.</span> <span class="toc-text">addr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#route"><span class="toc-number">2.3.</span> <span class="toc-text">route</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ss"><span class="toc-number">2.4.</span> <span class="toc-text">ss</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#udev"><span class="toc-number">3.</span> <span class="toc-text">udev</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络属性配置"><span class="toc-number">4.</span> <span class="toc-text">网络属性配置</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -145,7 +145,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/网络/">网络</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/Network/">Network</a>
     </div>
 
 
@@ -270,7 +270,7 @@
 <p>其中的OBJECT就是 ip 的子命令.</p>
 <p>常用的OBJECT就是: <code>{ link | addr | route | ...}</code></p>
 <p>就一个一个Object来说吧:</p>
-<h4 id="link"><a href="#link" class="headerlink" title="link"></a>link</h4><p>link是用来查看和配置网卡设备的, 使用<code>ip link [show]</code>来查看, 当前网卡驱动的状态.</p>
+<h3 id="link"><a href="#link" class="headerlink" title="link"></a>link</h3><p>link是用来查看和配置网卡设备的, 使用<code>ip link [show]</code>来查看, 当前网卡驱动的状态.</p>
 <p>和上面的<code>ifconfig</code>类似,     </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LOOPBACK 表明是本地回环</span><br><span class="line">BROADCAST 开启广播</span><br><span class="line">MULTICAST 组播( 集群使用 )</span><br><span class="line">UP 已启用</span><br></pre></td></tr></table></figure>
 
@@ -286,7 +286,7 @@
 <p>再开启的话即只要后面的off加上换成on就行了~.</p>
 <p>ip-link命令 主要用于网络设备的配置,因此不是太过于常用.</p>
 <p>与其说link子命令像ifconfig, 不如说addr子命令更像.因为它不仅显示了当前网卡的简要信息,还有当前的本机IP.</p>
-<h4 id="addr"><a href="#addr" class="headerlink" title="addr"></a>addr</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ ip addr show</span><br></pre></td></tr></table></figure>
+<h3 id="addr"><a href="#addr" class="headerlink" title="addr"></a>addr</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ ip addr show</span><br></pre></td></tr></table></figure>
 
 <p><strong>值得一提的是, addr显示出的IP地址是通过DHCP协动态获取的.</strong></p>
 <p>使用addr常用的操作是进行IP地址的更换.添加.删除等.</p>
@@ -304,7 +304,7 @@
 <p>接下来再来看一下作用域.(scope), 这个选项的值在进行<code>show</code>时候也是可以看见的.默认是global.</p>
 <p>也就意味该IP全局有效., 除了global(用于内核, IP属于内核)以外还有site(只用于IPv6), link(仅用于本设备[添加了这个IP的网卡]), host(仅用于本机[服务器]内部).</p>
 <p>如果想要清空一张网卡上的所有IP,一个一个<code>del</code>未免太蠢了, 所以ip-address提供了<code>flush</code>命令, 直接就可以清空指定设备上的所有IP.</p>
-<h4 id="route"><a href="#route" class="headerlink" title="route"></a>route</h4><p>ip-route作为路由表管理工具, 支持了极多的路由管理和策略.</p>
+<h3 id="route"><a href="#route" class="headerlink" title="route"></a>route</h3><p>ip-route作为路由表管理工具, 支持了极多的路由管理和策略.</p>
 <p>然而常规操作依然就是<code>show</code>.<code>add</code>.<code>delete</code>.<code>flush</code>.</p>
 <p>但是在添加路由时,ip-route支持更多功能, 比如:原地址伪装.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ ip route add 192.168.1.0/24 via 172.16.0.1 dev eth0 src 172.16.0.22</span><br></pre></td></tr></table></figure>
@@ -312,7 +312,7 @@
 <p>最后的的src就是伪装ip了, 建议不要乱写了, 其实乱写程序也会直接报错的.</p>
 <p><strong>注意:如果不明确注明子网掩码或者写明default,ip-route会都将其当做主机.</strong></p>
 <p>再删除路由时, 最好指明白要删除的路由的dest和netmask, 这样可以避免一些模糊的导致删除错误.</p>
-<h4 id="ss"><a href="#ss" class="headerlink" title="ss"></a>ss</h4><p>ss是一个网络状况查看工具, 当你的网络繁忙,网络连接情况十分复杂, 或者说连接数非常多的时候, <code>netstat</code>往往会比较卡.而<code>ss</code>就是一个取代<code>netstat</code>的工具. 他的速度基本上是<code>netstat</code>的10倍左右</p>
+<h3 id="ss"><a href="#ss" class="headerlink" title="ss"></a>ss</h3><p>ss是一个网络状况查看工具, 当你的网络繁忙,网络连接情况十分复杂, 或者说连接数非常多的时候, <code>netstat</code>往往会比较卡.而<code>ss</code>就是一个取代<code>netstat</code>的工具. 他的速度基本上是<code>netstat</code>的10倍左右</p>
 <p><code>ss</code>命令的大体格式就是:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ss [OPTION] ... [FILTER]</span><br></pre></td></tr></table></figure>
 
@@ -490,7 +490,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ifcfg系列"><span class="toc-number">1.</span> <span class="toc-text">ifcfg系列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置网络接口"><span class="toc-number">1.1.</span> <span class="toc-text">配置网络接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip家族"><span class="toc-number">2.</span> <span class="toc-text">ip家族</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#link"><span class="toc-number">2.0.1.</span> <span class="toc-text">link</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#addr"><span class="toc-number">2.0.2.</span> <span class="toc-text">addr</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#route"><span class="toc-number">2.0.3.</span> <span class="toc-text">route</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ss"><span class="toc-number">2.0.4.</span> <span class="toc-text">ss</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#udev"><span class="toc-number">3.</span> <span class="toc-text">udev</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络属性配置"><span class="toc-number">4.</span> <span class="toc-text">网络属性配置</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ifcfg系列"><span class="toc-number">1.</span> <span class="toc-text">ifcfg系列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置网络接口"><span class="toc-number">1.1.</span> <span class="toc-text">配置网络接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip家族"><span class="toc-number">2.</span> <span class="toc-text">ip家族</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#link"><span class="toc-number">2.1.</span> <span class="toc-text">link</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#addr"><span class="toc-number">2.2.</span> <span class="toc-text">addr</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#route"><span class="toc-number">2.3.</span> <span class="toc-text">route</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ss"><span class="toc-number">2.4.</span> <span class="toc-text">ss</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#udev"><span class="toc-number">3.</span> <span class="toc-text">udev</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#网络属性配置"><span class="toc-number">4.</span> <span class="toc-text">网络属性配置</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

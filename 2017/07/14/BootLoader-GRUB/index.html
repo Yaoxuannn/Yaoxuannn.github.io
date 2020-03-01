@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="如果没有loader, 那么kernel根本没有办法被系统加载, 现在来说说grub吧, 当前Linux里最主流的boot loader.">
-<meta name="keywords" content="Linux,系统,bootloader">
+<meta name="keywords" content="Linux,bootloader,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BootLoader-GRUB">
 <meta property="og:url" content="https://yaoxuannn.com/2017/07/14/BootLoader-GRUB/index.html">
@@ -24,7 +24,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/grub_%E6%94%B9.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/grub_password.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/boot_passwd%27.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.201Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BootLoader-GRUB">
 <meta name="twitter:description" content="如果没有loader, 那么kernel根本没有办法被系统加载, 现在来说说grub吧, 当前Linux里最主流的boot loader.">
@@ -116,7 +116,7 @@
 
     </div>
     <div id="toc">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GRUB-old-version"><span class="toc-number">1.</span> <span class="toc-text">GRUB (old version)</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -151,7 +151,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/bootloader/">bootloader</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>, <a class="tag-link" href="/tags/bootloader/">bootloader</a>
     </div>
 
 
@@ -163,7 +163,7 @@
     <p>如果没有loader, 那么kernel根本没有办法被系统加载, 现在来说说grub吧, 当前Linux里最主流的boot loader.</p>
 <a id="more"></a>
 
-<p>在CentOS5/6系统启动流程中我们就已经提过了grub这个小东西. 全称叫<code>GRand Unified Bootloader</code>.</p>
+<h2 id="GRUB-old-version"><a href="#GRUB-old-version" class="headerlink" title="GRUB (old version)"></a>GRUB (old version)</h2><p>在CentOS5/6系统启动流程中我们就已经提过了grub这个小东西. 全称叫<code>GRand Unified Bootloader</code>.</p>
 <p>  从CentOS7开始, 使用了新版的grub, 也就是1.x版本, 这个被叫做grub2. 而原先的CentOS5/6使用的就是grub 0.x版本 也就是所谓grub legacy. 并且这两者也已经出现了巨大的变化.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grub legacy:</span><br><span class="line">    stage1: mbr</span><br><span class="line">    stage1_5: mbr之后的扇区, 让stage1中的bootloader可以识别stage2所在分区的文件系统</span><br><span class="line">    stage2: 磁盘分区(/boot/grub/)</span><br></pre></td></tr></table></figure>
 
@@ -281,7 +281,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#GRUB-old-version"><span class="toc-number">1.</span> <span class="toc-text">GRUB (old version)</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

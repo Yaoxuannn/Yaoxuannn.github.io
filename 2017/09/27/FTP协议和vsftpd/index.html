@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="文件共享服务 – 应用层的FTP, 工作在内核的nfs(难以跨平台), 跨平台的文件服务samba(在Linux上实现SMB).">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.215Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FTP协议和vsftpd">
 <meta name="twitter:description" content="文件共享服务 – 应用层的FTP, 工作在内核的nfs(难以跨平台), 跨平台的文件服务samba(在Linux上实现SMB).">
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP协议"><span class="toc-number">1.</span> <span class="toc-text">FTP协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP协议的响应码"><span class="toc-number">2.</span> <span class="toc-text">FTP协议的响应码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户认证"><span class="toc-number">3.</span> <span class="toc-text">用户认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd"><span class="toc-number">4.</span> <span class="toc-text">vsftpd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd配置"><span class="toc-number">5.</span> <span class="toc-text">vsftpd配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#匿名用户"><span class="toc-number">5.0.1.</span> <span class="toc-text">匿名用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地用户的配置"><span class="toc-number">5.0.2.</span> <span class="toc-text">本地用户的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#虚拟用户的配置"><span class="toc-number">5.0.3.</span> <span class="toc-text">虚拟用户的配置</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP协议"><span class="toc-number">1.</span> <span class="toc-text">FTP协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP协议的响应码"><span class="toc-number">2.</span> <span class="toc-text">FTP协议的响应码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户认证"><span class="toc-number">3.</span> <span class="toc-text">用户认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd"><span class="toc-number">4.</span> <span class="toc-text">vsftpd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd配置"><span class="toc-number">5.</span> <span class="toc-text">vsftpd配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名用户"><span class="toc-number">5.1.</span> <span class="toc-text">匿名用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地用户的配置"><span class="toc-number">5.2.</span> <span class="toc-text">本地用户的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟用户的配置"><span class="toc-number">5.3.</span> <span class="toc-text">虚拟用户的配置</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -232,7 +232,7 @@
 
 <p>默认的目录会是自己的家目录, 这个我们之前就说过了, 但是, 在这情况下, 客户端可以随意的移动倒其他的目录, FTP是明文传输, 这样实在是太危险了. 所以我们必须把系统用户像匿名用户那样锁在一个目录中, 或者说根切换.</p>
 <p>接下来我们按照用户类型看一下配置项:</p>
-<h4 id="匿名用户"><a href="#匿名用户" class="headerlink" title="匿名用户"></a>匿名用户</h4><p>anonymous_enable=YES<br>anon_upload_enable=YES 匿名用户能不能进行文件上传<br>anon_mkdir_write_enable=YES 匿名用户能否创建新目录<br>anon_other_write_enable=YES 匿名用户能否进行其他写操作</p>
+<h3 id="匿名用户"><a href="#匿名用户" class="headerlink" title="匿名用户"></a>匿名用户</h3><p>anonymous_enable=YES<br>anon_upload_enable=YES 匿名用户能不能进行文件上传<br>anon_mkdir_write_enable=YES 匿名用户能否创建新目录<br>anon_other_write_enable=YES 匿名用户能否进行其他写操作</p>
 <p>我们打开文件上传选项, 做个试验:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ftp&gt; put anaconda-ks.cfg </span><br><span class="line"><span class="built_in">local</span>: anaconda-ks.cfg remote: anaconda-ks.cfg</span><br><span class="line">227 Entering Passive Mode (192,168,56,101,30,146).</span><br><span class="line">553 Could not create file.</span><br></pre></td></tr></table></figure>
 
@@ -255,7 +255,7 @@
 
 <p>就可以了.</p>
 <p>以上的这些属性都是比较危险的选项, 开启时候要注意的.</p>
-<h4 id="本地用户的配置"><a href="#本地用户的配置" class="headerlink" title="本地用户的配置"></a>本地用户的配置</h4><p>local_enable=YES<br>write_enable=YES<br>local_umask=022<br>chroot_local_user=YES<br>allow_writeable_chroot=YES<br>chroot_list_enable=YES<br>chroot_list_file=/etc/vsftpd/chroot_list</p>
+<h3 id="本地用户的配置"><a href="#本地用户的配置" class="headerlink" title="本地用户的配置"></a>本地用户的配置</h3><p>local_enable=YES<br>write_enable=YES<br>local_umask=022<br>chroot_local_user=YES<br>allow_writeable_chroot=YES<br>chroot_list_enable=YES<br>chroot_list_file=/etc/vsftpd/chroot_list</p>
 <p>关于这些属性的意味我们在实验中展示: [ 前三个就省略了, 看看都明白了 ]</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]<span class="comment"># ftp 192.168.56.101</span></span><br><span class="line">Connected to 192.168.56.101 (192.168.56.101).</span><br><span class="line">220 (vsFTPd 3.0.2)</span><br><span class="line">Name (192.168.56.101:root): <span class="built_in">test</span></span><br><span class="line">331 Please specify the password.</span><br><span class="line">Password:</span><br><span class="line">230 Login successful.</span><br><span class="line">Remote system <span class="built_in">type</span> is UNIX.</span><br><span class="line">Using binary mode to transfer files.</span><br><span class="line">ftp&gt; <span class="built_in">pwd</span></span><br><span class="line">257 <span class="string">"/"</span></span><br></pre></td></tr></table></figure>
 
@@ -297,7 +297,7 @@
 <p>max_clients: 最大并发连接数<br>max_per_ip: 每个IP可同时发起的并发请求.</p>
 <p>还有速率上的限制:</p>
 <p>anno_max_rate: 匿名用户的最大传输限制, 字节/s<br>local_max_rate: 本地用户的最大传输限制, 字节/s</p>
-<h4 id="虚拟用户的配置"><a href="#虚拟用户的配置" class="headerlink" title="虚拟用户的配置"></a>虚拟用户的配置</h4><p>虚拟用户需要映射到一个指定的系统账号. 所以每一个虚拟用户访问到的就是这个系统账号的家目录. 但是我们却可以赋予这些虚拟用户不同的权限, 这是依靠匿名用户进行的设定. </p>
+<h3 id="虚拟用户的配置"><a href="#虚拟用户的配置" class="headerlink" title="虚拟用户的配置"></a>虚拟用户的配置</h3><p>虚拟用户需要映射到一个指定的系统账号. 所以每一个虚拟用户访问到的就是这个系统账号的家目录. 但是我们却可以赋予这些虚拟用户不同的权限, 这是依靠匿名用户进行的设定. </p>
 <p>关于账号的存储, 我们说过可以存储在文件中, 奇数偶数分别为用户名/密码. 这个文件为了安全会被Hash, 但是我的每一次修改都要进行Hash计算, 所以很不方便.</p>
 <p>因此更好的方法是存储在数据库中. 而且这样还是即时的. 但是我们知道vsftpd是依靠于PAM的验证机制的, 如果想要访问数据库, 就需要PAM能够访问数据库. 这样就需要一个模块: pam-mysql, 这个模块是第三方的, 默认不会有, 所以就需要安装.</p>
 <p>这个模块在epel源中, 如果搜索不到需要建立yum源, 如果实在搜索不到就使用二进制的rpm包吧.</p>
@@ -377,7 +377,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP协议"><span class="toc-number">1.</span> <span class="toc-text">FTP协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP协议的响应码"><span class="toc-number">2.</span> <span class="toc-text">FTP协议的响应码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户认证"><span class="toc-number">3.</span> <span class="toc-text">用户认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd"><span class="toc-number">4.</span> <span class="toc-text">vsftpd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd配置"><span class="toc-number">5.</span> <span class="toc-text">vsftpd配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#匿名用户"><span class="toc-number">5.0.1.</span> <span class="toc-text">匿名用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地用户的配置"><span class="toc-number">5.0.2.</span> <span class="toc-text">本地用户的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#虚拟用户的配置"><span class="toc-number">5.0.3.</span> <span class="toc-text">虚拟用户的配置</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP协议"><span class="toc-number">1.</span> <span class="toc-text">FTP协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP协议的响应码"><span class="toc-number">2.</span> <span class="toc-text">FTP协议的响应码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用户认证"><span class="toc-number">3.</span> <span class="toc-text">用户认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd"><span class="toc-number">4.</span> <span class="toc-text">vsftpd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vsftpd配置"><span class="toc-number">5.</span> <span class="toc-text">vsftpd配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#匿名用户"><span class="toc-number">5.1.</span> <span class="toc-text">匿名用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地用户的配置"><span class="toc-number">5.2.</span> <span class="toc-text">本地用户的配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟用户的配置"><span class="toc-number">5.3.</span> <span class="toc-text">虚拟用户的配置</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

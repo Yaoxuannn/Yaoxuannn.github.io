@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="基础数据结构篇">
-<meta name="keywords" content="学习笔记,Python">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python&#39;s Memo(1)">
 <meta property="og:url" content="https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="基础数据结构篇">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.274Z">
+<meta property="og:updated_time" content="2020-03-01T23:02:15.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python&#39;s Memo(1)">
 <meta name="twitter:description" content="基础数据结构篇">
@@ -75,10 +75,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2017/04/12/SS-SSR/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/04/15/Linux基本命令的常用参数/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2017/04/09/Win批处理/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/04/03/对SSL-TLS的理解/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -100,13 +100,12 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&name=Python&#39;s Memo(1)&description=&lt;hr&gt;
-&lt;p&gt;基础数据结构篇&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&name=Python&#39;s Memo(1)&description=&lt;p&gt;基础数据结构篇&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-的备忘录–基础数据结构篇"><span class="toc-number">1.</span> <span class="toc-text">Python 的备忘录–基础数据结构篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#list"><span class="toc-number">1.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tuple"><span class="toc-number">1.2.</span> <span class="toc-text">tuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dict"><span class="toc-number">1.3.</span> <span class="toc-text">dict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">1.4.</span> <span class="toc-text">set</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-的备忘录–基础数据结构篇"><span class="toc-number">1.</span> <span class="toc-text">Python 的备忘录–基础数据结构篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#list"><span class="toc-number">2.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tuple"><span class="toc-number">3.</span> <span class="toc-text">tuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dict"><span class="toc-number">4.</span> <span class="toc-text">dict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">5.</span> <span class="toc-text">set</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -141,7 +140,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/学习笔记/">学习笔记</a>
+        <a class="tag-link" href="/tags/Python/">Python</a>
     </div>
 
 
@@ -150,12 +149,10 @@
   
 
   <div class="content" itemprop="articleBody">
-    <hr>
-<p>基础数据结构篇</p>
+    <p>基础数据结构篇</p>
 <a id="more"></a>
 
-<h1 id="Python-的备忘录–基础数据结构篇"><a href="#Python-的备忘录–基础数据结构篇" class="headerlink" title="Python 的备忘录–基础数据结构篇"></a>Python 的备忘录–基础数据结构篇</h1><hr>
-<p>Python基础数据结构主要有列表(list),元组(tuple),词典(dict)以及集合(set)</p>
+<h2 id="Python-的备忘录–基础数据结构篇"><a href="#Python-的备忘录–基础数据结构篇" class="headerlink" title="Python 的备忘录–基础数据结构篇"></a>Python 的备忘录–基础数据结构篇</h2><p>Python基础数据结构主要有列表(list),元组(tuple),词典(dict)以及集合(set)</p>
 <blockquote>
 <p>快速记忆的方法:</p>
 <ul>
@@ -225,7 +222,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-的备忘录–基础数据结构篇"><span class="toc-number">1.</span> <span class="toc-text">Python 的备忘录–基础数据结构篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#list"><span class="toc-number">1.1.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tuple"><span class="toc-number">1.2.</span> <span class="toc-text">tuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dict"><span class="toc-number">1.3.</span> <span class="toc-text">dict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">1.4.</span> <span class="toc-text">set</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-的备忘录–基础数据结构篇"><span class="toc-number">1.</span> <span class="toc-text">Python 的备忘录–基础数据结构篇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#list"><span class="toc-number">2.</span> <span class="toc-text">list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tuple"><span class="toc-number">3.</span> <span class="toc-text">tuple</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dict"><span class="toc-number">4.</span> <span class="toc-text">dict</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">5.</span> <span class="toc-text">set</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -239,8 +236,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&title=Python&#39;s Memo(1)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&name=Python&#39;s Memo(1)&description=&lt;hr&gt;
-&lt;p&gt;基础数据结构篇&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/12/Python-s-Memo-1/&name=Python&#39;s Memo(1)&description=&lt;p&gt;基础数据结构篇&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

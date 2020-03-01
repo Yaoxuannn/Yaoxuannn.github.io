@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="最令我头疼的程序包管理….学习笔记在此.">
-<meta name="keywords" content="Linux,软件">
+    <meta name="description" content="令人头疼的程序包管理….学习笔记在此. 来自未来的评论: 现在看来Linux的程序包管理是最轻松的, 比Mac, Windows好管理太多了">
+<meta name="keywords" content="Linux,Software Package">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux程序包管理">
 <meta property="og:url" content="https://yaoxuannn.com/2017/06/21/Linux程序包管理/index.html">
 <meta property="og:site_name" content="看多了会困">
-<meta property="og:description" content="最令我头疼的程序包管理….学习笔记在此.">
+<meta property="og:description" content="令人头疼的程序包管理….学习笔记在此. 来自未来的评论: 现在看来Linux的程序包管理是最轻松的, 比Mac, Windows好管理太多了">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.253Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux程序包管理">
-<meta name="twitter:description" content="最令我头疼的程序包管理….学习笔记在此.">
+<meta name="twitter:description" content="令人头疼的程序包管理….学习笔记在此. 来自未来的评论: 现在看来Linux的程序包管理是最轻松的, 比Mac, Windows好管理太多了">
     
     
         
@@ -100,12 +100,13 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&title=Linux程序包管理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&title=Linux程序包管理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&title=Linux程序包管理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&name=Linux程序包管理&description=&lt;p&gt;最令我头疼的程序包管理….学习笔记在此.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&name=Linux程序包管理&description=&lt;p&gt;令人头疼的程序包管理….学习笔记在此.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;来自未来的评论: 现在看来Linux的程序包管理是最轻松的, 比Mac, Windows好管理太多了&lt;/strong&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#先扯扯别的"><span class="toc-number">1.</span> <span class="toc-text">先扯扯别的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#程序包-RPM"><span class="toc-number">2.</span> <span class="toc-text">程序包(RPM)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#管理程序包"><span class="toc-number">3.</span> <span class="toc-text">管理程序包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取程序包"><span class="toc-number">3.1.</span> <span class="toc-text">获取程序包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS的rpm"><span class="toc-number">3.2.</span> <span class="toc-text">CentOS的rpm</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#管理程序包工具YUM"><span class="toc-number">4.</span> <span class="toc-text">管理程序包工具YUM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进入yum的世界"><span class="toc-number">4.1.</span> <span class="toc-text">进入yum的世界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum的基本使用-1"><span class="toc-number">4.2.</span> <span class="toc-text">yum的基本使用(1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum的包组管理"><span class="toc-number">4.3.</span> <span class="toc-text">yum的包组管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum的基本使用-2"><span class="toc-number">4.4.</span> <span class="toc-text">yum的基本使用(2)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编译安装程序包"><span class="toc-number">5.</span> <span class="toc-text">编译安装程序包</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先扯扯别的"><span class="toc-number">1.</span> <span class="toc-text">先扯扯别的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序包-RPM"><span class="toc-number">2.</span> <span class="toc-text">程序包(RPM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理程序包"><span class="toc-number">3.</span> <span class="toc-text">管理程序包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取程序包"><span class="toc-number">3.1.</span> <span class="toc-text">获取程序包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS的rpm"><span class="toc-number">3.2.</span> <span class="toc-text">CentOS的rpm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理程序包工具YUM"><span class="toc-number">4.</span> <span class="toc-text">管理程序包工具YUM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进入yum的世界"><span class="toc-number">4.1.</span> <span class="toc-text">进入yum的世界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum的基本使用-1"><span class="toc-number">4.2.</span> <span class="toc-text">yum的基本使用(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum的包组管理"><span class="toc-number">4.3.</span> <span class="toc-text">yum的包组管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum的基本使用-2"><span class="toc-number">4.4.</span> <span class="toc-text">yum的基本使用(2)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译安装程序包"><span class="toc-number">5.</span> <span class="toc-text">编译安装程序包</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -140,7 +141,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/软件/">软件</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/Software-Package/">Software Package</a>
     </div>
 
 
@@ -149,10 +150,11 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>最令我头疼的程序包管理….学习笔记在此.</p>
+    <p>令人头疼的程序包管理….学习笔记在此.</p>
+<p><strong>来自未来的评论: 现在看来Linux的程序包管理是最轻松的, 比Mac, Windows好管理太多了</strong></p>
 <a id="more"></a>
 
-<h1 id="先扯扯别的"><a href="#先扯扯别的" class="headerlink" title="先扯扯别的"></a>先扯扯别的</h1><p>先来简单谈谈程序相关的一些小东西吧, 说一说为什么程序员写的代码可以在不同的操作系统上跑起来.</p>
+<h2 id="先扯扯别的"><a href="#先扯扯别的" class="headerlink" title="先扯扯别的"></a>先扯扯别的</h2><p>先来简单谈谈程序相关的一些小东西吧, 说一说为什么程序员写的代码可以在不同的操作系统上跑起来.</p>
 <p>最底层当然就是硬件, 在往上一层是操作系统内核, 不同的操作系统的内核的操作是不同的, 同时也提供了不同的系统调用, 这样就会使得每一个系统自成一派, 为了解决这个问题, 在提供系统调用的基础上, 再封装一层接口, 使得程序员在写程序的时候, 只需要面向接口就好, 而不关心系统调用是什么样的, 这样当不同的操作系统的提供的接口都满足某个规范的时候就可以实现程序在不同的操作系统上都可以运行了.</p>
 <p>这样的接口规范叫<code>POSIX</code> – <code>Portable OS</code> 便携式操作系统. 后面的<code>IX</code>是为了贴合<code>UNIX.LINUX</code>这样的命名规范罢了.</p>
 <p>这样程序在源代码的级别上就是一样的了, 事实上所谓源代码文件只不过是一个文本文件罢了, 在经过预处理, 编译器做编译,形成目标代码,这样就可以通过汇编器做汇编成为机器码. 现在仍然不能运行, 因为很多程序是依赖库的. 这样就会产生两个分支, </p>
@@ -205,7 +207,7 @@
 <p>目前相对最早并且还存在的程序包管理器是<code>Debian</code>的, 程序包的安装格式为<code>deb</code> 这个管理器叫做<code>dpt</code>.</p>
 <p>接着<code>redhat</code>也推出了自己的包管理工具, 叫做<code>rpm</code>, 其程序包的格式也是<code>rpm</code> 使用<code>perl</code>开发.</p>
 <p>目前, <code>rpm</code>已经成为<code>Linux</code>的工业标准, 使用<code>C</code>语言进行了重新开发.</p>
-<h1 id="程序包-RPM"><a href="#程序包-RPM" class="headerlink" title="程序包(RPM)"></a>程序包(RPM)</h1><blockquote>
+<h2 id="程序包-RPM"><a href="#程序包-RPM" class="headerlink" title="程序包(RPM)"></a>程序包(RPM)</h2><blockquote>
 <p>RPM is Package Manager.</p>
 </blockquote>
 <p>每一个RPM包都是要拿到源代码的, 接着将源代码<strong>制作</strong>成的.  分两种: 普通的<code>rpm</code>包, 源码<code>rpm</code>包 </p>
@@ -237,7 +239,7 @@
 <p>除了清单文件, 还有一些安装和卸载的所用的脚本, 就比如说<code>nginx</code>在安装时是需要进行一次预配置的, 并且是以<code>nginx</code>的用户的身份来运行的, 如果系统中没有<code>nginx</code>用户, 那么脚本会自动的进行用户创建.</p>
 <p><strong>数据库(公共)</strong>:</p>
 <p>这个数据库中存放了程序包的名称和版本 依赖关系 功能说明 安装生成的文件路径以及校验码信息.</p>
-<h1 id="管理程序包"><a href="#管理程序包" class="headerlink" title="管理程序包"></a>管理程序包</h1><h2 id="获取程序包"><a href="#获取程序包" class="headerlink" title="获取程序包"></a>获取程序包</h2><ul>
+<h2 id="管理程序包"><a href="#管理程序包" class="headerlink" title="管理程序包"></a>管理程序包</h2><h3 id="获取程序包"><a href="#获取程序包" class="headerlink" title="获取程序包"></a>获取程序包</h3><ul>
 <li><strong>光盘</strong> : 最直接和最安全的方式就是使用光盘进行获取, 但是这样的程序包一般都是已经过时的.</li>
 <li><strong>官方的FTP/HTTP文件服务器</strong> : 虽然是经过验证并且是最较新的, 但是我们需要的包有可能官方不一定会收录进去.</li>
 <li><strong>项目站点</strong> : 第三方软件的的官方站点的软件包</li>
@@ -245,7 +247,7 @@
 <li><strong>自己制作</strong> : 算了吧.  : )</li>
 </ul>
 <p>一个可能会用到的网站: <a href="https://pkgs.org/" target="_blank" rel="noopener"><strong>pkgs.org</strong></a></p>
-<h2 id="CentOS的rpm"><a href="#CentOS的rpm" class="headerlink" title="CentOS的rpm"></a>CentOS的rpm</h2><p>现在就来学习使用rpm来进行包的管理.</p>
+<h3 id="CentOS的rpm"><a href="#CentOS的rpm" class="headerlink" title="CentOS的rpm"></a>CentOS的rpm</h3><p>现在就来学习使用rpm来进行包的管理.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ man rpm</span><br></pre></td></tr></table></figure>
 
 <p>同大多数命令一样, <code>rpm</code>的<code>-v</code>和<code>-vv</code>参数, 是为了输出信息和大量调试信息. 先把这个说在最前面.</p>
@@ -299,13 +301,13 @@
 <p>两个指令:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ rpm &#123;--initdb|--rebuilddb&#125;</span><br><span class="line">    --initdb: 初始化</span><br><span class="line">        如果事先不存在数据库, 则会新建, 否则不会执行任何操作.</span><br><span class="line">    --rebuilddb: 重建</span><br><span class="line">        无论当前存在与否, 直接进行数据库的建立.</span><br></pre></td></tr></table></figure>
 
-<h1 id="管理程序包工具YUM"><a href="#管理程序包工具YUM" class="headerlink" title="管理程序包工具YUM"></a>管理程序包工具YUM</h1><p> <code>yum</code>(<code>Yellowdog Update Modifier</code>)是<code>CentOS</code>上的一个软件包安装的前端工具(C/S架构), 它的工作前提是需要联网, 其实需要连接一个拥有巨大空间的文件服务器,这个服务器中包含了大量的<code>rpm</code>包. 而这样的服务器在网络上有很多,因此需要在配置文件中指定<code>yum</code>要访问的服务器地址.</p>
+<h2 id="管理程序包工具YUM"><a href="#管理程序包工具YUM" class="headerlink" title="管理程序包工具YUM"></a>管理程序包工具YUM</h2><p> <code>yum</code>(<code>Yellowdog Update Modifier</code>)是<code>CentOS</code>上的一个软件包安装的前端工具(C/S架构), 它的工作前提是需要联网, 其实需要连接一个拥有巨大空间的文件服务器,这个服务器中包含了大量的<code>rpm</code>包. 而这样的服务器在网络上有很多,因此需要在配置文件中指定<code>yum</code>要访问的服务器地址.</p>
 <p><code>yum</code>的工作原理简单说是这样的: 当用户要安装程序包的时候, <code>yum</code>接收到用户的指令, 这个时候YUM会尝试寻找本地指向的有程序包的文件服务主机的地址, 这个地址从配置文件中读取, 接着找到了之后, 而远方服务器会有仓库(repository)来存储程序包和一个描述信息(包之间的依赖关系, 包的版本等等信息), 接着<code>yum</code>从服务器上把这个文件下载下来, 放在自己的一个缓存区内. </p>
 <p>接着读取这个文件中是否有用户请求的包的信息, 接着还会自动的解析这个文件中对于依赖关系的描述.(查询本地已安装过的包, 将依赖并且没有安装的包列出来) 接着就启动一个文件服务器的客户端, 向远方的服务器请求下载相应的包文件. </p>
 <p>同样也是放在本地, 接着就进行安装, 安装完成后就会将这些缓存中的包删除. 但是这个元数据不会被删除. 如果每一次使用都要进行下载, 那岂不是很蠢? 但是如果服务器端的程序包进行了更新, 我怎么知道呢 ? 很简单, 远方服务器会有一个文件单独存放这个元数据文件的校验码.那么<code>yum</code>每次只要进行对这个校验码的请求就可以知道是否需要进行更新元数据文件.</p>
 <p>在寻找远端服务器的时候, <code>yum</code>可以基于插件进行加载远端服务器的镜像, 这样就可以一个仓库, 执行多个服务器.<code>yum</code>会优先加载最近的服务器节点.</p>
 <p><code>yum</code>面临的最大的问题是, 程序包安装过程中, 如果发生错误而导致中断, 产生的后果将是不可逆的, 无法修复.因此现在的趋势开始导向<code>dnf</code> [ 不是地下城 :) ] 这个工具, 但是现在<code>CentOS7</code>官方还没有明确的宣布, 所以还是先来学习下<code>yum</code>,  但实际上, 他们两人的命令是很相像的.</p>
-<h2 id="进入yum的世界"><a href="#进入yum的世界" class="headerlink" title="进入yum的世界"></a>进入yum的世界</h2><p>yum的一个重要组成部分就是yum仓库(repository), 这个仓库中存储了大量的rpm包以及包的相关元数据信息文件(放置在特定的目录下: repodata) 这个目录的位置, 就是我们指定<code>yum</code>仓库的位置</p>
+<h3 id="进入yum的世界"><a href="#进入yum的世界" class="headerlink" title="进入yum的世界"></a>进入yum的世界</h3><p>yum的一个重要组成部分就是yum仓库(repository), 这个仓库中存储了大量的rpm包以及包的相关元数据信息文件(放置在特定的目录下: repodata) 这个目录的位置, 就是我们指定<code>yum</code>仓库的位置</p>
 <p><code>yum</code>支持的文件服务器有: </p>
 <ul>
 <li><strong>ftp://</strong> </li>
@@ -326,7 +328,7 @@
 
 <p>随便找一个镜像站点(阿里云,网易,各种高校), 可以很轻易的找到<code>repodata</code>目录文件, 原来是<code>xml</code>啊, 看过你就知道我在说什么了, 嘻嘻 : )</p>
 <p>之前说我觉得这个<code>enable</code>选项是个很蠢的选项, 其实不是, 因为你可以在一个文件中指定多个<code>repo</code>, 这时这个选项就派上用场了.</p>
-<h2 id="yum的基本使用-1"><a href="#yum的基本使用-1" class="headerlink" title="yum的基本使用(1)"></a>yum的基本使用(1)</h2><p>yum的命令格式是下面这样:</p>
+<h3 id="yum的基本使用-1"><a href="#yum的基本使用-1" class="headerlink" title="yum的基本使用(1)"></a>yum的基本使用(1)</h3><p>yum的命令格式是下面这样:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ yum [options] [<span class="built_in">command</span>] [package ...]</span><br></pre></td></tr></table></figure>
 
 <p>yum也是有很多的子命令以实现不同的管理: </p>
@@ -387,12 +389,12 @@
 <p>这样就随时可以进行回复:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">--&gt; Running transaction check</span><br><span class="line">---&gt; Package zsh.x86_64 0:5.0.2-25.el7_3.1 will be erased</span><br><span class="line">--&gt; Finished Dependency Resolution</span><br><span class="line">......</span><br><span class="line">Is this ok [y/N]: </span><br><span class="line">Exiting on user <span class="built_in">command</span></span><br><span class="line">Your transaction was saved, rerun it with:</span><br><span class="line"> yum load-transaction /tmp/yum_save_tx.2017-06-24.16-09.HQGAUR.yumtx</span><br><span class="line">--------------------------------------------------------------------</span><br><span class="line">[root@WWW ~]$ yum load-transaction /tmp/yum_save_tx.2017-06-24.16-09.HQGAUR.yumtx</span><br><span class="line">...</span><br><span class="line">Is this ok [y/N]: y</span><br><span class="line">Downloading packages:</span><br><span class="line">Running transaction check</span><br><span class="line">Running transaction <span class="built_in">test</span></span><br><span class="line">Transaction <span class="built_in">test</span> succeeded</span><br><span class="line">Running transaction</span><br><span class="line">  Erasing    : zsh-5.0.2-25.el7_3.1.x86_64</span><br><span class="line">  Verifying  : zsh-5.0.2-25.el7_3.1.x86_64</span><br><span class="line">Removed:</span><br><span class="line">  zsh.x86_64 0:5.0.2-25.el7_3.1</span><br></pre></td></tr></table></figure>
 
-<h2 id="yum的包组管理"><a href="#yum的包组管理" class="headerlink" title="yum的包组管理"></a>yum的包组管理</h2><p>yum支持一个独特的功能, 叫<strong>组管理</strong>.</p>
+<h3 id="yum的包组管理"><a href="#yum的包组管理" class="headerlink" title="yum的包组管理"></a>yum的包组管理</h3><p>yum支持一个独特的功能, 叫<strong>组管理</strong>.</p>
 <p>说白了其实就是软件大礼包, 直接安装一个组就是将这个组内所有的包执行安装.</p>
 <p>对组的操作和对单个软件包的操作基本类似, 命令也基本通用, 只要在前面加上<code>groups</code>就行了.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ yum groups info</span><br><span class="line">[root@WWW ~]$ yum groups install</span><br><span class="line">[root@WWW ~]$ yum groups list</span><br><span class="line">[root@WWW ~]$ yum groups remove</span><br><span class="line">[root@WWW ~]$ yum groups summary</span><br></pre></td></tr></table></figure>
 
-<h2 id="yum的基本使用-2"><a href="#yum的基本使用-2" class="headerlink" title="yum的基本使用(2)"></a>yum的基本使用(2)</h2><p>现在我们拿到了一张CnetOS的光盘, 如何将这张光盘当成我们的本地<code>yum</code>仓库呢?</p>
+<h3 id="yum的基本使用-2"><a href="#yum的基本使用-2" class="headerlink" title="yum的基本使用(2)"></a>yum的基本使用(2)</h3><p>现在我们拿到了一张CnetOS的光盘, 如何将这张光盘当成我们的本地<code>yum</code>仓库呢?</p>
 <ul>
 <li>挂载光盘到某目录<ul>
 <li><code>mount -r -t iso9660 /dev/cdrom /media/cdrom</code></li>
@@ -420,7 +422,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$releasever</span>: 当前OS的发行版中主版本号</span><br><span class="line"><span class="variable">$arch</span>: 平台 ( i386, i586, i686 ... )</span><br><span class="line"><span class="variable">$basearch</span>: 基础平台 ( x86, x86_64, ... )</span><br><span class="line"><span class="variable">$YUM0</span>-<span class="variable">$YUM9</span>: 自定义变量</span><br></pre></td></tr></table></figure>
 
 <p>这样就拼成了我们看到的<code>URL</code>: <code>http://mirrors.scuec.edu.cn/centos/$releasever/$basearch/os</code></p>
-<h1 id="编译安装程序包"><a href="#编译安装程序包" class="headerlink" title="编译安装程序包"></a>编译安装程序包</h1><p>上面再说rpm的时候, 提到过有两种rpm包, 其中有一种是源码rpm包, 这种包的命名是这样的:</p>
+<h2 id="编译安装程序包"><a href="#编译安装程序包" class="headerlink" title="编译安装程序包"></a>编译安装程序包</h2><p>上面再说rpm的时候, 提到过有两种rpm包, 其中有一种是源码rpm包, 这种包的命名是这样的:</p>
 <p><code>testapp-VERSION-release.src.rpm</code></p>
 <p>这个src就是source的意思, 这个包内是不含二进制格式的输出的, 只有源码, 也就是这个需要我们手动进行编译. 安装后使用<code>rpmbuild</code>命令制作成二进制的<code>rpm</code>包, 而后就可以进行安装了. </p>
 <p>之所以需要这样的包, 是因为并没有考虑到操作系统, 实际也就是CPU的架构. 这样就可以根据本机实际的情况编译出适合自己(CPU的指令集)的二进制包,. 从命名中也可以发现了, 这个包中并没有<code>arch</code>这个部分.</p>
@@ -543,7 +545,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#先扯扯别的"><span class="toc-number">1.</span> <span class="toc-text">先扯扯别的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#程序包-RPM"><span class="toc-number">2.</span> <span class="toc-text">程序包(RPM)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#管理程序包"><span class="toc-number">3.</span> <span class="toc-text">管理程序包</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#获取程序包"><span class="toc-number">3.1.</span> <span class="toc-text">获取程序包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS的rpm"><span class="toc-number">3.2.</span> <span class="toc-text">CentOS的rpm</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#管理程序包工具YUM"><span class="toc-number">4.</span> <span class="toc-text">管理程序包工具YUM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#进入yum的世界"><span class="toc-number">4.1.</span> <span class="toc-text">进入yum的世界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum的基本使用-1"><span class="toc-number">4.2.</span> <span class="toc-text">yum的基本使用(1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum的包组管理"><span class="toc-number">4.3.</span> <span class="toc-text">yum的包组管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#yum的基本使用-2"><span class="toc-number">4.4.</span> <span class="toc-text">yum的基本使用(2)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#编译安装程序包"><span class="toc-number">5.</span> <span class="toc-text">编译安装程序包</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#先扯扯别的"><span class="toc-number">1.</span> <span class="toc-text">先扯扯别的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序包-RPM"><span class="toc-number">2.</span> <span class="toc-text">程序包(RPM)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理程序包"><span class="toc-number">3.</span> <span class="toc-text">管理程序包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#获取程序包"><span class="toc-number">3.1.</span> <span class="toc-text">获取程序包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS的rpm"><span class="toc-number">3.2.</span> <span class="toc-text">CentOS的rpm</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#管理程序包工具YUM"><span class="toc-number">4.</span> <span class="toc-text">管理程序包工具YUM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#进入yum的世界"><span class="toc-number">4.1.</span> <span class="toc-text">进入yum的世界</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum的基本使用-1"><span class="toc-number">4.2.</span> <span class="toc-text">yum的基本使用(1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum的包组管理"><span class="toc-number">4.3.</span> <span class="toc-text">yum的包组管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#yum的基本使用-2"><span class="toc-number">4.4.</span> <span class="toc-text">yum的基本使用(2)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译安装程序包"><span class="toc-number">5.</span> <span class="toc-text">编译安装程序包</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -557,7 +559,8 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&title=Linux程序包管理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&title=Linux程序包管理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&title=Linux程序包管理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&name=Linux程序包管理&description=&lt;p&gt;最令我头疼的程序包管理….学习笔记在此.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/06/21/Linux程序包管理/&name=Linux程序包管理&description=&lt;p&gt;令人头疼的程序包管理….学习笔记在此.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;来自未来的评论: 现在看来Linux的程序包管理是最轻松的, 比Mac, Windows好管理太多了&lt;/strong&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Python的IO编程">
-<meta name="keywords" content="学习笔记,Python">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python学习笔记(2)">
 <meta property="og:url" content="https://yaoxuannn.com/2017/03/18/Python学习笔记-2/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Python的IO编程">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.276Z">
+<meta property="og:updated_time" content="2020-03-01T23:02:04.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python学习笔记(2)">
 <meta name="twitter:description" content="Python的IO编程">
@@ -100,13 +100,12 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&title=Python学习笔记(2)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&title=Python学习笔记(2)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&title=Python学习笔记(2)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&name=Python学习笔记(2)&description=&lt;hr&gt;
-&lt;p&gt;Python的IO编程&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&name=Python学习笔记(2)&description=&lt;p&gt;Python的IO编程&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#非二进制文件读写"><span class="toc-number">1.</span> <span class="toc-text">非二进制文件读写</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制IO和FS操作"><span class="toc-number">2.</span> <span class="toc-text">二进制IO和FS操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列化"><span class="toc-number">3.</span> <span class="toc-text">序列化</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#非二进制文件读写"><span class="toc-number">1.</span> <span class="toc-text">非二进制文件读写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二进制IO和FS操作"><span class="toc-number">2.</span> <span class="toc-text">二进制IO和FS操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化"><span class="toc-number">3.</span> <span class="toc-text">序列化</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -141,7 +140,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/学习笔记/">学习笔记</a>
+        <a class="tag-link" href="/tags/Python/">Python</a>
     </div>
 
 
@@ -150,13 +149,12 @@
   
 
   <div class="content" itemprop="articleBody">
-    <hr>
-<p>Python的IO编程</p>
+    <p>Python的IO编程</p>
 <a id="more"></a>
 
 <p>操作IO的能力都是有操作系统决定的，因此，使用高级语言来操作都是调用的系统所提供的低级C接口。</p>
 <p><u>本文探讨的IO都是同步的</u></p>
-<h4 id="非二进制文件读写"><a href="#非二进制文件读写" class="headerlink" title="非二进制文件读写"></a>非二进制文件读写</h4><p>向其他脚本语言相似，Python提供了以下非二进制文件IO模式：</p>
+<h2 id="非二进制文件读写"><a href="#非二进制文件读写" class="headerlink" title="非二进制文件读写"></a>非二进制文件读写</h2><p>向其他脚本语言相似，Python提供了以下非二进制文件IO模式：</p>
 <table>
 <thead>
 <tr>
@@ -235,7 +233,7 @@
 <p>所以，最好使用反复调用<code>read(size)</code>这样来读取，或是使用<code>readlines()</code>来读取，这种读取方法非常适合读取配置文件或单行文本。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> f.readlines():</span><br><span class="line">  print(line.strip())</span><br></pre></td></tr></table></figure>
 
-<h4 id="二进制IO和FS操作"><a href="#二进制IO和FS操作" class="headerlink" title="二进制IO和FS操作"></a>二进制IO和FS操作</h4><p>对于二进制的文件操作基本与之前的文件读写操作类似，不同的是访问模式：（也就是在之前的访问模式后加b = _binary_）</p>
+<h2 id="二进制IO和FS操作"><a href="#二进制IO和FS操作" class="headerlink" title="二进制IO和FS操作"></a>二进制IO和FS操作</h2><p>对于二进制的文件操作基本与之前的文件读写操作类似，不同的是访问模式：（也就是在之前的访问模式后加b = _binary_）</p>
 <table>
 <thead>
 <tr>
@@ -287,7 +285,7 @@
 <p>特意又去看了2.7的源码…基本没有改动(3.6增加了对文件链接的处理、以及3.3/3.4对异常的更改)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copyfile</span><span class="params">(src, dst, *, follow_symlinks=True)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> _samefile(src, dst):</span><br><span class="line">        <span class="keyword">raise</span> SameFileError(<span class="string">"&#123;!r&#125; and &#123;!r&#125; are the same file"</span>.format(src, dst))</span><br><span class="line">    <span class="keyword">for</span> fn <span class="keyword">in</span> [src, dst]:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            st = os.stat(fn)</span><br><span class="line">        <span class="keyword">except</span> OSError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> stat.S_ISFIFO(st.st_mode):</span><br><span class="line">                <span class="keyword">raise</span> SpecialFileError(<span class="string">"`%s` is a named pipe"</span> % fn)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> follow_symlinks <span class="keyword">and</span> os.path.islink(src):</span><br><span class="line">        os.symlink(os.readlink(src), dst)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">with</span> open(src, <span class="string">'rb'</span>) <span class="keyword">as</span> fsrc: <span class="comment"># 文件输入流</span></span><br><span class="line">            <span class="keyword">with</span> open(dst, <span class="string">'wb'</span>) <span class="keyword">as</span> fdst: <span class="comment"># 文件写入流</span></span><br><span class="line">                copyfileobj(fsrc, fdst)</span><br><span class="line">    <span class="keyword">return</span> dst</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">copyfileobj</span><span class="params">(fsrc, fdst, length=<span class="number">16</span>*<span class="number">1024</span>)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        buf = fsrc.read(length) <span class="comment"># 读数据</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> buf:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        fdst.write(buf) <span class="comment"># 写数据</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><p>Python支持bytes序列化和流行的JSON序列化。</p>
+<h2 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h2><p>Python支持bytes序列化和流行的JSON序列化。</p>
 <p>本文仅谈一下JSON的部分。</p>
 <p>JSON中允许的数据类型有:</p>
 <ul>
@@ -319,7 +317,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = Student(<span class="string">"Justin"</span>, <span class="number">19</span>, <span class="number">100</span>)</span><br><span class="line">json.dumps(student, default=student2dict)</span><br></pre></td></tr></table></figure>
 
 <p>就可以按照我们的想法来序列化了。</p>
-<p>© Justin13</p>
 
   </div>
 </article>
@@ -353,7 +350,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#非二进制文件读写"><span class="toc-number">1.</span> <span class="toc-text">非二进制文件读写</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二进制IO和FS操作"><span class="toc-number">2.</span> <span class="toc-text">二进制IO和FS操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#序列化"><span class="toc-number">3.</span> <span class="toc-text">序列化</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#非二进制文件读写"><span class="toc-number">1.</span> <span class="toc-text">非二进制文件读写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二进制IO和FS操作"><span class="toc-number">2.</span> <span class="toc-text">二进制IO和FS操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列化"><span class="toc-number">3.</span> <span class="toc-text">序列化</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -367,8 +364,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&title=Python学习笔记(2)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&title=Python学习笔记(2)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&title=Python学习笔记(2)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&name=Python学习笔记(2)&description=&lt;hr&gt;
-&lt;p&gt;Python的IO编程&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/03/18/Python学习笔记-2/&name=Python学习笔记(2)&description=&lt;p&gt;Python的IO编程&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

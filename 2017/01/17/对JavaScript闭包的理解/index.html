@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="对JS闭包的理解">
-<meta name="keywords" content="学习笔记,JavaScript">
+<meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对JavaScript闭包的理解">
 <meta property="og:url" content="https://yaoxuannn.com/2017/01/17/对JavaScript闭包的理解/index.html">
@@ -15,7 +15,7 @@
 <meta property="og:description" content="对JS闭包的理解">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://yaoxuannn.com/2017/01/17/对JavaScript闭包的理解/goo1.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.321Z">
+<meta property="og:updated_time" content="2020-03-01T23:44:25.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对JavaScript闭包的理解">
 <meta name="twitter:description" content="对JS闭包的理解">
@@ -77,10 +77,10 @@
     <span id="actions">
       <ul>
         
-        <li><a class="icon" href="/2017/01/23/Learning-JS/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/03/17/Python学习笔记-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2016/12/03/JavaScript学习笔记-Part-7/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2016/11/16/正则表达式入门教程/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -142,7 +142,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/JavaScript/">JavaScript</a>, <a class="tag-link" href="/tags/学习笔记/">学习笔记</a>
+        <a class="tag-link" href="/tags/JavaScript/">JavaScript</a>
     </div>
 
 
@@ -187,7 +187,6 @@
 <p><em>在ES6中，新增了<strong>let</strong>关键字，使得变量获得了块级作用域。</em></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">foo</span></span>() &#123;</span><br><span class="line">	var result = [];</span><br><span class="line">	<span class="keyword">for</span>(<span class="built_in">let</span> i = 0; i &lt; 3; i ++) &#123;</span><br><span class="line">		result.push(<span class="function"><span class="title">function</span></span> () &#123;<span class="built_in">return</span> i * i&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>Copyright © Justin13</p>
 
   </div>
 </article>

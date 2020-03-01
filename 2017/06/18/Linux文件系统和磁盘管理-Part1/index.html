@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Quota&amp;amp;LVM2.">
-<meta name="keywords" content="Linux,系统">
+<meta name="keywords" content="Linux,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux文件系统和磁盘管理--Part1">
 <meta property="og:url" content="https://yaoxuannn.com/2017/06/18/Linux文件系统和磁盘管理-Part1/index.html">
@@ -58,7 +58,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/mkfs_.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/remount.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/xfs1.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.243Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux文件系统和磁盘管理--Part1">
 <meta name="twitter:description" content="Quota&amp;amp;LVM2.">
@@ -150,7 +150,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#初识文件系统-EXT2"><span class="toc-number">1.</span> <span class="toc-text">初识文件系统(EXT2)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux的EXT2-3文件系统"><span class="toc-number">2.</span> <span class="toc-text">Linux的EXT2/3文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux的文件系统的操作"><span class="toc-number">2.0.1.</span> <span class="toc-text">Linux的文件系统的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VFS"><span class="toc-number">2.0.2.</span> <span class="toc-text">VFS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘配额-Quota"><span class="toc-number">3.</span> <span class="toc-text">磁盘配额(Quota)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LVM"><span class="toc-number">4.</span> <span class="toc-text">LVM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LVM的构建过程"><span class="toc-number">4.0.1.</span> <span class="toc-text">LVM的构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM的系统快照"><span class="toc-number">4.1.</span> <span class="toc-text">LVM的系统快照</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XFS文件系统"><span class="toc-number">5.</span> <span class="toc-text">XFS文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据区-data-section"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">数据区(data section)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志区-log-section"><span class="toc-number">5.0.0.2.</span> <span class="toc-text">日志区(log section)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#即时区-realtime-section"><span class="toc-number">5.0.0.3.</span> <span class="toc-text">即时区(realtime section)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XFS的构建"><span class="toc-number">5.0.1.</span> <span class="toc-text">XFS的构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XFS的使用"><span class="toc-number">5.0.2.</span> <span class="toc-text">XFS的使用</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初识文件系统-EXT2"><span class="toc-number">1.</span> <span class="toc-text">初识文件系统(EXT2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux的EXT2-3文件系统"><span class="toc-number">1.1.</span> <span class="toc-text">Linux的EXT2/3文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux的文件系统的操作"><span class="toc-number">1.2.</span> <span class="toc-text">Linux的文件系统的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VFS"><span class="toc-number">1.3.</span> <span class="toc-text">VFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘配额-Quota"><span class="toc-number">2.</span> <span class="toc-text">磁盘配额(Quota)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM"><span class="toc-number">3.</span> <span class="toc-text">LVM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LVM的构建过程"><span class="toc-number">3.1.</span> <span class="toc-text">LVM的构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM的系统快照"><span class="toc-number">4.</span> <span class="toc-text">LVM的系统快照</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XFS文件系统"><span class="toc-number">5.</span> <span class="toc-text">XFS文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据区-data-section"><span class="toc-number">5.1.</span> <span class="toc-text">数据区(data section)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日志区-log-section"><span class="toc-number">5.2.</span> <span class="toc-text">日志区(log section)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#即时区-realtime-section"><span class="toc-number">5.3.</span> <span class="toc-text">即时区(realtime section)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XFS的构建"><span class="toc-number">6.</span> <span class="toc-text">XFS的构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XFS的使用"><span class="toc-number">7.</span> <span class="toc-text">XFS的使用</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -185,7 +185,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>
     </div>
 
 
@@ -197,8 +197,7 @@
     <p>Quota&amp;LVM2.</p>
 <a id="more"></a>
 
-<hr>
-<h1 id="初识文件系统-EXT2"><a href="#初识文件系统-EXT2" class="headerlink" title="初识文件系统(EXT2)"></a>初识文件系统(EXT2)</h1><blockquote>
+<h2 id="初识文件系统-EXT2"><a href="#初识文件系统-EXT2" class="headerlink" title="初识文件系统(EXT2)"></a>初识文件系统(EXT2)</h2><blockquote>
 <p>EXT2文件系统是Linux上最传统的文件系统.</p>
 </blockquote>
 <p>传统的磁盘和文件系统中, 一个分区就是一个文件系统, 但现在有了LVM等新技术, 使得一个分区可以获得多个文件系统.</p>
@@ -217,7 +216,7 @@
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/fat.jpg" alt="fat"></p>
 <p>这样就会造成的一种情况是, 读取一个文件会使得磁盘的磁头多转好多圈才能读完一个文件的数据.</p>
 <p>而磁盘碎片就是因为写入的block太过于分散, 导致文件的读取性能会大大的降低, 因此FAT文件系统经常需要进行磁盘的碎片清理.</p>
-<h1 id="Linux的EXT2-3文件系统"><a href="#Linux的EXT2-3文件系统" class="headerlink" title="Linux的EXT2/3文件系统"></a>Linux的EXT2/3文件系统</h1><p>文件系统最一开始是将block的大小和inode的节点的数量都规划好了, 除非再进行格式化或者使用工具改变文件系统的大小.</p>
+<h3 id="Linux的EXT2-3文件系统"><a href="#Linux的EXT2-3文件系统" class="headerlink" title="Linux的EXT2/3文件系统"></a>Linux的EXT2/3文件系统</h3><p>文件系统最一开始是将block的大小和inode的节点的数量都规划好了, 除非再进行格式化或者使用工具改变文件系统的大小.</p>
 <p>考虑这样的情况, 一个文件系统的大小为500GB, 这是一个非常庞大的数字, 如果直接这样分组, 会导致inode和block的数量非常大, 这样就会非常不容易管理. 因此一种明智的做法设计是: <strong>进行分组</strong>.</p>
 <p>这样的块组叫做<code>blockgroup</code>.</p>
 <p>再考虑整体的规划上, 文件系统的最前方是一个启动扇区, 这个扇区中可以安装引导装载程序.(boot loader),这样我们就可以将不同系统的引导程序安装在系统最前端, 而不用直接覆盖MBR.</p>
@@ -288,7 +287,7 @@
 <h3 id="VFS"><a href="#VFS" class="headerlink" title="VFS"></a>VFS</h3><p>Linux的内核通过一个叫做VFS的模块功能进行的文件系统的读取.我们所操作的整个文件系统都是建立在VFS之上, 下面的图可很好的概括一下:</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vfs.gif" alt="vfs"></p>
 <p>再说说一个磁盘空间的浪费问题, 前面其实已经说过, 如果一个文件的大小不够一个block的大小, 他依然会占满整个block, 而一个block又最多只能有一个文件的内容.</p>
-<h1 id="磁盘配额-Quota"><a href="#磁盘配额-Quota" class="headerlink" title="磁盘配额(Quota)"></a>磁盘配额(Quota)</h1><p>现在就进入我们的第一个主题了.</p>
+<h2 id="磁盘配额-Quota"><a href="#磁盘配额-Quota" class="headerlink" title="磁盘配额(Quota)"></a>磁盘配额(Quota)</h2><p>现在就进入我们的第一个主题了.</p>
 <p>假设我们有多人登陆同一台服务器(10人), 我们给家目录单分了一个独立的分区, 大小为10GB, 这样当然是人均分1GB的空间才公平.但是不做任何操作的话 就只能靠大家自觉 ( 不存在的好吗 )</p>
 <p>Quota就能帮我们实现这个. 首先要说的是, Quota的作用范围仅是作用于文件系统的, 这就是说你这个分区的内容都会受到影响.然后就是Quota对root无效(Linux里的天神 /摊手)</p>
 <p>Quota的限制功能体现在限制容量和文件数量上(也就是通过操作block/inode来进行的)</p>
@@ -329,24 +328,20 @@
 <p>写的方式也很简单, 直接指定soft和hard就好了, 其他的属性都是自己计算的,我们不需要管他们.</p>
 <p>这样设置之后磁盘配额就完成了, 作为管理员, 我们当然要关注当前的磁盘使用情况, 这是就要使用<code>repquota -auvs</code>命令来获取信息了, 如果你想给某个用户发送磁盘快要满了的警告, 就直接使用<code>warnquota</code>命令就好.</p>
 <p>最后加一句小提示: 在进行目录迁移的时候, SELINUX会进行限制, 因此你需要暂时关闭SELINUX或者修改SELINUX的规则.</p>
-<h1 id="LVM"><a href="#LVM" class="headerlink" title="LVM"></a>LVM</h1><p>LVM叫做逻辑卷管理器(Logical Volume Manager)</p>
+<h2 id="LVM"><a href="#LVM" class="headerlink" title="LVM"></a>LVM</h2><p>LVM叫做逻辑卷管理器(Logical Volume Manager)</p>
 <p>LVM拥有动态进行磁盘空间分配的功能, 看起来是动态分配, 事实上是将所有磁盘的空间全部集合到一个整体, 再在这个整体的基础上进行分配.</p>
 <blockquote>
 <p>LVM 的作法是将几个实体的 partitions (或 disk) 透过软件组合成为一块看起来是独立的大磁盘 (VG) ，然后将这块大磁盘再经过分割成为可使用分割槽 (LV)， 最终就能够挂载使用了.</p>
 </blockquote>
 <p>一个一个来说一下这些东西,就从最小的组成的开始吧.</p>
 <p><strong>Physical Volume, PV 叫做物理卷</strong></p>
-<hr>
 <p>LVM的最底层的卷, 通过调整系统标识符来使得它成为LVM的专用标识符.</p>
 <p><strong>Volume Group, VG 卷用户组</strong></p>
-<hr>
 <p>一个VG就是将许多PV整合起来, 它的最大大小和下面的PE有关.</p>
 <p><strong>Physical Extend, PE, 物理拓展快</strong></p>
-<hr>
 <p>PE是LVM的最小存储快, 你可以把它理解成上面说过的block, 只不过这个是LVM的存储块.</p>
 <p>一个VG最多可以包含256个PE, 这就意味着如果使用默认的PE大小(4MB), VG的最大容量是256GB</p>
 <p><strong>Logical Volume, LV 逻辑卷</strong></p>
-<hr>
 <p>这个就是最终形成的LVM了, LV包含若干个PE, 也就是像一个个block group一样, 只不过他的弹性变换是通过交换PE做到的.细节见下图:</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/lvm1.gif" alt="lvm1"></p>
 <p>这样, 经过PV -&gt; VG -&gt; LV 的过程, 最后将LV进行格式化合适的文件系统就可以使用了, 这个文件系统拥有扩充和减少的能力.</p>
@@ -468,16 +463,15 @@
 </li>
 <li><p>最后，使用fdisk 修改ID 回来！OK啦!</p>
 <hr>
-<p>17.6.20 更新:</p>
-<h1 id="XFS文件系统"><a href="#XFS文件系统" class="headerlink" title="XFS文件系统"></a>XFS文件系统</h1><p>​</p>
 </li>
 </ul>
-<p>从CentOS7开始, 官方已经开始使用XFS文件系统而抛弃了EXT4.</p>
+<p>17.6.20 更新:</p>
+<h2 id="XFS文件系统"><a href="#XFS文件系统" class="headerlink" title="XFS文件系统"></a>XFS文件系统</h2><p>从CentOS7开始, 官方已经开始使用XFS文件系统而抛弃了EXT4.</p>
 <p>这是因为在原先磁盘容量不是很大的时候, 这种预先就划分所有的inode/block/meta data的做法还没有什么问题.但是现在的磁盘大小动辄就是TB以上的等级, 光是进行格式化就要花费很多时间.</p>
 <p>而XFS是一个适合高容量或者巨型资料的文件系统.</p>
 <p>XFS 就是一个日志式档案系统, 所有EXT文件系统支持的功能. 他都支持.</p>
 <p>在文件系统的构造上, XFS将文件系统分成了三个部分: 数据区(data section), 日志区(log section), 即时区(realtime section). 这三个区的内容是这样的:</p>
-<h4 id="数据区-data-section"><a href="#数据区-data-section" class="headerlink" title="数据区(data section)"></a>数据区(data section)</h4><p>基本上，数据区就跟我们之前谈到的EXT系统一样，包括inode/data block/superblock 等资料，都放置在这个区块。这个数据区与EXT家族的block group 类似，也是分为多个储存区群组(allocation groups, AG) 来分别放置档案系统所需要的资料。每个储存区群组都包含了:</p>
+<h3 id="数据区-data-section"><a href="#数据区-data-section" class="headerlink" title="数据区(data section)"></a>数据区(data section)</h3><p>基本上，数据区就跟我们之前谈到的EXT系统一样，包括inode/data block/superblock 等资料，都放置在这个区块。这个数据区与EXT家族的block group 类似，也是分为多个储存区群组(allocation groups, AG) 来分别放置档案系统所需要的资料。每个储存区群组都包含了:</p>
 <ul>
 <li><p>整个档案系统的superblock</p>
 </li>
@@ -485,12 +479,12 @@
 </li>
 <li><p>inode的分配与追踪</p>
 <p>此外，inode与block 都是系统需要用到时， 这才动态配置产生，所以格式化动作非常快！</p>
-<h4 id="日志区-log-section"><a href="#日志区-log-section" class="headerlink" title="日志区(log section)"></a>日志区(log section)</h4></li>
+</li>
 </ul>
-<p>这个区是XFS用来进行数据恢复以及检查错误的重要的区域.和日志区有点像,当文件系统出现变化都会先在这里进行记录, 直到该变化被完整的写入到磁盘中. 这一条记录才会被终结掉. 这样当文件系统因为某些原因导致损毁的时候 系统就可以使用这个区块进行检验, 这样就可以直到在挂掉之前文件系统在干什么, 借以快速修复文件系统.</p>
+<h3 id="日志区-log-section"><a href="#日志区-log-section" class="headerlink" title="日志区(log section)"></a>日志区(log section)</h3><p>这个区是XFS用来进行数据恢复以及检查错误的重要的区域.和日志区有点像,当文件系统出现变化都会先在这里进行记录, 直到该变化被完整的写入到磁盘中. 这一条记录才会被终结掉. 这样当文件系统因为某些原因导致损毁的时候 系统就可以使用这个区块进行检验, 这样就可以直到在挂掉之前文件系统在干什么, 借以快速修复文件系统.</p>
 <p>有意思的是, 这个区块你可选择外部的磁盘. 就是说你的文件系统是可以跨磁盘的(就像btrfs那样).</p>
-<h4 id="即时区-realtime-section"><a href="#即时区-realtime-section" class="headerlink" title="即时区(realtime section)"></a>即时区(realtime section)</h4><p>这个部分是用来进行数据写入时使用的, 当写入数据的时候, xfs会先寻找一个或者数个extent区块, 接着分配结束后, 再将数据写入到data section的inode和block里面去. 这个extent区块的大小在格式化的时候就要指定(4K-1G).一般普通的使用都直接使用预设的64K就好.</p>
-<h3 id="XFS的构建"><a href="#XFS的构建" class="headerlink" title="XFS的构建"></a>XFS的构建</h3><p>简单介绍一下之后, 我们下面就要一起来构建XFS系统, 仍然是老朋友<code>mkfs</code>的出场啦.</p>
+<h3 id="即时区-realtime-section"><a href="#即时区-realtime-section" class="headerlink" title="即时区(realtime section)"></a>即时区(realtime section)</h3><p>这个部分是用来进行数据写入时使用的, 当写入数据的时候, xfs会先寻找一个或者数个extent区块, 接着分配结束后, 再将数据写入到data section的inode和block里面去. 这个extent区块的大小在格式化的时候就要指定(4K-1G).一般普通的使用都直接使用预设的64K就好.</p>
+<h2 id="XFS的构建"><a href="#XFS的构建" class="headerlink" title="XFS的构建"></a>XFS的构建</h2><p>简单介绍一下之后, 我们下面就要一起来构建XFS系统, 仍然是老朋友<code>mkfs</code>的出场啦.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ mkfs.xfs device</span><br><span class="line"><span class="comment"># 和ext一样, 后面也可以指定block, inode的相关参数,</span></span><br><span class="line"><span class="comment"># 但是特别就是指定data section的相关参数</span></span><br></pre></td></tr></table></figure>
 
 <p>下面就来操作一下:</p>
@@ -509,17 +503,11 @@
 <p>存群组的个数, 共有<code>4</code>个.</p>
 <p>接着后面的是每一个储存群组有的<code>block</code>的个数, 有<code>121072</code>个. 后面的<code>bsize</code>, 相信也能猜出来 恩 就是每一个<code>block</code>的大小. </p>
 <p>后面的<code>internal</code>标识日志区的位置是在文件系统内, 而不是外部设备, 以及占用的<code>block</code>的数量.</p>
-<h3 id="XFS的使用"><a href="#XFS的使用" class="headerlink" title="XFS的使用"></a>XFS的使用</h3><p>如果在格式化的时候我忘记了给文件系统加上UUID和Label怎么办呢? 不需要重新进行格式化的, 可以使用<code>xfs_admin</code>来查看和重新设定.</p>
+<h2 id="XFS的使用"><a href="#XFS的使用" class="headerlink" title="XFS的使用"></a>XFS的使用</h2><p>如果在格式化的时候我忘记了给文件系统加上UUID和Label怎么办呢? 不需要重新进行格式化的, 可以使用<code>xfs_admin</code>来查看和重新设定.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ xfs_admin [OPTIONS] &lt;DEVICE&gt;</span><br><span class="line">-l 列出label</span><br><span class="line">-u 列出UUID</span><br><span class="line">-L 设定Label</span><br><span class="line">-U 设定UUID</span><br></pre></td></tr></table></figure>
 
 <p>如果文件系统损坏, 或者发生了什么错乱 就要进行修复.XFS的修复指令是<code>xfs_repair</code>.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ xfs_repair [-fnd] &lt;DEVICE&gt; </span><br><span class="line">-f 表明后面的device其实是个文件系统而不是实体磁盘</span><br><span class="line">-n 仅仅是检查, 并不会修改系统的信息</span><br><span class="line">-d (危险参数) 对根目录(/)进行检查和修复.</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
   </div>
 </article>
 
@@ -552,7 +540,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#初识文件系统-EXT2"><span class="toc-number">1.</span> <span class="toc-text">初识文件系统(EXT2)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux的EXT2-3文件系统"><span class="toc-number">2.</span> <span class="toc-text">Linux的EXT2/3文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux的文件系统的操作"><span class="toc-number">2.0.1.</span> <span class="toc-text">Linux的文件系统的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VFS"><span class="toc-number">2.0.2.</span> <span class="toc-text">VFS</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#磁盘配额-Quota"><span class="toc-number">3.</span> <span class="toc-text">磁盘配额(Quota)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LVM"><span class="toc-number">4.</span> <span class="toc-text">LVM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LVM的构建过程"><span class="toc-number">4.0.1.</span> <span class="toc-text">LVM的构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM的系统快照"><span class="toc-number">4.1.</span> <span class="toc-text">LVM的系统快照</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#XFS文件系统"><span class="toc-number">5.</span> <span class="toc-text">XFS文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据区-data-section"><span class="toc-number">5.0.0.1.</span> <span class="toc-text">数据区(data section)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#日志区-log-section"><span class="toc-number">5.0.0.2.</span> <span class="toc-text">日志区(log section)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#即时区-realtime-section"><span class="toc-number">5.0.0.3.</span> <span class="toc-text">即时区(realtime section)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XFS的构建"><span class="toc-number">5.0.1.</span> <span class="toc-text">XFS的构建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XFS的使用"><span class="toc-number">5.0.2.</span> <span class="toc-text">XFS的使用</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初识文件系统-EXT2"><span class="toc-number">1.</span> <span class="toc-text">初识文件系统(EXT2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux的EXT2-3文件系统"><span class="toc-number">1.1.</span> <span class="toc-text">Linux的EXT2/3文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux的文件系统的操作"><span class="toc-number">1.2.</span> <span class="toc-text">Linux的文件系统的操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VFS"><span class="toc-number">1.3.</span> <span class="toc-text">VFS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#磁盘配额-Quota"><span class="toc-number">2.</span> <span class="toc-text">磁盘配额(Quota)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM"><span class="toc-number">3.</span> <span class="toc-text">LVM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LVM的构建过程"><span class="toc-number">3.1.</span> <span class="toc-text">LVM的构建过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM的系统快照"><span class="toc-number">4.</span> <span class="toc-text">LVM的系统快照</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XFS文件系统"><span class="toc-number">5.</span> <span class="toc-text">XFS文件系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据区-data-section"><span class="toc-number">5.1.</span> <span class="toc-text">数据区(data section)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日志区-log-section"><span class="toc-number">5.2.</span> <span class="toc-text">日志区(log section)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#即时区-realtime-section"><span class="toc-number">5.3.</span> <span class="toc-text">即时区(realtime section)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XFS的构建"><span class="toc-number">6.</span> <span class="toc-text">XFS的构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XFS的使用"><span class="toc-number">7.</span> <span class="toc-text">XFS的使用</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

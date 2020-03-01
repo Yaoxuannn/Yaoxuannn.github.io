@@ -7,7 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.">
-<meta name="keywords" content="Linux,系统">
+<meta name="keywords" content="Linux,OS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux系统基本原理(init)">
 <meta property="og:url" content="https://yaoxuannn.com/2017/06/26/Linux系统基本原理/index.html">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/page.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/fake.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/struct.png">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.255Z">
+<meta property="og:updated_time" content="2020-03-01T22:54:28.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux系统基本原理(init)">
 <meta name="twitter:description" content="简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.">
@@ -113,7 +113,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#操作系统的基本原理-Linux"><span class="toc-number">1.</span> <span class="toc-text">操作系统的基本原理(Linux)</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#操作系统的基本原理-Linux"><span class="toc-number">1.</span> <span class="toc-text">操作系统的基本原理(Linux)</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -148,7 +148,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/系统/">系统</a>
+        <a class="tag-link" href="/tags/Linux/">Linux</a>, <a class="tag-link" href="/tags/OS/">OS</a>
     </div>
 
 
@@ -160,7 +160,7 @@
     <p>简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.</p>
 <a id="more"></a>
 
-<h1 id="操作系统的基本原理-Linux"><a href="#操作系统的基本原理-Linux" class="headerlink" title="操作系统的基本原理(Linux)"></a>操作系统的基本原理(Linux)</h1><p>先来在重复了无数遍的东西, 一个计算机由硬件做底层向上是: 操作系统(<code>内核 kernel</code>) , 由于直接的系统调用不适合编程, 所以有了诸多的库<strong>调用</strong>. 而调用就是使用/载入别人写好的模块, 接着为了实现生产功能, 程序员面向这些库进行编程.当然也可以进行混合编程, 面对库和系统调用接口进行编程. 这就是我们静态看到的操作系统的状态.</p>
+<h2 id="操作系统的基本原理-Linux"><a href="#操作系统的基本原理-Linux" class="headerlink" title="操作系统的基本原理(Linux)"></a>操作系统的基本原理(Linux)</h2><p>先来在重复了无数遍的东西, 一个计算机由硬件做底层向上是: 操作系统(<code>内核 kernel</code>) , 由于直接的系统调用不适合编程, 所以有了诸多的库<strong>调用</strong>. 而调用就是使用/载入别人写好的模块, 接着为了实现生产功能, 程序员面向这些库进行编程.当然也可以进行混合编程, 面对库和系统调用接口进行编程. 这就是我们静态看到的操作系统的状态.</p>
 <p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sys.png" alt="sys"></p>
 <p>那么当系统运行起来, 程序在操作系统中跑起来的时候, 这又是什么状态呢.</p>
 <p>之前说过, 当进行系统调用的时候<code>CPU</code>根据指令执行工作,而指令又分成不同等级的(普通指令–环3, 特权指令–环0), 一般特权指令都是直接对硬件进行的操作, 如果一个程序可以随便调用, 那岂不是就会大乱 ? 那么如果这些程序需要进行硬件管理的操作怎么办呢? 那就调用系统接口进行实现.  </p>
@@ -275,7 +275,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#操作系统的基本原理-Linux"><span class="toc-number">1.</span> <span class="toc-text">操作系统的基本原理(Linux)</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#操作系统的基本原理-Linux"><span class="toc-number">1.</span> <span class="toc-text">操作系统的基本原理(Linux)</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

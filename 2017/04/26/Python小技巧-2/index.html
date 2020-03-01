@@ -7,14 +7,14 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Python编程技巧.[环境:Python3.6.0]">
-<meta name="keywords" content="Python,小技巧">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python小技巧_2">
 <meta property="og:url" content="https://yaoxuannn.com/2017/04/26/Python小技巧-2/index.html">
 <meta property="og:site_name" content="看多了会困">
 <meta property="og:description" content="Python编程技巧.[环境:Python3.6.0]">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-02-24T23:04:46.278Z">
+<meta property="og:updated_time" content="2020-03-01T23:03:39.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python小技巧_2">
 <meta name="twitter:description" content="Python编程技巧.[环境:Python3.6.0]">
@@ -78,7 +78,7 @@
         <li><a class="icon" href="/2017/04/26/Crontab学习日志/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
         
-        <li><a class="icon" href="/2017/04/25/Python与MySQL/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        <li><a class="icon" href="/2017/04/23/Python小技巧-1/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -100,8 +100,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&title=Python小技巧_2"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&title=Python小技巧_2"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&title=Python小技巧_2"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&name=Python小技巧_2&description=&lt;hr&gt;
-&lt;p&gt;Python编程技巧.[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&name=Python小技巧_2&description=&lt;p&gt;Python编程技巧.[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -141,7 +140,7 @@
       
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Python/">Python</a>, <a class="tag-link" href="/tags/小技巧/">小技巧</a>
+        <a class="tag-link" href="/tags/Python/">Python</a>
     </div>
 
 
@@ -150,12 +149,10 @@
   
 
   <div class="content" itemprop="articleBody">
-    <hr>
-<p>Python编程技巧.[环境:Python3.6.0]</p>
+    <p>Python编程技巧.[环境:Python3.6.0]</p>
 <a id="more"></a>
 
-<h2 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h2><hr>
-<p>字符串最主要的处理之一就是分割.</p>
+<h2 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h2><p>字符串最主要的处理之一就是分割.</p>
 <p>最基础简单的分割方式就是使用<code>split</code>函数.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Hello"</span>.split(<span class="string">"l"</span>)</span><br><span class="line"><span class="comment"># ["He", "", "o"]</span></span><br></pre></td></tr></table></figure>
 
@@ -173,7 +170,7 @@
 <blockquote>
 <p>当你遇到了一个问题的时候, 为了解决它, 你想到了使用正则表达式, 这时, 你就有了两个问题. :)</p>
 </blockquote>
-<p>正则确实强大, 但是今天不会来讨论正则, 如果想要了解, 请前往<a href="http://justin13wyx.me/2016/11/16/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" target="_blank" rel="noopener">正则表达式入门教程</a>.</p>
+<p>正则确实强大, 但是今天不会来讨论正则, 如果想要了解, 请前往<a href="http://yaoxuannn.com/2016/11/16/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/">正则表达式入门教程</a>.</p>
 <p>正则模块需要引入.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> re.split(<span class="string">"[,./|]"</span>, <span class="string">"Hel.lo,W|or/ld!"</span>):</span><br><span class="line">    text += n</span><br><span class="line">print(text)</span><br><span class="line"><span class="comment"># HelloWorld!</span></span><br></pre></td></tr></table></figure>
 
@@ -264,8 +261,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">"123\n456\t789\r"</span></span><br><span class="line">s.translate(str.maketrans(<span class="string">"123789"</span>, <span class="string">"789123"</span>,<span class="string">"\n\r\t"</span>))</span><br><span class="line"><span class="comment"># "789456123"</span></span><br></pre></td></tr></table></figure>
 
 <p>到此, 字符串处理的基本就结束了.</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><hr>
-<p>Python有个特别好用的函数特性, 叫做<strong>装饰器</strong>.</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>Python有个特别好用的函数特性, 叫做<strong>装饰器</strong>.</p>
 <p>装饰器可以帮助我们减少大量代码的冗余, 使得函数的利用更加便利.</p>
 <p>一个非常的经典的例子就是这样:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> n &lt;= <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">return</span> n</span><br><span class="line">  <span class="keyword">return</span> fib(n<span class="number">-1</span>) + fib(n<span class="number">-2</span>)</span><br></pre></td></tr></table></figure>
@@ -367,8 +363,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&title=Python小技巧_2"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&title=Python小技巧_2"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&title=Python小技巧_2"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&name=Python小技巧_2&description=&lt;hr&gt;
-&lt;p&gt;Python编程技巧.[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/04/26/Python小技巧-2/&name=Python小技巧_2&description=&lt;p&gt;Python编程技巧.[环境:Python3.6.0]&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
