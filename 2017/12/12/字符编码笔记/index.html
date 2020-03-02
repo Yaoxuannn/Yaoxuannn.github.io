@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/560px-Little-Endian.svg.png">
 <meta property="og:image" content="https://pic4.zhimg.com/50/v2-099eb9b3df42395ee58ed21599e7f616_hd.jpg">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/utf-8_web_growth.png">
-<meta property="og:updated_time" content="2020-03-02T03:53:54.862Z">
+<meta property="og:updated_time" content="2020-03-02T03:58:52.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字符编码笔记">
 <meta name="twitter:description" content="想来想去终于决定写一个关于计算机字符编码的笔记了 ( 应该说终于愿意去学了..) , 原本的目的只是搞清楚Unicode的, 考虑到字符编码问题是一个有趣, 在开发中经常会遇到并且稍微有点麻烦和棘手的问题, 但是在网络上却很难找到将这个说的比较细致和成体系的文章, 所以我决定倾尽精力去写这篇笔记, 我会尽量的去查资料和参考他人的文章和博客, 将关于计算机编码的问题捣鼓清楚. 在笔记的后半部分, 我">
@@ -238,7 +238,7 @@
 <p>这里我们所说的抽象字符是不具有的<strong>字形</strong>的, 所以才说是抽象的.</p>
 <p>稍稍总结一下ACR的三个特点: <strong>无序</strong>, <strong>封闭和开放</strong>, <strong>字符不具有具体的字形</strong>.</p>
 <h4 id="2-编号字符集-CCS"><a href="#2-编号字符集-CCS" class="headerlink" title="2. 编号字符集 CCS"></a>2. 编号字符集 CCS</h4><p>一个编号字符集定义成是从上面的抽象字符集合到非负整数集合的映射. 这些整数不一定要连续, ß我们把定义了整数的抽象字符的这个位置(想象一个表格的单元格)称为<strong>码点(code point)</strong>(暂时存个疑问), 所以这样就形成了一个<strong>编号空间(Code space, 也可以叫做码点空间)</strong>. 一个存在上限的有多种方式描述的非负整数范围. 例如, 我们可以通过一对非负整数: GB2312的汉字编号空间就是94 x 94. 也可以直接使用一个非负整数: ISO-8859-1的256, 或者也可以使用字符的存储单元尺寸, 比如ISO-8859-1的范围是2^8 = 256.</p>
-<p>回到上面的码点这个概念, 并不是说码点的数量和抽象字符的数量(编号)是一致的, 这是因为在我们的CCS中, 还存在了非字符码点和保留码点. 不仅如此, 多个码点可能还对应这同一个字符, 比如: <code>\u51c9</code>与<code>\uf979</code>的这两个码点是同一个字符“凉”(<strong>注意, 这并不是不是汉字liáng, 这是一个字符.</strong>). 更多的例子可以在这里查询到: <a href="http://www.unicode.org/charts/PDF/UF900.pdf" target="_blank" rel="noopener">CJK兼容-F900-F921</a>. 还有, 例如上面的注音符号, 他就是由多个码点表示的, 由基本符号的a加上注音符号.</p>
+<p>回到上面的码点这个概念, 并不是说码点的数量和抽象字符的数量(编号)是一致的, 这是因为在我们的CCS中, 还存在了非字符码点和保留码点. 不仅如此, 多个码点可能还对应这同一个字符, 比如: <code>\u51c9</code>与<code>\uf979</code>的这两个码点是同一个字符“凉”(<strong>注意, 这并不是汉字liáng, 这是一个字符.</strong>). 更多的例子可以在这里查询到: <a href="http://www.unicode.org/charts/PDF/UF900.pdf" target="_blank" rel="noopener">CJK兼容-F900-F921</a>. 还有, 例如上面的注音符号, 他就是由多个码点表示的, 由基本符号的a加上注音符号.</p>
 <p>最后稍微注意, 这里我们说的是<strong>编号</strong>, 而非编码. 这是两个截然不同的概念. 其实这一步和计算机丁点关系都没有, 因为没有涉及到下面说的字符编码方式和字符编码模式.</p>
 <h4 id="3-字符编码方式-CEF"><a href="#3-字符编码方式-CEF" class="headerlink" title="3. 字符编码方式 CEF"></a>3. 字符编码方式 CEF</h4><p>从这一步开始, 就开始进入到计算机的表示了. 我们知道常见的数据类型也就是单,双,四字节, 分别能够表示256, 65536, 4294967296个码位. 那么现在这一级别需要考虑的就是如何将无限扩展的(上面说了Unicode是开放的ACR, 也许现在就有新的emoji表情被添加到字符表中), 不仅如此, 过去诞生且正在使用的那些字符编码我们是抛弃不用(显然不可能), 还是向下兼容, 如果是兼容的话, 是完全兼容, 还是部分兼容 ?</p>
 <p>这些问题的解决方案 就是我们的CEF了. CEF将字符集中字符的码点值转换成有限长度的编码值, 这个编码值就是之前提到的<strong>码元序列</strong>, 码元(code unit)就是这个序列的单位名称. 这里的转换也还没有这么具体, 只不过是逻辑上的方式.</p>
