@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="勤奋的我回来了, 哈哈哈. 很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.">
+    <meta name="description" content="Here&apos;s something encrypted, password is required to continue reading.">
 <meta name="keywords" content="Python,Source Code">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python源码阅读小结">
 <meta property="og:url" content="https://yaoxuannn.com/2018/07/07/Python源码学习小结/index.html">
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
-<meta property="og:description" content="勤奋的我回来了, 哈哈哈. 很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.">
+<meta property="og:description" content="Here&apos;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-01T23:11:52.437Z">
+<meta property="og:updated_time" content="2020-03-02T18:12:15.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python源码阅读小结">
-<meta name="twitter:description" content="勤奋的我回来了, 哈哈哈. 很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.">
+<meta name="twitter:description" content="Here&apos;s something encrypted, password is required to continue reading.">
     
     
         
@@ -100,13 +100,12 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&title=Python源码阅读小结"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&title=Python源码阅读小结"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&title=Python源码阅读小结"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&name=Python源码阅读小结&description=&lt;p&gt;勤奋的我回来了, 哈哈哈.&lt;/p&gt;
-&lt;p&gt;很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&name=Python源码阅读小结&description=Here&#39;s something encrypted, password is required to continue reading."><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原初-对象的基石"><span class="toc-number">1.</span> <span class="toc-text">原初 - 对象的基石</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.1.</span> <span class="toc-text">对象</span></a></li></ol></li></ol>
+      
     </div>
   </span>
 </div>
@@ -150,19 +149,15 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>勤奋的我回来了, 哈哈哈.</p>
-<p>很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.</p>
-<a id="more"></a>
-
-<h2 id="原初-对象的基石"><a href="#原初-对象的基石" class="headerlink" title="原初 - 对象的基石"></a>原初 - 对象的基石</h2><p>我们最一开始了解到的, 就是Python对象的构成基石 - PyObject. 并且在之后对其他对象和基础虚拟机的简单了解过程中, 渐渐的体会到了这个设计的巧妙. 我们来回顾一下.</p>
-<p>起初我们先拿的intObject开的刀, 这是一个不可变长对象只需要一个int类型的变量基本就可以解决问题了, 再来看一下这个对象:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef struct &#123;</span><br><span class="line">    PyObject_HEAD</span><br><span class="line">    long ob_ival;</span><br><span class="line">&#125; PyIntObject;</span><br></pre></td></tr></table></figure>
-
-<p>看到那个熟悉的头部宏了, 这个宏的设计使得所有的对象都可以使用<code>*PyObject</code>指针来进行指向. 这个神奇的头部还包括了对象的类型信息和引用计数. 而另外一种对应列表字典字符串的对象, 就是可变长对象了, 这种对象唯一的不同就在他的头部中加了一个表示变量长度的量. 接着我们向内部深入了一层, 看到了<code>Python</code>表示类型的结构体. 这个类型结构体其实就是Python类的实现.</p>
-<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p>通过在后来对一些典型对象的了解, 我们看到了两种创建对象的方式, 一种是直接使用C API, 直接传入PyObject和对应的TypeObject指针来自动选择创建函数, 另一种是使用类型相关的创建函数, 每一种函数都是单独实现的, 并且是存在在每一个对象实现中的.</p>
-<p>那么对于用户自定义的类, 创建方式就是通过base指针指向的一个基本类来作为对象创建的, 实际上呢. 创建的函数还是new. 只不过我们自定义的类new函数指针指向的是NULL, 但是通过base指向的基本类是有new函数的, 接着就根据这个类中记录的大小来进行内存申请, 接着调用init函数进行初始化就完事了.</p>
-<p>(待更新)</p>
-
+    <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="" />
+    <label for="hbePass">Hey, password is required here.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="3d1c2b5d56f1af561c2870c990bebc4408fdb3e67004fbf9d84c01585c2d4033">f0639518489cb87612d34256f1c44b633701e132248b94ca838f478b3ddcd70f60eb991d4243006a625431ea3be9126a21e02e18ed9a69e100d44c305c1432594d59ad220d3c938913dedb3653bc5b7a0b471aba6cf756aa023122610b06472d8ec453cde25bcb815752f8366bdf63329a6e112bd75dd8ef8990811ce54844af04aa35515e8c56cc1493c21453abda59b18145bf2d75301df2a44ffda85bbee8f482cd57d99cea6077aa358d78697af5114b574f508052ada41a901e23a1eed71251af172ef098f17e096c1e5b4b414a558152bf856dad2716c68135a6704ed9f42d2dee38df6465484e5808e927c2e801868f5a0f8f25ba62a3cdf868b74a8e4017183bd9d48f947aa46d1d3af3385103c638e41c7eb511d89532412836d013ee4e42312be0aac43bec2c4cdb634c2db4efe09d60eb60de0c75a4120ddff94c44813cf3cfd0ff74c9d872adbb20897e1d71ec2cd00c790cdb73cba08a02b41e30ab843c1fef9dd4fb59facc8006b86b6921a7be0bbed94978a46c6d5155284887edcbd3893124db00b776cc07af76f48aabadfe8f2aec9d6b30355ebc462a272d80a37ac5f446d08df7c45fd2bf3248fa9009024980570f013afba239cc2bc50ad0ab8bae5d210167c5175218479bc503320eb6956e0fc0d658460a7c5eb9e86928483c5e25fb3b00cfeac79ff15b3e165add6976765a3e67cdcd981954361f0ced7381b37d81939b41d39834c4c6b2cc50c178229992d8de8635ab44f41886fbef32533f5aa6814b8f2d904db56a84012d01d33f580a480918478e7e3289cace822c8048d05f59116ed0c829e930aeea469e28eb9507e03d57cca094121c4576ccb69f69daa50a08de55ed46ecbbf18d8cb29916bcfa7e9b7456f613da1b4d44b17eb4d532ad3349b8ee96fbd1252913c6544da6d8350f3e4995d423aae181469a98e7a77bb7d792e34bef1bebac89492fbb8c0754f43199dca04cdea9f8c86991787dbfe7c2d6d5c9061a0d4705c5d6f670e8e5517a07d515d37cc9f0844cd92de649674bfd2e3dcf1173a96802acd2e72a58e09f0bfc5468a349fd7f2b29232f0ce94e27347115859d5f8944bcdf187448660897c8e0cd1c14d378c6df0e27ef26f733a5bd9e619e385bed945cb2137a2a42f7a577634d92deaa4114c0d699565dcae5c9f56265fea95b6efedf3c774c7835735c00c27b962ac7ce2cc6f481a5e1f6eed32be41f18811f822e22662e199147c860930046e42962326d1354d2368226f11c006f3f6cca2f75ce41bd3e46f6b175f4be14e21e626fa0da9118549c52f572e4f7d67bf26c2bc965eab36767830953f8db878e636e3bf902e282f639aa0fb7ca6a8478f19c7e1fd611e0f9eb86da98324a98f62f630145915dd0c1c1252a984993c39e49032b088618196b59295197b6743e1dc6b2d6a0c0817a49ca7334d0fe1fab36b2a53ff7ba610d4c5e76cb8577cfed7982d0f0d51e63716205890d0c5a85aa4207d1c4585128368a55bd84fbe171b1d19e52887574f52e6c936d67ac22adecbed61bd45e0d00ac1933c0337f253ea68ca456d1f64518bf7dbd40c75d7cc4beb9fce997f7d1b3649d2f23b045a4b60334881805dd16e8ba56b68f6cb734f83e066f232757aa4ac8daeac9c8121670ed051237f3846b1a008127ef7e5953e1f7960a0c99c76361dce70cb7ea276849eb492d0664d216545a232358a11c45ccafe065db09dc9e4a673f159753d3fd65c5431cecc28688122d225c973e4e534107d4ca6d58adde9ed0a2d3e8938419bf2fa3a69ceb17a3aaa0dda6c682ec2e8e62bddd1abcd12d7f22d1d0db8a1035efbf9e9aaa546770cc920666cc0dd18bb7adec6f018c7ea2829ed78586e36e77da66fdeebea3fda70d92890e6f1b51c548d4e166926ed468733240562e18ba176a4f286d1a8b52196e5cff086b0460a85816fbadd7cc3373aba7130946e906100769331a698012a8de2d59cd4621823d8e1696c124745a025f7d511f91119057a29a7c7bb3e422832e21db63f7941b591ee4e7c668a2e2fe5b6136bf1d8d28dbcabb3c5602bc8a38534d8403f41852077baf08c29a1a7c69fc3b02b87d08c741d462f993b6aefa7792cb3898c2080d14ba3d3da6c763a6c0335dbef55269c535efbb75c906fb2e79417d2026d79f59668bfa692b962ea678af8e9bf6a34c82ec5f8f5d7bb4bbf0a76378c4c5a0b1d084d3872f35a0fdd05d926e6bb57f45b4648de017410a520b9ec4dd059ff5b068db6dc21fd93db65d8e1d812d6e98f929654b743577df3ffd476ea97e8f502447346b7b42b7d1a7f4c8d4c5411e3b1ea5723ed43967b612b123ca2f6261b041c82fe0542050c727039ad8b8276a57646da75f2540a42459c9506f3e3d1cbca181dfd2d48dda50a15d13de6f26986d11b9cb1d75957b5d04b5bf6d172ba15108627dc6f0a828b3cf3f812e91f9443ced28f2807472d3d35955860bac592bdf9a88013c985d7b30322ed9be24d3de83431b415b33912d014d57f06988eea39c46f69f5b2a49a51bd6e2bb74aa883ffc963a9bdac512b7df761038261c01a4de045a8b06c5f6c87a78e0f8c461bc314c873cb7ed3dd3f08c928e1e741767cd68949d6d35d6cd519b13ae72b9919c47db4365059e36d8c074c88782af2ace10caeff091f0ac214c75e139de0c79fc6f583785b3800c41c05ab5b60f0cec19a7afe6059722ea9336153c022ad9aac7897fabd245440505527fb68f8c6a0cc78815db7e5eee62b0da5778f8541c49239e0dc5ee13b2b235f940e17026984d294c38ea1c68f668f3cbe358adc38a8c8f854fde0a7ec3395181276790598a4986a4e8c7eee8d477b4d56dfe1743d4942a64be9bfe6ea34ec753cb1c9d97c3002de54136694f9c2c16cb6716459433bc562be93a77e9cfdca851528999048b64571954aa98308a030443136b4f70220f8c899c97d8f95597b60882480f85a37da9a3d59f25cb2f8d75ccdb41d47b5413c9124991ad7864fff0b32b1c8bf5e966073e6b14f80f7e98a1dfd7fc5774683ac20c85209ae0cb5c1c58921680e2508eab378f323badba831d0271ac352ab8e368fcf10de83ba03f6bfead9cf49b1efd0309670dad7c746e0cea034bafe06ec2ccf22c9d8c2620d058966ee35556924c0e0b3b292d2c08c4113dfef78675f31cad2f48345b1299a78cdc5dddad2839034ceb69701199b47cccfa535bc92ab98f8cf407b83c9b1a3f3267962927e5c3293b8eba3ed7e871229888e69353fb0338dab2b4091243910281f810666f5ab802744989501355dac5a3fc5d3a856cfeb13d005c582f600806c844f942e1de47c6fdc999d34c872931dd45de4e42fdb3bcba3beb4fb647ded2586ffd702e99bf0b13c160ddf4c06bb4a9f65f8d43cb80f94818f46211a5f050c2fcf2f686d7b240c4c99b82157076f70b810b3413a10a50ebee14b9e640c37c3a24b671da95bd7522f65ea58514502c4f70ee7de7d86811e6120f8e0f5cac7bf282a7292c066e632261e2f6a835dbcd17b2e6700ac1a22dd19a0b2771c3e3f41aff46f6232dd4d9d5a164dc2155645fa34bbb09a6128fabf9170d6249d8e5fcb2396a9082851924</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
   </div>
 </article>
 
@@ -195,7 +190,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原初-对象的基石"><span class="toc-number">1.</span> <span class="toc-text">原初 - 对象的基石</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-number">1.1.</span> <span class="toc-text">对象</span></a></li></ol></li></ol>
+      
     </div>
 
     <div id="share-footer" style="display: none">
@@ -209,8 +204,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&title=Python源码阅读小结"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&title=Python源码阅读小结"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&title=Python源码阅读小结"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&name=Python源码阅读小结&description=&lt;p&gt;勤奋的我回来了, 哈哈哈.&lt;/p&gt;
-&lt;p&gt;很久没有更新了, 我们来把之前学到的Python源码相关再来过一遍吧. 也暂时作为这一段学习的小收尾.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2018/07/07/Python源码学习小结/&name=Python源码阅读小结&description=Here&#39;s something encrypted, password is required to continue reading."><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
