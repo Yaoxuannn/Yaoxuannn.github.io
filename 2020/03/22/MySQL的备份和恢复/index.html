@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="接下来我们来说说MySQL的备份和恢复相关. 关于备份和恢复, 小到可以仅仅涉及一条命令和一个SQL文件, 大到可以说成一个学科. ( 然后发现, 每件事情不都是这样的. 简直就是废话23333. )">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-04T04:43:52.460Z">
+<meta property="og:updated_time" content="2020-04-27T01:28:16.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的备份和恢复">
 <meta name="twitter:description" content="接下来我们来说说MySQL的备份和恢复相关. 关于备份和恢复, 小到可以仅仅涉及一条命令和一个SQL文件, 大到可以说成一个学科. ( 然后发现, 每件事情不都是这样的. 简直就是废话23333. )">
@@ -103,7 +103,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说备份"><span class="toc-number">1.</span> <span class="toc-text">说说备份</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说备份"><span class="toc-number">1.</span> <span class="toc-text">说说备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysqldump"><span class="toc-number">2.</span> <span class="toc-text">mysqldump</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -193,6 +193,30 @@
 <li>lvm2快照+复制binlog</li>
 <li>直接使用xtrabackup</li>
 </ul>
+<h2 id="mysqldump"><a href="#mysqldump" class="headerlink" title="mysqldump"></a>mysqldump</h2><p>接下来我们来说说其中一个工具, mysqldump. 在我们的数据量较小的情况下, mysqldump就是一个很不错的选择. 这个程序是mysql自带的, 而xtrabackup是需要另外安装使用的. </p>
+<p>mysqldump是从文件系统层面上的备份, 上面也说过了, mysqldump是一个逻辑备份工具, 所以, schema和数据是存储在一起的. dump出来的东西, 是一个单个巨大的SQL语句, output的东西也是一个单个巨大的备份文件.</p>
+<p>mysqldump说白了其实就是通过mysql协议连接到服务器然后进行一个全量的查询.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump [options] [db_name [tbl_name ...]]</span><br></pre></td></tr></table></figure>
+
+<p>我们可以直接指定选择什么数据库, 或者通过传递选项来备份所有的数据库. 当然了, 我们也可以进行表级别的备份.</p>
+<p>不过, 需要提到的是, 如果在备份的时候, 下面的三种方式, 第一种略有不同:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Usage: mysqldump [OPTIONS] database [tables]</span><br><span class="line">OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]</span><br><span class="line">OR     mysqldump [OPTIONS] --all-databases [OPTIONS]</span><br></pre></td></tr></table></figure>
+
+<p>如果我们没有传递<code>--databases</code>或者<code>--all-databases</code>的话, 备份的结果中是不包含创建数据库的语句的, 而另外两个会自带创建数据库语句.</p>
+<p>接下来还是回到我们之前说的问题, 显然我们不能直接就从一个正在运行的线上数据库dump数据, 因为这样获取的数据备份会出现新旧数据夹杂在一起. 因此我们需要在备份时候做锁定表的操作.</p>
+<p>mysqldump就有提供类似的选项:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">--lock-all-tables, -x</span><br><span class="line">Lock all tables across all databases. This is achieved by acquiring a global read lock for the duration of the whole dump. This option automatically turns off --single-transaction and --lock-tables.</span><br><span class="line"></span><br><span class="line">--lock-tables, -l</span><br><span class="line">For each dumped database, lock all tables to be dumped before dumping them. The tables are locked with READ LOCAL to allow concurrent inserts in the case of MyISAM tables. For transactional tables such as InnoDB, --single-transaction is a much better option than --lock-tables because it does not need to lock the tables at all.</span><br><span class="line"></span><br><span class="line">Because --lock-tables locks tables for each database separately, this option does not guarantee that the tables in the dump file arelogically consistent between databases. Tables in different databases may be dumped in completely different states.</span><br></pre></td></tr></table></figure>
+
+<p>其中, 我们可以直接给所有的表都施加一个全局的读锁, 不过在我们只备份其中的几个表, 这个选项就有点太过了. 因此可以选择只锁定我们需要备份的表. 注意这里是读锁, 因此还是可以进行读的操作的. </p>
+<p>首先我们说MyISAM存储引擎. 我们前面也说过了, 它是不能热备的, 因为我们就锁定备份库然后进行备份操作就行了. 而对于InnoDB而言, 我们可以实现热备, 为了实现热备, 我们会使用到InnoDB的事务功能.</p>
+<p>mysqldump可以启动一个巨大的事务操作, 在备份结束之后才commit. 这个选项叫做<code>--single-transaction</code>. 这样我们备份的数据就是一个时间点的.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">--single-transaction</span><br><span class="line">           </span><br><span class="line">This option sends a START TRANSACTION SQL statement to the server before dumping data. It is useful only with transactional tables such as InnoDB, because then it dumps the consistent state of the database at the time when BEGIN was issued without blocking any applications.</span><br><span class="line"></span><br><span class="line">When using this option, you should keep in mind that only InnoDB tables are dumped in a consistent state. For example, any MyISAM or MEMORY tables dumped while using this option may still change state.</span><br><span class="line"></span><br><span class="line">While a --single-transaction dump is in process, to ensure a valid dump file (correct table contents and binary log coordinates), no other connection should use the following statements: ALTER TABLE, CREATE TABLE, DROP TABLE, RENAME TABLE, TRUNCATE TABLE. A consistent read is not isolated from those statements, so use of them on a table to be dumped can cause the SELECT that is performed by mysqldump to retrieve the table contents to obtain incorrect contents or fail.</span><br><span class="line"></span><br><span class="line">The --single-transaction option and the --lock-tables option are mutually exclusive because LOCK TABLES causes any pending transactions to be committed implicitly.</span><br><span class="line"></span><br><span class="line">This option is not supported for MySQL Cluster tables; the results cannot be guaranteed to be consistent due to the fact that the NDBCLUSTERstorage engine supports only the READ_COMMITTED transaction isolation level. You should always use NDB backup and restore instead.</span><br><span class="line"></span><br><span class="line">To dump large tables, you should combine the --single-transaction option with --quick.</span><br></pre></td></tr></table></figure>
+
+<p>mysqldump还可以备份数据库相关的event scheduler, 通过<code>-E</code>或者<code>--events</code>选项来指定.</p>
+<p>存储过程和存储函数也是可以备份的, 通过<code>-R</code>来指明备份这些.</p>
+<p>默认情况下, 触发器也是被备份的, 如果想要避免备份触发器, 传递<code>--skip-triggers</code>.</p>
+<p>在锁定表完成后, 进行日志滚动: <code>--flush-logs</code>. 为什么要做这个操作呢? 这样当我们一次备份结束, 在下一次备份的时候就可以直接把新的binlog拿来用了, 而不需要看上一次备份的master-log的位置在哪里.</p>
+<p>总的来说, 在中小规模的数据库下, mysqldump可以说是一个廉价可靠易用的解决方案.</p>
 
   </div>
 </article>
@@ -226,7 +250,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说备份"><span class="toc-number">1.</span> <span class="toc-text">说说备份</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说备份"><span class="toc-number">1.</span> <span class="toc-text">说说备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysqldump"><span class="toc-number">2.</span> <span class="toc-text">mysqldump</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
