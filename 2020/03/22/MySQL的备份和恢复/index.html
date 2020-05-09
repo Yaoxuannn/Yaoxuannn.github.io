@@ -14,10 +14,12 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="接下来我们来说说MySQL的备份和恢复相关. 关于备份和恢复, 小到可以仅仅涉及一条命令和一个SQL文件, 大到可以说成一个学科. ( 然后发现, 每件事情不都是这样的. 简直就是废话23333. )">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-04-27T01:28:16.979Z">
+<meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/hellodb_table_innodb.png">
+<meta property="og:updated_time" content="2020-05-09T19:43:24.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的备份和恢复">
 <meta name="twitter:description" content="接下来我们来说说MySQL的备份和恢复相关. 关于备份和恢复, 小到可以仅仅涉及一条命令和一个SQL文件, 大到可以说成一个学科. ( 然后发现, 每件事情不都是这样的. 简直就是废话23333. )">
+<meta name="twitter:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/hellodb_table_innodb.png">
     
     
         
@@ -103,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说备份"><span class="toc-number">1.</span> <span class="toc-text">说说备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysqldump"><span class="toc-number">2.</span> <span class="toc-text">mysqldump</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说备份"><span class="toc-number">1.</span> <span class="toc-text">说说备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysqldump"><span class="toc-number">2.</span> <span class="toc-text">mysqldump</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xtrabackup"><span class="toc-number">3.</span> <span class="toc-text">xtrabackup</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -217,6 +219,64 @@
 <p>默认情况下, 触发器也是被备份的, 如果想要避免备份触发器, 传递<code>--skip-triggers</code>.</p>
 <p>在锁定表完成后, 进行日志滚动: <code>--flush-logs</code>. 为什么要做这个操作呢? 这样当我们一次备份结束, 在下一次备份的时候就可以直接把新的binlog拿来用了, 而不需要看上一次备份的master-log的位置在哪里.</p>
 <p>总的来说, 在中小规模的数据库下, mysqldump可以说是一个廉价可靠易用的解决方案.</p>
+<h2 id="xtrabackup"><a href="#xtrabackup" class="headerlink" title="xtrabackup"></a>xtrabackup</h2><p>接下来我们再来说说<code>xtrabackup</code>这个工具. </p>
+<p>在我们的epel源中收录了他的2.3.6版本, 可以直接通过yum下载安装.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# rpm -ql percona-xtrabackup</span><br><span class="line">/usr/bin/innobackupex</span><br><span class="line">/usr/bin/xbcrypt</span><br><span class="line">/usr/bin/xbstream</span><br><span class="line">/usr/bin/xtrabackup</span><br><span class="line">/usr/share/doc/percona-xtrabackup-2.3.6</span><br><span class="line">/usr/share/doc/percona-xtrabackup-2.3.6/COPYING</span><br><span class="line">/usr/share/doc/percona-xtrabackup-2.3.6/README</span><br><span class="line">/usr/share/doc/percona-xtrabackup-2.3.6/VERSION</span><br><span class="line">/usr/share/man/man1/innobackupex.1.gz</span><br><span class="line">/usr/share/man/man1/xbcrypt.1.gz</span><br><span class="line">/usr/share/man/man1/xbstream.1.gz</span><br><span class="line">/usr/share/man/man1/xtrabackup.1.gz</span><br></pre></td></tr></table></figure>
+
+<p>可以看到下载生成的文件很少, 基本就是几个应用程序然后就是帮助文档了.</p>
+<p>这里有一个innobackupex的程序, man文档中说他是一个perl脚本, 用作xtrabackup的wrapper, 但是实际上这个东西就是一个软连接, 指向xtrabackup.</p>
+<p>在我们使用xtrabackup进行备份的时候, 应用程序会在我们的备份目录中创建这些文件:</p>
+<ul>
+<li>xtrabackup_checkpoints – 备份类型(完全或增量), 备份状态(如是否是prepared) 以及 LSN (日志序列号)</li>
+</ul>
+<p>对于每个InnoDB页都会有一个LSN.</p>
+<ul>
+<li>xtrabackup_binlog_info – mysql服务器当前正在使用的二进制日志文件以及到备份这一刻位置的二进制日志时间的位置</li>
+<li>xtrabackup_binlog_pos_innodb – 二进制日志文件及用于InnoDB或者XtraDB的表的二进制日志文件的位置</li>
+</ul>
+<p>我们来执行一次备份操作, 就会好理解很多.</p>
+<p>首先还是看一下我们当前的表:</p>
+<p><img src="https://hexopic.s3.ap-northeast-1.amazonaws.com/hellodb_table_innodb.png" alt="hellodb_table_innodb"></p>
+<p>使用的都是InnoDB引擎. 接着我们要来确保一下<code>innodb_file_per_table</code>这个选项是要打开的.</p>
+<p>我们直接运行一次全库的备份: <code>innobackupex --user=???--password=??? /backups/</code>, 这里其实默认就带上了百分的参数<code>--backup</code>因此我们可以忽略不写.</p>
+<p>执行的结果最后告诉我们备份的目标地址以及一些信息:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">200507 12:58:29 Backup created in directory '/backups//2020-05-07_12-58-28'</span><br><span class="line">MySQL binlog position: filename 'mariadb-bin.000003', position '245'</span><br><span class="line">200507 12:58:29 [00] Writing backup-my.cnf</span><br><span class="line">200507 12:58:29 [00]        ...done</span><br><span class="line">200507 12:58:29 [00] Writing xtrabackup_info</span><br><span class="line">200507 12:58:29 [00]        ...done</span><br><span class="line">xtrabackup: Transaction log of lsn (1646953) to (1646953) was copied.</span><br><span class="line">200507 12:58:29 completed OK!</span><br></pre></td></tr></table></figure>
+
+<p>在这个备份的目录下, 我们可以看到刚刚提到的那些文件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# ls -l /backups/2020-05-07_12-58-28/</span><br><span class="line">total 18460</span><br><span class="line">-rw-r-----. 1 root root      386 May  7 12:58 backup-my.cnf</span><br><span class="line">drwx------. 2 root root      272 May  7 12:58 hellodb</span><br><span class="line">-rw-r-----. 1 root root 18874368 May  7 12:58 ibdata1</span><br><span class="line">drwx------. 2 root root       48 May  7 12:58 mydb</span><br><span class="line">drwx------. 2 root root     4096 May  7 12:58 mysql</span><br><span class="line">drwx------. 2 root root     4096 May  7 12:58 performance_schema</span><br><span class="line">-rw-r-----. 1 root root       23 May  7 12:58 xtrabackup_binlog_info</span><br><span class="line">-rw-r-----. 1 root root      113 May  7 12:58 xtrabackup_checkpoints</span><br><span class="line">-rw-r-----. 1 root root      471 May  7 12:58 xtrabackup_info</span><br><span class="line">-rw-r-----. 1 root root     2560 May  7 12:58 xtrabackup_logfile</span><br></pre></td></tr></table></figure>
+
+<p>如果查看checkpoints的内容, 我们也可以获取这一次备份的信息:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 2020-05-07_12-58-28]# cat xtrabackup_checkpoints </span><br><span class="line">backup_type = full-backuped</span><br><span class="line">from_lsn = 0</span><br><span class="line">to_lsn = 1646953</span><br><span class="line">last_lsn = 1646953</span><br><span class="line">compact = 0</span><br><span class="line">recover_binlog_info = 0</span><br></pre></td></tr></table></figure>
+
+<p>备份完成了之后, 在进行数据恢复之前, 我们现需要对备份进行整理, 以确保不会出现事务相关的问题. 整理的选项就加上<code>apply-log</code>就可以了.</p>
+<p>尽管我们备份的时候是不存在未完成的事务的, 我们还是可以执行一下整理命令来看一下效果:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">xtrabackup: cd to /backups/2020-05-07_12-58-28/</span><br><span class="line">xtrabackup: This target seems to be not prepared yet.</span><br><span class="line">xtrabackup: xtrabackup_logfile detected: size=2097152, start_lsn=(1646953)</span><br><span class="line">xtrabackup: using the following InnoDB configuration for recovery:</span><br><span class="line">xtrabackup:   innodb_data_home_dir = ./</span><br><span class="line">xtrabackup:   innodb_data_file_path = ibdata1:10M:autoextend</span><br><span class="line">xtrabackup:   innodb_log_group_home_dir = ./</span><br><span class="line">xtrabackup:   innodb_log_files_in_group = 1</span><br><span class="line">xtrabackup:   innodb_log_file_size = 2097152</span><br><span class="line">xtrabackup: using the following InnoDB configuration for recovery:</span><br><span class="line">xtrabackup:   innodb_data_home_dir = ./</span><br><span class="line">xtrabackup:   innodb_data_file_path = ibdata1:10M:autoextend</span><br><span class="line">xtrabackup:   innodb_log_group_home_dir = ./</span><br><span class="line">xtrabackup:   innodb_log_files_in_group = 1</span><br><span class="line">xtrabackup:   innodb_log_file_size = 2097152</span><br><span class="line">xtrabackup: Starting InnoDB instance for recovery.</span><br></pre></td></tr></table></figure>
+
+<p>首先是获取我们备份目录下的内容然后读取InnoDB存储引擎的配置.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">InnoDB: 5.6.24 started; log sequence number 1646953</span><br><span class="line">xtrabackup: Last MySQL binlog file position 436, file name ./mariadb-bin.000001</span><br><span class="line"></span><br><span class="line">xtrabackup: starting shutdown with innodb_fast_shutdown = 1</span><br><span class="line">InnoDB: FTS optimize thread exiting.</span><br><span class="line">InnoDB: Starting shutdown...</span><br><span class="line">InnoDB: Shutdown completed; log sequence number 1646963</span><br><span class="line">xtrabackup: using the following InnoDB configuration for recovery:</span><br><span class="line">xtrabackup:   innodb_data_home_dir = ./</span><br><span class="line">xtrabackup:   innodb_data_file_path = ibdata1:10M:autoextend</span><br><span class="line">xtrabackup:   innodb_log_group_home_dir = ./</span><br><span class="line">xtrabackup:   innodb_log_files_in_group = 2</span><br><span class="line">xtrabackup:   innodb_log_file_size = 5242880</span><br><span class="line">InnoDB: Using atomics to ref count buffer pool pages</span><br><span class="line">InnoDB: The InnoDB memory heap is disabled</span><br><span class="line">InnoDB: Mutexes and rw_locks use GCC atomic builtins</span><br><span class="line">InnoDB: Memory barrier is not used</span><br><span class="line">InnoDB: Compressed tables use zlib 1.2.7</span><br><span class="line">InnoDB: Using CPU crc32 instructions</span><br><span class="line">InnoDB: Initializing buffer pool, size = 100.0M</span><br><span class="line">InnoDB: Completed initialization of buffer pool</span><br><span class="line">InnoDB: Setting log file ./ib_logfile101 size to 5 MB</span><br><span class="line">InnoDB: Setting log file ./ib_logfile1 size to 5 MB</span><br><span class="line">InnoDB: Renaming log file ./ib_logfile101 to ./ib_logfile0</span><br><span class="line">InnoDB: New log files created, LSN=1646963</span><br><span class="line">InnoDB: Highest supported file format is Barracuda.</span><br><span class="line">InnoDB: 128 rollback segment(s) are active.</span><br><span class="line">InnoDB: Waiting for purge to start</span><br><span class="line">InnoDB: 5.6.24 started; log sequence number 1647116</span><br><span class="line">xtrabackup: starting shutdown with innodb_fast_shutdown = 1</span><br><span class="line">InnoDB: FTS optimize thread exiting.</span><br><span class="line">InnoDB: Starting shutdown...</span><br><span class="line">InnoDB: Shutdown completed; log sequence number 1647126</span><br><span class="line">200507 13:06:18 completed OK!</span><br></pre></td></tr></table></figure>
+
+<p>接着会读取最后一个二进制日志文件, 然后创建一个新的日志文件, 标记序列号.</p>
+<p>接下来我们就可以进行恢复操作了. 注意在恢复的时候, mysql服务可以为关闭状态.</p>
+<p>恢复的参数是<code>--copy-back</code>.</p>
+<p>在执行完毕之后, 你可能会遇到文件权限的问题. 这是因为在执行完操作之后, data的属主属组会变成mysql没有权限访问的对象, 因此, 我们需要在启动之前更改数据文件的属主属组.</p>
+<p>这里我们做的是一个全库的备份. 如果是增量备份呢?</p>
+<p>想要实现增量备份, 首先我们需要一个已有的备份. 我们之前说过每个InnoDB的页面都会包含一个LSN信息, 增量备份就是通过这个信息来实现的. 我们可以用下面的命令进行第一个增量备份: (省略user/password)</p>
+<p><code>innobackupex --incremental /backup --incremental-basedir=BASEDIR</code></p>
+<p>这里BASEDIR指的就是完全备份所在的目录.  这个备份倒没什么, 但是此刻聪明的你一定想到了, 在进行准备恢复操作的时候, 就会有一点不同了.</p>
+<p>首先我们需要在每个(完全+增量)备份中, 进行事务的重放操作. 重放之后, 所有的备份数据就会合并到我们的完全备份上.  接着我们就对所有的备份将未提交的事务进行回滚就行了. 反映到实际操作, 就像这样:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">innobackupex --apply-log --redo-only BASE-DIR</span><br><span class="line">innobackupex --apply-log --redo-only BASE-DIR --incremental-dir=INCREMENTAL-DIR-1</span><br><span class="line">innobackupex --apply-log --redo-only BASE-DIR --incremental-dir=INCREMENTAL-DIR-2</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>这样, 将每个增量备份都执行一边, 就ok了.</p>
+<p>我新建了<code>mydb.t2</code>并且插入了两行数据, 接着我们执行<strong>增量</strong>备份的命令.</p>
+<p>执行一遍之后我们再来查看一下checkpoint:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 2020-05-10_03-10-25]# cat xtrabackup_checkpoints </span><br><span class="line">backup_type = incremental</span><br><span class="line">from_lsn = 1646953</span><br><span class="line">to_lsn = 1650558</span><br><span class="line">last_lsn = 1650558</span><br><span class="line">compact = 0</span><br><span class="line">recover_binlog_info = 0</span><br></pre></td></tr></table></figure>
+
+<p>这一次的备份类型就变成增量了. 而且同时LSN也不再从0开始了.</p>
+<p>接下来我们来尝试进行数据恢复. </p>
+<p>在准备工作结束后, 再次查看全量备份的checkpoint, 我们可以看到:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# cat /backups/2020-05-07_12-58-28/xtrabackup_checkpoints </span><br><span class="line">backup_type = log-applied</span><br><span class="line">from_lsn = 0</span><br><span class="line">to_lsn = 1650558</span><br><span class="line">last_lsn = 1650558</span><br><span class="line">compact = 0</span><br><span class="line">recover_binlog_info = 0</span><br></pre></td></tr></table></figure>
+
+<p>接着就copy-back即可, 别忘记改变属主属组.</p>
 
   </div>
 </article>
@@ -250,7 +310,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说备份"><span class="toc-number">1.</span> <span class="toc-text">说说备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysqldump"><span class="toc-number">2.</span> <span class="toc-text">mysqldump</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说说备份"><span class="toc-number">1.</span> <span class="toc-text">说说备份</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysqldump"><span class="toc-number">2.</span> <span class="toc-text">mysqldump</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xtrabackup"><span class="toc-number">3.</span> <span class="toc-text">xtrabackup</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
