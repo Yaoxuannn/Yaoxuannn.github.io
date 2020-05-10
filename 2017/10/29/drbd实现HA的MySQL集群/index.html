@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="现在我们来把目光放在HA存储上面吧~">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://img1.51cto.com/attachment/201308/17/2033581_1376720329Miiy.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.630Z">
+<meta property="og:image" content="https://terry.im/wiki/terry/attachments/33325169/33554434.gif">
+<meta property="og:updated_time" content="2020-05-10T22:50:11.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="drbd实现HA的MySQL集群">
 <meta name="twitter:description" content="现在我们来把目光放在HA存储上面吧~">
-<meta name="twitter:image" content="http://img1.51cto.com/attachment/201308/17/2033581_1376720329Miiy.png">
+<meta name="twitter:image" content="https://terry.im/wiki/terry/attachments/33325169/33554434.gif">
     
     
         
@@ -156,7 +156,7 @@
 
 <h2 id="drbd简述"><a href="#drbd简述" class="headerlink" title="drbd简述"></a>drbd简述</h2><p>什么是drbd? 全称是Distributed Replicated Block Device, 分布式复制块设备.基于内核和相关脚本构建的.用来构建高可用性的集群. 总体来看, 就像是基于网络的RAID1. 可以进行数据块级别的复制, 由于存在在文件系统模块的下层, 所以当然是无法理解文件系统的层次.</p>
 <p>整体的一个流程如下:</p>
-<p><img src="http://img1.51cto.com/attachment/201308/17/2033581_1376720329Miiy.png" alt="drbd-in-kernel2"></p>
+<p><img src="https://terry.im/wiki/terry/attachments/33325169/33554434.gif" alt="img"></p>
 <p>其中有底色的那一个大块就是我们的内核空间, 上方就是用户空间, 用户空间的应用程序发起写入的系统调用请求将数据写入到磁盘设备, 原本应该是经过FS -&gt; BC -&gt; DS -&gt; DD最后进入硬件设备的, 但是我们的DRBD在中间横插一刀, 将写入的数据原封不动的复制一遍, 并且通过TCP/IP协议栈经由网卡发送出去. 另外一边,接收端收到之后发送到DRBD, 接着进过scheduler通过驱动到达磁盘.</p>
 <p>同样, 这样的模型也规定了DRBD只能是一读一写, 读写分离的形式, 一旦出现双写, 就会造成数据不一致的情况. 当然, 双主模型也不是不可以, 只不过需要分布式文件系统的援助. 利用它的分布式锁机制才可以.</p>
 <p>上述的这个过程, 其实就是在镜像一个数据, 主要有三个特点:</p>

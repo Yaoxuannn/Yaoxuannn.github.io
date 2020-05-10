@@ -16,7 +16,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/mysql_master_basic_config2.png">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/mysql_slave_basic_config.png">
-<meta property="og:updated_time" content="2020-05-10T02:20:58.525Z">
+<meta property="og:updated_time" content="2020-05-10T22:48:14.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL的主从复制架构">
 <meta name="twitter:description" content="主从复制简述我们之前在说到集群架构扩展的时候说过, 有两种最典型的扩展方式, 即: Scale Up &amp;amp; Scale Out. 对于MySQL这样的存储系统来说, IO压力十分之大使得它经常成为集群架构中最需要性能的一环. 动辄128或256G的内存+RAID10的后端存储. 但是我们之前说过, 提升服务器的性能, 往往很容易在不久之后就再次达到性能瓶颈. 因此考虑Scale Out,">
@@ -106,7 +106,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制简述"><span class="toc-number">1.</span> <span class="toc-text">主从复制简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL主从复制原理"><span class="toc-number">2.</span> <span class="toc-text">MySQL主从复制原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制模型的实现"><span class="toc-number">3.</span> <span class="toc-text">主从复制模型的实现</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制简述"><span class="toc-number">1.</span> <span class="toc-text">主从复制简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL主从复制原理"><span class="toc-number">2.</span> <span class="toc-text">MySQL主从复制原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制模型的实现"><span class="toc-number">3.</span> <span class="toc-text">主从复制模型的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主主模型的实现"><span class="toc-number">4.</span> <span class="toc-text">主主模型的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#半同步复制"><span class="toc-number">5.</span> <span class="toc-text">半同步复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复制过滤器"><span class="toc-number">6.</span> <span class="toc-text">复制过滤器</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -164,7 +164,7 @@
 <p>接着我们回到这个主从复制的本身. 我们说做这个的目的是什么? <strong>负载均衡</strong>. 那么问题来了, 既然要做均衡, 就需要一个调度器, 这个调度器必须工作在7层, 还必须理解请求中SQL语句是写操作还是读操作. 如果是读请求, 就要基于负载均衡规则, 调度给一个从节点, 如果是写操作, 就只能无可选择的给主节点. 这个负载均衡器, 就是一个MySQL的反向代理, 不过, 我们一般把它称为语句路由节点或者读写分离器(r/w splitter).</p>
 <p>接下来我们考虑假设从服务器宕机的场景, 读写分离器应能通过健康状态检测来监控后端的从服务器的状态, 如果发现有不健康的节点, 应该自主将他从可调度的名单中移除. 但是我们可以稍微在想多一点. 我们知道MySQL的查询有一个很重要的部件叫做SQL Cache. 缓存可以极大程度的减轻读压力. 如果我们能够在架构中增加一个memcache, 用来存储查询缓存, 并且让客户端优先去缓冲中查询, 如果hit则直接返回, 请求根本都不需要进入到我们的MySQL中, 如果miss, 则可以在读取完数据集之后写入到缓冲服务器中. 这样, 就可以避免反向代理节点实现过多的功能.</p>
 <p>但是, 如果主节点宕机了呢? 如何实现写操作? 显然, 主节点宕机, 就无法实现写操作. 此时, 我们就需要将从节点中的一个当做主节点. 这种方式看起来很美好, 但是, 实际上存在很多问题. 例如, 当主节点存在并行事务, 而从节点完成的不一致的时候, 是没有办法简单的直接转移的. 虽然MySQL在5.6推出了GTID, 全局事务ID, 来区分每一个事务, 简单的替换仍然不太可靠. 另外一种解决方案就是使用Corosync等工具实现主节点的高可用, 我们用Active的节点来做主节点, Passive的随时等待替换. 那么问题来了, 这两个家伙怎么做同步嘞? 这次就简单了, 我们可以使用共享存储, 因为同一时间只有一个在做写操作. 块级别的分布式存储也可以考虑. 但是这种解决方案复杂且不方便. 或者也可以简单的使用IP SAN. 只不过这种情况可能会有昂贵的开销. </p>
-<p>或者, 还有一种解决方案可以考虑. 那就是Master-Master模型, 即两个节点既是主节点又是从节点. 这样是如何实现的呢? 两个节点都写入中继日志, 然后将中继日志传输到其他的节点然后另外节点执行日志中对应的事件. 如何区分事件是那个节点的呢? 我们之前在说MySQL日志的时候, 就提到过, 日志中有一个字段叫做server id, 用这个就可以区分是哪个服务器的事件了. ok, 在这种模型下, 我们也可实现高可用和冗余. 只不过, 主主模型会造成数据不一致. 主主模型其实是比主从模型更容易出问题.</p>
+<p>或者, 还有一种解决方案可以考虑. 那就是Master-Master模型, 即两个节点既是主节点又是从节点. 这样是如何实现的呢? 两个节点都写入中继日志, 然后将中继日志传输到其他的节点然后另外节点执行日志中对应的事件. 如何区分事件是那个节点的呢? 我们之前在说MySQL日志的时候, 就提到过, 日志中有一个字段叫做server id, 用这个就可以区分是哪个服务器的事件了. ok, 在这种模型下, 我们也可实现高可用和冗余. 只不过, 主主模型会造成数据不一致. 主主模型其实是比主从模型更容易出问题. 另外, 在这种模型下, 写操作依然没有被分担.</p>
 <p>不过 既然都有双主了, 我们还可以有环状的多主模型…</p>
 <p>现在回到我们之前说的主从复制架构, 其实主节点在接受这么多写请求的时候压力就已经很大了, 这个时候还要分出很多dump线程来给从节点发送日志就更难了. 因此我们用一个从节点作为中继节点, 接受日志的同时, 向其他的从节点发送数据. 此外, 这个中继节点可以使用一种特殊的存储引擎: <code>blackhole</code>. 因为这个节点是没有必要存储数据的.</p>
 <h2 id="主从复制模型的实现"><a href="#主从复制模型的实现" class="headerlink" title="主从复制模型的实现"></a>主从复制模型的实现</h2><p>事实上, 实现一个最基本的主从复制很简单. 仅需要以下几步:</p>
@@ -208,6 +208,48 @@
 
 <p>ok, 接下来我们去主节点做点事情, 看看会不会复制到从节点上.</p>
 <p>我们删除一些数据, 查看一下master log的位置变化, 接着回到从节点, 查看状态. 这个时候的位置就已经更新到主节点一致了, 并且我们在主节点所作的更改也都反映到从节点了.</p>
+<p>不过, 我们现在的主从复制只是最基本的, 还有很多问题需要考量, 例如, 我们应该限制从服务器为只读的. 事实上, MySQL就有一个变量叫做<code>read_only</code>. 只不过, 此变量对拥有SUPER权限的用户无效. 因此 有一个小trick是在我们的从服务器上开一个连接线程, 然后<code>FLUSH TABLES WITH READ LOCK</code>. 接着不关闭此线程就行了.</p>
+<p>另外, 我们如何保证主从复制的事务安全?</p>
+<p>我们之前说过, 在事务提交的时候, 会事先先写入到日志文件中, 然后反映到数据文件, 但事实上, 我们的日志文件在内存中也是有一个缓冲区的, 事务写入是先写入到缓冲区中, 然后再推到文件中的. 这样的话, 从节点接收到的日志文件有可能包含不完整的事务或者有可能主节点已经提交事务了, 但是由于日志文件没有得到及时更新, 从节点也接受不到. 再这样的情况下, 我们可以做这样的操作:</p>
+<ul>
+<li>在master节点, 启用<code>sync_binlog</code>, 即当事务更新的时候立刻刷新到日志文件中.<ul>
+<li>如果使用InnoDB存储引擎, 开启<code>innodb_flush_logs_at_trx_commit=ON</code>, <code>innodb_support_xa=ON</code>. 第一个看名字就可以理解, 即当事务提交的时候就刷新到日志中. 第二个是开启分布式事务.</li>
+</ul>
+</li>
+<li>在slave节点, 开启<code>skip_slave_start=OFF</code>,  也就是不要开启自动开启复制线程, 这样有可能复制主节点的错误数据导致数据风险. 我们应该手动开启.</li>
+</ul>
+<p>另外, 我们来到从节点看一下他的数据目录.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@node2 mysql]# ls</span><br><span class="line">aria_log.00000001  ibdata1      mariadb-bin.000001  master.info  mysql.sock          relay-log.000002  xtrabackup_binlog_pos_innodb</span><br><span class="line">aria_log_control   ib_logfile0  mariadb-bin.000002  mydb         performance_schema  relay-log.index   xtrabackup_info</span><br><span class="line">hellodb            ib_logfile1  mariadb-bin.index   mysql        relay-log.000001    relay-log.info</span><br><span class="line">[root@node2 mysql]# cat master.info </span><br><span class="line">18</span><br><span class="line">master-bin.000001</span><br><span class="line">873</span><br><span class="line">192.168.10.101</span><br><span class="line">repluser</span><br><span class="line">replpass</span><br><span class="line">3306</span><br><span class="line">60</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">0</span><br><span class="line">1800.000</span><br><span class="line"></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>其中有一个叫做<code>master.info</code>的文件. 这个文件记录了我们的复制所需要的信息, 因此这个文件十分重要. 另外, 还有一个<code>relay-log.info</code>, 其中也记录了当前复制的位置:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@node2 mysql]# cat relay-log.info</span><br><span class="line">./relay-log.000002</span><br><span class="line">904</span><br><span class="line">master-bin.000001</span><br><span class="line">873</span><br></pre></td></tr></table></figure>
+
+<p>同理, 我们从节点的<code>relay log</code>也是先写缓冲再文件的, 我们也可以通过配置变量来使得数据sync到文件中.</p>
+<h2 id="主主模型的实现"><a href="#主主模型的实现" class="headerlink" title="主主模型的实现"></a>主主模型的实现</h2><p>主主模型实现起来其实十分容易, 只要将两个节点都打开二进制日志和中继日志, 都配置MASTER指向, 然后都启动复制线程就可以了. 不过, 我们之前说过主主模型存在很多弊端(数据不一致), 所以就不展开了.</p>
+<p>另外, 主主模型可能还需要考虑到关于自动增长ID的问题.</p>
+<h2 id="半同步复制"><a href="#半同步复制" class="headerlink" title="半同步复制"></a>半同步复制</h2><p>半同步复制是Google为MySQL开发的复制插件. 我们可以从安装的服务端应用程序看到这两个插件:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# rpm -ql mariadb-server</span><br><span class="line">...</span><br><span class="line">/usr/lib64/mysql/plugin/semisync_master.so</span><br><span class="line">/usr/lib64/mysql/plugin/semisync_slave.so</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>在我们之前配置好的主从复制的基础上, 主节点和从节点安装对应的插件, 接着启用他们, 开启复制线程. 就可以使用半同步复制了.</p>
+<blockquote>
+<p>在我们装好插件之后, 变量就会变多, 状态也会变多.</p>
+</blockquote>
+<h2 id="复制过滤器"><a href="#复制过滤器" class="headerlink" title="复制过滤器"></a>复制过滤器</h2><p>复制过滤器可以使得我们让从节点复制指定的数据库, 或者指定数据库的指定表.</p>
+<p>有两种实现方式:</p>
+<ul>
+<li>主服务器仅向二进制日志中记录与特定的数据库(特定表)相关的时间. 不过, 这种情况下, 我们就无法实现时间点还原. 通过这两个变量来控制:<ul>
+<li>binlog_do_db/table 白名单</li>
+<li>binlog_ignore_db/table 黑名单</li>
+</ul>
+</li>
+<li>从服务器SQL_THREAD在replay中继日志的时间时, 仅读取与特定数据库(特定表)相关的事件并应用于本地. 在这种实现方式下, 会造成网络和磁盘IO的浪费. 通过这两个变量来控制:<ul>
+<li>replicate_do_db/table</li>
+<li>replicate_ignore_db/table</li>
+</ul>
+</li>
+</ul>
+<p>这些变量在我们查看复制状态的时候也可以看到.</p>
+<p>当然, 我们也可以通过SSL来进行复制, 通过建立私有CA来实现.</p>
 
   </div>
 </article>
@@ -241,7 +283,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制简述"><span class="toc-number">1.</span> <span class="toc-text">主从复制简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL主从复制原理"><span class="toc-number">2.</span> <span class="toc-text">MySQL主从复制原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制模型的实现"><span class="toc-number">3.</span> <span class="toc-text">主从复制模型的实现</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制简述"><span class="toc-number">1.</span> <span class="toc-text">主从复制简述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MySQL主从复制原理"><span class="toc-number">2.</span> <span class="toc-text">MySQL主从复制原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主从复制模型的实现"><span class="toc-number">3.</span> <span class="toc-text">主从复制模型的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主主模型的实现"><span class="toc-number">4.</span> <span class="toc-text">主主模型的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#半同步复制"><span class="toc-number">5.</span> <span class="toc-text">半同步复制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复制过滤器"><span class="toc-number">6.</span> <span class="toc-text">复制过滤器</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
