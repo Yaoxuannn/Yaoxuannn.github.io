@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="令人头疼的程序包管理….学习笔记在此. 来自未来的评论: 现在看来Linux的程序包管理是最轻松的, 比Mac, Windows好管理太多了">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.644Z">
+<meta property="og:updated_time" content="2020-05-13T05:18:10.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux程序包管理">
 <meta name="twitter:description" content="令人头疼的程序包管理….学习笔记在此. 来自未来的评论: 现在看来Linux的程序包管理是最轻松的, 比Mac, Windows好管理太多了">
@@ -167,7 +167,7 @@
 </ul>
 <p><code>Linux</code>下的可执行程序是<code>ELF</code>格式的(这里说的是格式,不是扩展名), 而<code>Windows</code>下的可执行文件是<code>EXE</code>格式的.</p>
 <p>因此, 一旦编译成二进制格式后, 程序将会变得不兼容, 因此说, 源代码级别是相同的.  </p>
-<p><code>Linux</code>下查看一个二进制程序依赖哪些库的命令是: <code>ddl</code></p>
+<p><code>Linux</code>下查看一个二进制程序依赖哪些库的命令是: <code>ldd</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@Ubuntu:~$ ldd /bin/ls</span><br><span class="line">	linux-vdso.so.1 =&gt;  (0x00007fff4ee35000)</span><br><span class="line">	libselinux.so.1 =&gt; /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007f99b26f7000)</span><br><span class="line">	libacl.so.1 =&gt; /lib/x86_64-linux-gnu/libacl.so.1 (0x00007f99b24ef000)</span><br><span class="line">	libc.so.6 =&gt; /lib/x86_64-linux-gnu/libc.so.6 (0x00007f99b2126000)</span><br><span class="line">	libpcre.so.3 =&gt; /lib/x86_64-linux-gnu/libpcre.so.3 (0x00007f99b1ee8000)</span><br><span class="line">	libdl.so.2 =&gt; /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f99b1ce4000)</span><br><span class="line">	/lib64/ld-linux-x86-64.so.2 (0x00005560ba8de000)</span><br><span class="line">	libattr.so.1 =&gt; /lib/x86_64-linux-gnu/libattr.so.1 (0x00007f99b1ade000)</span><br></pre></td></tr></table></figure>
 
 <p>除了熟悉的<code>API(Application Programming Interface)</code>外, 还有一个叫做<code>ABI(Application Binary Interface)</code>.导致<code>Linux</code>下的程序在<code>Windows</code>下不能运行的原因就是这个<code>ABI</code> 不同. 程序在链接时就决定了是如何去寻找库的路径.</p>
@@ -488,7 +488,7 @@
 <p>这样就很方便的进行了多文件的编译. 但是你可能要说了, 我可以使用脚本来代替这个过程啊, 为什么非要编写这样的一个文件呢? 看下面的例子吧:</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost c]<span class="comment"># make</span></span><br><span class="line">make: `main<span class="string">' is up to date.</span></span><br><span class="line"><span class="string">[root@localhost c]# vim haha.c</span></span><br><span class="line"><span class="string">[root@localhost c]# make</span></span><br><span class="line"><span class="string">cc    -c -o haha.o haha.c</span></span><br><span class="line"><span class="string">gcc -o main main.o haha.o sin_value.o cos_value.o -lm</span></span><br></pre></td></tr></table></figure>
 
-<p>发现了吗, 只要这个文件没有发生改变我们就不会再去消耗CPU去编译他, (编译是一件很想吃性能的事情啊) 而且当文件发生了变化, 他也可以安装相关关系来按需编译, 也就是按照相依性来更新执行文件.</p>
+<p>发现了吗, 只要这个文件没有发生改变我们就不会再去消耗CPU去编译他, (编译是一件很吃性能的事情啊) 而且当文件发生了变化, 他也可以安装相关关系来按需编译, 也就是按照相依性来更新执行文件.</p>
 <p>现在也许你尝试着进行了<code>make clean</code> 的操作但是发现失败了. 来看一下报错吧:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost c]<span class="comment"># make clean</span></span><br><span class="line">make: *** No rule to make target `clean<span class="string">'.  Stop.</span></span><br></pre></td></tr></table></figure>
 

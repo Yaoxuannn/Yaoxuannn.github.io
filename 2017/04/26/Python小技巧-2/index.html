@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="Python编程技巧.[环境:Python3.6.0]">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-01T23:03:39.506Z">
+<meta property="og:updated_time" content="2020-05-13T03:37:19.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python小技巧_2">
 <meta name="twitter:description" content="Python编程技巧.[环境:Python3.6.0]">
@@ -170,7 +170,6 @@
 <blockquote>
 <p>当你遇到了一个问题的时候, 为了解决它, 你想到了使用正则表达式, 这时, 你就有了两个问题. :)</p>
 </blockquote>
-<p>正则确实强大, 但是今天不会来讨论正则, 如果想要了解, 请前往<a href="http://yaoxuannn.com/2016/11/16/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/">正则表达式入门教程</a>.</p>
 <p>正则模块需要引入.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">''</span></span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> re.split(<span class="string">"[,./|]"</span>, <span class="string">"Hel.lo,W|or/ld!"</span>):</span><br><span class="line">    text += n</span><br><span class="line">print(text)</span><br><span class="line"><span class="comment"># HelloWorld!</span></span><br></pre></td></tr></table></figure>
 
