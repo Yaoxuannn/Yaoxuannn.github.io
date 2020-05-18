@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="文件共享服务 – 应用层的FTP, 工作在内核的nfs(难以跨平台), 跨平台的文件服务samba(在Linux上实现SMB).">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.633Z">
+<meta property="og:updated_time" content="2020-05-18T01:27:02.135Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FTP协议和vsftpd">
 <meta name="twitter:description" content="文件共享服务 – 应用层的FTP, 工作在内核的nfs(难以跨平台), 跨平台的文件服务samba(在Linux上实现SMB).">
@@ -186,7 +186,7 @@
 <p><strong>2XX</strong>: 成功类的响应码</p>
 <p><strong>3XX:</strong> 需要补充信息的状态码</p>
 <p><strong>4XX:</strong> 客户端错误</p>
-<p>*<em>5XX: *</em>服务端错误</p>
+<p>*<em>5XX: *</em> 服务端错误</p>
 <p>这个和HTTP的响应码几乎是一样的.</p>
 <h2 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h2><p>现在想想我们之前说过的MySQL, 和FTP有一点像么? 当然他们组织数据的方式是不一样的, MySQl提供的是结构化的数据.  对于用户认证, MySQL提供的验证机制和系统是不一样的, 用户需要提供账号和密码, 这些信息是保存在一个数据表中的. 这种认证方式 我们把这个叫做<strong>虚拟用户</strong> . 这个是为了和操作系统其他的资源隔离起来, 更加安全. 此用户仅仅是为了一个特定服务而存在.</p>
 <p>与MySQL应用层服务不同的是, FTP协议存在的非常早, 在互联网混沌初开的时候就已经存在了. 早期, FTP使用的是系统用户进行认证. 其实也是因为FTP提供的是系统文件服务, 所以才选择这样的策略 – 关联系统账号.</p>

@@ -9,7 +9,7 @@
     <meta name="description" content="Python后端一锅端.">
 <meta name="keywords" content="Python,Redis,RabbitMQ,SQLAlchemy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python操作Rabbitmq, Redis">
+<meta property="og:title" content="Python操作Rabbitmq, Redis, MySQL">
 <meta property="og:url" content="https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/index.html">
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="Python后端一锅端.">
@@ -24,9 +24,9 @@
 <meta property="og:image" content="https://www.rabbitmq.com/img/tutorials/python-six.png">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/820332/201601/820332-20160124221240875-1959295808.png">
 <meta property="og:image" content="http://www.sqlalchemy.org/img/sqla_logo.png">
-<meta property="og:updated_time" content="2020-03-01T23:11:16.508Z">
+<meta property="og:updated_time" content="2020-05-14T01:55:30.647Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python操作Rabbitmq, Redis">
+<meta name="twitter:title" content="Python操作Rabbitmq, Redis, MySQL">
 <meta name="twitter:description" content="Python后端一锅端.">
 <meta name="twitter:image" content="https://www.rabbitmq.com/img/RabbitMQ-logo.svg">
     
@@ -48,7 +48,7 @@
         
     
     <!-- title -->
-    <title>Python操作Rabbitmq, Redis</title>
+    <title>Python操作Rabbitmq, Redis, MySQL</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -103,15 +103,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&text=Python操作Rabbitmq, Redis"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&is_video=false&description=Python操作Rabbitmq, Redis"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python操作Rabbitmq, Redis&body=Check out this article: https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&name=Python操作Rabbitmq, Redis&description=&lt;p&gt;Python后端一锅端.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&text=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&is_video=false&description=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python操作Rabbitmq, Redis, MySQL&body=Check out this article: https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&name=Python操作Rabbitmq, Redis, MySQL&description=&lt;p&gt;Python后端一锅端.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -128,7 +128,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        Python操作Rabbitmq, Redis
+        Python操作Rabbitmq, Redis, MySQL
     </h1>
 
 
@@ -445,15 +445,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&text=Python操作Rabbitmq, Redis"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&is_video=false&description=Python操作Rabbitmq, Redis"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Python操作Rabbitmq, Redis&body=Check out this article: https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&name=Python操作Rabbitmq, Redis&description=&lt;p&gt;Python后端一锅端.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&text=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&is_video=false&description=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Python操作Rabbitmq, Redis, MySQL&body=Check out this article: https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&title=Python操作Rabbitmq, Redis, MySQL"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://yaoxuannn.com/2017/07/19/Python操作Rabbitmq-Redis-MySQL/&name=Python操作Rabbitmq, Redis, MySQL&description=&lt;p&gt;Python后端一锅端.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

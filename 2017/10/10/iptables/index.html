@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/jianghaha.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/itworks.png">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/iptables_mind.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.635Z">
+<meta property="og:updated_time" content="2020-05-18T04:32:41.039Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iptables">
 <meta name="twitter:description" content="Linux的防火墙 – iptables.">
@@ -474,7 +474,7 @@
 <p>那么为了解决这个问题, 有什么好办法吗? 对了, 我们想到了nat和proxy. 其中, nat其实是为了隐藏本地网络的主机的(最早), 而proxy一般是在应用层实现不同于nat在网络层和传输层实现. 现在我们先说说nat.</p>
 <p>NAT就是网络地址转换了, 现在主要有地址转换[SNAT, DNAT]和端口转换两种, SNAT和DNAT两种其实是相互对应的. 一般情况下, 我们内网的主机发起对外网的通信请求, 这些请求都会先到达网关, 这个网关服务器现在扮演的角色就是nat server. 他不监听在任何一个套接字上, 也不是一个服务或者进程, 而是内核中的一些转发规则的实现. </p>
 <p>当报文发送到网关的时候, 源地址被改成网关的外网通信IP, 目的地址不变, 接着外网服务器的响应报文将携带着目的地址为网关服务器的外网通信IP发送回来, 于是该响应报文再次被修改成目的地址为内网IP从内网接口被发送出去.</p>
-<p>那么问题来了, 网关服务器或者说nat server怎么知道这个报文是发给谁的? 如果内网中有很多台主机的话, 决定报文流向的机制其实就是我们说过的<strong>连接追踪机制</strong> 因为这个报文是内网主机先发送的, 所以内核中是存在追踪记录的话, 就好办了. 这样也就造成一个非常难办的问题: *<em>IP协议变成了不公平的协议. *</em> 只有内网主机才可以主动发送请求.</p>
+<p>那么问题来了, 网关服务器或者说nat server怎么知道这个报文是发给谁的? 如果内网中有很多台主机的话, 决定报文流向的机制其实就是我们说过的<strong>连接追踪机制</strong> 因为这个报文是内网主机先发送的, 所以内核中是存在追踪记录的话, 就好办了. 这样也就造成一个非常难办的问题: <strong>IP协议变成了不公平的协议.</strong> 只有内网主机才可以主动发送请求.</p>
 <p>显然, DNAT只能运行在PREROUTING上, 而SNAT也只能运行在POSTROUTING上. </p>
 <p>简单的说一下proxy吧. 刚刚说过了proxy是运行在应用层的, 因为网关服务器需要理解客户请求的协议到底是什么协议的, 所以报文会径直到达网关的用户空间的代理进程, 接着重新封装发向目的地址. 注意啦 这里的请求发出者就是网关, 所以不存在什么转换的问题. 接着同样服务器也会把响应报文径直发向代理服务器(网关服务器), 接着代理进程重新封装报文发送给客户. 就是这样的过程.</p>
 <p>现在切入正题, 来使用iptables实现nat功能. 我们在外网服务器开启httpd服务, 清空三台主机所有的iptables规则, 并且在内网主机配置默认路由, 设置网关. 现在我想做的事情是在网关服务器配置一条nat规则, 将内网的主机源地址转换成为网关的IP地址.</p>
