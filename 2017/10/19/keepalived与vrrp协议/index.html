@@ -15,7 +15,7 @@
 <meta property="og:description" content="打开高可用的探索之门~">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://www.keepalived.org/images/Software%20Design.gif">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.637Z">
+<meta property="og:updated_time" content="2020-05-19T20:08:32.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="keepalived">
 <meta name="twitter:description" content="打开高可用的探索之门~">
@@ -163,7 +163,7 @@
 <p>接着在回到之前说的配置IP这一点上, 如果直接就这么配置上, 一个明显的问题就是我们director之前的路由器就傻了, 可能会出现一段时间是第一台节点, 一段时间路由到第二台节点的情况. 这怎么办呢? 很简单了, 只要确保必须是一台活动, 一台备用就行了, 也就是说只要一台得到了IP, 另外一台就不能进行工作. 这样的话就回到了那个老话题 – 如何判断主备状态.</p>
 <p>监控, 对. 显然, 监控就可以解决问题. 但是监控也是分很多形式的, 比如可以一问一答, 也可以进行单方向发送状态信息. 一般情况下, 我们选择的方式是后者. 而且还是基于组播的发送. 另外, 这个机制的一个重要的考量因素就是<strong>时间</strong>. 主机之间的时间必须同步. 否则极大几率会出现误判. 那么如何实现时间同步? 简单, 只要指向同一台ntp服务器就行了. 我不管这个时间是否准确, 只要<strong>你们的</strong>时间一样就行了. </p>
 <p>要说到keepalived, 首先我们要说说vrrp, 也就是虚拟路由冗余协议.</p>
-<h2 id="keepalived和vrrp简述"><a href="#keepalived和vrrp简述" class="headerlink" title="keepalived和vrrp简述"></a>keepalived和vrrp简述</h2><p>网络工程师肯定是很熟悉这个vrrp了, 在华为, H3C, Cisco都相关的技术文档了. 事实上vrrp的工作原理和上面说的那些差不多了, 作为网关的路由器可以说是很重要的设备, 所以为了后端服务器的高可用, 我们会对网关进行一个冗余, 只要正在运行的, 也就是active的路由设备一直向冗余的路由设备发送心跳, 就认定成是可用的, 一段周期内, 备份的路由器如果没有心跳数据包, 就会取代这个网关路由, 保持这个通道的连续和可靠. </p>
+<h2 id="keepalived和vrrp简述"><a href="#keepalived和vrrp简述" class="headerlink" title="keepalived和vrrp简述"></a>keepalived和vrrp简述</h2><p>网络工程师肯定是很熟悉这个vrrp了, 在华为, H3C, Cisco都有相关的技术文档. 事实上vrrp的工作原理和上面说的那些差不多了, 作为网关的路由器可以说是很重要的设备, 所以为了后端服务器的高可用, 我们会对网关进行一个冗余, 只要正在运行的, 也就是active的路由设备一直向冗余的路由设备发送心跳, 就认定成是可用的, 一段周期内, 备份的路由器如果没有心跳数据包, 就会取代这个网关路由, 保持这个通道的连续和可靠. </p>
 <p>那么vrrp怎么工作的? 核心的思想就是将两个路由器构建成一个或者多个虚拟路由. 具体的实施过程是这样的, 首先, 配置成虚拟路由的多台路由器之间协商, 选举出一台Master节点, 选举主要依靠他们的优先级, 如果优先级相同, IP地址大的成为Master. 接着, Master路由周期性的发送vrrp报文, 通报自己的配置信息和工作状态. 如果Master路由出现故障, 剩余的Backup路由重新进行选举出新的Master, 并且发布一个携带虚拟IP和自己的虚拟MAC地址的免费ARP报文从而更新网络中的ARP信息. 这里的ARP报文也可以理解成是ARP欺骗.</p>
 <p>当然直接这样发送报文, 不是这么的安全, 所以vrrp也支持认证功能. 包括简单的字符认证, 和MD5认证. 不过对于一个频繁发送的心跳包来说, MD5计算显然是一个很消耗性能和带宽的方式. 所以一般都会选择简单的字符认证. </p>
 <p>另外, 考虑到backup路由一直处于闲置的状态, 我们可以构建<strong>双主模型</strong>. 就是说, R1和R2两台路由器, 我们可以配置两个虚拟路由器, 其中一个R1做主, 另一个R2做主. 这样还可以实现负载均衡, 还充分运用了资源.</p>
