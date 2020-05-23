@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/560px-Little-Endian.svg.png">
 <meta property="og:image" content="https://pic4.zhimg.com/50/v2-099eb9b3df42395ee58ed21599e7f616_hd.jpg">
 <meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/utf-8_web_growth.png">
-<meta property="og:updated_time" content="2020-03-02T03:58:52.505Z">
+<meta property="og:updated_time" content="2020-05-20T23:17:41.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字符编码笔记">
 <meta name="twitter:description" content="想来想去终于决定写一个关于计算机字符编码的笔记了 ( 应该说终于愿意去学了..) , 原本的目的只是搞清楚Unicode的, 考虑到字符编码问题是一个有趣, 在开发中经常会遇到并且稍微有点麻烦和棘手的问题, 但是在网络上却很难找到将这个说的比较细致和成体系的文章, 所以我决定倾尽精力去写这篇笔记, 我会尽量的去查资料和参考他人的文章和博客, 将关于计算机编码的问题捣鼓清楚. 在笔记的后半部分, 我">
@@ -234,10 +234,10 @@
 <p>感觉无论怎么看, TES都不是算是模型的层次…</p>
 </blockquote>
 <p>现在我们慢慢展开说一下这四个等级.</p>
-<h4 id="1-抽象字符表-ACR"><a href="#1-抽象字符表-ACR" class="headerlink" title="1. 抽象字符表 ACR"></a>1. 抽象字符表 ACR</h4><p>在这里, 我们通过定义<strong>抽象字符</strong>的无序集合来确定字符的范围. 字符表可以是<del><strong>封闭</strong></del>的, 也就是在制定时就决定了, 典型的例子是ASCII以及ISO8859系列, 而Unicode为了达到通用的目的, 提出设计<del><strong>开放</strong></del>的字符表, 也就是说, 我们可以随时添加新的字符到表中.</p>
+<h4 id="1-抽象字符表-ACR"><a href="#1-抽象字符表-ACR" class="headerlink" title="1. 抽象字符表 ACR"></a>1. 抽象字符表 ACR</h4><p>在这里, 我们通过定义<strong>抽象字符</strong>的无序集合来确定字符的范围. 字符表可以是<strong>封闭</strong>的, 也就是在制定时就决定了, 典型的例子是ASCII以及ISO8859系列, 而Unicode为了达到通用的目的, 提出设计<strong>开放</strong>的字符表, 也就是说, 我们可以随时添加新的字符到表中.</p>
 <p>这里我们所说的抽象字符是不具有的<strong>字形</strong>的, 所以才说是抽象的.</p>
 <p>稍稍总结一下ACR的三个特点: <strong>无序</strong>, <strong>封闭和开放</strong>, <strong>字符不具有具体的字形</strong>.</p>
-<h4 id="2-编号字符集-CCS"><a href="#2-编号字符集-CCS" class="headerlink" title="2. 编号字符集 CCS"></a>2. 编号字符集 CCS</h4><p>一个编号字符集定义成是从上面的抽象字符集合到非负整数集合的映射. 这些整数不一定要连续, ß我们把定义了整数的抽象字符的这个位置(想象一个表格的单元格)称为<strong>码点(code point)</strong>(暂时存个疑问), 所以这样就形成了一个<strong>编号空间(Code space, 也可以叫做码点空间)</strong>. 一个存在上限的有多种方式描述的非负整数范围. 例如, 我们可以通过一对非负整数: GB2312的汉字编号空间就是94 x 94. 也可以直接使用一个非负整数: ISO-8859-1的256, 或者也可以使用字符的存储单元尺寸, 比如ISO-8859-1的范围是2^8 = 256.</p>
+<h4 id="2-编号字符集-CCS"><a href="#2-编号字符集-CCS" class="headerlink" title="2. 编号字符集 CCS"></a>2. 编号字符集 CCS</h4><p>一个编号字符集定义成是从上面的抽象字符集合到非负整数集合的映射. 这些整数不一定要连续, 我们把定义了整数的抽象字符的这个位置(想象一个表格的单元格)称为<strong>码点(code point)</strong>(暂时存个疑问), 所以这样就形成了一个<strong>编号空间(Code space, 也可以叫做码点空间)</strong>. 一个存在上限的有多种方式描述的非负整数范围. 例如, 我们可以通过一对非负整数: GB2312的汉字编号空间就是94 x 94. 也可以直接使用一个非负整数: ISO-8859-1的256, 或者也可以使用字符的存储单元尺寸, 比如ISO-8859-1的范围是2^8 = 256.</p>
 <p>回到上面的码点这个概念, 并不是说码点的数量和抽象字符的数量(编号)是一致的, 这是因为在我们的CCS中, 还存在了非字符码点和保留码点. 不仅如此, 多个码点可能还对应这同一个字符, 比如: <code>\u51c9</code>与<code>\uf979</code>的这两个码点是同一个字符“凉”(<strong>注意, 这并不是汉字liáng, 这是一个字符.</strong>). 更多的例子可以在这里查询到: <a href="http://www.unicode.org/charts/PDF/UF900.pdf" target="_blank" rel="noopener">CJK兼容-F900-F921</a>. 还有, 例如上面的注音符号, 他就是由多个码点表示的, 由基本符号的a加上注音符号.</p>
 <p>最后稍微注意, 这里我们说的是<strong>编号</strong>, 而非编码. 这是两个截然不同的概念. 其实这一步和计算机丁点关系都没有, 因为没有涉及到下面说的字符编码方式和字符编码模式.</p>
 <h4 id="3-字符编码方式-CEF"><a href="#3-字符编码方式-CEF" class="headerlink" title="3. 字符编码方式 CEF"></a>3. 字符编码方式 CEF</h4><p>从这一步开始, 就开始进入到计算机的表示了. 我们知道常见的数据类型也就是单,双,四字节, 分别能够表示256, 65536, 4294967296个码位. 那么现在这一级别需要考虑的就是如何将无限扩展的(上面说了Unicode是开放的ACR, 也许现在就有新的emoji表情被添加到字符表中), 不仅如此, 过去诞生且正在使用的那些字符编码我们是抛弃不用(显然不可能), 还是向下兼容, 如果是兼容的话, 是完全兼容, 还是部分兼容 ?</p>
@@ -268,7 +268,7 @@
 <h3 id="ISO-8859"><a href="#ISO-8859" class="headerlink" title="ISO-8859"></a>ISO-8859</h3><p>这个和上面的两个就不一样了, ISO/IEC-8859是一套标准, 一共包含从ISO-8859-1到ISO-8859-16, 除去已经被废弃的ISO-8859-12, 总共有15个标准. 这些标准涵盖了欧洲各国使用的字符, 甚至包括一些外来语. 而且每一个具体的标准都只是用了扩展ASCII的<code>0xA0-0xFF</code>, 即160-255这96个编码.</p>
 <h3 id="GB系列"><a href="#GB系列" class="headerlink" title="GB系列"></a>GB系列</h3><p>渐渐地, 计算机发展到了亚洲地区. 于是自然, 需要想个办法来表示这些亚洲地区文字. 以汉字为例, 汉字的表示和英语不同, 鉴于其表示的特殊性和复杂性, 中国相关部门设计了GB系列编码, GB就是国标的汉语拼音的缩写, 国家标准的意思. GB的编码规则向下兼容ASCII, 如果一个字节是0-127, 那么就字节的含义还是ASCII制定的含义. 但是当出现ASCII单字节和GB多字节混合使用的时候, 就要先将GB编码的最高位设置成1, 以防止冲突.</p>
 <p>对了, <strong>凡是GB系列的编码, 都是符合ISO-8859标准的.</strong></p>
-<h4 id="GB2312"><a href="#GB2312" class="headerlink" title="GB2312"></a>GB2312</h4><p>这是最早的中文国家标准, 诞生于1980年. 目前GB2312仍然被广泛使用, 它一共包括了6763个汉字, 还收录了包括拉丁字母、希腊字母、日文平假名及片假名字母、俄语西里尔字母在内的682个字符.GB2312-1980通过 这6763个汉字已经足够日常使用. GB2312的编码方法和EASCII类似, 都是使用ASCII不使用最高位, 它规定所有的汉字必须大于127, 然后<strong>必须</strong>和原本ASCII一起结合使用, 正因为此, 他不能兼容EASCII的扩展部分. </p>
+<h4 id="GB2312"><a href="#GB2312" class="headerlink" title="GB2312"></a>GB2312</h4><p>这是最早的中文国家标准, 诞生于1980年. 目前GB2312仍然被广泛使用, 它一共包括了6763个汉字, 还收录了包括拉丁字母、希腊字母、日文平假名及片假名字母、俄语西里尔字母在内的682个字符.GB2312-1980通过 这6763个汉字已经足够日常使用. GB2312的编码方法和EASCII类似, 都是使用ASCII不使用的最高位, 它规定所有的汉字必须大于127, 然后<strong>必须</strong>和原本ASCII一起结合使用, 正因为此, 他不能兼容EASCII的扩展部分. </p>
 <p>由于当时的计算机仍然是终端和文本模式的时代, 而每个字符都是一个小点阵, 占8个像素宽, 而汉字并不适合这样展示, 所以又出现了全角和半角的区别.  全角的标点符号和半角的标点符号在中文输入法下是一样的, 而在英文输入法中, 半角标点的宽度就是全角的一半大小. 关于全角半角, 我们在后面还会提到.</p>
 <h4 id="GB13000-GBK"><a href="#GB13000-GBK" class="headerlink" title="GB13000 / GBK"></a>GB13000 / GBK</h4><p>1993年, Unicode1.1标准(ISO/IEC 10646.1:1993)第一部分发布(关于Unicode和ISO10646的相关, 我们在后面会说), 随后中国就发布了新的国标: GB13000-1993. 这一个标准和前面的那两个相一致. 后来在2010年, 发布了替代标准GB13000-2010, 和ISO/IEC10646:2003保持一致</p>
 <blockquote>
