@@ -15,9 +15,9 @@
 <meta property="og:description" content="我们在之前聊完了ELK栈第一个部分ElasticSearch的索引链程序Lucene , 也对搜索引擎有了一个大体的认知, 解下来就来看看剩下的组件吧.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/ELK_mspaint.png">
-<meta property="og:image" content="c:%5CUsers%5C43842%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200524195549790.png">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/kibana_discover_show_1.png">
-<meta property="og:updated_time" content="2020-05-25T00:57:50.544Z">
+<meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/kibana_discover_show_1.png">
+<meta property="og:updated_time" content="2020-05-25T01:00:50.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ELK栈初见-2">
 <meta name="twitter:description" content="我们在之前聊完了ELK栈第一个部分ElasticSearch的索引链程序Lucene , 也对搜索引擎有了一个大体的认知, 解下来就来看看剩下的组件吧.">
@@ -234,7 +234,7 @@
 
 <p>接着我们启动所有程序, 刷新一下web page, 这样日志就会增加, 然后由node1的logstash进行了处理推到了redis中. 接着, node2的logstash从redis中拿取数据交给了ES节点. 然后由kibana进行展示.</p>
 <p>初次启动kibana需要让我们配置index和排序依据, 配置好了之后, 我们就可以看到记录了:</p>
-<p><img src="C:%5CUsers%5C43842%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200524195549790.png" alt="image-20200524195549790"></p>
+<p><img src="https://hexopic.s3.ap-northeast-1.amazonaws.com/kibana_discover_show_1.png" alt="kibana_discover_show_1"></p>
 <p>我们可以搜索筛选, 上面还有时间和数量的展示图. 左侧有我们所有的域. 此外, 我们还以使用kibana进行数据可视化.</p>
 <p>当然, 之前就说过, 我们可以使用kibana来对我们的集群进行管理, 监控</p>
 <p><img src="https://hexopic.s3.ap-northeast-1.amazonaws.com/kibana_discover_show_1.png" alt="kibana_discover_show_1"></p>
