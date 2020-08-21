@@ -15,7 +15,9 @@
 <meta property="og:description" content="我们要始终假设自己的系统处在高危状态.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/Zabbix_Architecture.png">
-<meta property="og:updated_time" content="2020-08-21T21:26:29.477Z">
+<meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/Zabbix_logical_diagram.png">
+<meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/zabbix_login_page.png">
+<meta property="og:updated_time" content="2020-08-21T22:57:43.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控系统与Zabbix">
 <meta name="twitter:description" content="我们要始终假设自己的系统处在高危状态.">
@@ -171,6 +173,13 @@
 <p>Zabbix的架构如上图所示:</p>
 <p>其中最重要的组件就是Zabbix Server, 负责接受agent发送过来的各种数据. 同时各种配置信息也都保存在这里. 接着是Database, 听名字就知道这是个用于存储收集到的数据的组件.</p>
 <p>Zabbix可以使用两种方式进行数据监控, 也就是被动和主动, 被动也就是Zabbix server去拉取数据, 然后agent返回数据, 而主动也就是Zabbix的agent主动将数据推到server端.</p>
+<p>在Zabbix中, 我们可以把多个指标放在一个组中, 而这么一个组, 就叫做<code>application</code>, 而一个指标项就叫做<code>item</code>.</p>
+<p><img src="https://hexopic.s3.ap-northeast-1.amazonaws.com/Zabbix_logical_diagram.png" alt="Zabbix_logical_diagram"></p>
+<p>从逻辑层面上, 我们可以得到这样的一张关系图. 主要的过程在右下角.</p>
+<p>安装Zabbix已经不能再简单了, 官方的网站上有着保姆级的教程, 并且配置文件的注释也十分的详细. 之后的配置都在WebGUI中进行.</p>
+<p><img src="https://hexopic.s3.ap-northeast-1.amazonaws.com/zabbix_login_page.png" alt="zabbix_login_page"></p>
+<p>配置完成之后就可以进行登录了, 默认的用户名是<code>Admin</code>, 密码是<code>zabbix</code>.</p>
+<p>剩下的使用GUI就没有什么难的了.</p>
 
   </div>
 </article>
