@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/zabbix_node2_item_configuration.png">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/zabbix_node2_itemvalues_graph.png">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/zabbix_node2_inbound_trigger_graph.png">
-<meta property="og:updated_time" content="2020-08-23T22:38:22.836Z">
+<meta property="og:updated_time" content="2020-08-23T23:36:54.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控系统与Zabbix">
 <meta name="twitter:description" content="我们要始终假设自己的系统处在高危状态.">
@@ -211,6 +211,11 @@
 <p>这里会看到一条红线, 这就是警戒线了. 平常我们的节点没啥流量, 所以只有十位数个位数的流量, 我们让他<code>yum update</code>一样, 瞬间这个值就会上去了. 然后我们可以去check一下problems页面就会看到红色闪烁的<code>PROBLEM</code>了, 当问题没有了之后, 状态就会变成<code>RESOLVED</code>. 而触发器的状态也会变成<code>OK</code>了.</p>
 <p>另外, 想象这样的一种情景. 我们的一天服务器上运行的Nginx出现问题不能提供服务了, 但是这是因为我们的服务器本身宕机了, 如果我们对Nginx和服务器本身都加了触发器, 那么Nginx的触发器在这种情况下是不是压根就没意义了呀? 所以这就叫做, 触发器之间的<strong>依赖关系</strong>. </p>
 <p>那么接下来, 我们就要定义Actions了.</p>
+<p>首先我们需要定义条件, 也就是何时才使用这个action, 接下来下一步就是定义要做的操作. 我们之前说过, Zabbix可以进行步进式的操作设定, 也就是通过设定步骤来指明操作的层级.</p>
+<p>例如我们在这里适用Linux的本地邮件来做个例子, 注意要先到Administration里面添加本地邮件这种Media Type和发送的消息内容(Zabbix有各种模板供你选用)才行, 另外还需要给你要发送的用户也配置上Media.</p>
+<p>这样, 当我们的触发器触发到了这一个Action的时候, 我们就可以看到:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# mail</span><br><span class="line">Heirloom Mail version 12.5 7/5/10.  Type ? for help.</span><br><span class="line">"/var/spool/mail/root": 1 message</span><br><span class="line"><span class="meta">&gt;</span>   1 zabbix@localhost.loc  Sun Aug 23 18:09  23/1060  "Problem: ipps too high"</span><br><span class="line">&amp; </span><br><span class="line">Message  1:</span><br><span class="line">From zabbix@localhost.localdomain  Sun Aug 23 18:09:45 2020</span><br><span class="line">Return-Path: &lt;zabbix@localhost.localdomain&gt;</span><br><span class="line">X-Original-To: root@localhost.localdomain</span><br><span class="line">Delivered-To: root@localhost.localdomain</span><br><span class="line">From: &lt;zabbix@localhost.localdomain&gt;</span><br><span class="line">To: &lt;root@localhost.localdomain&gt;</span><br><span class="line">Date: Sun, 23 Aug 2020 18:09:45 -0500</span><br><span class="line">Subject: Problem: ipps too high</span><br><span class="line">Content-Type: text/html; charset="UTF-8"</span><br><span class="line">Status: RO</span><br><span class="line"></span><br><span class="line">&lt;b&gt;Problem started&lt;/b&gt; at 18:09:42 on 2020.08.23&lt;br&gt;&lt;b&gt;Problem name:&lt;/b&gt; ipps too high&lt;br&gt;&lt;b&gt;Host:&lt;/b&gt; node2&lt;br&gt;&lt;b&gt;Severity:&lt;/b&gt; High&lt;br&gt;&lt;b&gt;Operational data:&lt;/b&gt; 9.9 Kpackets/sec&lt;br&gt;&lt;b&gt;Original problem ID:&lt;/b&gt; 53&lt;br&gt;&amp;</span><br></pre></td></tr></table></figure>
+
 
   </div>
 </article>
