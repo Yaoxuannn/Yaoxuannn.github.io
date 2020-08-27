@@ -21,7 +21,7 @@
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/zabbix_node2_item_configuration.png">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/zabbix_node2_itemvalues_graph.png">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/zabbix_node2_inbound_trigger_graph.png">
-<meta property="og:updated_time" content="2020-08-23T23:36:54.669Z">
+<meta property="og:updated_time" content="2020-08-26T22:58:19.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控系统与Zabbix">
 <meta name="twitter:description" content="我们要始终假设自己的系统处在高危状态.">
@@ -216,6 +216,72 @@
 <p>这样, 当我们的触发器触发到了这一个Action的时候, 我们就可以看到:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[root@node1 ~]# mail</span><br><span class="line">Heirloom Mail version 12.5 7/5/10.  Type ? for help.</span><br><span class="line">"/var/spool/mail/root": 1 message</span><br><span class="line"><span class="meta">&gt;</span>   1 zabbix@localhost.loc  Sun Aug 23 18:09  23/1060  "Problem: ipps too high"</span><br><span class="line">&amp; </span><br><span class="line">Message  1:</span><br><span class="line">From zabbix@localhost.localdomain  Sun Aug 23 18:09:45 2020</span><br><span class="line">Return-Path: &lt;zabbix@localhost.localdomain&gt;</span><br><span class="line">X-Original-To: root@localhost.localdomain</span><br><span class="line">Delivered-To: root@localhost.localdomain</span><br><span class="line">From: &lt;zabbix@localhost.localdomain&gt;</span><br><span class="line">To: &lt;root@localhost.localdomain&gt;</span><br><span class="line">Date: Sun, 23 Aug 2020 18:09:45 -0500</span><br><span class="line">Subject: Problem: ipps too high</span><br><span class="line">Content-Type: text/html; charset="UTF-8"</span><br><span class="line">Status: RO</span><br><span class="line"></span><br><span class="line">&lt;b&gt;Problem started&lt;/b&gt; at 18:09:42 on 2020.08.23&lt;br&gt;&lt;b&gt;Problem name:&lt;/b&gt; ipps too high&lt;br&gt;&lt;b&gt;Host:&lt;/b&gt; node2&lt;br&gt;&lt;b&gt;Severity:&lt;/b&gt; High&lt;br&gt;&lt;b&gt;Operational data:&lt;/b&gt; 9.9 Kpackets/sec&lt;br&gt;&lt;b&gt;Original problem ID:&lt;/b&gt; 53&lt;br&gt;&amp;</span><br></pre></td></tr></table></figure>
 
+<p>接下来我们来说说Zabbix的主机配置模板, 我们可以设置一个链接至主机的模板, 从而实现主机的快速监控配置. 我们前往Configuration的Template里面,可以看到很多内置的模板. 模板可以导出, 也可以通过链接的方式进行模板之间的继承.</p>
+<p>模板支持使用宏, 也就是预设的文本替换. 宏也有等级, 一共有三种:</p>
+<ul>
+<li>优先级最高的, 全局宏, 在Administration中定义</li>
+<li>模板宏, 在模板配置中定义, 也可以进行链接继承. </li>
+<li>主机宏, 优先级最低, 在主机页面定义.</li>
+</ul>
+<p>我们一开始就介绍过Zabbix支持网络发现, Zabbix提供了多个网络发现方式, 例如使用HTTP, SSH, SMTP, Zabbix agent等等. 在扫描到之后就会添加到监控主机当中来.</p>
+<p>一旦发现主机, 就会产生发现事件, 也就是说我们的发现操作一共分为两步:</p>
+<ul>
+<li>discover</li>
+<li>actions: conditions, operations</li>
+</ul>
+<p>Zabbix定义了多种发现事件:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Event</th>
+<th align="left">Check of service result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><em>Service Discovered</em></td>
+<td align="left">The service is ‘up’ after it was ‘down’ or when discovered for the first time.</td>
+</tr>
+<tr>
+<td align="left"><em>Service Up</em></td>
+<td align="left">The service is ‘up’, consecutively.</td>
+</tr>
+<tr>
+<td align="left"><em>Service Lost</em></td>
+<td align="left">The service is ‘down’ after it was ‘up’.</td>
+</tr>
+<tr>
+<td align="left"><em>Service Down</em></td>
+<td align="left">The service is ‘down’, consecutively.</td>
+</tr>
+<tr>
+<td align="left"><em>Host Discovered</em></td>
+<td align="left">At least one service of a host is ‘up’ after all services of that host were ‘down’ or a service is discovered which belongs to a not registered host.</td>
+</tr>
+<tr>
+<td align="left"><em>Host Up</em></td>
+<td align="left">At least one service of a host is ‘up’, consecutively.</td>
+</tr>
+<tr>
+<td align="left"><em>Host Lost</em></td>
+<td align="left">All services of a host are ‘down’ after at least one was ‘up’.</td>
+</tr>
+<tr>
+<td align="left"><em>Host Down</em></td>
+<td align="left">All services of a host are ‘down’, consecutively.</td>
+</tr>
+</tbody></table>
+<p>其实也就是Host, Service和Up/Down, Discovered/Lost的组合.</p>
+<p>可以采取的行动有这些:</p>
+<ul>
+<li>Sending notifications</li>
+<li>Adding/removing hosts</li>
+<li>Enabling/disabling hosts</li>
+<li>Adding hosts to a group</li>
+<li>Removing hosts from a group</li>
+<li>Linking hosts to/unlinking from a template</li>
+<li>Executing remote scripts</li>
+</ul>
+<p>因为我们先定义发现规则, 接着在设置发现事件触发之后采取的行动就可以了. 这里提个醒, 增加action的切换在左上角, 想吐槽一下这个UI, 真的好不明显啊.</p>
 
   </div>
 </article>

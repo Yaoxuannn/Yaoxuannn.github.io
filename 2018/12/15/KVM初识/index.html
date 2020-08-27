@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="看完了Xen, 接下来再来接触一下不使用hypervisor的KVM虚拟化技术.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.638Z">
+<meta property="og:updated_time" content="2020-08-27T05:37:09.963Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KVM初识">
 <meta name="twitter:description" content="看完了Xen, 接下来再来接触一下不使用hypervisor的KVM虚拟化技术.">
@@ -153,9 +153,8 @@
 <a id="more"></a>
 
 <h2 id="KVM概述"><a href="#KVM概述" class="headerlink" title="KVM概述"></a>KVM概述</h2><p>KVM就是<code>Kernel-based Virtualization</code>. 基于内核的虚拟化, 我们之前已经通过使用Xen这种类型一虚拟化来实现虚拟化环境, 通过Dom0虚拟机来实现IO设备模拟交互.</p>
-<p>KVM是通过实现一个内核接口来进行虚拟机管理的, 当创建了一个虚拟机之后, 在操作系统中被抽象成了一个进程, 我们甚至可以通过<code>ps</code>来看到他们, 那关闭一个虚拟机咋做? 很简单, 直接<code>kill</code>就完事了. 在KVM出现之后, 由于他和内核的相性使得Linux直接抛弃了原先的Xen, 实装了KVM到内核模块中, 至于一些支持Xen和KVM的管理工具, 就被砍去了对Xen的部分功能.</p>
-<p>对于KVM而言, 硬件辅助虚拟技术(HVM)也是必要的, 因此我们需要在虚拟机测试的环境下开启硬件虚拟化.</p>
-<p>(待更新)</p>
+<p>KVM是通过实现一个内核接口来进行虚拟机管理的, KVM作为一个内核模块, 当我们装载了之后整个Linux内核就会变成一个HyperVisor了. 因此当创建了一个虚拟机之后, 在操作系统中被抽象成了一个进程, 我们甚至可以通过<code>ps</code>来看到他们, 那关闭一个虚拟机咋做? 很简单, 直接<code>kill</code>就完事了. 在KVM出现之后, 由于他和内核的相性使得Linux直接抛弃了原先的Xen, 实装了KVM到内核模块中, 至于一些支持Xen和KVM的管理工具, 就被砍去了对Xen的部分功能.</p>
+<p>对于KVM而言, 硬件辅助虚拟技术(HVM)也是必要的, 因此我们需要在虚拟机测试的环境下开启硬件虚拟化. KVM在我们的<code>/dev</code>目录下有一个专门的文件, <code>/dev/kvm</code>. 当我们想要创建虚拟机的时候, 就向这个文件发送请求即可, 他会和我们的KVM内核模块打交道. 现在来想象一下, 在装载了KVM并且新建一个虚拟机之后, 假设这还是一个Linux虚拟机, 那么他也会有自己的用户空间和内核空间, 这就比较麻烦, 我们知道有内核模式和用户模式, 此时我们引入了一个新的模式叫做宾客模式(guest mode). 也就是这个虚拟机对应的用户空间的模式名. </p>
 
   </div>
 </article>
