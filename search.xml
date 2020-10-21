@@ -119,9 +119,9 @@
       
         <tags>
             
-            <tag> Cloud Computing </tag>
-            
             <tag> Kubernetes </tag>
+            
+            <tag> Cloud Computing </tag>
             
         </tags>
       
@@ -205,9 +205,9 @@
       
         <tags>
             
-            <tag> Openstack </tag>
-            
             <tag> Cloud Computing </tag>
+            
+            <tag> Openstack </tag>
             
         </tags>
       
@@ -226,9 +226,9 @@
       
         <tags>
             
-            <tag> Openstack </tag>
-            
             <tag> Cloud Computing </tag>
+            
+            <tag> Openstack </tag>
             
         </tags>
       
@@ -331,9 +331,9 @@
       
         <tags>
             
-            <tag> Cluster </tag>
-            
             <tag> Tomcat </tag>
+            
+            <tag> Cluster </tag>
             
             <tag> Memcached </tag>
             
@@ -1377,9 +1377,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> Redis </tag>
+            
+            <tag> Python </tag>
             
             <tag> RabbitMQ </tag>
             
