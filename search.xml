@@ -331,9 +331,9 @@
       
         <tags>
             
-            <tag> Tomcat </tag>
-            
             <tag> Cluster </tag>
+            
+            <tag> Tomcat </tag>
             
             <tag> Memcached </tag>
             
@@ -738,9 +738,9 @@
             
             <tag> Linux </tag>
             
-            <tag> MySQL </tag>
-            
             <tag> Cluster </tag>
+            
+            <tag> MySQL </tag>
             
             <tag> drbd </tag>
             
