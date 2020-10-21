@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="看完了Xen, 接下来再来接触一下不使用hypervisor的KVM虚拟化技术.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-27T05:37:09.963Z">
+<meta property="og:updated_time" content="2020-09-24T23:58:28.098Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KVM初识">
 <meta name="twitter:description" content="看完了Xen, 接下来再来接触一下不使用hypervisor的KVM虚拟化技术.">
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#KVM概述"><span class="toc-number">1.</span> <span class="toc-text">KVM概述</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#KVM概述"><span class="toc-number">1.</span> <span class="toc-text">KVM概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KVM的工具栈"><span class="toc-number">2.</span> <span class="toc-text">KVM的工具栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Qemu"><span class="toc-number">2.1.</span> <span class="toc-text">Qemu</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -155,6 +155,26 @@
 <h2 id="KVM概述"><a href="#KVM概述" class="headerlink" title="KVM概述"></a>KVM概述</h2><p>KVM就是<code>Kernel-based Virtualization</code>. 基于内核的虚拟化, 我们之前已经通过使用Xen这种类型一虚拟化来实现虚拟化环境, 通过Dom0虚拟机来实现IO设备模拟交互.</p>
 <p>KVM是通过实现一个内核接口来进行虚拟机管理的, KVM作为一个内核模块, 当我们装载了之后整个Linux内核就会变成一个HyperVisor了. 因此当创建了一个虚拟机之后, 在操作系统中被抽象成了一个进程, 我们甚至可以通过<code>ps</code>来看到他们, 那关闭一个虚拟机咋做? 很简单, 直接<code>kill</code>就完事了. 在KVM出现之后, 由于他和内核的相性使得Linux直接抛弃了原先的Xen, 实装了KVM到内核模块中, 至于一些支持Xen和KVM的管理工具, 就被砍去了对Xen的部分功能.</p>
 <p>对于KVM而言, 硬件辅助虚拟技术(HVM)也是必要的, 因此我们需要在虚拟机测试的环境下开启硬件虚拟化. KVM在我们的<code>/dev</code>目录下有一个专门的文件, <code>/dev/kvm</code>. 当我们想要创建虚拟机的时候, 就向这个文件发送请求即可, 他会和我们的KVM内核模块打交道. 现在来想象一下, 在装载了KVM并且新建一个虚拟机之后, 假设这还是一个Linux虚拟机, 那么他也会有自己的用户空间和内核空间, 这就比较麻烦, 我们知道有内核模式和用户模式, 此时我们引入了一个新的模式叫做宾客模式(guest mode). 也就是这个虚拟机对应的用户空间的模式名. </p>
+<p>由此, 在我们载入KVM模块之后, 我们的系统就会有三种运行模式了:</p>
+<ul>
+<li>内核模式: 虚拟机的内核模式</li>
+<li>用户模式: 代表GuestOS执行I/O类操作, host的用户模式</li>
+<li>来宾模式: GuestOS的非I/O操作, 该模式可以说成是虚拟机的用户模式</li>
+</ul>
+<p>此时我们的Host的内核就扮演成Hypervisor的角色了.</p>
+<p>除了上面提到的<code>/dev/kvm</code>, 另外一个重要的KVM组件就是我们之前也见过的qemu进程. 先来说说<code>/dev/kvm</code>. 我们知道这个东西是KVM的一个入口, 作为一个字符设备来存在, 可以通过<code>ioctl()</code>系统调用来完成VM创建, 启动, 分配内存, 读写VCPU的寄存器等等. 而qemu, 工作在用户空间, 主要用于实现模拟PC机的IO设备.</p>
+<p>KVM可以使用Linux的大内存页(Huge Page), 也支持将分配给虚拟机的内存进行swap交换. 另外, KVM还可以使用KSM(Kernel Same-page Merging), 合并相同的内存页.</p>
+<p>接着我们来说说KVM的设备驱动, 首先是IO设备的完全虚拟化, 很简单了这就是模拟硬件. 而对于IO设备的半虚拟化, 我们需要在GuestOS中安装驱动, 叫做virtio.</p>
+<p>KVM优点很多, 但也有一些局限性, 例如KVM的过载使用(overcommit), 还有虚拟机的时钟, 由于VCPU的存在就会导致时间同步出错. </p>
+<h2 id="KVM的工具栈"><a href="#KVM的工具栈" class="headerlink" title="KVM的工具栈"></a>KVM的工具栈</h2><p>除了上面说的Qemu, 另外一组KVM的工具栈就是使用libvirt的virsh. 在qemu中我们主要使用qemu-kvm和qemu-img这两个工具. 而libvirt支持在GUI和CLI两种模式下的, 使用到的工具也不尽相同. 我们从Qemu开始.</p>
+<h3 id="Qemu"><a href="#Qemu" class="headerlink" title="Qemu"></a>Qemu</h3><p>我们QEMU主要提供一下几个部分:</p>
+<ul>
+<li>处理器模拟器</li>
+<li>仿真IO设备</li>
+<li>关联模拟设备到真实设备</li>
+<li>调试器</li>
+<li>与模拟器交互的用户接口</li>
+</ul>
 
   </div>
 </article>
@@ -188,7 +208,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#KVM概述"><span class="toc-number">1.</span> <span class="toc-text">KVM概述</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#KVM概述"><span class="toc-number">1.</span> <span class="toc-text">KVM概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#KVM的工具栈"><span class="toc-number">2.</span> <span class="toc-text">KVM的工具栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Qemu"><span class="toc-number">2.1.</span> <span class="toc-text">Qemu</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
