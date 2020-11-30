@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="这是《Python源码剖析 — 深度探索动态语言核心技术》的阅读记录. 概述和内建对象的基石 - PyObject">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/python_src_tree.png">
-<meta property="og:updated_time" content="2020-03-01T23:12:32.744Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/python_src_tree.png">
+<meta property="og:updated_time" content="2020-11-30T01:46:21.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python源码阅读—内建对象(1)">
 <meta name="twitter:description" content="这是《Python源码剖析 — 深度探索动态语言核心技术》的阅读记录. 概述和内建对象的基石 - PyObject">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/python_src_tree.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/python_src_tree.png">
     
     
         
@@ -177,7 +177,7 @@
 </ul>
 <p>后期在学习中再根据进度做修改. </p>
 <p>当然源码是一定要下载下来的~我们来看下结构:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/python_src_tree.png" alt="python_src_tree.png"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/python_src_tree.png" alt="python_src_tree.png"></p>
 <p>其中, <code>Include</code>这样的命名大家都知道了, 是用来放头文件的. <code>Lib</code>就是我们熟悉的那些Python标准库的源码了, 他们都是使用Python写的, 另外一个目录: <code>Modules</code>同样也是放一些模块的, 只不过这里的都是使用C语言写的, 目的不言自明. <code>Parser</code>就是Python解释器中的词法分析和语法分析, 其中还有些自动生成Python语言的词法和语法分析器, 类似YACC.<code>Python</code>, 都用自己的名字来命名了, 这个目录就十分重要了, 包含了Python的编译器和执行引擎. 另外<code>PCbuild</code>和<code>PCbuild8</code>这两个玩意是VS的工程了, 由于我是在Mac上操作的, 所以就忽略掉了.</p>
 <p>那就不说多了, 直接开始吧!</p>
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>先来撇清楚一个概念, 我们都知道Python是个面向对象的编程语言, 而这里内建对象的<strong>对象</strong>. 和面向<strong>对象</strong>的<strong>对象</strong>是两个截然不同的概念. 在Python中, 存在许多类型, 例如上面列举的int, string, List, Dict等等. 这些都实现了<strong>类</strong>的功能, 有意思的是, 这些类型, 他们也是类; 即是说: 类型本身也是类. 除了这些内置的, 我们还可以使用<code>class A(object)</code>这样的语句进行自定类型的声明和创建相应的实例. 我们都知道Python是使用ANSI C实现的, 那么这些对象是怎么在C中表示的呢?</p>

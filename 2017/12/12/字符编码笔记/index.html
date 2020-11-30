@@ -17,8 +17,8 @@
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Big-Endian.svg/560px-Big-Endian.svg.png">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Little-Endian.svg/560px-Little-Endian.svg.png">
 <meta property="og:image" content="https://pic4.zhimg.com/50/v2-099eb9b3df42395ee58ed21599e7f616_hd.jpg">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/utf-8_web_growth.png">
-<meta property="og:updated_time" content="2020-05-20T23:17:41.027Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/utf-8_web_growth.png">
+<meta property="og:updated_time" content="2020-11-30T01:49:13.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="字符编码笔记">
 <meta name="twitter:description" content="想来想去终于决定写一个关于计算机字符编码的笔记了 ( 应该说终于愿意去学了..) , 原本的目的只是搞清楚Unicode的, 考虑到字符编码问题是一个有趣, 在开发中经常会遇到并且稍微有点麻烦和棘手的问题, 但是在网络上却很难找到将这个说的比较细致和成体系的文章, 所以我决定倾尽精力去写这篇笔记, 我会尽量的去查资料和参考他人的文章和博客, 将关于计算机编码的问题捣鼓清楚. 在笔记的后半部分, 我">
@@ -371,7 +371,7 @@
 <p>就像基本的数据类型: BYTE, WORD, DWORD一样, 我们的码元类型也就分成这些: 对应上面的这三个, 分别有单字节, 2字节和4字节的码元. 是不是想到什么了? 没错, 这三种码元类型就对应UTF-8, UTF-16, UTF-32这三种<code>Unicode Transform Form</code>, 也就是<strong>Unicode码转换格式</strong>, 你也可以把这个叫做<code>UCS Transform Form</code>, 即通用字符集转换格式. 说到这里你就明白了, 所谓Unicode的CEF, 其实就是选择了一个类型的码元来编码.</p>
 <p>至于具体是怎么样进行编码的, 我们在下面一个部分来说. (以UTF-8为重点, 毕竟使用最为广泛, 至于UTF-32暂不讨论)</p>
 <p>你可能会说, 我还听说过<code>UTF-7</code>, <code>UTF-1</code>这些, 怎么上面没有提到呢? 实际上, <code>UTF-1</code>其实就是<code>UTF-8</code>的退役前身. 目前已经不再是Unicode的标准, 而<code>UTF-7</code>是为了电子邮件而设计的, 目前是<code>deprecated</code>的状态, 不再是Unicode的标准, 作为信息RFC存在.</p>
-<h5 id="UTF-8和本不应存在的BOM"><a href="#UTF-8和本不应存在的BOM" class="headerlink" title="UTF-8和本不应存在的BOM"></a>UTF-8和本不应存在的BOM</h5><p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/utf-8_web_growth.png" alt="utf-8_web_growth.png"></p>
+<h5 id="UTF-8和本不应存在的BOM"><a href="#UTF-8和本不应存在的BOM" class="headerlink" title="UTF-8和本不应存在的BOM"></a>UTF-8和本不应存在的BOM</h5><p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/utf-8_web_growth.png" alt="utf-8_web_growth.png"></p>
 <p>先来看一下UTF-8在前几年的增长势头(Web页面, 由Google统计).</p>
 <p>UTF-8在目前仍然是最广泛使用的具体编码方案, 但他却不是UTF最早的, 最早的是UTF-16. 最标准的称呼方法应该是<code>UTF-8</code>, 在一些不区分大小写的语言中, 例如: <code>HTML</code>, <code>CSS</code>, <code>XML</code>等, 都可使用<code>utf-8</code>这样的说法. 但是<code>utf8</code>或者<code>UTF8</code>这样缺失连字符的说法不被认为是正确的, 一些现代的浏览器或者是一些相关的标准(<code>HTML5</code>比如) 也可以有效的识别 但最好还是使用标准名称.</p>
 <p>接下来步入正题, 我们来说说UTF-8的一些组成和特性.</p>

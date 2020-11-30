@@ -14,15 +14,15 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="今天来了解下另一个缓存服务器应用 - Varnish.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/http_expire.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnish_arch.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnishstat.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnishtop.png">
-<meta property="og:updated_time" content="2020-03-01T23:31:43.674Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/http_expire.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnish_arch.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnishstat.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnishtop.png">
+<meta property="og:updated_time" content="2020-11-30T01:48:09.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Varnish初见">
 <meta name="twitter:description" content="今天来了解下另一个缓存服务器应用 - Varnish.">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/http_expire.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/http_expire.png">
     
     
         
@@ -171,7 +171,7 @@
 <p>接受请求 –&gt; 解析请求 (提取请求中的URL和各种首部) –&gt; 查询缓存 –&gt; 新鲜度检测 –&gt; 创建响应报文 –&gt;  发送响应 –&gt; 记录日志</p>
 </blockquote>
 <h3 id="缓存新鲜度"><a href="#缓存新鲜度" class="headerlink" title="缓存新鲜度"></a>缓存新鲜度</h3><p>这里面有一个至关重要的一步叫做新鲜度检测. 在HTTP版本是1.0, 会使用到一个响应首部来检测(HTTP/1.1中也有这个), 叫做Expire. 我们可以来随便访问一个网站看一下.</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/http_expire.png" alt="http_expire"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/http_expire.png" alt="http_expire"></p>
 <p>这个是百度的logo, 可以看到高亮的部分就写了在10年后才会过期. 不过你应该也注意到了一个地方, 这里所使用的时间是个绝对的时间, 但是我们是存在时差这个东西的, 也就是说有可能一个新鲜度时间对用户来说由于时差的影响并不新鲜, 因此在HTTP/1.1版本 中, 我们使用一个另外一个响应头部来得到缓存时间是多久, 那就是上面图中的<code>Cache-Control</code>. </p>
 <p>这个属性的的一个典型的值就是像上面所使用的<code>max-age</code>. 我不需要来决定具体的过期时间了, 只要告诉客户端从当前开始, 这个资源有效的时间是多长时间(s). 至于到底什么时候会过期, 有客户端自己去计算就好了.</p>
 <p>这里我们是从客户端的角度来看的, 其实在我们的缓存服务器和真实的资源服务器之间还存在一个有效性再验证: <code>revalidate</code>.  这里就会分成三种情况了:</p>
@@ -193,7 +193,7 @@
 <p>另外, 还有更大型的缓存网络. 例如借助全局的DNS, 一个典型的例子就是我们的CDN和GSLB. CDN借由节点之间的内容缓存控制协议来实现在用户的请求到达我们的后端架构之前, 会先在一个缓存网络中进行查找, 每一个用户只会被路由到他最近的节点.</p>
 </blockquote>
 <p>我们来看看Varnish的架构图;</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnish_arch.png" alt="varnish_arch"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnish_arch.png" alt="varnish_arch"></p>
 <p>Varnish也同样使用DSL(domain-specific language, 领域特定语言)来进行配置, 这里就叫做VCL, 也就是Varnish Configuration Language. 可以看到Varnish 主要分成两个部分, 主进程:也叫做管理进程, 子进程, 也即是缓存进程, 首先是主进程通过读取我们所编写的Varnish配置文件通过VCL编译器将他们编译成C代码, 接着通过C编译器得到<code>*.so</code>. 然后叫做子进程来进行真正的缓存操作.</p>
 <p>而主进程可以通过我们的命令行界面或者telnet, 或者Web接口. 说起来 这里我们只使用CLI的方式, telnet太不安全应该已经被废弃, 而Web界面是Varnish所提供的需要付费的组件.</p>
 <p>对于Varnish所生成的日志文件, 我们可以从图的右侧看到, 有多种分析工具啥的. 值得一说的是: Varnish所生成的日志内存空间对于所有的子进程而言都是共享的, 并且这一段内存是一个环状的空间, 当最后一个日志填满了只会, 就会从头开始继续写入.</p>
@@ -271,12 +271,12 @@
 <ul>
 <li>varnishstat</li>
 </ul>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnishstat.png" alt="varnishstat"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnishstat.png" alt="varnishstat"></p>
 <p>这个结果也是即时刷新的.</p>
 <ul>
 <li>varnishtop</li>
 </ul>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnishtop.png" alt="varnishtop"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnishtop.png" alt="varnishtop"></p>
 
   </div>
 </article>

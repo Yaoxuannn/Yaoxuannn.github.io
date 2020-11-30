@@ -14,19 +14,19 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="DHCP服务器建立起来特别简单啦, 就当放松心情来搭建一个吧! 另外 这一次顺便来看看神奇的网络引导究竟是怎么实现的~">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dhcptest.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/pxe.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/centos6.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/installC6.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Cobbler_first.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ks_mirror.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cobbler_first_run.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/dhcptest.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/pxe.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/centos6.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/installC6.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/Cobbler_first.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/ks_mirror.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/cobbler_first_run.png">
 <meta property="og:image" content="https://www.zhangfangzhou.cn/wp-content/uploads/2017/11/centos7-bad-superblock-.png">
-<meta property="og:updated_time" content="2020-03-01T23:49:21.746Z">
+<meta property="og:updated_time" content="2020-11-30T01:49:42.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="来,搭建一个DHCP服务器和PXE吧">
 <meta name="twitter:description" content="DHCP服务器建立起来特别简单啦, 就当放松心情来搭建一个吧! 另外 这一次顺便来看看神奇的网络引导究竟是怎么实现的~">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dhcptest.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/dhcptest.png">
     
     
         
@@ -179,7 +179,7 @@
 <p>不仅如此, 我们局域网中的机器也越来越多了, 有的时候总数量会超过我们可分配的地址范围, 那怎么办? 没关系, 只要保证在同一时间不会出现所有主机上线的情况就可以了. 这样bootp协议进行了升级, 也就是现在的DHCP协议.</p>
 <p>DHCP协议无非就是引入了一个新的租期(租约)的概念. 主机被分配的地址是有使用期限的. 一般是2Hours, 而每次经过50%的时间, 客户端就会进行续租操作 也就是1hour的时候, 重新变成了2hours.</p>
 <p>DHCP的流程也是很简单了, 我就以一个wireshark的包来做个展示吧:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dhcptest.png" alt="dhcptest"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/dhcptest.png" alt="dhcptest"></p>
 <p>过程共有4步, 从抓包的结果来看, 似乎每一次都是广播报文.</p>
 <p>接下来再说一个有用的技术, 叫做DHCP中继. 因为我们已经知道, 每一个DHCP报文都是广播报文, 但是路由器偏偏又是隔离广播域的一道天然屏障, 这样就没法跨路由器访问DHCP服务器了.</p>
 <p>所以为了能够访问到另一网络的DHCP服务器, 我们需要路由器将我们的广播请求转换成为单播.</p>
@@ -261,9 +261,9 @@
 
 <p>这样重启服务之后, 新建一个虚拟机</p>
 <p>确保使用同一网络之后, 就会看到激动人心的画面:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/pxe.png" alt="pxe"></p>
-<p>接着就神奇的进入了:<br><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/centos6.png" alt="CentOS6"></p>
-<p>怎么样, 是不是很有趣. 等到加载完vmlinuz和initrd.img时候就可以进行安装了:<br><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/installC6.png" alt="installC6"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/pxe.png" alt="pxe"></p>
+<p>接着就神奇的进入了:<br><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/centos6.png" alt="CentOS6"></p>
+<p>怎么样, 是不是很有趣. 等到加载完vmlinuz和initrd.img时候就可以进行安装了:<br><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/installC6.png" alt="installC6"></p>
 <p>这是CentOS6的安装流程.</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>过程总结如下:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CentOS 6 PXE: </span><br><span class="line">  yum -y install syslinux tftp-server</span><br><span class="line"></span><br><span class="line">  cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/</span><br><span class="line">  cp /media/cdrom/images/pxelinux/&#123;vmlinuz,initrd.img&#125; /var/lib/tftp/boot/</span><br><span class="line">  cp /media/cdrom/isolinux/&#123;boot.cfg,vesamenu.c32,splash.png&#125; /var/lib/tftp/boot/</span><br><span class="line">  mkdir /var/lib/tftpboot/pxelinux.cfg/</span><br><span class="line">  cp /media/cdrom/isolinux/isolinux.cfg /var/lib/tftpboot/pxelinux.cfg/default/</span><br></pre></td></tr></table></figure>
@@ -273,7 +273,7 @@
 
 <h2 id="Cobbler的实现"><a href="#Cobbler的实现" class="headerlink" title="Cobbler的实现"></a>Cobbler的实现</h2><p>我们在上面已经实现了一个简单的PXE网络引导环境, 那么现在说的Cobbler又是个什么东西呢? 实际上, 这是一个对PXE的更高级封装, 包括了KS, YUM等等一统之下的系统集中部署的环境.</p>
 <p>这个玩意是使用Python实现的, 十分小巧. 我们来看一下他的架构和一些名词:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Cobbler_first.png" alt="Cobbler_first.png"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/Cobbler_first.png" alt="Cobbler_first.png"></p>
 <p>这里最重要的部分就是Profile了, 我们在上面都知道较完整的一个网络引导起码需要vmlinuz + initrd.img, YUM repo, KS文件等等. 而不同的发行版是需要不同的, 或者说对应版本的vmlinuz, initrd.img的, 我们不能将非对应版本的这些扔到一块去.</p>
 <p>所以Cobbler就把他们集合在一起而组成了一个个Profile, 例如我们可以制定这样的Profile:</p>
 <p><strong>用于Web的CentOS6</strong>: (CentOS6的)vmlinuz+initrd.img+kickstart_web+CentOS6的yum repo</p>
@@ -313,12 +313,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]<span class="comment"># cobbler import --name=CentOS7_x86_64 --path=/media/</span></span><br><span class="line">task started: 2017-12-11_203518_import</span><br><span class="line">task started (id=Media import, time=Mon Dec 11 20:35:18 2017)</span><br><span class="line">Found a candidate signature: breed=redhat, version=rhel6</span><br><span class="line">Found a candidate signature: breed=redhat, version=rhel7</span><br><span class="line">Found a matching signature: breed=redhat, version=rhel7</span><br><span class="line">Adding distros from path /var/www/cobbler/ks_mirror/CentOS7_x86_64:</span><br><span class="line">creating new distro: CentOS7-x86_64</span><br><span class="line">trying symlink: /var/www/cobbler/ks_mirror/CentOS7_x86_64 -&gt; /var/www/cobbler/links/CentOS7-x86_64</span><br><span class="line">creating new profile: CentOS7-x86_64</span><br><span class="line">associating repos</span><br><span class="line">checking <span class="keyword">for</span> rsync repo(s)</span><br><span class="line">checking <span class="keyword">for</span> rhn repo(s)</span><br><span class="line">checking <span class="keyword">for</span> yum repo(s)</span><br><span class="line">starting descent into /var/www/cobbler/ks_mirror/CentOS7_x86_64 <span class="keyword">for</span> CentOS7-x86_64</span><br><span class="line">processing repo at : /var/www/cobbler/ks_mirror/CentOS7_x86_64</span><br><span class="line">need to process repo/comps: /var/www/cobbler/ks_mirror/CentOS7_x86_64</span><br><span class="line">looking <span class="keyword">for</span> /var/www/cobbler/ks_mirror/CentOS7_x86_64/repodata/*comps*.xml</span><br><span class="line">Keeping repodata as-is :/var/www/cobbler/ks_mirror/CentOS7_x86_64/repodata</span><br><span class="line">*** TASK COMPLETE ***</span><br><span class="line">[root@master ~]<span class="comment"># cd /var/www/</span></span><br><span class="line">[root@master www]<span class="comment"># ls</span></span><br><span class="line">cgi-bin  cobbler  html</span><br><span class="line">[root@master www]<span class="comment"># cd /etc/httpd/conf.d/</span></span><br><span class="line">[root@master conf.d]<span class="comment"># ls</span></span><br><span class="line">autoindex.conf  cobbler.conf  README  userdir.conf  welcome.conf</span><br><span class="line">[root@master conf.d]<span class="comment"># head cobbler.conf</span></span><br><span class="line"><span class="comment"># This configuration file allows cobbler data</span></span><br><span class="line"><span class="comment"># to be accessed over HTTP.</span></span><br><span class="line"></span><br><span class="line">AliasMatch ^/cblr(?!/svc/)(.*)?$ <span class="string">"/var/www/cobbler<span class="variable">$1</span>"</span></span><br><span class="line">AliasMatch ^/cobbler_track(.*)?$ <span class="string">"/var/www/cobbler<span class="variable">$1</span>"</span></span><br><span class="line"><span class="comment">#AliasMatch ^/cobbler(.*)?$ "/var/www/cobbler$1"</span></span><br><span class="line">Alias /cobbler /var/www/cobbler</span><br><span class="line">Alias /cobbler_webui_content /var/www/cobbler_webui_content</span><br><span class="line"></span><br><span class="line">WSGIScriptAliasMatch ^/cblr/svc/([^/]*) /var/www/cobbler/svc/services.py</span><br></pre></td></tr></table></figure>
 
 <p>我们能看到, Cobbler已经构建了一个YUM源, 并且在httpd的配置文件中定制了别名, 我们现在已经可以访问到看看了.</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ks_mirror.png" alt="ks_mirror.png"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/ks_mirror.png" alt="ks_mirror.png"></p>
 <p>接着再次执行一次同步:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]<span class="comment"># cobbler sync</span></span><br><span class="line">task started: 2017-12-11_203756_sync</span><br><span class="line">task started (id=Sync, time=Mon Dec 11 20:37:56 2017)</span><br><span class="line">running pre-sync triggers</span><br><span class="line">cleaning trees</span><br><span class="line">removing: /var/www/cobbler/images/CentOS7-x86_64</span><br><span class="line">removing: /var/lib/tftpboot/pxelinux.cfg/default</span><br><span class="line">removing: /var/lib/tftpboot/grub/images</span><br><span class="line">removing: /var/lib/tftpboot/grub/efidefault</span><br><span class="line">removing: /var/lib/tftpboot/images/CentOS7-x86_64</span><br><span class="line">removing: /var/lib/tftpboot/s390x/profile_list</span><br><span class="line">copying bootloaders</span><br><span class="line">copying distros to tftpboot</span><br><span class="line">copying files <span class="keyword">for</span> distro: CentOS7-x86_64</span><br><span class="line">trying hardlink /var/www/cobbler/ks_mirror/CentOS7_x86_64/images/pxeboot/vmlinuz -&gt; /var/lib/tftpboot/images/CentOS7-x86_64/vmlinuz</span><br><span class="line">trying hardlink /var/www/cobbler/ks_mirror/CentOS7_x86_64/images/pxeboot/initrd.img -&gt; /var/lib/tftpboot/images/CentOS7-x86_64/initrd.img</span><br><span class="line">copying images</span><br><span class="line">generating PXE configuration files</span><br><span class="line">generating PXE menu structure</span><br><span class="line">copying files <span class="keyword">for</span> distro: CentOS7-x86_64</span><br><span class="line">trying hardlink /var/www/cobbler/ks_mirror/CentOS7_x86_64/images/pxeboot/vmlinuz -&gt; /var/www/cobbler/images/CentOS7-x86_64/vmlinuz</span><br><span class="line">trying hardlink /var/www/cobbler/ks_mirror/CentOS7_x86_64/images/pxeboot/initrd.img -&gt; /var/www/cobbler/images/CentOS7-x86_64/initrd.img</span><br><span class="line">Writing template files <span class="keyword">for</span> CentOS7-x86_64</span><br><span class="line">rendering TFTPD files</span><br><span class="line">generating /etc/xinetd.d/tftp</span><br><span class="line">processing boot_files <span class="keyword">for</span> distro: CentOS7-x86_64</span><br><span class="line">cleaning link caches</span><br><span class="line">running post-sync triggers</span><br><span class="line">running python triggers from /var/lib/cobbler/triggers/sync/post/*</span><br><span class="line">running python trigger cobbler.modules.sync_post_restart_services</span><br><span class="line">running shell triggers from /var/lib/cobbler/triggers/sync/post/*</span><br><span class="line">running python triggers from /var/lib/cobbler/triggers/change/*</span><br><span class="line">running python trigger cobbler.modules.scm_track</span><br><span class="line">running shell triggers from /var/lib/cobbler/triggers/change/*</span><br><span class="line">*** TASK COMPLETE ***</span><br></pre></td></tr></table></figure>
 
 <p>接着我们重新打开另外一台主机. 就可以看到下面的画面:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cobbler_first_run.png" alt="cobbler_first_run.png"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/cobbler_first_run.png" alt="cobbler_first_run.png"></p>
 <p>但是这显然不够, 我们想要达成无人值守的自动化安装, 就需要kickstart文件的帮助.</p>
 <blockquote>
 <p>脱坑指南, 如果说你在这个时候尝试进入安装的时候出现了故障:</p>
@@ -334,7 +334,7 @@
 <p>总之生成了这个文件之后我们就可以去改变profile的行为了, </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cobbler profile edit --name=CentOS7-x86_64 --kickstart=%你的kickstart文件路径%</span><br><span class="line">cobbler sync</span><br></pre></td></tr></table></figure>
 
-<p>接着我们重启机器就可以享受无人值守的PXE自动安装了.</p>
+<p>接着我们重启机器就可以享受无人值守的PXE自动安装了</p>
 
   </div>
 </article>

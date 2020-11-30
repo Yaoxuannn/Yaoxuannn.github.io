@@ -14,13 +14,13 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="我们运行的各种服务在工作过程中都会产生巨大的日志, 如果是小规模的生产环境我们可以简单的通过将各种软件的日志复制到数据库或者直接文件系统上进行汇总. 当然这种不仅仅限日志量十分的少而且这样做会带来很多的弊端, 例如我们很难对其中的日志进行搜索和分析, 另外巨大的IO量对我们的硬盘也是一种巨大的考验. 今天就来学习ELK栈的第一步, 我们先来了解一下搜索引擎的简单原理.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E4%B8%80%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9E%B6%E6%9E%84.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E7%B4%A2%E5%BC%95%E8%A1%A8%E7%9A%84%E6%A0%B7%E5%AD%90.png">
-<meta property="og:updated_time" content="2020-05-24T21:33:12.289Z">
+<meta property="og:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/%E4%B8%80%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/%E7%B4%A2%E5%BC%95%E8%A1%A8%E7%9A%84%E6%A0%B7%E5%AD%90.png">
+<meta property="og:updated_time" content="2020-11-30T01:34:13.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ELK栈初见-1">
 <meta name="twitter:description" content="我们运行的各种服务在工作过程中都会产生巨大的日志, 如果是小规模的生产环境我们可以简单的通过将各种软件的日志复制到数据库或者直接文件系统上进行汇总. 当然这种不仅仅限日志量十分的少而且这样做会带来很多的弊端, 例如我们很难对其中的日志进行搜索和分析, 另外巨大的IO量对我们的硬盘也是一种巨大的考验. 今天就来学习ELK栈的第一步, 我们先来了解一下搜索引擎的简单原理.">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E4%B8%80%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9E%B6%E6%9E%84.png">
+<meta name="twitter:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/%E4%B8%80%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9E%B6%E6%9E%84.png">
     
     
         
@@ -158,7 +158,7 @@
 <a id="more"></a>
 
 <h2 id="从一个典型架构说起"><a href="#从一个典型架构说起" class="headerlink" title="从一个典型架构说起"></a>从一个典型架构说起</h2><p>我们之前谈论过了很多架构模型, 其中最常见的就是在一个系统的最前方加入反向代理进行负载均衡, 我们把这一层叫做接入层, 接着向后, 接入层的服务会优先向后方的缓存服务请求缓存, 即缓存层, 包括一些静态和动态资源, 如果命中则直接返回, 如果发生了miss就会再向后方真正的服务提供者请求资源, 也就是说真正的服务器层.</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E4%B8%80%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9E%B6%E6%9E%84.png" alt="一个常见的架构"></p>
+<p><img src="https://hexopic.s3-ap-northeast-1.amazonaws.com/%E4%B8%80%E4%B8%AA%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9E%B6%E6%9E%84.png" alt="一个常见的架构"></p>
 <p>想想看, 我们应该在那个地方进行日志的收集呢? 如果是真实服务器层, 可能80%以上的请求都没有到达这个地方, 显然我们应该在更前方部署日志服务. 如果是在缓存层呢, 在这地方是可以进行日志收集的. 但是显然, 接入层会过滤掉一些非法的请求或者是无权限的请求. 另外, 如果我们的站点足够大, 可能在接入层的前方还要一个CDN网络, 这些都要纳入我们的考虑范围中.</p>
 <p>为什么需要日志? 通过日志, 我们可以来分析和获取PV和UV, 从而得到自己站点的推荐系统. 这是十分重要的. 这就是我们为什么要收集日志.</p>
 <p>说到了收集日志, 稍微想一下就可以知道, 仅仅假设我们有4台Web服务器, 产生的日志量都是巨大的. 如果我们想在这些日志中知道某一个IP的访问次数, 可以说是一个比较麻烦的事情了. 尤其是这种检索只是一个很简单的检索.</p>
@@ -175,7 +175,7 @@
 <p>接收到源数据之后, 构成文档. 我们知道使用搜索引擎搜索的时候一般都是通过键入关键字词而不是一句话, 因此我们需要进行<strong>切词</strong>. 在切完词之后我们才可以进行全文搜索. 另外, 对结果排序也是一个需要考虑的问题, 如何设计权重?</p>
 <p>说到这, 我们就可以来简单的小结一下了, 一个搜索引擎的搜索组件就是由上面说到的构建查询部分加上查询的运行, 以及读取结果返回给前端. 当然了, 我们还需要一个前端的访问UI, 不管是命令行操作界面还是图形操作, 总归是有一个能够提供访问接口的东西.</p>
 <p>说完了搜索组件, 我们就来说说所索引链. 这个组件就是用来构建索引的, 我们刚刚说了对收集到的文档进行切词构建索引. 这里的索引是<strong>倒排</strong>的. 一般SQL的索引是正排的. 什么是倒排的呢? 我们构建的索引形如这样:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/%E7%B4%A2%E5%BC%95%E8%A1%A8%E7%9A%84%E6%A0%B7%E5%AD%90.png" alt="索引表的样子"></p>
+<p><img src="https://hexopic.s3-ap-northeast-1.amazonaws.com/%E7%B4%A2%E5%BC%95%E8%A1%A8%E7%9A%84%E6%A0%B7%E5%AD%90.png" alt="索引表的样子"></p>
 <p>左边就是词, 而右边就是这个词出现的文档. </p>
 <p>比如说正排就是在一篇文档中寻找出现的词, 正好是反过来的, 我们在SQL中也正好就是一个大单位数据中寻找小单位数据.</p>
 <p>因此, 一个大体的获取索引链过程:</p>

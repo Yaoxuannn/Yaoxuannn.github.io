@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="简单了解Tomcat之后, 我们来看看他的实际配置和相关的应用吧,">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/tomcat_test.png">
-<meta property="og:updated_time" content="2020-03-01T23:25:49.293Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/tomcat_test.png">
+<meta property="og:updated_time" content="2020-11-30T01:47:53.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tomcat配置与应用">
 <meta name="twitter:description" content="简单了解Tomcat之后, 我们来看看他的实际配置和相关的应用吧,">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/tomcat_test.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/tomcat_test.png">
     
     
         
@@ -186,7 +186,7 @@
 
 <p>ok, 接下来我们就来直接访问一下. 默认配置的是自动部署的 我们先不要关心这方面的.</p>
 <p>直接访问的结果:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/tomcat_test.png" alt="tomcat_test"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/tomcat_test.png" alt="tomcat_test"></p>
 <p>结果和我们设想的结果是一致的.</p>
 <p>我们之前说过, webapp中的源文件会被翻译成Java代码和Class文件在<code>work</code>目录下, 我们去看一下吧.</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node0 myapp]# pwd</span><br><span class="line">/usr/local/tomcat/work/Catalina/localhost/myapp</span><br><span class="line">[root@VM-node0 myapp]# tree .</span><br><span class="line">.</span><br><span class="line">└── org</span><br><span class="line">    └── apache</span><br><span class="line">        └── jsp</span><br><span class="line">            ├── index_jsp.class</span><br><span class="line">            └── index_jsp.java</span><br><span class="line"></span><br><span class="line">3 directories, 2 files</span><br></pre></td></tr></table></figure>

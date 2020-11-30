@@ -15,8 +15,8 @@
 <meta property="og:description" content="Linux(CentOS5&amp;amp;6)的系统启动流程">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://linux.vbird.org/linux_basic/0510osloader//osloader-flow-initramfs.jpg">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/login.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.645Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/login.png">
+<meta property="og:updated_time" content="2020-11-30T01:41:34.390Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS5和6的启动流程">
 <meta name="twitter:description" content="Linux(CentOS5&amp;amp;6)的系统启动流程">
@@ -266,7 +266,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1:2345:respawn:/sbin/mingetty tty1</span><br><span class="line">2:2345:respawn:/sbin/mingetty tty2</span><br><span class="line">...</span><br><span class="line">6:2345:respawn:/sbin/mingetty tty6</span><br><span class="line">x:5:respawn:/etc/X11/prefdm -nodaemon <span class="comment"># 图形界面</span></span><br></pre></td></tr></table></figure>
 
 <p>这个时候开始加载终端, 也就进入了我们看到的第一个画面: </p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/login.png" alt="login"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/login.png" alt="login"></p>
 <p>这个界面的出现是因为<code>mingetty</code>之后调用了一个叫<code>login</code>的程序. <strong>Warning: 在远程连接的shell里执行这个指令远程主机就会关闭连接!</strong></p>
 <p>在SysV的inittab里的第一句话写了这么一句: <code>si::sysinit:/etc/rc.d/rc.sysinit</code>.在CentOS6上这个由于使用了startup所以没有出现在inittab中, 而是写在了别的配置文件中, 这意味着在实际运行之前还要再把整个系统的环境设置好.这个脚本做的初始化有哪些呢?</p>
 <p>这个脚本还是很大的(670行)主要做的事情有:</p>
@@ -289,7 +289,7 @@
 </blockquote>
 <h3 id="CentOS6和5的区别"><a href="#CentOS6和5的区别" class="headerlink" title="CentOS6和5的区别"></a>CentOS6和5的区别</h3><p>init程序尽管更换为了startup, 但仍旧命名为init, 并且配置文件不是单一的inittab, 而是分了多个文件都放在<code>/etc/init</code>下, 每一个配置项都是一个*.conf的文件.</p>
 <p> 在这个目录下的rc.conf其实最终还是执行的<code>/etc/rc.d/rc $RUNLEVEL</code> 而负责执行脚本的rcS.conf实际上运行的也就是刚刚说过的<code>rc.sysinit</code>类似的, 大家也可以猜出来tty.conf实际上就是执行的<code>mingetty</code>. </p>
-<p><strong>注意: /etc/init/<em>.conf文件语法, 遵循upstart配置文件的语法格式.*</em></strong></p>
+<p><strong>注意: /etc/init/*.conf文件语法, 遵循upstart配置文件的语法格式.</strong></p>
 
   </div>
 </article>

@@ -14,18 +14,18 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="从今天开始学习Docker容器!">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/namespace.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cgroups1.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/docker_image.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/docker_image2.png">
+<meta property="og:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/namespace.png">
+<meta property="og:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/cgroups1.png">
+<meta property="og:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/docker_image.png">
+<meta property="og:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/docker_image2.png">
 <meta property="og:image" content="https://docs.docker.com/engine/images/engine-components-flow.png">
 <meta property="og:image" content="https://docs.docker.com/engine/images/architecture.svg">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/docker_network.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.630Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.comdocker_network.png">
+<meta property="og:updated_time" content="2020-11-30T01:33:45.522Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker容器技术入门">
 <meta name="twitter:description" content="从今天开始学习Docker容器!">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/namespace.png">
+<meta name="twitter:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/namespace.png">
     
     
         
@@ -167,9 +167,9 @@
 <p>除了根切换, 一个隔离环境还需要个隔离哪些资源呢?</p>
 <p>首当其冲的就是UTS了, 也就是一台Linux主机的主机名和一些基本信息, 还有文件系统的挂载点, 进程的ID号(PID), 进程间通讯(IPC), 用户和网络(例如端口).</p>
 <p>为了能够隔离这些空间, 我们Linux内核在内核空间对这些资源使用到了命名空间(namespace)来进行管理和隔离.</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/namespace.png" alt="namespace"></p>
+<p><img src="https://hexopic.s3-ap-northeast-1.amazonaws.com/namespace.png" alt="namespace"></p>
 <p>好的, 现在资源隔离的问题我们已经解决了, 接下来想象这么一个场景, 如果一个容器中的进程突然要求获取全部的CPU资源, 会怎么样呢? 其实不会造成大问题, CPU资源是一个可压缩型资源, 其他容器中的进程就挂起等待CPU就好了. 那么如果是内存资源呢? 一个容器中的进程占据了大部分的内存使得其他的容器中进程无法申请到内存, 一个进程如果申请不到内存, 就会被直接kill掉. 这样的结果是我们无法接受的, 于是Linux使用了一个叫做<strong>控制组</strong>的概念来约束资源分配:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/cgroups1.png" alt="cgroups1"></p>
+<p><img src="https://hexopic.s3-ap-northeast-1.amazonaws.com/cgroups1.png" alt="cgroups1"></p>
 <p>除此之外, 还支持组内嵌套.</p>
 <p>我们把Linux容器叫做 - LXC, 也就是<strong>L</strong>inu<strong>X</strong> <strong>C</strong>ontainer.</p>
 <h2 id="何为Docker"><a href="#何为Docker" class="headerlink" title="何为Docker"></a>何为Docker</h2><blockquote>
@@ -182,7 +182,7 @@
 <p>就像我们使用虚拟机那样, 我们把操作系统打包成一个镜像文件. 安装时直接进行使用这个镜像文件就可以处理了, 而docker也是如此. 甚至不仅如此, docker对镜像文件的处理, 更加精妙.</p>
 <h3 id="Docker的镜像"><a href="#Docker的镜像" class="headerlink" title="Docker的镜像"></a>Docker的镜像</h3><p><strong>分层构建, 联合挂载.</strong></p>
 <p>我们可以来看这么一个图:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/docker_image.png" alt="docker_image"></p>
+<p><img src="https://hexopic.s3-ap-northeast-1.amazonaws.com/docker_image.png" alt="docker_image"></p>
 <p>可以看到, docker的镜像构成是分层的, 最底层的就是用于系统引导的文件系统, 包括bootloader和kernel, 当容器启动完成之后就会被卸载来节省内存. 通常是aufs/btrfs这样的文件系统. 这是所谓的容器的内核空间. </p>
 <blockquote>
 <p> aufs叫做高级多层同一文件系统(advanced multi-layered unification filesystem), 主要用来为Linux文件系统实现”联合挂载”. 由于某些历史原因, centos上不支持使用aufs, 所以docker也使用btrfs, devicemapper, overlayfs等等.</p>
@@ -191,7 +191,7 @@
 <p>而现在, 按照docker的这种构建方法, 我们只需要一份基础层, 也就是上图中的rootfs, 我第一个容器需要跑Nginx, 好, 那么就把Nginx的层给挂载到基础层上面, 然后使用它, 另外一个需要使用到Apache httpd, 好, 那么就在把httpd的层给挂载到同一个基础层上面, 通过这种层叠和联合挂载的方式就会节省大量的资源. </p>
 <p>不过值得注意的是, 基础层是公用的, 那么如果我在一个容器中进行了数据修改, 会影响到其他容器吗? 显然这种事情是不能被允许的, 我们本来就是需要隔离的环境嘛. 所以这些镜像层都是<strong>只读</strong>的. 那我的数据修改怎么生效呢?</p>
 <p>Docker在容器的启动和执行时, 会在它所使用的镜像的顶层, 叠加一个可读可写的新层, 容器的数据操作都会生效在这么一个可写层上, 如果删除了某些资源, 上层就会把这个资源标记成不可见, 容器就会以为自己真的删除了, 实际上资源还原封不动的保留在下层, 数据修改亦是如此:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/docker_image2.png" alt="docker_image2"></p>
+<p><img src="https://hexopic.s3-ap-northeast-1.amazonaws.com/docker_image2.png" alt="docker_image2"></p>
 <p>这里使用到的技术就是CoW, 也就是写时复制, 我们在之前说到LVM的快照的时候就已经说过了. 这里就不在重复了.</p>
 <p>你可能会有这样的疑问, 假设我现在使用的服务是MariaDB, 产生的数据量是巨大的, 难道还要存储在这么一个可写层上? 其实原本, 这么一个可写层在容器停止的时候也是会被持久化的, 但更一般的, 我们在使用容器的时候, 数据都是直接存储在远端存储上的, 也就是说我们找一个共享存储, 把它挂载到自己文件系统上使用, 这样的好处是, 首先不会消耗太多的性能(写时复制还是很吃性能的), 另外在发生迁移的时候很方便, 我们只需要重新创建一个新的容器, 然后把使用的共享存储挂载上去就行了.</p>
 <h2 id="何为编排"><a href="#何为编排" class="headerlink" title="何为编排"></a>何为编排</h2><p>我们经常听到这么一个概念, 叫做 – <strong>编排</strong> (<code>Orchestration</code>), 到底是个啥?</p>
@@ -240,7 +240,7 @@
 <p>另外, 还可以通过多个容器共享同一个网络命名空间, 我们把这种称作<code>Join</code>式的网络. </p>
 <p>最后一种, 就是不携带网络通信功能, 只有一个loopback接口, 这种叫做<code>Closed Conatiner</code>.</p>
 <p>用一个图来总结就是:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/docker_network.png" alt="docker_network"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.comdocker_network.png" alt="docker_network"></p>
 <h3 id="Docker的容器网络"><a href="#Docker的容器网络" class="headerlink" title="Docker的容器网络"></a>Docker的容器网络</h3><p>通过在创建容器的时候传递网络参数就可以指定使用的网络模型.</p>
 <p>不仅如此, 还可以通过传递参数的方式来注入主机名, DNS, hosts文件等等. 但是容器所使用的网络是一个内部网络, 为了能够将服务暴露出去, 我们需要将容器的端口和宿主机的端口做映射, 通过在创建容器的时候加上<code>-p</code>参数就可以进行mapping.</p>
 <p>如果是只直接写上容器需要暴露的端口, 就会将这个端口映射到宿主机的一个动态随机端口上, 至于是那个端口, 可以通过查看iptables规则或者是使用docker port命令查看, 例如:</p>
@@ -317,7 +317,7 @@
 <p>首先是<code>--cpu-share</code>, 传入一个默认是1024的可大可小的值. 得益于我们的CPU是一个可压缩的资源, 所以我们可以通过指明每一个容器使用CPU的比例来进行动态的划分. 例如, 我现在有三个容器的参数分别是1024:512:2048. 那么当三个容器都在运行的时候占总运算比分别是2:1:4. 但是如果第二个和第三个都不吃CPU的话, 第一个容器是完全可以占用全部的运算资源的. 因为此时的比例就是1:0:0了嘛. 所以这是一个容器之间对CPU的限制, 并不能对单个容器的CPU用量进行限制. 如果想要做到这个效果, 就应该使用下面的参数.</p>
 <p><code>--cpus</code>, 简单直接, 直接指明你想让容器所使用到的最多的CPU资源. 例如, 指定<code>--cpu 1.5</code>就是限制该容器最多可以用一个半的CPU. 但是使用的是哪个核心, 我们是不知道的, 如果想要明确指定容器可以使用到的核心, 使用下面的参数.</p>
 <p><code>--cpusets-cpus</code>, 我们的CPU从0开始, 一个四核心的主机, CPU就是0,1,2,3. 所以比如说我限制上面提到的容器只可以使用前两个核心, 那就写<code>--cpuset-cpus 0,1</code>即可.</p>
-<p>如果想要看看限制的效果, 可以试着pull一个压力测试的镜像跑着玩玩, 例如<code>docker-stress-ng</code></p>
+<p>如果想要看看限制的效果, 可以试着pull一个压力测试的镜像跑着玩玩, 例如<code>docker-stress-ng</code>跑着玩玩, 例如<code>docker-stress-ng</code></p>
 
   </div>
 </article>

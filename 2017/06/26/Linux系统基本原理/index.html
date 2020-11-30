@@ -14,18 +14,18 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sys.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/pro.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/taskStr.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/mem_alloc.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/page.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/fake.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/struct.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.645Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/sys.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/pro.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/taskStr.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/mem_alloc.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/page.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/fake.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/struct.png">
+<meta property="og:updated_time" content="2020-11-30T01:41:51.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux系统基本原理(init)">
 <meta name="twitter:description" content="简单了解一些Linux的系统原理(init), 等以后学了操作系统再来补充和更正吧~ 先来简单的了解知道个大概.">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sys.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/sys.png">
     
     
         
@@ -161,7 +161,7 @@
 <a id="more"></a>
 
 <h2 id="操作系统的基本原理-Linux"><a href="#操作系统的基本原理-Linux" class="headerlink" title="操作系统的基本原理(Linux)"></a>操作系统的基本原理(Linux)</h2><p>先来在重复了无数遍的东西, 一个计算机由硬件做底层向上是: 操作系统(<code>内核 kernel</code>) , 由于直接的系统调用不适合编程, 所以有了诸多的库<strong>调用</strong>. 而调用就是使用/载入别人写好的模块, 接着为了实现生产功能, 程序员面向这些库进行编程.当然也可以进行混合编程, 面对库和系统调用接口进行编程. 这就是我们静态看到的操作系统的状态.</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/sys.png" alt="sys"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/sys.png" alt="sys"></p>
 <p>那么当系统运行起来, 程序在操作系统中跑起来的时候, 这又是什么状态呢.</p>
 <p>之前说过, 当进行系统调用的时候<code>CPU</code>根据指令执行工作,而指令又分成不同等级的(普通指令–环3, 特权指令–环0), 一般特权指令都是直接对硬件进行的操作, 如果一个程序可以随便调用, 那岂不是就会大乱 ? 那么如果这些程序需要进行硬件管理的操作怎么办呢? 那就调用系统接口进行实现.  </p>
 <p>这样指令排成队列一个一个的交给CPU去执行, 当出现了系统调用的时候, 程序就会等待内核将处理的结果交给程序. 那么此时 就要进行<strong>模式转换</strong>, 这是由程序发起的一次<strong>软中断</strong>实现的. 我们都知道操作系统划分为用户态和内核态, 或者叫模式吧, 那么在这次切换的时候, 程序运行就会从<code>用户模式 --&gt; 内核模式</code> . </p>
@@ -182,7 +182,7 @@
 <p>父进程创建子进程, 使用<code>fork()</code>来创建, 这个是<code>Linux</code>的一个系统调用接口. 而<code>fork()</code>之后又会克隆自己的数据到子进程中, 这是另一个系统调用<code>clone()</code>. 也就是说, 在创建的时候, 父进程和子进程共享一个内存空间, 这个时候子进程的数据和父进程是一模一样的, 只要子进程不会修改自己的数据, 他就永远和自己的父进程共享同一个内存空间, 如果一旦出现了子进程修改数据的时候,就会复制一个到另外的内存空间(基于<code>CoW</code>), </p>
 <p>当进程被销毁的时候, 永远都是父进程存活而子进程死亡, 也就是<code>白发人送黑发人</code>.</p>
 <p>在实际的执行过程中, 子进程正常执行而父进程就会进入睡眠, 直到子进程结束父进程收拾掉子进程的残存资源后就会继续执行自己了</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/pro.png" alt="pro"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/pro.png" alt="pro"></p>
 <p>接下来再说说优先级的优化问题. </p>
 <p>进程存在优先级, 那么当有一千条进程在后面排队时, 因为在每一个结构体当中可以获取到每一个进程的优先级, 那么假设内核挨一个一个去查看, 就会进行完整的遍历, 那么当进程太多的时候就会变的很卡. </p>
 <blockquote>
@@ -197,7 +197,7 @@
 <p>为了便于管理,  <code>Linux</code>给这个分配了<code>Nice</code>值, 这个值的范围区间是从<code>-20</code>-<code>19</code>, 对应上面的<code>100-139</code>.</p>
 </blockquote>
 <p>上面说过, 一个进程是一个结构体, 那么这个结构体是什么样的呢 ?</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/taskStr.png" alt="taskStr"> </p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/taskStr.png" alt="taskStr"> </p>
 <ul>
 <li>state 状态</li>
 <li>thread_info 线程信息</li>
@@ -214,14 +214,14 @@
 <p>重要的话先说, <strong>每一个进程所拥有的内存都是虚拟的</strong>. </p>
 <p>物理内存只有一个, <code>CPU</code>只有一颗, 机器上有<code>n</code>个进程, 而且我们的进程不断的被创建和销毁, 也就意味着有内存不断的被分配和回收. 每一个进程在创建时, 都是内核在进行资源的分配, 由于不同进程对内存的大小是有区别的, 即使是同一个命令, 在数据不同的时候, 他所需要的内存也是不同的, (<code>e.g: cat anaconda-ks.cfg和cat /etc/service 后者会出现明显的卡顿</code>)  同样 内核也不知道该分给进程多少内存. 这个问题是这样解决的:</p>
 <p>最初整个内存中一定存在的一段是属于内核的, 接着一段是要分配给其他的进程的:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/mem_alloc.png" alt="mem_alloc"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/mem_alloc.png" alt="mem_alloc"></p>
 <p>为了能够高效的分配内存, OS采取了这样的方法 :</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/page.png" alt="page"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/page.png" alt="page"></p>
 <p>将剩下的内存进行分页, 每一个页的大小是<code>4K</code>, 这样一个一个页的分配给进程, 如果不够就再分配,所以这些的进程的内存组成, 其实是一个一个页拼接起来的.接着, 内核将这些伪装成是一个连续的, 大段内存. 实际上呢, 是虚拟的. 不仅如此, 内核还向进程描绘了一个很棒的前景.</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/fake.png" alt="fake"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/fake.png" alt="fake"></p>
 <p>每一个进程都以为除开内核就是自己, 其实实际上是用的时候在分配, 你用不到那么多就不给你, 也就是<strong>仅分配给所需要的</strong>. 每一个进程所分到的空间叫做<strong>线性地址空间</strong>, 而总共的内存叫做<strong>物理地址空间</strong>, 他们基本上是离散的对应的关系, 而这种映射关系由内核实现. 这种实现机制就叫做<strong>虚拟内存实现机制</strong>.</p>
 <p> 一个进程的内存构成是这样的: </p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/struct.png" alt="struct"> </p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/struct.png" alt="struct"> </p>
 <p>现在就来考虑一个进程的内存不够用了, 那么就要分配更多的内存给他. 内核开始在页中进行扫描, 使用<code>LRU</code>:最近最少使用算法. 一旦发现有页的使用最少, 就先把它挪出来, 当需要的时候就在把他给放回去, 但是这个时候, 回来的页已经不再是原来的那个了, 还记得上面说的进程的<code>task_struct</code>嘛, 这里面存放了映射关系的表, 在每一次进程访问内存的时候, 内核都要做一次转换, 将虚拟的指向物理上的. 这么一个过程由一个<code>CPU</code>上专门的硬件来负责, 叫做<code>mmu : Memory Management Unit</code> . 当一个进程被加载到内存上的时候, 我们就把这个映射关系放到<code>mmu</code>上进行实时的转换. 而进行分配的时候, <code>mmu</code>中的映射关系就要进行重新映射, 这个时候才能访问到真实的内存.</p>
 <p>当进程访问的资源不在内存中的时候, 就要向内核发起调用请求从磁盘装载进内存,这个时候就发生了<strong>缺页异常</strong>. </p>
 <p>尽管前面说过,  每一个进程都以为整个内存空间只有自己, 但是我们又需要进行进程间的通信(<code>IPC: Inter Process Communication</code>) 既然进程彼此不知道其他的存在, 那么我们怎么使他们进行通信啊? 如果是同一主机: 我们有多种方法, 共享内存 信号 信号量等等… 如果是不同主机进行进程间通信, <code>rpc: remote procecure call</code>远程进程调用 , <code>socket</code>套接字.</p>

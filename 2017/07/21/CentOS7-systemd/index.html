@@ -15,11 +15,11 @@
 <meta property="og:description" content="systemd是CentOS7所使用的全新的init程序. Systemd:  POST -&amp;gt; Boot Sequence -&amp;gt; Bootloader -&amp;gt; kernel + initramfs(initrd) -&amp;gt; rootfs -&amp;gt; /sbin/init  systemd的架构图:">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2016/bg2016030703.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Unit.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dependencies.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/rd.break.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/rd.start.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.627Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/Unit.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/dependencies.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/rd.break.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/rd.start.png">
+<meta property="og:updated_time" content="2020-11-30T01:32:01.092Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS7-systemd">
 <meta name="twitter:description" content="systemd是CentOS7所使用的全新的init程序. Systemd:  POST -&amp;gt; Boot Sequence -&amp;gt; Bootloader -&amp;gt; kernel + initramfs(initrd) -&amp;gt; rootfs -&amp;gt; /sbin/init  systemd的架构图:">
@@ -197,7 +197,7 @@
 <p>下一个swap unit, 后缀.swap, 用来干什么也很容易就知道了: 表示和管理swap设备.</p>
 <p>最后还有两项, 一个后缀是叫.automount, 用来定义文件系统的自动挂载点, 以及Path unit, 后缀名就是.path, 用来定义文件系统中与一个文件或者一个目录. 仅在某些特定的场景下才会使用.</p>
 <p>以上这些就是unit的类型, 用一张图来说明就是:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Unit.png" alt="Unit"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/Unit.png" alt="Unit"></p>
 <h3 id="systemd的关键特性"><a href="#systemd的关键特性" class="headerlink" title="systemd的关键特性"></a>systemd的关键特性</h3><h4 id="基于socket的激活机制"><a href="#基于socket的激活机制" class="headerlink" title="基于socket的激活机制"></a>基于socket的激活机制</h4><p>在系统引导的时候systemd对所有支持这种模式的服务, 分别创建需要监听的套接字, 并在服务启动之后, 立即将这个套接字传递给它.</p>
 <p>这样做的好处是: 可以实现多个服务的并行启动, 而且如果用不到这个服务的时候我就不启动, 反正套接字创建好了(我不关心服务的启动与否),这样当有人访问套接字, systemd就会收到, 接着就可以去激活相应的进程服务, 也就是按需激活.  这就像CentOS5,6上的超级守护进程和瞬时启动进程.</p>
 <blockquote>
@@ -266,7 +266,7 @@
 <p>如果你的服务不能正常启动是因为依赖的话, 那么你可以使用systemctl的子命令来查看:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]<span class="comment"># systemctl list-dependencies httpd</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dependencies.png" alt="dependencies"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/dependencies.png" alt="dependencies"></p>
 <p>所依赖的会使用树形结构表示出来, 还会注明当前的激活情况.</p>
 <blockquote>
 <p>systemd的子命令实在是太多了. 在启用之初曾被人说, 违背了UNIX的simple原则. 当然他确实强大 方便.</p>
@@ -275,9 +275,9 @@
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>我们知道在Linux下找回密码只要能够进入并且挂载/, 再重新设定root的密码就可以了. 以前我们使用rescue模式/单用户来操作.但在systemd上这就没有用了.</p>
 <p>在新版的systemd 的管理机制中，预设的rescue 模式是无法直接取得root 权限的！还是得要使用root 的密码才能够登入rescure 环境！所以我们透过一个名为<strong>rd.break</strong>的核心参数来处理！只是需要注意的是， rd.break 是在Ram Disk 里面的作业系统状态，因此你不能直接取得原本的linux 系统操作环境。所以，还需要chroot 的支援. 更由于SELinux 的问题，你可能还得要加上某些特殊的流程才能顺利的搞定root 密码的重新设置. 这样说有些不清楚. 我们来走一个流程.</p>
 <p>首先在grub界面使用e进入编辑模式, 在标有linux16的那一行的最后加上<code>rd.break</code>这个核心参数.</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/rd.break.png" alt="rd"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/rd.break.png" alt="rd"></p>
 <p>之后就可以执行了,使用ctrl+x,这时开机你会看到这样的界面</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/rd.start.png" alt="rd"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/rd.start.png" alt="rd"></p>
 <p>这个时候我们不需要输入密码就可以进入系统! 但是注意这个时候我们进入的位置是/sysroot 并且使用mount查看当前挂载情况的时候, 你会发现当前的系统挂载了/sysroot这个目录,并且是仅仅可读不可写的.所以我们要先把他重新挂载成可读写.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">switch_root:/<span class="comment"># mount -o remount, rw /sysroot</span></span><br></pre></td></tr></table></figure>
 
@@ -286,7 +286,7 @@
 
 <p>接着就可以进行密码更改了. 你会发现这时的/sys /proc都是空的.</p>
 <p>更改完毕后, 别忘了要先退出这个根. 然后在重新启动就可以了.</p>
-<p>关于这些的原理和其他的一些, 在后面的GRUB2中会说明.</p>
+<p>关于这些的原理和其他的一些, 在后面的GRUB2中会说明. 后面的GRUB2中会说明.</p>
 
   </div>
 </article>

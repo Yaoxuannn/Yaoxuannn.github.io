@@ -14,13 +14,13 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="之前说过了grub的0.X版本, 而新版本是相当于重构了整个bootloader. 来学习一下.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/img.png">
+<meta property="og:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/img.png">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/733013/201706/733013-20170629150034914-1219800403.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.623Z">
+<meta property="og:updated_time" content="2020-11-30T01:30:37.861Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Bootloader-GRUB2">
 <meta name="twitter:description" content="之前说过了grub的0.X版本, 而新版本是相当于重构了整个bootloader. 来学习一下.">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/img.png">
+<meta name="twitter:image" content="https://hexopic.s3-ap-northeast-1.amazonaws.com/img.png">
     
     
         
@@ -190,7 +190,7 @@
 <p>现在的磁盘设备，一般都会有分区边界对齐的性能优化提醒，所以第一个分区可能会自动从第1MB处开始创建的.</p>
 <h3 id="img文件"><a href="#img文件" class="headerlink" title="img文件"></a>img文件</h3><p>img文件是GRUB2的关键了, 也是他的核心. 我们来说一下这些文件的作用和GRUB legacy中的stage的对应关系.</p>
 <p>grub2生成了好几个img文件，有些分布在/usr/lib/grub/i386-pc目录下，有些分布在/boot/grub2/i386-pc目录下, </p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/img.png" alt="img"></p>
+<p><img src="https://hexopic.s3-ap-northeast-1.amazonaws.com/img.png" alt="img"></p>
 <p>事实上, 我们的core.img是动态生成的.而其他的img则存在在/usr/lib/grub/i386-pc/下. 在安装grub2的时候 boot.img会拷贝一份到/boot/grub2/i386-pc/目录下</p>
 <p><img src="http://images2015.cnblogs.com/blog/733013/201706/733013-20170629150034914-1219800403.png" alt="imgs"></p>
 <p>上图描述了各个模块的关系和层级.</p>
@@ -235,7 +235,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/sh -e</span></span><br><span class="line">cat &lt;&lt; EOF</span><br><span class="line"><span class="built_in">set</span> superusers=<span class="string">"justin"</span></span><br><span class="line">password_pbkdf2 justin grub.pbkdf2.sha512.10000.27E9FC1D4955E2DB0542F7198D86A4103A525B20CC500577BD646EA48785D3EFB70CFA05BBF8B536E73AB4F144F4F9FC76040B745B1F3A0E2EE2F2DFEE5A4145.442DE0D08D00B21FE793DA96588D1144AF1597519921BC6125E35C13E345A8E738FF5D3A3EA90B94D023CA51148F5BEAF8C2A17C43081C5F371B33278D1BCDDE</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># 也可以指定(多个)一般用户, 这里懒得弄了 hhhh 你打我啊</span></span><br></pre></td></tr></table></figure>
 
 <p>接着我们修改10_linux这个脚本, 在第一个CLASS的位置, 我们把原本在后面的–unrestricted的参数移除.</p>
-<p>重启机器. 在开机的时候就会看到请求输入用户名和密码的界面了. </p>
+<p>重启机器. 在开机的时候就会看到请求输入用户名和密码的界面了.</p>
 
   </div>
 </article>

@@ -14,14 +14,14 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="接下来我们就来更加深入的来看一下Varnish的相关.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnish_statusV3.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnish_statusV4.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnish_statusV3.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnish_statusV4.png">
 <meta property="og:image" content="http://book.varnish-software.com/4.0/_images/detailed_fsm.svg">
-<meta property="og:updated_time" content="2020-03-01T23:32:26.105Z">
+<meta property="og:updated_time" content="2020-11-30T01:48:15.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Varnish的状态引擎和VCL">
 <meta name="twitter:description" content="接下来我们就来更加深入的来看一下Varnish的相关.">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnish_statusV3.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnish_statusV3.png">
     
     
         
@@ -161,13 +161,13 @@
 <h2 id="状态引擎"><a href="#状态引擎" class="headerlink" title="状态引擎"></a>状态引擎</h2><p>VCL是一种域配置文件, 因此我们对VCL的配置操作对象就是很多类似我们代码块一样的东西, 只不过这里被叫做<strong>域</strong>. 这里我们就可以引入varnish的状态引擎了.</p>
 <p>那么什么是状态引擎呢, 这个可以类比我们之前学习过的<code>netfilter</code>的钩子函数. 由于到达我们varnish的请求可能是请求静态资源的, 可能是请求动态资源的, 也有可能是非法访问, 还有可能是请求的方法不支持或者不允许. 这么多情况, 他们都需要不同的应对措施, 这个就是varnish的状态引擎.</p>
 <p>首先我们来看一下V3版本的状态引擎吧:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnish_statusV3.png" alt="varnish_statusV3"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnish_statusV3.png" alt="varnish_statusV3"></p>
 <p>这个图是一个简化版本, 类似流程图一样的东西. 这里的每一个矩形都代表一个状态引擎.</p>
 <p>从图中, 我们可以很清楚的看到, 当用户的请求达到时, 我们的<code>vcl_recv</code>引擎先来进行处理, 如果请求的对象是可以被缓存的,那么就会去到下一个状态引擎, 如果不能被缓存. 那就会变得很简单了, 请求将会直接到达<code>vcl_fetch</code>状态, 由这个引擎来负责去后端服务器来取得数据.最后交给<code>vcl_deliver</code>来返回给用户.</p>
 <p>如果之前的状态是<code>vcl_hash</code>. Varnish就会在自己的缓存空间中进行寻找, 如果可以找到,  就会进入命中状态, 如果没有就是miss状态, 接着交给fetch状态引擎去后台服务器取得数据, 然后一边缓存到自己的空间中, 一边将结果返回给用户.</p>
 <p>这里我们也可以看到, 各个引擎之间是存在相关性的, 前一个engine如果可以有多个下游engine, 则上游需要使用return来指明要转移的下游engine.</p>
 <p> 接下来我们来看一下完全版的一个WORKFLOW:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/varnish_statusV4.png" alt="varnish_statusV4"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/varnish_statusV4.png" alt="varnish_statusV4"></p>
 <p>我们刚刚说过, 上一个engine使用return来返回下一个engine, 这里我们就能看到, 根据<code>vcl_recv</code>所返回的值不同, 到达的下一个engine也不一样. 例如说, 如果说用户发送过来的请求是不可缓存的, 那就没与必要去自己的缓存空间里寻找了, 于是就会返回pass, 直接到达<code>vcl_pass</code>. </p>
 <blockquote>
 <p>VCL的语法:</p>

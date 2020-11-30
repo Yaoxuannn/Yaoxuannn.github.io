@@ -14,18 +14,18 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="学习基础的Linux的服务与进程管理.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/top.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/htop.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/signals.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/pri.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/renice.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/jobs.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmstat.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.644Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/top.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/htop.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/signals.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.compri.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/renice.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.comjobs.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.comvmstat.png">
+<meta property="og:updated_time" content="2020-11-30T01:41:14.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux系统-服务管理学习笔记">
 <meta name="twitter:description" content="学习基础的Linux的服务与进程管理.">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/top.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/top.png">
     
     
         
@@ -202,7 +202,7 @@
 
 <p>另外一个更方便的命令是<code>pstree</code>命令, 可以以树形结构展示当前进程. 加 <code>-p</code> 参数查看pid号, 同时展开.</p>
 <h2 id="系统管理之top命令"><a href="#系统管理之top命令" class="headerlink" title="系统管理之top命令"></a>系统管理之top命令</h2><p>top命令是用来检测服务器健康的重要命令, 它的输出也是很多的, 但很多东西都和ps命令相同, 我们来看一下:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/top.png" alt="top"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/top.png" alt="top"></p>
 <p>最上方的状态栏就是top命令的最重要的地方了, 下面的情况基本和ps命令类似, 就不在此记录了.</p>
 <p>首先, 最前面的时间是指当前的系统时间, 不是指运行了多长时间, 后面的时间(天数)表示的才是运行的时间, 例如: 这台服务器运行了36分钟.</p>
 <p>后一项表示当前登录的用户数, 后面的是平均负载.(1分钟, 5分钟, 15分钟) 平均负载的数字是指等待执行的队列</p>
@@ -220,7 +220,7 @@
 <p>使用<code>m</code>可以改变内存占用情况的视图, 使用<code>1</code>命令来对<code>CPU</code>进行挨个查看.</p>
 <p>另外, 在启动时可以直接使用<code>-d #</code>来指定刷新时间. 如果在调用的时候使用了<code>-n</code>参数, 在后面跟上数字表示刷新几次之后直接退出.</p>
 <p>然而, <code>top</code>已经很有历史了, 现在我们使用一个更强的进程管理程序:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/htop.png" alt="htop"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/htop.png" alt="htop"></p>
 <p>看起来就比<code>top</code>更厉害吧! 还有一些很强大的功能. 下面简单列举一下:</p>
 <p>首先..我不明白这个东西为什么要支持鼠标点击…</p>
 <p>使用<code>&lt;F5&gt;</code>或者<code>t</code>来进行树形视图和列表视图的切换,</p>
@@ -233,7 +233,7 @@
 <p>第二个就是打开文件描述符, 尽管你可以通过打开<code>/proc</code>下的<code>fd</code>文件夹进行查看, 但是既然这个都封装了一层, 为什么不直接用呢 在相应的进程上使用<code>l</code>即可打开, 这个比直接打开<code>fd</code>可以看到更多信息哦.(比如说你不仅会看到打开的文件, 还可以查看到加载仅内存的库有哪些, 以及他们的文件类型, 以及大小)</p>
 <h2 id="杀死进程"><a href="#杀死进程" class="headerlink" title="杀死进程"></a>杀死进程</h2><p>结束进程的命令有这几个 <code>kill</code>,<code>killall</code>,<code>pkill</code>, 这些命令的作用都是类似的, 区别在于有些可以杀死单一进程, 有些可以杀死多进程, 接下来一个一个说.</p>
 <p>Linux杀死进程通过信号来执行. <code>kill -l</code>来查看所有的信号 (64个)</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/signals.png" alt="signals"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/signals.png" alt="signals"></p>
 <p>其中常用的是1.2.9.15这些.</p>
 <table>
 <thead>
@@ -285,7 +285,7 @@
 <p>有一个快速从进程名获得其所有的<code>pid</code>的命令: <code>pidof</code> , 还有一个专门用来先查看进程状态的命令: <code>pidstat</code>.</p>
 <h2 id="修改进程的优先级"><a href="#修改进程的优先级" class="headerlink" title="修改进程的优先级"></a>修改进程的优先级</h2><p>又到了使用ps的时候了, 但是注意, 如果要查看进程的优先级, 就不能使用<code>ps aux</code>了, 此时就要使用<code>ps -le</code>了.</p>
 <p>样例输出如下:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/pri.png" alt="优先级"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.compri.png" alt="优先级"></p>
 <p>其中的PRI表示priority, NI表示Nice, 这两个值都是优先级, 越小表示优先级越高.</p>
 <p>最终生效的是PRI这个优先级, 而且用户不能修改PRI的值(即使是root也不能), 用户仅可以修改NI的值.</p>
 <p>最终系统计算的优先级是PRI+NI的值.</p>
@@ -298,7 +298,7 @@
 <p>这样,运行的<code>tar</code>就会以<code>75</code>的<code>PRI</code>执行.</p>
 <p>如果要改变一个已经启动的进程的优先级的话, 就要使用<code>renice</code>命令.</p>
 <p>使用的效果就像是这样:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/renice.png" alt="renice">.</p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/renice.png" alt="renice">.</p>
 <p>最后说一句:</p>
 <blockquote>
 <p>进程的优先级调整被用户发现的几率几乎为0, 优先级的调整更多是在嵌入式开发的上面. 所以,如果你不信仰玄学, 就不要随意修改优先级了.</p>
@@ -319,7 +319,7 @@
 <p>有两种方法: 一个是在命令的末尾添加 <code>&amp;</code> 号(命令继续运行), 一个是在命令执行的过程中按下 <code>ctrl+z</code>.(会使得命令暂停)</p>
 <p>接下来, 你就可以通过 <code>jobs -l</code> 来查看放入后台的工作和他们的PID号了.</p>
 <p>来看这么一种情况:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/jobs.png" alt="jobs-top"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.comjobs.png" alt="jobs-top"></p>
 <p>这两个top使用不同的方法进入后台, 一个是<code>ctrl+z</code>, 一个是<code>&amp;</code>, 可是神奇的是, 两个都是<code>stopped</code>的状态 ?</p>
 <blockquote>
 <p>补充: 看到+号-号了吗? 这个表明放入后台的次序, “+”号表明最近放入后台的工作, 而”-“表示倒数第二个, 恢复工作时会默认恢复”+”号也就是最近一个.</p>
@@ -344,7 +344,7 @@
 <p>这个命令整合了进程,内存,交换分区,磁盘IO,系统,CPU负载情况.</p>
 <p>vmstat [刷新延时 刷新次数] 这样的格式和<code>top</code>是很像的. 如果仅指定第一个参数, 那么<code>vmstat</code>将会一直输出下去.</p>
 <p>例如:<code>vmstat 1 3</code></p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/vmstat.png" alt="vmstat"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.comvmstat.png" alt="vmstat"></p>
 <p>这里有很多信息在之前的PS和TOP中都见过呢, 但仍然出现了一些没有见过的, 来说一下:</p>
 <ul>
 <li>procs: 进程信息字段<ul>

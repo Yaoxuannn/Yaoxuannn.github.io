@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/SSL_handshake_with_two_way_authentication_with_certificates.svg/1024px-SSL_handshake_with_two_way_authentication_with_certificates.svg.png">
 <meta property="og:image" content="http://image.beekka.com/blog/2014/bg2014092009.png">
 <meta property="og:image" content="http://image.beekka.com/blog/2014/bg2014092012.png">
-<meta property="og:updated_time" content="2020-03-01T23:45:58.067Z">
+<meta property="og:updated_time" content="2020-11-30T01:49:20.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对SSL&#x2F;TLS的理解">
 <meta name="twitter:description" content="说说我对HTTPS的理解">
@@ -174,7 +174,7 @@
 <h2 id="正片开始"><a href="#正片开始" class="headerlink" title="正片开始"></a>正片开始</h2><p>提到了TLS,就一定要说一下HTTPS了,一般对HTTPS的定义是<code>HTTP over SSL/HTTP over TLS/HTTP over Secure</code>.</p>
 <p>而提到了HTTPS,有不得不说一下浏览器了.那么我来慢慢按照顺序来说一下.</p>
 <p>首先,HTTPS借由HTTP(<code>如果对HTTP不熟悉可以考虑看一下隔壁的HTTP阅读笔记</code>)来传输信息,但为了某些需要,要加密某些信息,此时它就借助了SSL/TLS来加密传输的数据包.一般的,HTTPS的默认使用端口为<code>443</code>.</p>
-<p>最重要的部分就是协议实现的方式了.<br>下面来说下: (可以结合下面的图来看, <a href="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/SSL_handshake_with_two_way_authentication_with_certificates.svg" target="_blank" rel="noopener">超清版的.SVG</a>)</p>
+<p>最重要的部分就是协议实现的方式了.<br>下面来说下: (可以结合下面的图来看, <a href="http://hexopic.s3-ap-northeast-1.amazonaws.com/SSL_handshake_with_two_way_authentication_with_certificates.svg" target="_blank" rel="noopener">超清版的.SVG</a>)</p>
 <p><strong>首先</strong>客户端向Web服务器发送一个HTTPS请求,该请求包含了客户端的条件以及一个随机数.<strong>关键字</strong>:{ <strong>本地条件</strong> }</p>
 <ul>
 <li>具体内容包括：支持的协议版本，比如TLS1.0版，一个客户端生成的随机数（稍后用于生成“会话密钥”），支持的加密算法（如RSA公钥加密）和支持的压缩算法。</li>

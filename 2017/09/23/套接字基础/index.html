@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="套接字基础.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-01T23:40:55.140Z">
+<meta property="og:updated_time" content="2020-11-30T01:49:05.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="套接字基础">
 <meta name="twitter:description" content="套接字基础.">
@@ -172,7 +172,7 @@
 </ul>
 <p>每一类套接字都提供两种socket, 也就是我们上面说的TCP和UDP的套接字, 即<strong>流</strong>和<strong>数据报</strong></p>
 <p>接下来我们扯扯一些套接字相关的系统调用吧:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">socket() 	创建一个套接字</span><br><span class="line"><span class="built_in">bind</span>()</span><br><span class="line">listen()</span><br><span class="line">accept()</span><br><span class="line">connect()</span><br><span class="line">write()</span><br><span class="line"><span class="built_in">read</span>()</span><br><span class="line">	send() recv() sendto()  recvform()</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">socket() 	创建一个套接字</span><br><span class="line"><span class="built_in">bind</span>()</span><br><span class="line">listen()</span><br><span class="line">accept()</span><br><span class="line">connect()</span><br><span class="line">write()</span><br><span class="line"><span class="built_in">read</span>()</span><br><span class="line">send()</span><br><span class="line">recv()</span><br><span class="line">sendto()</span><br><span class="line">recvform()</span><br></pre></td></tr></table></figure>
 
 
   </div>

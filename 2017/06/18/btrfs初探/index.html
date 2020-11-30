@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="btrfs是一个先进的文件系统, 由Oracle研发, 在2014年推出了稳定版,支持很多EXT系列文件系统不支持的特性.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.624Z">
+<meta property="og:updated_time" content="2020-11-30T01:28:22.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="btrfs初探">
 <meta name="twitter:description" content="btrfs是一个先进的文件系统, 由Oracle研发, 在2014年推出了稳定版,支持很多EXT系列文件系统不支持的特性.">
@@ -254,8 +254,6 @@
 <p>所以,其实是很简单的,直接进行一下<code>btrfs-convert</code>就好了. 在生成的文件系统中会出现一个叫做<code>ext2_saved</code>的镜像文件, 这个文件是用来进行回滚的, 就是重新恢复成<code>EXT</code>文件系统.</p>
 <p>其实还是<code>btrfs</code>命令, 直接加上<code>-r</code>参数 就好了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ umount /mnt/</span><br><span class="line">[root@WWW ~]$ btrfs-convert -r /dev/sdf1</span><br><span class="line">rollback complete</span><br><span class="line">[root@WWW ~]$ blkid /dev/sdf1</span><br><span class="line">/dev/sdf1: UUID=<span class="string">"213ded53-11a5-4d7b-9d3b-b196c543261b"</span> TYPE=<span class="string">"ext4"</span> PARTUUID=<span class="string">"0e2e36eb-01"</span></span><br></pre></td></tr></table></figure>
-
-
   </div>
 </article>
 

@@ -15,13 +15,13 @@
 <meta property="og:description" content="自动化运维第一步, 走起.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1508910970&di=b03f6498f57d1acb911248e9d8ddd53e&src=http://s2.51cto.com/wyfs02/M02/79/79/wKiom1aSQHHjJRZTAAEBRfKpi_E196.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook2.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook3.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook4.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook6.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook7.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook8.png">
-<meta property="og:updated_time" content="2020-03-01T23:50:35.705Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook2.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook3.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook4.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook6.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook7.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook8.png">
+<meta property="og:updated_time" content="2020-11-30T01:50:57.495Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自动化运维之Ansible">
 <meta name="twitter:description" content="自动化运维第一步, 走起.">
@@ -359,13 +359,13 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt; [testservers]</span><br><span class="line">&gt; VM-node[2:3]</span><br><span class="line">&gt;</span><br><span class="line">&gt; [webservers]</span><br><span class="line">&gt; 192.168.206.22</span><br><span class="line">&gt; 192.168.206.10</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>就是这样的效果, 很简单吧:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook2.png" alt="ansible-playbook2"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook2.png" alt="ansible-playbook2"></p>
 <p>再来写一个和tinyproxy相关的playbook, 接着引出我们的handler, </p>
 <p><code>web_tinyproxy.yml</code>内容如下:</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">- hosts:</span> <span class="string">testservers</span></span><br><span class="line"><span class="attr">  remote_user:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">  tasks:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">Install</span> <span class="string">tinyproxy</span> <span class="string">service</span></span><br><span class="line"><span class="attr">    yum:</span> <span class="string">name=tinyproxy</span> <span class="string">state=latest</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">Copy</span> <span class="string">configuration</span> <span class="string">file</span></span><br><span class="line"><span class="attr">    copy:</span> <span class="string">src=/etc/tinyproxy/tinyproxy.conf</span> <span class="string">dest=/etc/tinyproxy/tinyproxy.conf</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">Start</span> <span class="string">tinyproxy</span> <span class="string">service</span></span><br><span class="line"><span class="attr">    service:</span> <span class="string">name=tinyproxy</span> <span class="string">state=started</span></span><br></pre></td></tr></table></figure>
 
 <p>执行效果: </p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook3.png" alt="ansible-playbook3"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook3.png" alt="ansible-playbook3"></p>
 <p>有意思的是, 现在的配置文件监听端口是<code>2333</code>, 我们来验证一下:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node1 ~]<span class="comment"># ansible testservers -m shell -a "ss -tnl | grep 2333"</span></span><br><span class="line">VM-node3 | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">0      128                      *:2333                    *:*     </span><br><span class="line"></span><br><span class="line">VM-node2 | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">LISTEN     0      128          *:2333                     *:*</span><br></pre></td></tr></table></figure>
 
@@ -373,17 +373,17 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node1 ~]<span class="comment"># sed -i 's/2333/23333/' /etc/tinyproxy/tinyproxy.conf</span></span><br></pre></td></tr></table></figure>
 
 <p>再次执行一次playbook:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook4.png" alt="ansible-playbook4"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook4.png" alt="ansible-playbook4"></p>
 <p>从转型结果我们可以看出来, 服务并没有得到重启. 尽管我们的配置文件是已经重新复制了( 因为文件被修改了 ). 这个时候就需要我们的Handler来根据task的执行情况来触发特定的task.</p>
 <p>说来也简单, 当我们的配置文件被修改的时候, 显然是应该重启服务的, 所以我们应该<strong>通知</strong>一下, 从而去执行特定的操作, handler和我们的tasks同级别, 如果没有人<strong>通知(notify)</strong>它. 就不会执行里面的任务, 通知的方式就是通过notify关键字, 指明哪一个handler, 直接看我们的实例吧:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">- hosts: testservers</span><br><span class="line">  remote_user: root</span><br><span class="line">  tasks:</span><br><span class="line">  - name: Install tinyproxy service</span><br><span class="line">    yum: name=tinyproxy state=latest</span><br><span class="line">  - name: Copy configuration file</span><br><span class="line">    copy: src=/etc/tinyproxy/tinyproxy.conf dest=/etc/tinyproxy/tinyproxy.conf</span><br><span class="line">    notify:</span><br><span class="line">    - restart tinyproxy</span><br><span class="line">  - name: Start tinyproxy service</span><br><span class="line">    service: name=tinyproxy state=started</span><br><span class="line">  handlers:</span><br><span class="line">  - name: restart tinyproxy</span><br><span class="line">    service: name=tinyproxy state=restarted</span><br></pre></td></tr></table></figure>
 
-<p>这个时候, 我们还需要修改一下配置文件, 比如随便再把端口换一换, 9990吧. 接着再次执行一次:<br><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook6.png" alt="ansible-playbook6"></p>
+<p>这个时候, 我们还需要修改一下配置文件, 比如随便再把端口换一换, 9990吧. 接着再次执行一次:<br><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook6.png" alt="ansible-playbook6"></p>
 <p>多了一个<code>RUNNING HANDLER</code>吧. 这个时候看一下, 端口也确实是改变了.</p>
 <p>另外, 我们的playbook中还可以使用条件测试, 通过when关键字可以根据具体的一些情况来选择性的执行, 来看这样的一个playbook</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[root@VM-node1</span> <span class="string">~]#</span> <span class="string">cat</span> <span class="string">test.yml</span> </span><br><span class="line"><span class="attr">- hosts:</span> <span class="string">testservers</span></span><br><span class="line"><span class="attr">  remote_user:</span> <span class="string">root</span></span><br><span class="line"><span class="attr">  tasks:</span></span><br><span class="line"><span class="attr">    - name:</span> <span class="string">make</span> <span class="string">a</span> <span class="string">test</span></span><br><span class="line"><span class="attr">      copy:</span> <span class="string">content="This</span> <span class="string">is</span> <span class="string">CentOS7"</span> <span class="string">dest=/tmp/version.ansible</span></span><br><span class="line"><span class="attr">      when:</span> <span class="string">ansible_distribution_major_version</span> <span class="string">==</span> <span class="string">"7"</span></span><br></pre></td></tr></table></figure>
 
-<p>执行之后就是这样的了:<br><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook7.png" alt="ansible-playbook7"></p>
+<p>执行之后就是这样的了:<br><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook7.png" alt="ansible-playbook7"></p>
 <p>其中<code>ansible_distribution_major_version</code>是fact中的变量, 我们可以直接进行引用. </p>
 <p>从结果看出来了, 因为我们的两个节点一个是CentOS7, 一个是 CentOS6, 所以仅仅执行了一个.</p>
 <p>除了条件测试 , playbook还可以使用迭代, 就像这样:</p>
@@ -408,7 +408,7 @@
 <p>我们在复制文件的那个地方加入了tags, 接着我们执行:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@VM-node1 ~]<span class="comment"># ansible-playbook web_tinyproxy.yml --tags='skip-install'</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/ansible-playbook8.png" alt="ansible-playbook8"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/ansible-playbook8.png" alt="ansible-playbook8"></p>
 <p>看, 只有加上tag的那一个任务才会执行.</p>
 
   </div>

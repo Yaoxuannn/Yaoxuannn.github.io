@@ -14,12 +14,12 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="现在让我们一起来看看这只企鹅到底是个什么吧">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Kernel_config.png">
-<meta property="og:updated_time" content="2020-03-01T22:54:28.642Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/Kernel_config.png">
+<meta property="og:updated_time" content="2020-11-30T01:40:11.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux内核管理和编译初步">
 <meta name="twitter:description" content="现在让我们一起来看看这只企鹅到底是个什么吧">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Kernel_config.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/Kernel_config.png">
     
     
         
@@ -274,7 +274,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@WWW ~]$ make menuconfig</span><br></pre></td></tr></table></figure>
 
 <p>在执行这一步的时候, 会先尝试从当前目录寻找<code>.config</code>文件, 这个就是通过这个命令配置的产物, 如果没有找到, 会尝试从/boot/下找config-VERSION, 如果找到了就会加载它作为默认的配置. 如果还是没有, 就会根据当前系统的架构尝试从自己的<code>arch</code>下寻找相配的默认配置. 但现在我们把这个配置文件已经加载进来了.</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Kernel_config.png" alt="Kernel_config"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/Kernel_config.png" alt="Kernel_config"></p>
 <p>根据具体需求来进行配置之后就可以开始进行安装啦! 但是, 先别急着安装! 想一个问题先, 在我们安装时, 网络会断开 那么我们session断掉了, 整个安装进程也就直接结束了. 那岂不是就陷入了死循环了吗. 所以我们可以考虑使用screen这么一个工具. 他可以创建一个虚拟的屏幕, 使得任务只要虚拟机不关机, 就不会终止.</p>
 <p>好了! 开始编译吧! 编译的时候可以根据自己机器的情况加上<code>-j</code>参数来加快速度.</p>
 <blockquote>

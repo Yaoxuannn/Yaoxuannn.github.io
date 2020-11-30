@@ -14,13 +14,13 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="前一篇文章过了一遍权限服务和虚拟机映像服务, 而且都是在控制节点上进行的. 现在终于要开始部署计算服务了, 想想都激动.">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Nova-arch.png">
-<meta property="og:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dashboard1.png">
-<meta property="og:updated_time" content="2020-03-01T23:40:34.133Z">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/Nova-arch.png">
+<meta property="og:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/dashboard1.png">
+<meta property="og:updated_time" content="2020-11-30T01:48:43.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识Opensatck_2">
 <meta name="twitter:description" content="前一篇文章过了一遍权限服务和虚拟机映像服务, 而且都是在控制节点上进行的. 现在终于要开始部署计算服务了, 想想都激动.">
-<meta name="twitter:image" content="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Nova-arch.png">
+<meta name="twitter:image" content="http://hexopic.s3-ap-northeast-1.amazonaws.com/Nova-arch.png">
     
     
         
@@ -156,7 +156,7 @@
 <a id="more"></a>
 
 <h2 id="Nova"><a href="#Nova" class="headerlink" title="Nova"></a>Nova</h2><p>为了了解Nova是如何工作的, 我们先看下这个逻辑架构图的Nova部分:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/Nova-arch.png" alt="Nova-arch"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/Nova-arch.png" alt="Nova-arch"></p>
 <p>可以看到, 其中最重要, 和大部分的组件都产生关系的组件就是这个<code>Queue</code>了. 官方文档称呼这个东西叫做<code>central hub</code>, 都已经central了能不重要吗哈哈. 这个队列主要是在各种daemon中传递消息的, 通常使用的是RabbitMQ.</p>
 <p>然后我们从最外面开始看, 这里唯一和外界打交道的就是nova-api了, 它是用来接受和响应终端用户的计算API调用的. 与之配合的, 上图中没有列出的一个组件是<code>nova-api-metadata service</code>, 听名字就知道了, 这个东西是用来接受来自实例的源数据请求的.</p>
 <p>接着是调度器组件–<code>Nova-scheduler</code>. </p>
@@ -202,7 +202,7 @@
 <p>配置完了Nova和Neutron之后, 一个最小化的Openstack就完成了</p>
 <p>接下来为了更方便的使用, 我们可以构建horizon.</p>
 <h2 id="Horizon"><a href="#Horizon" class="headerlink" title="Horizon"></a>Horizon</h2><p>Horizon就是Openstack的前端dashboard了. 使用的Django进行的开发, 配置使用起来十分容易:</p>
-<p><img src="http://hexopic.s3-website-ap-northeast-1.amazonaws.com/dashboard1.png" alt="dashboard1"></p>
+<p><img src="http://hexopic.s3-ap-northeast-1.amazonaws.com/dashboard1.png" alt="dashboard1"></p>
 <p>但是现在还不能直接通过镜像启动实例, 因为我们还有一些必要的配置项没有搞. 但是现在这么一个基础的服务框架已经建立, 接下来因为时间和进度的关系, 我会暂时放下Openstack转而学习Docker的基础, 最后再来学习将两者统一起来的项目Zun或者Magnum.</p>
 
   </div>
