@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://d33wubrfki0l68.cloudfront.net/27b2978647a8d7bdc2a96b213f0c0d3242ef9ce0/e8c9b/images/docs/services-iptables-overview.svg">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/Kubernetes_network_mage_overview.png">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/Pod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
-<meta property="og:updated_time" content="2020-12-11T18:30:55.533Z">
+<meta property="og:updated_time" content="2020-12-19T22:51:08.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes架构基础">
 <meta name="twitter:description" content="在熟悉了Docker相关的操作之后, 我们现在就可以来对大规模集群的容器编排下手了.">
@@ -112,7 +112,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#容器编排工具栈"><span class="toc-number">1.</span> <span class="toc-text">容器编排工具栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes的架构概述和基础概念"><span class="toc-number">3.</span> <span class="toc-text">Kubernetes的架构概述和基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod"><span class="toc-number">4.</span> <span class="toc-text">Pod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod-Controller"><span class="toc-number">5.</span> <span class="toc-text">Pod Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number">6.</span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ingress"><span class="toc-number">7.</span> <span class="toc-text">Ingress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储"><span class="toc-number">8.</span> <span class="toc-text">存储</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#容器编排工具栈"><span class="toc-number">1.</span> <span class="toc-text">容器编排工具栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes的架构概述和基础概念"><span class="toc-number">3.</span> <span class="toc-text">Kubernetes的架构概述和基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod"><span class="toc-number">4.</span> <span class="toc-text">Pod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod-Controller"><span class="toc-number">5.</span> <span class="toc-text">Pod Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number">6.</span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ingress"><span class="toc-number">7.</span> <span class="toc-text">Ingress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储"><span class="toc-number">8.</span> <span class="toc-text">存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StatefulSet控制器"><span class="toc-number">9.</span> <span class="toc-text">StatefulSet控制器</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -138,7 +138,7 @@
       
         <time datetime="2020-01-10T06:37:08.000Z" itemprop="datePublished">2020-01-10</time>
         
-        (Updated: <time datetime="2020-12-11T18:30:55.533Z" itemprop="dateModified">2020-12-12</time>)
+        (Updated: <time datetime="2020-12-19T22:51:08.206Z" itemprop="dateModified">2020-12-20</time>)
         
       
     </div>
@@ -313,14 +313,40 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">env:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">name:</span> <span class="string">SPECIAL_LEVEL_KEY</span></span><br><span class="line">	  <span class="attr">valueFrom:</span></span><br><span class="line">	    <span class="attr">configMapKeyRef:</span></span><br><span class="line">	      <span class="attr">name:</span> <span class="string">special-config</span></span><br><span class="line">	      <span class="attr">key:</span> <span class="string">special.how</span></span><br></pre></td></tr></table></figure>
 
 <p>另外, 我们在导入之后也可以在容器的<code>command</code>中进行引用. 除此之外, 我们还可以把我们configMap的文件直接挂载到我们的Pod中. </p>
-<p>而Secret, 可以用来存储我们的一些密码密钥等需要被加密的配置数据. Secret可以使用Volume挂载或者当做会环境变量来使用.我们Secret有三种类型:</p>
+<p>而Secret, 可以用来存储我们的一些密码密钥等需要被加密的配置数据. Secret可以使用Volume挂载或者当做会环境变量来使用. 使用起来Secret和ConfigMap十分相似. 我们Secret有三种类型:</p>
 <ul>
 <li>Service Account: 用来访问Kubernetes API, 由Kubernetes自动创建, 并且会自动挂载到Pod的<code>/run/secrets/kubernetes.io/serviceaccount</code>目录中</li>
 <li>Opaque: Base64编码格式, 存储密码密钥等</li>
 <li>Kubernetes.io/dockerconfigjson: 用来存储私有的docker registry的认证信息</li>
 </ul>
-<p>接下来我们来说说存储卷.</p>
+<p>因此我们配置容器化应用的方式就有这些了:</p>
+<ol>
+<li>自定义命令行参数: <code>args: []</code></li>
+<li>把配置文件直接丢到镜像中</li>
+<li>环境变量<ol>
+<li>Cloud Native的应用程序一般直接通过环境变量加载配置</li>
+<li>通过<code>entrypoint</code>脚本来预处理变量为配置文件中的配置信息</li>
+</ol>
+</li>
+<li>存储卷</li>
+</ol>
+<p>上面的两个更多的都是为了向Pod内部注入配置信息而非存储, 接下来我们来说说存储卷Volume.</p>
 <p>准确的说, 我们的存储卷是属于Pod的而不是容器. 我们说过, 每一个Pod都会启动一个超级小的容器, 叫做<code>pause</code>或者叫基础架构容器. 我们所有的容器都使用的<code>pause</code>的网络命名空间. </p>
+<p>Kubernetes支持非常多的存储卷或者存储服务, 我们可以使用<code>explain</code>来看看支持的情况, 或者去官网看文档啦哈哈哈.</p>
+<p>在Kubernetes的存储中, 重头戏应该就是PV和PVC了, 这两个玩意的全称就是<code>PersistentVolume</code>和<code>PersistentVolumeClaim</code>.  一个大概的流程就是, 我们负责存储的工程师来创建和部署存储服务(NFS, Ceph…), 接着由负责管理Kubernetes集群的工程师来提供PV, PV会成为存储系统对Kubernetes的存储抽象层, 接着由用户来声明PVC向PV发起获取存储空间的请求.</p>
+<p>另外, 我们还可以声明一个Kubernetes的资源类型, 叫<code>StorageClass</code>, 来划分不同级别的PV从而根据不同的服务需求指标来提供给用户. 这样我们的PVC就可以不针对某一个特定的PV来申请资源而可以通过对<code>StorageClass</code>来发请求. 存储系统必须要提供相应的RESTful API. </p>
+<h2 id="StatefulSet控制器"><a href="#StatefulSet控制器" class="headerlink" title="StatefulSet控制器"></a>StatefulSet控制器</h2><p>StatefulSet是针对我们有状态的应用设计的, 不同于无状态应用我们可以随意的重建和重启. 那么到底什么样的应用属于StatefulSet嘞?</p>
+<ul>
+<li>稳定且唯一的网络标识符</li>
+<li>稳定且持久的存储</li>
+<li>有序平滑的部署和扩展</li>
+<li>有序平滑的删除和终止</li>
+<li>有序的滚动更新</li>
+</ul>
+<p>我们着重来说一下他的滚动更新吧, 默认使用的更新方法是分区更新, 我们可以从文档中看到:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">[root@kbs-demo ~]# kubectl explain sts.spec.updateStrategy</span><br><span class="line">KIND:     StatefulSet</span><br><span class="line">VERSION:  apps/v1</span><br><span class="line"></span><br><span class="line">RESOURCE: updateStrategy &lt;Object&gt;</span><br><span class="line"></span><br><span class="line">DESCRIPTION:</span><br><span class="line">     updateStrategy indicates the StatefulSetUpdateStrategy that will be</span><br><span class="line">     employed to update Pods in the StatefulSet when a revision is made to</span><br><span class="line">     Template.</span><br><span class="line"></span><br><span class="line">     StatefulSetUpdateStrategy indicates the strategy that the StatefulSet</span><br><span class="line">     controller will use to perform updates. It includes any additional</span><br><span class="line">     parameters necessary to perform the update for the indicated strategy.</span><br><span class="line"></span><br><span class="line">FIELDS:</span><br><span class="line">   rollingUpdate	&lt;Object&gt;</span><br><span class="line">     RollingUpdate is used to communicate parameters when Type is</span><br><span class="line">     RollingUpdateStatefulSetStrategyType.</span><br><span class="line"></span><br><span class="line">   type	&lt;string&gt;</span><br><span class="line">     Type indicates the type of the StatefulSetUpdateStrategy. Default is</span><br><span class="line">     RollingUpdate.</span><br><span class="line"></span><br><span class="line">[root@kbs-demo ~]# kubectl explain sts.spec.updateStrategy.rollingUpdate</span><br><span class="line">KIND:     StatefulSet</span><br><span class="line">VERSION:  apps/v1</span><br><span class="line"></span><br><span class="line">RESOURCE: rollingUpdate &lt;Object&gt;</span><br><span class="line"></span><br><span class="line">DESCRIPTION:</span><br><span class="line">     RollingUpdate is used to communicate parameters when Type is</span><br><span class="line">     RollingUpdateStatefulSetStrategyType.</span><br><span class="line"></span><br><span class="line">     RollingUpdateStatefulSetStrategy is used to communicate parameter for</span><br><span class="line">     RollingUpdateStatefulSetStrategyType.</span><br><span class="line"></span><br><span class="line">FIELDS:</span><br><span class="line">   partition	&lt;integer&gt;</span><br><span class="line">     Partition indicates the ordinal at which the StatefulSet should be</span><br><span class="line">     partitioned. Default value is 0.</span><br></pre></td></tr></table></figure>
+
+<p>那么分区更新是啥嘞? 我们会定义一个分区分界, 例如N, 那么当所有标识&gt;=N的Pod都会被更新. 假设我们现在一共有5个Pod, 我定义成N=4, 那么从Pod-0开始, 第一个满足条件(也仅有这个)的就是Pod-4, 当我们发布了此更新之后, 如果没有问题, 我们就将N改成0即可. (金丝雀发布)</p>
 
   </div>
 </article>
@@ -354,7 +380,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#容器编排工具栈"><span class="toc-number">1.</span> <span class="toc-text">容器编排工具栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes的架构概述和基础概念"><span class="toc-number">3.</span> <span class="toc-text">Kubernetes的架构概述和基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod"><span class="toc-number">4.</span> <span class="toc-text">Pod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod-Controller"><span class="toc-number">5.</span> <span class="toc-text">Pod Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number">6.</span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ingress"><span class="toc-number">7.</span> <span class="toc-text">Ingress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储"><span class="toc-number">8.</span> <span class="toc-text">存储</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#容器编排工具栈"><span class="toc-number">1.</span> <span class="toc-text">容器编排工具栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes"><span class="toc-number">2.</span> <span class="toc-text">Kubernetes</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Kubernetes的架构概述和基础概念"><span class="toc-number">3.</span> <span class="toc-text">Kubernetes的架构概述和基础概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod"><span class="toc-number">4.</span> <span class="toc-text">Pod</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pod-Controller"><span class="toc-number">5.</span> <span class="toc-text">Pod Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number">6.</span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ingress"><span class="toc-number">7.</span> <span class="toc-text">Ingress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#存储"><span class="toc-number">8.</span> <span class="toc-text">存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StatefulSet控制器"><span class="toc-number">9.</span> <span class="toc-text">StatefulSet控制器</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
