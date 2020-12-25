@@ -15,7 +15,8 @@
 <meta property="og:description" content="面试的时候提到了关于HTTP协议的发展变化, 没答出来. 只记得之前在一些公众号文章中瞥过几眼, 现在来做个总结~ 万维网发明 - HTTP/0.9这玩意就真的算是HTTP协议的祖宗了, 这个也叫做单行(one-line)协议. 他是和HTML, 浏览器, 服务器(httpd的前身)一起诞生的. 而这四个部分其实就构成了我们熟知的万维网. 那么这个协议既然是最初的, 相比很简单了. 那么有多简单呢">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/http0.9_telnet_response.png">
-<meta property="og:updated_time" content="2020-12-24T19:04:01.120Z">
+<meta property="og:image" content="https://www.pingdom.com/wp-content/uploads/2015/06/Sk%C3%A4rmavbild-2015-06-11-kl.-10.54.59.png">
+<meta property="og:updated_time" content="2020-12-25T01:23:53.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP发展史">
 <meta name="twitter:description" content="面试的时候提到了关于HTTP协议的发展变化, 没答出来. 只记得之前在一些公众号文章中瞥过几眼, 现在来做个总结~ 万维网发明 - HTTP/0.9这玩意就真的算是HTTP协议的祖宗了, 这个也叫做单行(one-line)协议. 他是和HTML, 浏览器, 服务器(httpd的前身)一起诞生的. 而这四个部分其实就构成了我们熟知的万维网. 那么这个协议既然是最初的, 相比很简单了. 那么有多简单呢">
@@ -105,7 +106,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#万维网发明-HTTP-0-9"><span class="toc-number">1.</span> <span class="toc-text">万维网发明 - HTTP/0.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建可扩展性-HTTP-1-0"><span class="toc-number">2.</span> <span class="toc-text">构建可扩展性 - HTTP/1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准建立-HTTP-1-1"><span class="toc-number">3.</span> <span class="toc-text">标准建立 - HTTP/1.1</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#万维网发明-HTTP-0-9"><span class="toc-number">1.</span> <span class="toc-text">万维网发明 - HTTP/0.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建可扩展性-HTTP-1-0"><span class="toc-number">2.</span> <span class="toc-text">构建可扩展性 - HTTP/1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准建立-HTTP-1-1"><span class="toc-number">3.</span> <span class="toc-text">标准建立 - HTTP/1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展-进化-HTTP-1-1-与-HTTP-2-0"><span class="toc-number">4.</span> <span class="toc-text">扩展, 进化 - HTTP/1.1+ 与 HTTP/2.0</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -131,7 +132,7 @@
       
         <time datetime="2020-12-23T13:56:42.000Z" itemprop="datePublished">2020-12-23</time>
         
-        (Updated: <time datetime="2020-12-24T19:04:01.120Z" itemprop="dateModified">2020-12-25</time>)
+        (Updated: <time datetime="2020-12-25T01:23:53.946Z" itemprop="dateModified">2020-12-25</time>)
         
       
     </div>
@@ -196,6 +197,33 @@
 <li>在第二次连接中我们标明了<code>Connection: close</code>也就是说我们显式声明了结束连接</li>
 </ul>
 <p>事实上, 我们的HTTP/1.1默认情况下就是长连接, 也就是说, 除非你带上了<code>Connection: Close</code>, 否则连接始终都是保持住的, 即时客户端没有带上<code>Connection: Keep-Alive</code>的头部. 但尽管如此, 众多浏览器还是会提供这个头部.</p>
+<h2 id="扩展-进化-HTTP-1-1-与-HTTP-2-0"><a href="#扩展-进化-HTTP-1-1-与-HTTP-2-0" class="headerlink" title="扩展, 进化 - HTTP/1.1+ 与 HTTP/2.0"></a>扩展, 进化 - HTTP/1.1+ 与 HTTP/2.0</h2><p>这个1.1+是我说的, 并不是官方说法. 我们刚刚在上面说过, HTTP头部信息的引入, 为HTTP带来了巨大的可扩展性,   因此从1997年开始, HTTP就一直在扩展.</p>
+<p>2000年, 状态层转换出现, 这也就是我们现在常说的<code>REST</code>, 我们通过基本的HTTP/1.1方法里访问特定的URI. 起初, 最早的HTTP1.1有这些动词:</p>
+<ul>
+<li>GET</li>
+<li>POST</li>
+<li>PUT</li>
+<li>DELETE</li>
+<li>TRACE</li>
+<li>OPTIONS</li>
+<li>CONNECT</li>
+</ul>
+<p>接着从2010开始, 我们新增了<code>PATCH</code>来部分更新某些资源.</p>
+<p>并且从2005年开始, 针对于Web的API大大增加, 由此也引入了很多的新HTTP头部, 例如:</p>
+<ul>
+<li>CORS支持</li>
+<li>DNT隐私控制</li>
+<li>WebSocket以及<code>Upgrade</code>头部来进行协议升级</li>
+</ul>
+<p>经过了15年的发展, 现在到了2020年, 已然是HTTP/2.0的时代了.</p>
+<p>为了应对当前越来越复杂的Web页面和Web应用, 数据量也越来越大, 为了能够更快速的传输数据, 早先谷歌使用了一种叫做<code>SPDY</code>的协议, 这可以被视为是HTTP/2.0的雏形.</p>
+<p>相较于HTTP/1.1, HTTP/2最大的不同就是成为了二进制协议. 也就是说不能直接可读和手动创建, 除此之外, HTTP/2是一个多路复用的协议, 我们将传输的信息分割成了更小的消息和帧, 然后对他们采用二进制格式的编码.</p>
+<p><img src="https://www.pingdom.com/wp-content/uploads/2015/06/Sk%C3%A4rmavbild-2015-06-11-kl.-10.54.59.png" alt="HTTP/2 – The new protocol on the block | Pingdom"></p>
+<p>HTTP/2开始强调<strong>流</strong>的概念了. </p>
+<p>流(Stream) – 双向的字节流可以在一次建立的连接中传递多个信息(Message). </p>
+<p>信息(Message)在HTTP/2中就是一个完整的帧(Frame)序列, 用来映射逻辑上的请求和响应消息</p>
+<p>帧(Frame)就是HTTP/2中最小的单元了 , 每一个帧都包含着一个帧头部, 用来标明这个帧属于哪一个流.</p>
+<p>并且从图中我们也能看到, 流是多路复用的, 并且是有优先级的. 而这个二进制帧层也支持流之间的优先级别和依赖关系, 由此更有效率的请求和响应数据. 另外, HTTP/2还可以支持流控和服务端的推流, 以及头部压缩.</p>
 
   </div>
 </article>
@@ -229,7 +257,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#万维网发明-HTTP-0-9"><span class="toc-number">1.</span> <span class="toc-text">万维网发明 - HTTP/0.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建可扩展性-HTTP-1-0"><span class="toc-number">2.</span> <span class="toc-text">构建可扩展性 - HTTP/1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准建立-HTTP-1-1"><span class="toc-number">3.</span> <span class="toc-text">标准建立 - HTTP/1.1</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#万维网发明-HTTP-0-9"><span class="toc-number">1.</span> <span class="toc-text">万维网发明 - HTTP/0.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建可扩展性-HTTP-1-0"><span class="toc-number">2.</span> <span class="toc-text">构建可扩展性 - HTTP/1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准建立-HTTP-1-1"><span class="toc-number">3.</span> <span class="toc-text">标准建立 - HTTP/1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展-进化-HTTP-1-1-与-HTTP-2-0"><span class="toc-number">4.</span> <span class="toc-text">扩展, 进化 - HTTP/1.1+ 与 HTTP/2.0</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
