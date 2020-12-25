@@ -16,7 +16,8 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://hexopic.s3.ap-northeast-1.amazonaws.com/http0.9_telnet_response.png">
 <meta property="og:image" content="https://www.pingdom.com/wp-content/uploads/2015/06/Sk%C3%A4rmavbild-2015-06-11-kl.-10.54.59.png">
-<meta property="og:updated_time" content="2020-12-25T01:23:53.946Z">
+<meta property="og:image" content="https://kinsta.com/wp-content/uploads/2019/03/http2-stack-vs-http3-stack.png">
+<meta property="og:updated_time" content="2020-12-25T01:39:14.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP发展史">
 <meta name="twitter:description" content="面试的时候提到了关于HTTP协议的发展变化, 没答出来. 只记得之前在一些公众号文章中瞥过几眼, 现在来做个总结~ 万维网发明 - HTTP/0.9这玩意就真的算是HTTP协议的祖宗了, 这个也叫做单行(one-line)协议. 他是和HTML, 浏览器, 服务器(httpd的前身)一起诞生的. 而这四个部分其实就构成了我们熟知的万维网. 那么这个协议既然是最初的, 相比很简单了. 那么有多简单呢">
@@ -106,7 +107,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#万维网发明-HTTP-0-9"><span class="toc-number">1.</span> <span class="toc-text">万维网发明 - HTTP/0.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建可扩展性-HTTP-1-0"><span class="toc-number">2.</span> <span class="toc-text">构建可扩展性 - HTTP/1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准建立-HTTP-1-1"><span class="toc-number">3.</span> <span class="toc-text">标准建立 - HTTP/1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展-进化-HTTP-1-1-与-HTTP-2-0"><span class="toc-number">4.</span> <span class="toc-text">扩展, 进化 - HTTP/1.1+ 与 HTTP/2.0</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#万维网发明-HTTP-0-9"><span class="toc-number">1.</span> <span class="toc-text">万维网发明 - HTTP/0.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建可扩展性-HTTP-1-0"><span class="toc-number">2.</span> <span class="toc-text">构建可扩展性 - HTTP/1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准建立-HTTP-1-1"><span class="toc-number">3.</span> <span class="toc-text">标准建立 - HTTP/1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展-进化-HTTP-1-1-与-HTTP-2-0"><span class="toc-number">4.</span> <span class="toc-text">扩展, 进化 - HTTP/1.1+ 与 HTTP/2.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#然后-–-HTTP-over-QUIC-HTTP-3"><span class="toc-number">5.</span> <span class="toc-text">然后? – HTTP over QUIC (HTTP/3)?</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -132,7 +133,7 @@
       
         <time datetime="2020-12-23T13:56:42.000Z" itemprop="datePublished">2020-12-23</time>
         
-        (Updated: <time datetime="2020-12-25T01:23:53.946Z" itemprop="dateModified">2020-12-25</time>)
+        (Updated: <time datetime="2020-12-25T01:39:14.641Z" itemprop="dateModified">2020-12-25</time>)
         
       
     </div>
@@ -224,6 +225,11 @@
 <p>信息(Message)在HTTP/2中就是一个完整的帧(Frame)序列, 用来映射逻辑上的请求和响应消息</p>
 <p>帧(Frame)就是HTTP/2中最小的单元了 , 每一个帧都包含着一个帧头部, 用来标明这个帧属于哪一个流.</p>
 <p>并且从图中我们也能看到, 流是多路复用的, 并且是有优先级的. 而这个二进制帧层也支持流之间的优先级别和依赖关系, 由此更有效率的请求和响应数据. 另外, HTTP/2还可以支持流控和服务端的推流, 以及头部压缩.</p>
+<h2 id="然后-–-HTTP-over-QUIC-HTTP-3"><a href="#然后-–-HTTP-over-QUIC-HTTP-3" class="headerlink" title="然后? – HTTP over QUIC (HTTP/3)?"></a>然后? – HTTP over QUIC (HTTP/3)?</h2><p>QUIC的全称是<code>Quick UDP Internet Connections</code>, 也就是使用UDP的快速网络连接. 是由Google在2012年提出的, 相当于重新划分了一次网络分层, 请看:</p>
+<p><img src="https://kinsta.com/wp-content/uploads/2019/03/http2-stack-vs-http3-stack.png" alt="HTTP/2 stack vs HTTP/3 stack"></p>
+<p>我们刚刚说过, HTTP/2提供了多路复用, 但是这实际上是被TCP限制了. 我们使用一个单一的TCP连接来进行多个流的同时传输, 如果这个时候哪怕只有一个流出现了报文丢失, 整个连接(当然包括该连接下所有的流)都会被劫持, 直到TCP重传. 这个时候, 哪怕是已经传输到目标节点的buffer中了, 也需要一同被阻塞, 直到丢失的报文被重传过来.</p>
+<p>而使用了QUIC的话, 就不存在这种问题了. 那么你可能会问, 我如何确保可靠性呢? QUIC同样是个可靠的协议, 不同于TCP的Seq Number, QUIC使用Packet Number来代替, 而每一个Package Number都是严格递增的, 由此避免了原先Seq的歧义性, 另外, QUIC使用Stream Offset来保证数据传输顺序.</p>
+<p>QUIC简单总结的话, 相当于是一个4+5+7层协议了.</p>
 
   </div>
 </article>
@@ -257,7 +263,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#万维网发明-HTTP-0-9"><span class="toc-number">1.</span> <span class="toc-text">万维网发明 - HTTP/0.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建可扩展性-HTTP-1-0"><span class="toc-number">2.</span> <span class="toc-text">构建可扩展性 - HTTP/1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准建立-HTTP-1-1"><span class="toc-number">3.</span> <span class="toc-text">标准建立 - HTTP/1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展-进化-HTTP-1-1-与-HTTP-2-0"><span class="toc-number">4.</span> <span class="toc-text">扩展, 进化 - HTTP/1.1+ 与 HTTP/2.0</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#万维网发明-HTTP-0-9"><span class="toc-number">1.</span> <span class="toc-text">万维网发明 - HTTP/0.9</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建可扩展性-HTTP-1-0"><span class="toc-number">2.</span> <span class="toc-text">构建可扩展性 - HTTP/1.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#标准建立-HTTP-1-1"><span class="toc-number">3.</span> <span class="toc-text">标准建立 - HTTP/1.1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#扩展-进化-HTTP-1-1-与-HTTP-2-0"><span class="toc-number">4.</span> <span class="toc-text">扩展, 进化 - HTTP/1.1+ 与 HTTP/2.0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#然后-–-HTTP-over-QUIC-HTTP-3"><span class="toc-number">5.</span> <span class="toc-text">然后? – HTTP over QUIC (HTTP/3)?</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
