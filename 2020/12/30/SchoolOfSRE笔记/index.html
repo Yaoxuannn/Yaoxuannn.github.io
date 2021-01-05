@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="SchoolOfSRE是Linkedin的一个SRE基础教程, 里面有一些零碎知识点在这里记录下. 网络部分这个部分涉及到了DNS, UDP, HTTP, TCP, IP路由相关 DNS看的过程提到了FQDN, 一时间忘记了是啥. 再来复习一遍: FQDN: 叫做完全合格域名, fully qualified domain name. 例如, 我们的www.google.com就是FQDN, 而w">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-01-03T04:56:37.061Z">
+<meta property="og:updated_time" content="2021-01-05T00:20:51.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SchoolOfSRE笔记">
 <meta name="twitter:description" content="SchoolOfSRE是Linkedin的一个SRE基础教程, 里面有一些零碎知识点在这里记录下. 网络部分这个部分涉及到了DNS, UDP, HTTP, TCP, IP路由相关 DNS看的过程提到了FQDN, 一时间忘记了是啥. 再来复习一遍: FQDN: 叫做完全合格域名, fully qualified domain name. 例如, 我们的www.google.com就是FQDN, 而w">
@@ -103,7 +103,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络部分"><span class="toc-number">1.</span> <span class="toc-text">网络部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing"><span class="toc-number">1.5.</span> <span class="toc-text">Routing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python部分"><span class="toc-number">2.</span> <span class="toc-text">Python部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-VS-解释"><span class="toc-number">2.1.</span> <span class="toc-text">编译 VS 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些Python的概念"><span class="toc-number">2.2.</span> <span class="toc-text">一些Python的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Web和Flask"><span class="toc-number">2.3.</span> <span class="toc-text">Python, Web和Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Shortening-App的设计"><span class="toc-number">2.4.</span> <span class="toc-text">URL Shortening App的设计</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络部分"><span class="toc-number">1.</span> <span class="toc-text">网络部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing"><span class="toc-number">1.5.</span> <span class="toc-text">Routing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python和Web部分"><span class="toc-number">2.</span> <span class="toc-text">Python和Web部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-VS-解释"><span class="toc-number">2.1.</span> <span class="toc-text">编译 VS 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些Python的概念"><span class="toc-number">2.2.</span> <span class="toc-text">一些Python的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Web和Flask"><span class="toc-number">2.3.</span> <span class="toc-text">Python, Web和Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Shortening-App的设计"><span class="toc-number">2.4.</span> <span class="toc-text">URL Shortening App的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小节"><span class="toc-number">2.5.</span> <span class="toc-text">小节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规模化应用"><span class="toc-number">2.5.1.</span> <span class="toc-text">规模化应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控策略"><span class="toc-number">2.5.2.</span> <span class="toc-text">监控策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据"><span class="toc-number">3.</span> <span class="toc-text">数据</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -129,7 +129,7 @@
       
         <time datetime="2020-12-30T08:34:01.000Z" itemprop="datePublished">2020-12-30</time>
         
-        (Updated: <time datetime="2021-01-03T04:56:37.061Z" itemprop="dateModified">2021-01-03</time>)
+        (Updated: <time datetime="2021-01-05T00:20:51.124Z" itemprop="dateModified">2021-01-05</time>)
         
       
     </div>
@@ -211,7 +211,7 @@
 <li>理解错误信息能够帮我们很快的定位问题</li>
 <li>在一些少见的场合, 通过检查ARP表能够帮助我们了解到是否有IP冲突</li>
 </ul>
-<h1 id="Python部分"><a href="#Python部分" class="headerlink" title="Python部分"></a>Python部分</h1><p>在这个部分, 涉及到了关于Python的一些基本概念, Web应用(以Flask框架为例), 以及一个<code>URL Shortening</code>的案例设计的例子.</p>
+<h1 id="Python和Web部分"><a href="#Python和Web部分" class="headerlink" title="Python和Web部分"></a>Python和Web部分</h1><p>在这个部分, 涉及到了关于Python的一些基本概念, Web应用(以Flask框架为例), 以及一个<code>URL Shortening</code>的案例设计的例子.</p>
 <h2 id="编译-VS-解释"><a href="#编译-VS-解释" class="headerlink" title="编译 VS 解释"></a>编译 VS 解释</h2><p>首先是关于Python和C/C++以及Java的对比. 从某种角度来说Python也算是编译语言, 他有自己的内置编译器. 类比Java, Java会生成一个<code>.class</code>的类文件, 也就是我们所熟悉的<code>bytecode</code>. 而Python也类似这样, 而区别在于Python不需要单独的编译命令来运行一个Python程序. 除此以外, Java是静态强类型语言, 因此编译器是在编译阶段可以知道类型相关的错误的, 而Python是动态语言, 直到程序运行, 我们都不会知道类型的. 因此, Python的编译器更加<code>dumb</code>一点, 或者说没有Java的严格.</p>
 <p>但不管怎么说, 当涉及到Python程序运行的时候, 一定会有编译的步骤. 这个我们在之前说Python的对象机制的时候就知道, 我们通过使用<code>dis</code>模块来查看了Python运行的<code>bytecode</code>. 这一点就和C/C++又不一样了, C/C++会生成机器码而不是字节码.</p>
 <p>对于机器码, 可以直接交给我们的OS来执行, 而字节码就不是这样了. 对于字节码, 我们需要对应的虚拟机, 例如JVM, CPython, Jython等等. 虚拟机也就是读取字节码并且在给定的操作系统上运行的程序.</p>
@@ -219,7 +219,7 @@
 <p>接着是关于Python执行上下文, 或者说命名空间, 我们可以通过<code>locals()</code>来查看 当前上下文中定义的对象. 接着教程像我们展示了函数作为对象的特性. 我们可以通过<code>dir()</code>来查看一个对象包含的对象.</p>
 <p>另外, 还有<code>__globals__</code>可以让我们访问到当前的全局变量.</p>
 <p>接着介绍了一个有趣的对象<code>__code__</code>, 因为万物皆对象, 包括我们的字节码也是对象, 因此我们可以通过访问<code>__code__</code>来做一些很有趣的事情, 例如获取文件名, 参数, 变量列表, 甚至字节码本身.</p>
-<p>装饰器. Python可以使用装饰器来对函数附加一些额外功能. 顺带一提, 之前有在一些面试资料里面了解到, 装饰器的设计模式叫做<strong><code>AOP</code></strong>, 即面向切面编程. 我们在运行时, 动态将代码加入到类的指定位置, 指定方法上.</p>
+<p>装饰器. Python可以使用装饰器来对函数附加一些额外功能. 顺带一提, 之前有在一些面试资料里面了解到, 装饰器的设计模式叫做<strong><code>AOP (Aspect-oriented Programming)</code></strong>, 即面向切面编程. 我们在运行时, 动态将代码加入到类的指定位置, 指定方法上.</p>
 <p>接着说一些小tip类东西:</p>
 <ul>
 <li>Python构建原型非常迅速, 因为有大量的库可以使用, 这个时候我们的代码库往往会十分复杂, 类型错误就会更加普遍, 而由于Python的弱类型特性, 应付起来会更加困难.</li>
@@ -228,16 +228,35 @@
 <li>一些鲜为人知的Python特性: <a href="https://github.com/satwikkansal/wtfpython" target="_blank" rel="noopener">https://github.com/satwikkansal/wtfpython</a></li>
 </ul>
 <h2 id="Python-Web和Flask"><a href="#Python-Web和Flask" class="headerlink" title="Python, Web和Flask"></a>Python, Web和Flask</h2><p>这一部分简单介绍了Python的Socket变成和Flask框架的简述, 没啥意思, 跳过啦</p>
-<h2 id="URL-Shortening-App的设计"><a href="#URL-Shortening-App的设计" class="headerlink" title="URL Shortening App的设计"></a>URL Shortening App的设计</h2><p>这里构建了一个十分简单的URL缩略应用, 仅仅实现了一个API. 我们来看看在实际编程之前做了什么事情吧.</p>
+<h2 id="URL-Shortening-App的设计"><a href="#URL-Shortening-App的设计" class="headerlink" title="URL Shortening App的设计"></a>URL Shortening App的设计</h2><p>这里构建了一个十分简单的短URL应用, 仅仅实现了一个API. 我们来看看在实际编程之前做了什么事情吧.</p>
 <ol>
 <li>上层操作和API端点</li>
 </ol>
-<p>因为是一个URL缩短应用, 我们会需要一个API来生成, 以及一个API或者访问端点来接受短链接并且重定向到原始URL上去.</p>
+<p>因为是一个短链接生成应用, 我们会需要一个API来生成, 以及一个API或者访问端点来接受短链接并且重定向到原始URL上去. 这两个API应该就能够让App的功能正常运行并且可以被任何人调用</p>
 <ol start="2">
 <li>如何缩短URL?</li>
 </ol>
-<p>给定一个URL, 我们需要生成一个缩短版的. 一种方法就是使用随机字符.</p>
-
+<p>给定一个URL, 我们需要生成一个缩短版的. 一种方法就是使用随机字符. 另外一种方案是使用某种哈希算法. 好处就是我们可以对相同的URL重用同样的短链接. 那么关于哈希碰撞呢? 即时在随机字符的方案中, 哈希碰撞也是有可能发生的. 在这种场合下, 我们也许可以通过结果前后增加随机值来避免冲突.</p>
+<p>另外, 不同哈希算法的选择也至关重要. 我们将会需要分析不同的算法. CPU需求和他们的性质.</p>
+<ol start="3">
+<li>URl合法吗?</li>
+</ol>
+<p>如何验证一个URL是合法的? 我们是需要验证还是要鉴定真实性? 常规检查可以通过正则匹配来完成. 或者我们会尝试去访问该URL. 有这些陷阱我们需要留意:</p>
+<ul>
+<li>我们需要定义那些情况是成功(建立基准线): HTTP 200?</li>
+<li>如果URL是在私有网络中呢?</li>
+<li>如果该URL暂时停止服务了呢?</li>
+</ul>
+<ol start="4">
+<li>存储</li>
+</ol>
+<p>我们如何让持久化数据呢? 有不同的数据库选择, 关系型数据库MySQL还是NoSQL数据库呢? 关于这点会在下面的数据章节详述.</p>
+<h2 id="小节"><a href="#小节" class="headerlink" title="小节"></a>小节</h2><p>在这里我们将从应用规模化, 监控策略, SRE应用三个方面来做小节</p>
+<h3 id="规模化应用"><a href="#规模化应用" class="headerlink" title="规模化应用"></a>规模化应用</h3><p>书接上文, 我们设计和开发了应用, 那么接下来我们就要简历持续集成和持续交付的流水线(pipeline). 最后我们还需要把这个应用部署到什么地方.</p>
+<p>最初我们可能就只是把应用部署到单一虚拟机或者任意云服务提供商. 但是这是一个单点(Single point of failure), 这对于SRE(或者哪怕说对于一个工程师)来说都是不允许的. 因此这里我们考虑的一个提升就是在负载均衡之后部署复数个应用实例. </p>
+<p>尽管可以增加更多的实例, 但在增加到某一个节点的时候系统的其他瓶颈会显露出来, 例如: DB或者是负载均衡本身. 那么我们怎样才能知道瓶颈在哪里呢? 我们需要能够对应用架构中的各个部分进行观察. 也就是这样, 我们才能知道指标, 从而知道哪里出了问题.  <strong>What gets measured, gets fixed!</strong></p>
+<p>更多我们后面的<code>scalability module</code>的章节涉及到.</p>
+<h3 id="监控策略"><a href="#监控策略" class="headerlink" title="监控策略"></a>监控策略</h3><h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1>
   </div>
 </article>
 
@@ -270,7 +289,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络部分"><span class="toc-number">1.</span> <span class="toc-text">网络部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing"><span class="toc-number">1.5.</span> <span class="toc-text">Routing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python部分"><span class="toc-number">2.</span> <span class="toc-text">Python部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-VS-解释"><span class="toc-number">2.1.</span> <span class="toc-text">编译 VS 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些Python的概念"><span class="toc-number">2.2.</span> <span class="toc-text">一些Python的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Web和Flask"><span class="toc-number">2.3.</span> <span class="toc-text">Python, Web和Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Shortening-App的设计"><span class="toc-number">2.4.</span> <span class="toc-text">URL Shortening App的设计</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络部分"><span class="toc-number">1.</span> <span class="toc-text">网络部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing"><span class="toc-number">1.5.</span> <span class="toc-text">Routing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python和Web部分"><span class="toc-number">2.</span> <span class="toc-text">Python和Web部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-VS-解释"><span class="toc-number">2.1.</span> <span class="toc-text">编译 VS 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些Python的概念"><span class="toc-number">2.2.</span> <span class="toc-text">一些Python的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Web和Flask"><span class="toc-number">2.3.</span> <span class="toc-text">Python, Web和Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Shortening-App的设计"><span class="toc-number">2.4.</span> <span class="toc-text">URL Shortening App的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小节"><span class="toc-number">2.5.</span> <span class="toc-text">小节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规模化应用"><span class="toc-number">2.5.1.</span> <span class="toc-text">规模化应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控策略"><span class="toc-number">2.5.2.</span> <span class="toc-text">监控策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据"><span class="toc-number">3.</span> <span class="toc-text">数据</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
