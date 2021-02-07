@@ -14,10 +14,14 @@
 <meta property="og:site_name" content="Yaoxuannn&#39;s Blog">
 <meta property="og:description" content="SchoolOfSRE是Linkedin的一个SRE基础教程, 里面有一些零碎知识点在这里记录下. 网络部分这个部分涉及到了DNS, UDP, HTTP, TCP, IP路由相关 DNS看的过程提到了FQDN, 一时间忘记了是啥. 再来复习一遍: FQDN: 叫做完全合格域名, fully qualified domain name. 例如, 我们的www.google.com就是FQDN, 而w">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-01-05T00:20:51.124Z">
+<meta property="og:image" content="https://linkedin.github.io/school-of-sre/databases_sql/images/mysql_architecture.png">
+<meta property="og:image" content="https://linkedin.github.io/school-of-sre/databases_sql/images/innodb_architecture.png">
+<meta property="og:image" content="https://linkedin.github.io/school-of-sre/databases_nosql/images/vector_clocks.png">
+<meta property="og:updated_time" content="2021-01-17T03:09:26.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SchoolOfSRE笔记">
 <meta name="twitter:description" content="SchoolOfSRE是Linkedin的一个SRE基础教程, 里面有一些零碎知识点在这里记录下. 网络部分这个部分涉及到了DNS, UDP, HTTP, TCP, IP路由相关 DNS看的过程提到了FQDN, 一时间忘记了是啥. 再来复习一遍: FQDN: 叫做完全合格域名, fully qualified domain name. 例如, 我们的www.google.com就是FQDN, 而w">
+<meta name="twitter:image" content="https://linkedin.github.io/school-of-sre/databases_sql/images/mysql_architecture.png">
     
     
         
@@ -103,7 +107,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络部分"><span class="toc-number">1.</span> <span class="toc-text">网络部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing"><span class="toc-number">1.5.</span> <span class="toc-text">Routing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python和Web部分"><span class="toc-number">2.</span> <span class="toc-text">Python和Web部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-VS-解释"><span class="toc-number">2.1.</span> <span class="toc-text">编译 VS 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些Python的概念"><span class="toc-number">2.2.</span> <span class="toc-text">一些Python的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Web和Flask"><span class="toc-number">2.3.</span> <span class="toc-text">Python, Web和Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Shortening-App的设计"><span class="toc-number">2.4.</span> <span class="toc-text">URL Shortening App的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小节"><span class="toc-number">2.5.</span> <span class="toc-text">小节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规模化应用"><span class="toc-number">2.5.1.</span> <span class="toc-text">规模化应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控策略"><span class="toc-number">2.5.2.</span> <span class="toc-text">监控策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据"><span class="toc-number">3.</span> <span class="toc-text">数据</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络部分"><span class="toc-number">1.</span> <span class="toc-text">网络部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing"><span class="toc-number">1.5.</span> <span class="toc-text">Routing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python和Web部分"><span class="toc-number">2.</span> <span class="toc-text">Python和Web部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-VS-解释"><span class="toc-number">2.1.</span> <span class="toc-text">编译 VS 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些Python的概念"><span class="toc-number">2.2.</span> <span class="toc-text">一些Python的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Web和Flask"><span class="toc-number">2.3.</span> <span class="toc-text">Python, Web和Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Shortening-App的设计"><span class="toc-number">2.4.</span> <span class="toc-text">URL Shortening App的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小节"><span class="toc-number">2.5.</span> <span class="toc-text">小节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规模化应用"><span class="toc-number">2.5.1.</span> <span class="toc-text">规模化应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控策略"><span class="toc-number">2.5.2.</span> <span class="toc-text">监控策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据"><span class="toc-number">3.</span> <span class="toc-text">数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系型数据库"><span class="toc-number">3.1.</span> <span class="toc-text">关系型数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL"><span class="toc-number">3.2.</span> <span class="toc-text">NoSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键概念"><span class="toc-number">3.3.</span> <span class="toc-text">关键概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAP-理论"><span class="toc-number">3.3.1.</span> <span class="toc-text">CAP 理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据多版本"><span class="toc-number">3.3.2.</span> <span class="toc-text">数据多版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分区"><span class="toc-number">3.3.3.</span> <span class="toc-text">分区</span></a></li></ol></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -129,7 +133,7 @@
       
         <time datetime="2020-12-30T08:34:01.000Z" itemprop="datePublished">2020-12-30</time>
         
-        (Updated: <time datetime="2021-01-05T00:20:51.124Z" itemprop="dateModified">2021-01-05</time>)
+        (Updated: <time datetime="2021-01-17T03:09:26.268Z" itemprop="dateModified">2021-01-17</time>)
         
       
     </div>
@@ -256,7 +260,150 @@
 <p>最初我们可能就只是把应用部署到单一虚拟机或者任意云服务提供商. 但是这是一个单点(Single point of failure), 这对于SRE(或者哪怕说对于一个工程师)来说都是不允许的. 因此这里我们考虑的一个提升就是在负载均衡之后部署复数个应用实例. </p>
 <p>尽管可以增加更多的实例, 但在增加到某一个节点的时候系统的其他瓶颈会显露出来, 例如: DB或者是负载均衡本身. 那么我们怎样才能知道瓶颈在哪里呢? 我们需要能够对应用架构中的各个部分进行观察. 也就是这样, 我们才能知道指标, 从而知道哪里出了问题.  <strong>What gets measured, gets fixed!</strong></p>
 <p>更多我们后面的<code>scalability module</code>的章节涉及到.</p>
-<h3 id="监控策略"><a href="#监控策略" class="headerlink" title="监控策略"></a>监控策略</h3><h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1>
+<h3 id="监控策略"><a href="#监控策略" class="headerlink" title="监控策略"></a>监控策略</h3><p>一旦我们的应用部署好了, 他就可以正常运行了. 但是不可能永远都能正常提供服务. 既然可靠性都写在SRE的title里面了, 因此我们需要通过设计让系统运行可靠运行. 但是往往事与愿违, 机器会出问题, 磁盘可能也会有问题, 有问题的代码也有可能会被推送到生产环境上去. 而这些可能的场景都会让我们的系统更加的不可靠. 那么这个时候咋办呢? 当然就是监控了.</p>
+<p>如果系统出现问题, 或者说出现了我们没有预料到的情况, 我们希望能够收到警告. 那么以上面的例子(URL Shortening App)来说, 我们可以怎么监控呢?</p>
+<ol>
+<li>因为这是个WebApp, 接受HTTP请求, 因此我们可以关注HTTP状态码和延迟.</li>
+<li>请求容量也是我们需要关注的一个指标, 例如当app收到不寻常的请求流量, 应该有什么地方出问题了.</li>
+<li>我们也想关注一下数据库. 当然这取决于我们要选择什么样的数据库解决方案. 一般有查询时间, 容量, 磁盘使用率等等.</li>
+<li>最后, 我们还需要跑一些外部的监控, 用来模拟在用户的角度, 系统工作是否正常</li>
+</ol>
+<h1 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h1><p>在这个部分, 我们会涉及到关系型数据库和NoSQL数据库以及部分大数据的内容.</p>
+<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><p>首先是对于数据库相关基本概念的介绍, 包括关系型数据库本身, 事务, ACID, CRUD操作, 约束, 索引, 连接, ACL. 接着是说了一些流行的数据库产品, 例如商业闭源的 - Oracle, MicroSoft SQL Server, IBM DB2. 开源的 - MySQL, MariaDB, PostgreSQL.</p>
+<p>以MySQL为例, 附一张MySQL的架构图:</p>
+<p><img src="https://linkedin.github.io/school-of-sre/databases_sql/images/mysql_architecture.png" alt="mysql_arch"></p>
+<p>接着是分开应用层, Server层来分别介绍各个层的组件和负责的功能.</p>
+<p>应用层: 连接处理, 身份验证, 安全. 服务器层: 服务和utils - 备份/恢复, 复制, 集群功能等等, SQL接口, SQL分析器, 查询优化器, Cache和Buffer.</p>
+<p>另外, 我们还有这些常见存储引擎: InnoDB, MyISAM, Archive, Memory, CSV, …等等.</p>
+<blockquote>
+<p>关于MySQL的部分, 之前的文章有更详细的描述, 但是现在一看自己确实忘得也差不多了, 还是要多复习呀!</p>
+</blockquote>
+<p>以, InnoDB为例, 我们来看下架构图:</p>
+<p><img src="https://linkedin.github.io/school-of-sre/databases_sql/images/innodb_architecture.png" alt="alt_text"></p>
+<p>InnoDB是通用性最好的存储引擎了, 提供行级别的锁, ACID支持, 事务支持, 崩溃回复和多版本并发控制等特性.</p>
+<p>从架构图我们能很明显看到, InnoDB分成两个部分, 在磁盘的部分和内存中部分.</p>
+<p>在内存中, InnoDB有这些关键组件:</p>
+<ul>
+<li>缓冲池: 常用数据(表和索引)的LRU缓存</li>
+<li>变化缓冲: </li>
+<li>适应哈希索引: 通过快速哈希查找表补充InnoDB的B树索引. 未命中会有性能损失.</li>
+<li>日志缓冲: 见名知意, 存储那些没来得及刷新到磁盘的日志数据</li>
+</ul>
+<p>这些组件的内存都是可配置的, 这些配置项都会影响到InnoDB的性能. 调整这些需要对工作负载仔细的分析, 资源压测以及校准.</p>
+<p>而在磁盘上, 我们有这些:</p>
+<ul>
+<li>表文件</li>
+<li>索引文件</li>
+<li>重做日志</li>
+<li>撤销日志</li>
+</ul>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>一个常见的误解就是NoSQL数据库或者非关系型数据库不能很好的存储关系型数据. 事实上, 他们只不过是用的另外一种方式来存储数据而已, 并且, 很多NoSQL数据库在建模关系型数据上, 较之关系型数据库要更加容易, 因为关联的数据没有被分成表.</p>
+<p>我们可以把NoSQL数据库分成这四类:</p>
+<ul>
+<li>文档数据库: 文档类似JSON, 每一个文档都包含域和对应的值. 数据模型直观, 结构灵活. e.g: MongoDB, Couchbase</li>
+<li>键值对数据库: 适合存储大量数据但不需要复杂的查询. e.g: Redis</li>
+<li>宽列数据库: 数据可以存储到表, 行, 动态的列中. 灵活, 因为每一行不要求有同样的列. 常见存储IoT和用户档案数据. e.g: Cassandra, HBase</li>
+<li>图数据库: 数据被存储在节点和边中. 节点一般是信息而边一般都是存储这些节点之间的关系. e.g: Neo4j</li>
+</ul>
+<p>对比如下:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>性能</th>
+<th>可扩展性</th>
+<th>灵活性</th>
+<th>复杂度</th>
+<th>功能性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>键值对</td>
+<td>高</td>
+<td>高</td>
+<td>高</td>
+<td>无</td>
+<td>可变的</td>
+</tr>
+<tr>
+<td>文档存储</td>
+<td>高</td>
+<td>可变的 (高)</td>
+<td>高</td>
+<td>低</td>
+<td>可变的 (低)</td>
+</tr>
+<tr>
+<td>宽列</td>
+<td>高</td>
+<td>高</td>
+<td>适中</td>
+<td>低</td>
+<td>最弱</td>
+</tr>
+<tr>
+<td>图</td>
+<td>可变的</td>
+<td>可变的</td>
+<td>高</td>
+<td>高</td>
+<td>图理论</td>
+</tr>
+</tbody></table>
+<p>NoSQL简单总结下来, 有更灵活的数据模型. 并且更容易进行水平扩展, 通常能够执行比传统SQL系统更快的查询(非范式设计, 水平扩展). 另外, NoSQL通常可以直接将数据映射到对应的编程语言数据结构上(相对SQL DB而言, 不太需要ORM)</p>
+<h2 id="关键概念"><a href="#关键概念" class="headerlink" title="关键概念"></a>关键概念</h2><p>这里我们来看下对于NoSQL或者分布式系统来说的一些关键概念.</p>
+<h3 id="CAP-理论"><a href="#CAP-理论" class="headerlink" title="CAP 理论"></a>CAP 理论</h3><p>所谓CAP理论是2000年由Eric Brewer在ACM’s PODC讨论会的一个”Towards Robust Distributed Systems”提出的. 而CAP也就是<strong>一致性, 可用性, 分区容错</strong>的首字母缩略. 针对每一个特性, 来展开说.</p>
+<ul>
+<li>Consistency - 一致性</li>
+</ul>
+<p>简单的说, 这就是指系统在一次执行之后能有多一致. 所以一致就是指在一个分布式系统中, 一个源所作的写操作对该资源的所有读者可用. 不同的NoSQL系统支持不同等级的一致性.</p>
+<ul>
+<li>Availablity - 可用性</li>
+</ul>
+<p>可用性就是指系统如何应对不同系统当硬件或软件故障的时候导致失去部分功能. 而高可用就是指即使当系统中某些部分下线(故障或更新)的时候系统依然可用, 能够对读写操作进行处理.</p>
+<ul>
+<li>Partition Tolerance - 分区容错</li>
+</ul>
+<p>指系统在网络分区的情况下继续运行的能力. 简单的理解的话, 所谓分区容错性才是高可用的意思. 因为所谓网络分区就是节点之间的网络出故障而节点之间无法通信.</p>
+<p>通常来说, P我们必须满足, 那么接下来C和A就要选其一了. 而一般来说, A要比C更有价值一些. 但我们肯定也不是放着C就不管了. 通常我们会追求<strong>最终一致性</strong>.</p>
+<p>所谓最终一致性就是指随着时间推移, 所有的读者都会看到写入的内容: “在稳定状态下, 系统最后都会返回最后的写入值”. 因此在更新过程中, 客户端会面临一个数据的非一致状态.</p>
+<p>NoSQL系统支持不同等级的最终一致性模型, 例如:</p>
+<ul>
+<li>读自己写一致性</li>
+</ul>
+<p>客户端在写操作之后能立即看到其更新. 读取的内容会命中写入节点意外的节点. 但是他们不会立即看到其他客户的更新.</p>
+<ul>
+<li>会话一致性</li>
+</ul>
+<p>客户端能够在会话空间内看到对他们数据的更新. 这通常说明读操作和写操作发生在同一个服务器上. 其他使用同一个节点的客户端会收到同样的更新.</p>
+<ul>
+<li>因果一致性</li>
+</ul>
+<p>如果下列情况, 系统将会提供因果一致性: 由潜在因果关系相关的写操作会被系统的每个进程顺序看到. 不同进程会以不同的顺序观察到并发的写入操作.</p>
+<p>如果不太可能进行同分区数据的并发更新, 或者客户端不会立即依赖读到自己或者其他客户端发布的更新, 那么最终一致性会很有用.</p>
+<p>接着来看看在分布式系统中, 数据的版本管理相关.</p>
+<h3 id="数据多版本"><a href="#数据多版本" class="headerlink" title="数据多版本"></a>数据多版本</h3><p>我们的数据有可能在不同的节点中同时间被修改(假设现在是严格的一致性). 这样并发的更新修改就会出现冲突, 此时我们就需要一些冲突的解决方法, 常见的有这些:</p>
+<ul>
+<li>时间戳</li>
+</ul>
+<p>这就很简洁明了了, 我们记录修改时间然后选择最新的, 但是提到时间, 这就依赖我们infra中不同组件之间的时间同步了. 如果是异地可能会变得更麻烦点.</p>
+<ul>
+<li>乐观锁</li>
+</ul>
+<p>所谓乐观锁其实就是我们在每一次数据更新都会关联一个特殊的值, 类似计数器或者时钟. 当客户端更新数据的时候, 需要指明是哪个版本的数据. 为了达成这个效果, 我们会需要跟踪数据的更新历史.</p>
+<ul>
+<li>向量时钟</li>
+</ul>
+<p><img src="https://linkedin.github.io/school-of-sre/databases_nosql/images/vector_clocks.png" alt="alt_text"></p>
+<p>一个向量时钟是一个保存了各个节点时钟数值的元组. 在我们的分布式环境中, 每一个节点都维护这个一个代表节点自己和该节点的副本状态的时钟值的元组. 这里的时钟数值可以是从本地时钟或者版本号中获取的实时时间戳.</p>
+<p>向量时钟有这样的优点:</p>
+<ol>
+<li>对同步时钟没有依赖</li>
+<li>不需要对版本号做总排序</li>
+<li>不需要在不同的节点上存储和维护多版本的数据</li>
+</ol>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>当数据有了一定的量之后</p>
+
   </div>
 </article>
 
@@ -289,7 +436,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络部分"><span class="toc-number">1.</span> <span class="toc-text">网络部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing"><span class="toc-number">1.5.</span> <span class="toc-text">Routing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python和Web部分"><span class="toc-number">2.</span> <span class="toc-text">Python和Web部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-VS-解释"><span class="toc-number">2.1.</span> <span class="toc-text">编译 VS 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些Python的概念"><span class="toc-number">2.2.</span> <span class="toc-text">一些Python的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Web和Flask"><span class="toc-number">2.3.</span> <span class="toc-text">Python, Web和Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Shortening-App的设计"><span class="toc-number">2.4.</span> <span class="toc-text">URL Shortening App的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小节"><span class="toc-number">2.5.</span> <span class="toc-text">小节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规模化应用"><span class="toc-number">2.5.1.</span> <span class="toc-text">规模化应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控策略"><span class="toc-number">2.5.2.</span> <span class="toc-text">监控策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据"><span class="toc-number">3.</span> <span class="toc-text">数据</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#网络部分"><span class="toc-number">1.</span> <span class="toc-text">网络部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">1.1.</span> <span class="toc-text">DNS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-number">1.2.</span> <span class="toc-text">UDP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP"><span class="toc-number">1.3.</span> <span class="toc-text">HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-number">1.4.</span> <span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Routing"><span class="toc-number">1.5.</span> <span class="toc-text">Routing</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Python和Web部分"><span class="toc-number">2.</span> <span class="toc-text">Python和Web部分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译-VS-解释"><span class="toc-number">2.1.</span> <span class="toc-text">编译 VS 解释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些Python的概念"><span class="toc-number">2.2.</span> <span class="toc-text">一些Python的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-Web和Flask"><span class="toc-number">2.3.</span> <span class="toc-text">Python, Web和Flask</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#URL-Shortening-App的设计"><span class="toc-number">2.4.</span> <span class="toc-text">URL Shortening App的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#小节"><span class="toc-number">2.5.</span> <span class="toc-text">小节</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#规模化应用"><span class="toc-number">2.5.1.</span> <span class="toc-text">规模化应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#监控策略"><span class="toc-number">2.5.2.</span> <span class="toc-text">监控策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数据"><span class="toc-number">3.</span> <span class="toc-text">数据</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#关系型数据库"><span class="toc-number">3.1.</span> <span class="toc-text">关系型数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL"><span class="toc-number">3.2.</span> <span class="toc-text">NoSQL</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键概念"><span class="toc-number">3.3.</span> <span class="toc-text">关键概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CAP-理论"><span class="toc-number">3.3.1.</span> <span class="toc-text">CAP 理论</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据多版本"><span class="toc-number">3.3.2.</span> <span class="toc-text">数据多版本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分区"><span class="toc-number">3.3.3.</span> <span class="toc-text">分区</span></a></li></ol></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
